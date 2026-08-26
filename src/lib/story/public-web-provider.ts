@@ -31,11 +31,16 @@ export class PublicWebStoryProvider implements StoryProvider {
   async getProfile(usernameInput: string): Promise<Profile | null> {
     const { valid, normalized } = validateUsername(usernameInput);
     if (!valid) {
-      throw new ProviderError("Invalid username.");
+      // Defense in depth only — callers (lookup.ts) already validate
+      // before reaching the provider, so this should never actually fire.
+      throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
     }
 
     if (!checkOutboundRateLimit().allowed) {
-      throw new ProviderError("Upstream request budget exceeded for this window.");
+      throw new ProviderError(
+        "Upstream request budget exceeded for this window.",
+        "RATE_LIMITED",
+      );
     }
 
     // URL is always built from a strictly-validated, letters/numbers/./_
@@ -50,7 +55,12 @@ export class PublicWebStoryProvider implements StoryProvider {
       html = await this.readBodyWithLimit(response);
     } catch (err) {
       if (err instanceof ProviderError) throw err;
-      throw new ProviderError("Failed to reach the public profile page.", err);
+      const isTimeout = err instanceof Error && err.name === "AbortError";
+      throw new ProviderError(
+        isTimeout ? "Timed out reaching the public profile page." : "Failed to reach the public profile page.",
+        isTimeout ? "UPSTREAM_TIMEOUT" : "UPSTREAM_ERROR",
+        err,
+      );
     }
 
     if (response.status === 404) return null;
@@ -58,6 +68,7 @@ export class PublicWebStoryProvider implements StoryProvider {
     if (!response.ok) {
       throw new ProviderError(
         "Public profile page returned an unexpected status.",
+        "UPSTREAM_ERROR",
         `status=${response.status}`,
       );
     }
@@ -65,6 +76,7 @@ export class PublicWebStoryProvider implements StoryProvider {
     if (looksLikeAccessBlocked(response.url, html)) {
       throw new ProviderError(
         "Instagram served a login/checkpoint wall instead of the public profile.",
+        "CONTENT_UNAVAILABLE",
       );
     }
 
@@ -73,6 +85,7 @@ export class PublicWebStoryProvider implements StoryProvider {
     if (!hasEnoughDataToNormalize(raw)) {
       throw new ProviderError(
         "Could not confirm public/private status from the retrieved page — Instagram's markup may have changed.",
+        "CONTENT_UNAVAILABLE",
       );
     }
 
@@ -114,7 +127,10 @@ export class PublicWebStoryProvider implements StoryProvider {
       received += value.byteLength;
       if (received > MAX_RESPONSE_BYTES) {
         await reader.cancel();
-        throw new ProviderError("Public profile page exceeded the response size limit.");
+        throw new ProviderError(
+          "Public profile page exceeded the response size limit.",
+          "UPSTREAM_ERROR",
+        );
       }
       text += decoder.decode(value, { stream: true });
     }

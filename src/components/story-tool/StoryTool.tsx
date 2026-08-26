@@ -46,6 +46,7 @@ export function StoryTool({
     } catch {
       setResult({
         status: "error",
+        code: "UPSTREAM_ERROR",
         message: "We couldn't retrieve public content right now. Please try again later.",
       });
       setStatus("result");

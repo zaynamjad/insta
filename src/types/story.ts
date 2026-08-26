@@ -1,6 +1,15 @@
 import type { Profile } from "./profile";
+import type { ProviderErrorCode } from "@/lib/story/provider";
 
 export type StoryMediaType = "image" | "video";
+
+/**
+ * INVALID_USERNAME and INVALID_REQUEST sit on top of ProviderErrorCode —
+ * both are request-validation/API-guardrail failures (bad username format,
+ * cross-site origin, oversized body, malformed JSON), never something a
+ * provider itself would throw.
+ */
+export type StoryErrorCode = ProviderErrorCode | "INVALID_USERNAME" | "INVALID_REQUEST";
 
 export interface Story {
   id: string;
@@ -40,6 +49,7 @@ export interface StoryLookupPrivate {
 
 export interface StoryLookupError {
   status: "error";
+  code: StoryErrorCode;
   message: string;
 }
 

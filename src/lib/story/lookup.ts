@@ -1,7 +1,7 @@
 import { getProvider, ProviderError } from "./index";
 import { validateUsername } from "./validation";
 import { getCached, setCached } from "./cache";
-import type { StoryLookupResult } from "@/types/story";
+import type { StoryLookupResult, StoryErrorCode } from "@/types/story";
 
 /**
  * Shared entry point for resolving a username to a `StoryLookupResult` —
@@ -16,7 +16,7 @@ import type { StoryLookupResult } from "@/types/story";
 export async function lookupStory(usernameInput: unknown): Promise<StoryLookupResult> {
   const { valid, normalized, error } = validateUsername(usernameInput);
   if (!valid) {
-    return { status: "error", message: error ?? "Invalid username." };
+    return { status: "error", code: "INVALID_USERNAME", message: error ?? "Invalid username." };
   }
 
   const cacheKey = `story-lookup:${normalized}`;
@@ -48,13 +48,27 @@ export async function lookupStory(usernameInput: unknown): Promise<StoryLookupRe
     return result;
   } catch (err) {
     if (err instanceof ProviderError) {
-      console.error("[story-lookup] provider error:", err.message, err.detail);
-    } else {
-      console.error("[story-lookup] unexpected error:", err);
+      console.error("[story-lookup] provider error:", err.code, err.message, err.detail);
+      return { status: "error", code: err.code, message: errorMessageForCode(err.code) };
     }
+    console.error("[story-lookup] unexpected error:", err);
     return {
       status: "error",
-      message: "We couldn't retrieve public content right now. Please try again later.",
+      code: "UPSTREAM_ERROR",
+      message: errorMessageForCode("UPSTREAM_ERROR"),
     };
+  }
+}
+
+function errorMessageForCode(code: StoryErrorCode): string {
+  switch (code) {
+    case "UPSTREAM_TIMEOUT":
+      return "Instagram took too long to respond. Please try again in a moment.";
+    case "RATE_LIMITED":
+      return "Too many requests right now. Please wait a moment and try again.";
+    case "CONTENT_UNAVAILABLE":
+    case "UPSTREAM_ERROR":
+    default:
+      return "We couldn't retrieve public content right now. Please try again later.";
   }
 }
