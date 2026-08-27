@@ -45,6 +45,7 @@ export default function Page() {
       </p>
 
       <h2>What &quot;without login&quot; actually means here</h2>
+      <div className="overflow-x-auto">
       <table>
         <thead>
           <tr>
@@ -71,6 +72,7 @@ export default function Page() {
           </tr>
         </tbody>
       </table>
+      </div>
 
       <h2>What it can&apos;t do</h2>
       <p>

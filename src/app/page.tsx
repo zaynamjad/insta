@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { StoryTool } from "@/components/story-tool/StoryTool";
 import { Faq } from "@/components/Faq";
@@ -57,24 +58,36 @@ export default function HomePage() {
           aria-hidden
           className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-3xl brand-gradient"
         />
-        <div className="relative mx-auto max-w-3xl px-4 pt-16 pb-12 text-center sm:pt-24 sm:pb-16">
-          <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
-            Public profiles only · No login required
-          </span>
-          <h1 className="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
-            Instagram Story Viewer
-          </h1>
-          <p className="mt-5 text-lg text-foreground/70 sm:text-xl">
-            Enter a public Instagram username to see their public profile
-            info instantly — no login required.
-          </p>
-          <p className="mx-auto mt-2 max-w-md text-sm text-foreground/50">
-            Story media itself can&apos;t be retrieved without an Instagram
-            login, on any account — see why in the FAQ below.
-          </p>
+        <div className="relative mx-auto max-w-6xl px-4 pt-12 pb-12 sm:pt-16 sm:pb-16 lg:flex lg:items-center lg:gap-12 lg:pt-20">
+          <Image
+            src="/mascot.png"
+            alt=""
+            width={1086}
+            height={1448}
+            priority
+            className="order-first mx-auto w-36 sm:w-44 lg:order-last lg:mx-0 lg:w-[380px] lg:shrink-0"
+            sizes="(min-width: 1024px) 380px, (min-width: 640px) 176px, 144px"
+          />
 
-          <div className="mx-auto mt-8 max-w-xl text-left">
-            <StoryTool variant="hero" />
+          <div className="mt-4 text-center lg:mt-0 lg:flex-1 lg:text-left">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
+              Public profiles only · No login required
+            </span>
+            <h1 className="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+              Instagram Story Viewer
+            </h1>
+            <p className="mt-5 text-lg text-foreground/70 sm:text-xl">
+              Enter a public Instagram username to see their public profile
+              info instantly — no login required.
+            </p>
+            <p className="mx-auto mt-2 max-w-md text-sm text-foreground/50 lg:mx-0">
+              Story media itself can&apos;t be retrieved without an Instagram
+              login, on any account — see why in the FAQ below.
+            </p>
+
+            <div className="mx-auto mt-8 max-w-xl text-left lg:mx-0">
+              <StoryTool variant="hero" />
+            </div>
           </div>
         </div>
       </section>

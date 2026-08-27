@@ -48,6 +48,7 @@ export default function Page() {
       </p>
 
       <h2>Stories vs. regular posts</h2>
+      <div className="overflow-x-auto">
       <table>
         <thead>
           <tr>
@@ -70,6 +71,7 @@ export default function Page() {
           </tr>
         </tbody>
       </table>
+      </div>
 
       <h2>Who can see a Story?</h2>
       <p>
