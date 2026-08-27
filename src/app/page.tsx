@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { StoryTool } from "@/components/story-tool/StoryTool";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { softwareApplicationSchema } from "@/lib/seo/schema";
 import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
 import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
-import { SITE_NAME } from "@/lib/site";
+import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadataWithOverrides({
@@ -45,6 +46,18 @@ const homeFaqs = [
   },
 ];
 
+const DO_ITEMS = [
+  "Fetch a public profile page the same way any anonymous browser would",
+  "Show whatever public information Instagram includes on that page",
+  "Nothing else — no feed browsing, no messaging, no account management",
+];
+
+const DONT_ITEMS = [
+  "Never ask for your Instagram password or login credentials",
+  "Never access private accounts or bypass privacy settings",
+  "Never require an account to use the tool",
+];
+
 export default function HomePage() {
   return (
     <>
@@ -71,7 +84,7 @@ export default function HomePage() {
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
               Public profiles only · No login required
             </span>
-            <h1 className="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl">
+            <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl">
               Instagram Story Viewer
             </h1>
             <p className="mt-5 text-lg text-foreground/70 sm:text-xl">
@@ -102,13 +115,13 @@ export default function HomePage() {
           ].map((item, i) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-border bg-surface p-6 text-center"
+              className="rounded-2xl border border-border bg-surface p-6 text-center transition-shadow hover:shadow-sm"
             >
               <span className="brand-gradient mx-auto flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-white">
                 {i + 1}
               </span>
               <h3 className="mt-4 font-semibold text-foreground">{item.title}</h3>
-              <p className="mt-2 text-sm text-foreground/65">{item.text}</p>
+              <p className="mt-2 text-sm leading-relaxed text-foreground/65">{item.text}</p>
             </div>
           ))}
         </div>
@@ -152,6 +165,84 @@ export default function HomePage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section id="about" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            About {SITE_NAME}
+          </h2>
+          <p className="mt-4 leading-relaxed text-foreground/70">
+            {SITE_NAME} is a single-purpose tool: enter a public Instagram
+            username and see their public profile information — photo,
+            name, bio, follower counts — without logging into Instagram
+            yourself.
+          </p>
+        </div>
+
+        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+          <div className="rounded-2xl border border-border bg-surface p-6">
+            <h3 className="font-semibold text-foreground">What we do</h3>
+            <ul className="mt-4 space-y-3">
+              {DO_ITEMS.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/70">
+                  <svg aria-hidden className="mt-0.5 shrink-0 text-accent" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="rounded-2xl border border-border bg-surface p-6">
+            <h3 className="font-semibold text-foreground">What we don&apos;t do</h3>
+            <ul className="mt-4 space-y-3">
+              {DONT_ITEMS.map((item) => (
+                <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/70">
+                  <svg aria-hidden className="mt-0.5 shrink-0 text-foreground/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                    <path d="M18 6 6 18M6 6l12 12" />
+                  </svg>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-foreground/50">
+          {SITE_NAME} is independent and not affiliated with, endorsed by,
+          or connected to Instagram or Meta Platforms, Inc. Read the full{" "}
+          <Link href="/about/" className="font-medium text-accent hover:underline">
+            About page
+          </Link>{" "}
+          or{" "}
+          <Link href="/privacy-policy/" className="font-medium text-accent hover:underline">
+            Privacy Policy
+          </Link>
+          .
+        </p>
+      </section>
+
+      <section id="contact" className="bg-surface-muted py-16">
+        <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            Contact
+          </h2>
+          <p className="mt-4 leading-relaxed text-foreground/70">
+            Questions, feedback, or a request related to publicly displayed
+            content — reach out and we&apos;ll get back to you.
+          </p>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="brand-gradient mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+          >
+            <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 7 10 6 10-6" />
+            </svg>
+            {CONTACT_EMAIL}
+          </a>
         </div>
       </section>
 

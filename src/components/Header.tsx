@@ -47,7 +47,7 @@ export function Header() {
         <div className="flex shrink-0 items-center gap-2">
           <Link
             href="/"
-            className="brand-gradient hidden shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-[1.03] active:scale-[0.98] md:inline-block"
+            className="brand-gradient hidden shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90 md:inline-block"
           >
             View Stories
           </Link>

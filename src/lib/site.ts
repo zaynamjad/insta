@@ -15,8 +15,8 @@ export const TWITTER_HANDLE = "@storypeek";
 export const CONTACT_EMAIL = "hello@storypeek.com";
 
 export const NAV_LINKS = [
-  { href: "/about/", label: "About" },
-  { href: "/contact/", label: "Contact" },
+  { href: "/#about", label: "About" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 export const FOOTER_COMPANY_LINKS = [

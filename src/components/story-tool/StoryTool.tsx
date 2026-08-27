@@ -90,7 +90,7 @@ export function StoryTool({
         <button
           type="submit"
           disabled={status === "loading"}
-          className="brand-gradient shrink-0 rounded-2xl px-8 py-4 text-base font-semibold text-white shadow-md transition-transform hover:scale-[1.02] active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+          className="brand-gradient shrink-0 rounded-2xl px-8 py-4 text-base font-semibold text-white shadow-md transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "loading" ? "Searching…" : "View Stories"}
         </button>

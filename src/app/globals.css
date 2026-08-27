@@ -41,8 +41,23 @@ body {
   overflow-x: hidden;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background: var(--background);
+  color: var(--foreground);
+}
+
+/* Offsets same-page anchor scrolling (nav → #about / #contact) so the
+   sticky header never covers the top of the target section. */
+[id] {
+  scroll-margin-top: 5.5rem;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
   color: var(--foreground);
 }
 

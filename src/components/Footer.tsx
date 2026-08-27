@@ -4,17 +4,17 @@ import { SITE_NAME, SITE_SHORT_DESCRIPTION, FOOTER_COMPANY_LINKS } from "@/lib/s
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border bg-surface-muted">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+      <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
+        <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left">
           <div>
             <span className="text-lg font-bold tracking-tight">{SITE_NAME}</span>
-            <p className="mt-3 max-w-xs text-sm text-foreground/65">
+            <p className="mt-2 max-w-xs text-sm text-foreground/65">
               {SITE_SHORT_DESCRIPTION}
             </p>
           </div>
-          <div>
-            <h3 className="text-sm font-semibold text-foreground">Company</h3>
-            <ul className="mt-3 space-y-2">
+
+          <nav aria-label="Footer">
+            <ul className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 sm:justify-end">
               {FOOTER_COMPANY_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
@@ -26,7 +26,7 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
+          </nav>
         </div>
 
         <div className="mt-10 space-y-3 border-t border-border pt-6 text-xs leading-relaxed text-foreground/55">
