@@ -61,7 +61,7 @@ export function MobileNav() {
           >
             <nav className="flex flex-col px-4 py-3">
               <Link
-                href="/instagram-story-viewer/"
+                href="/"
                 className="brand-gradient mb-2 rounded-xl px-4 py-3.5 text-center text-base font-semibold text-white"
               >
                 View Stories

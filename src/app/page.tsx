@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { StoryTool } from "@/components/story-tool/StoryTool";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { softwareApplicationSchema } from "@/lib/seo/schema";
 import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
 import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
-import { allLandingPages } from "@/content/landing-pages";
 import { SITE_NAME } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -154,29 +152,6 @@ export default function HomePage() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-          Explore Our Instagram Story Tools
-        </h2>
-        <p className="mt-3 max-w-2xl text-foreground/65">
-          Different ways to reach the same tool, tuned for what you need.
-        </p>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {allLandingPages.map((page) => (
-            <Link
-              key={page.path}
-              href={page.path}
-              className="group rounded-2xl border border-border bg-surface p-5 transition-colors hover:border-accent"
-            >
-              <h3 className="font-semibold text-foreground group-hover:text-accent">
-                {page.h1}
-              </h3>
-              <p className="mt-1.5 text-sm text-foreground/60">{page.intro}</p>
-            </Link>
-          ))}
         </div>
       </section>
 

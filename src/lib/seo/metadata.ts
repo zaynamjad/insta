@@ -13,7 +13,7 @@ export interface RobotsFlags {
 interface BuildMetadataArgs {
   title: string;
   description: string;
-  /** Site-relative path starting with "/", e.g. "/instagram-story-viewer/" */
+  /** Site-relative path starting with "/", e.g. "/about/" */
   path: string;
   ogImagePath?: string;
   noindex?: boolean;

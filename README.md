@@ -113,28 +113,30 @@ See the `NOINDEX_PROFILE_PAGES` constant and
 
 ## Project structure
 
+Deliberately minimal: Home (the tool), a handful of trust/legal pages, and
+the profile lookup result page — no separate SEO landing pages or blog,
+by design.
+
 ```text
 src/
   app/                      Routes (App Router), one directory per URL
     api/story-viewer/       Backend API route
     profile/[username]/     Server-rendered public profile lookup page
-    instagram-story-viewer/ ...5 SEO landing pages
-    blog/                   Guides & educational content hub
-    about/ contact/ ...     Trust & legal pages
+    about/ contact/         Trust & legal pages
+    privacy-policy/ terms/ disclaimer/
+    admin/ [...path]/       Login-gated per-page SEO/meta editor
     sitemap.ts robots.ts    Technical SEO
   components/                Shared UI (Header, Footer, Faq, story-tool/*)
-  content/                    Page copy & blog post registry (data, not UI)
   lib/
     story/                    Provider interface, retrieval, parsing, cache, rate limiting
     seo/                      Metadata + schema.org builders
+    admin/                    Auth, settings store, page-overrides
   types/                      Profile, Story, and lookup-result types
 ```
 
-## SEO deliverables
-
-See [`docs/seo-strategy.md`](docs/seo-strategy.md) for the keyword map,
-competitor analysis, programmatic SEO strategy, content plan, and 30/60/90
-day roadmap.
+> `docs/seo-strategy.md` predates this simplification and still describes
+> a multi-landing-page/blog content strategy that no longer matches the
+> site — treat it as historical, not current.
 
 ## Deploying
 

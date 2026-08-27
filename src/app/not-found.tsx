@@ -14,16 +14,10 @@ export default function NotFound() {
         moved. Try the Instagram Story Viewer instead.
       </p>
       <Link
-        href="/instagram-story-viewer/"
+        href="/"
         className="brand-gradient mt-6 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-[1.02]"
       >
         Open the Story Viewer
-      </Link>
-      <Link
-        href="/"
-        className="mt-4 text-sm font-medium text-foreground/55 hover:text-foreground"
-      >
-        Back to homepage
       </Link>
     </div>
   );

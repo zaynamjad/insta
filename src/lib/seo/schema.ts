@@ -14,7 +14,7 @@ export function websiteSchema(): SchemaObject {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/instagram-story-viewer/?u={username}`,
+        urlTemplate: `${SITE_URL}/?u={username}`,
       },
       "query-input": "required name=username",
     },

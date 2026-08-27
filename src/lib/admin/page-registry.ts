@@ -1,5 +1,3 @@
-import { allLandingPages } from "@/content/landing-pages";
-import { blogIndex } from "@/content/blog-index";
 import { SITE_NAME, SITE_DESCRIPTION } from "@/lib/site";
 
 export interface PageRegistryEntry {
@@ -9,45 +7,18 @@ export interface PageRegistryEntry {
   defaultDescription: string;
 }
 
-const STATIC_ENTRIES: PageRegistryEntry[] = [
+export const PAGE_REGISTRY: PageRegistryEntry[] = [
   {
     path: "/",
     label: "Home",
     defaultTitle: `${SITE_NAME} — Instagram Story Viewer | View Stories Anonymously`,
     defaultDescription: SITE_DESCRIPTION,
   },
-  {
-    path: "/blog/",
-    label: "Guides index",
-    defaultTitle: "Instagram Story Guides & Educational Articles",
-    defaultDescription:
-      "Guides and explainers on how Instagram Stories work — anonymous viewing, login-free access, Story viewer lists, and how Stories compare to Highlights.",
-  },
   { path: "/about/", label: "About", defaultTitle: `About ${SITE_NAME}`, defaultDescription: "" },
   { path: "/contact/", label: "Contact", defaultTitle: `Contact ${SITE_NAME}`, defaultDescription: "" },
   { path: "/privacy-policy/", label: "Privacy Policy", defaultTitle: "Privacy Policy", defaultDescription: "" },
   { path: "/terms/", label: "Terms of Service", defaultTitle: "Terms of Service", defaultDescription: "" },
   { path: "/disclaimer/", label: "Disclaimer", defaultTitle: "Disclaimer", defaultDescription: "" },
-];
-
-const LANDING_ENTRIES: PageRegistryEntry[] = allLandingPages.map((page) => ({
-  path: page.path,
-  label: page.h1,
-  defaultTitle: page.title,
-  defaultDescription: page.description,
-}));
-
-const BLOG_ENTRIES: PageRegistryEntry[] = blogIndex.map((post) => ({
-  path: `/blog/${post.slug}/`,
-  label: post.title,
-  defaultTitle: post.title,
-  defaultDescription: post.description,
-}));
-
-export const PAGE_REGISTRY: PageRegistryEntry[] = [
-  ...STATIC_ENTRIES,
-  ...LANDING_ENTRIES,
-  ...BLOG_ENTRIES,
 ];
 
 const REGISTRY_BY_PATH = new Map(PAGE_REGISTRY.map((entry) => [entry.path, entry]));

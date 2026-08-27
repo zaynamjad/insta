@@ -1,52 +1,32 @@
 import Link from "next/link";
-import {
-  SITE_NAME,
-  SITE_SHORT_DESCRIPTION,
-  FOOTER_TOOL_LINKS,
-  FOOTER_GUIDE_LINKS,
-  FOOTER_COMPANY_LINKS,
-} from "@/lib/site";
-
-function FooterColumn({
-  title,
-  links,
-}: {
-  title: string;
-  links: { href: string; label: string }[];
-}) {
-  return (
-    <div>
-      <h3 className="text-sm font-semibold text-foreground">{title}</h3>
-      <ul className="mt-3 space-y-2">
-        {links.map((link) => (
-          <li key={link.href}>
-            <Link
-              href={link.href}
-              className="text-sm text-foreground/65 transition-colors hover:text-foreground"
-            >
-              {link.label}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+import { SITE_NAME, SITE_SHORT_DESCRIPTION, FOOTER_COMPANY_LINKS } from "@/lib/site";
 
 export function Footer() {
   return (
     <footer className="mt-24 border-t border-border bg-surface-muted">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
-        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-4">
-          <div className="sm:col-span-2 md:col-span-1">
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2">
+          <div>
             <span className="text-lg font-bold tracking-tight">{SITE_NAME}</span>
             <p className="mt-3 max-w-xs text-sm text-foreground/65">
               {SITE_SHORT_DESCRIPTION}
             </p>
           </div>
-          <FooterColumn title="Tools" links={FOOTER_TOOL_LINKS} />
-          <FooterColumn title="Guides" links={FOOTER_GUIDE_LINKS} />
-          <FooterColumn title="Company" links={FOOTER_COMPANY_LINKS} />
+          <div>
+            <h3 className="text-sm font-semibold text-foreground">Company</h3>
+            <ul className="mt-3 space-y-2">
+              {FOOTER_COMPANY_LINKS.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-foreground/65 transition-colors hover:text-foreground"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         <div className="mt-10 space-y-3 border-t border-border pt-6 text-xs leading-relaxed text-foreground/55">
