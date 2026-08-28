@@ -286,8 +286,8 @@ export default function HomePage() {
           <Image
             src="/mascot-pointing.png"
             alt=""
-            width={2000}
-            height={2000}
+            width={1156}
+            height={1367}
             className="w-40 shrink-0 sm:w-48"
             sizes="192px"
           />
