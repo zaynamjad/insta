@@ -64,7 +64,7 @@ export default function HomePage() {
       <JsonLd data={softwareApplicationSchema()} />
       <PageOverridesRenderer path="/" />
 
-      <section className="relative overflow-hidden">
+      <section id="search" className="relative overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-3xl brand-gradient"
@@ -129,9 +129,25 @@ export default function HomePage() {
 
       <section className="bg-surface-muted py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <h2 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
-            Why Use Our Instagram Story Viewer?
-          </h2>
+          <div className="lg:flex lg:items-center lg:gap-10">
+            <Image
+              src="/mascot-phone.png"
+              alt=""
+              width={2000}
+              height={2000}
+              className="mx-auto w-36 sm:w-44 lg:mx-0 lg:w-56 lg:shrink-0"
+              sizes="(min-width: 1024px) 224px, 176px"
+            />
+            <div className="mt-6 text-center lg:mt-0 lg:flex-1 lg:text-left">
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                Why Use Our Instagram Story Viewer?
+              </h2>
+              <p className="mt-3 text-foreground/65">
+                A fast, honest way to check a public profile — nothing more,
+                nothing hidden.
+              </p>
+            </div>
+          </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {[
               "No Instagram login required",
@@ -246,8 +262,36 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Faq items={homeFaqs} />
+      </section>
+
+      <section className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+        <div className="flex flex-col-reverse items-center gap-6 rounded-3xl border border-border bg-surface p-8 sm:flex-row sm:justify-center sm:gap-10">
+          <div className="text-center sm:text-right">
+            <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
+              Ready to look up a profile?
+            </h2>
+            <p className="mt-2 text-sm text-foreground/65">
+              Enter a public Instagram username and see their profile
+              instantly — no login required.
+            </p>
+            <Link
+              href="/#search"
+              className="brand-gradient mt-4 inline-block rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+            >
+              View Stories
+            </Link>
+          </div>
+          <Image
+            src="/mascot-pointing.png"
+            alt=""
+            width={2000}
+            height={2000}
+            className="w-40 shrink-0 sm:w-48"
+            sizes="192px"
+          />
+        </div>
       </section>
     </>
   );
