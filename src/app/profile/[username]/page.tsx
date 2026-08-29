@@ -49,7 +49,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const displayName = profile.fullName ?? `@${profile.username}`;
 
   return buildMetadata({
-    title: `${displayName} (@${profile.username}) — Public Profile`,
+    title: `${displayName} (@${profile.username}): Public Profile`,
     description:
       profile.bio ??
       `Publicly available Instagram profile information for @${profile.username}.`,

@@ -11,7 +11,7 @@ import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadataWithOverrides({
-    title: `${SITE_NAME} — Instagram Story Viewer | View Stories Anonymously`,
+    title: `${SITE_NAME}: Instagram Story Viewer | View Stories Anonymously`,
     description:
       "Enter a public Instagram username to view publicly available Stories without logging into Instagram. No password, no account, no app install.",
     path: "/",
@@ -22,17 +22,17 @@ const homeFaqs = [
   {
     question: "What is an Instagram Story Viewer?",
     answer:
-      "It's a tool that looks up a public Instagram account's profile information — photo, name, bio, follower counts — by fetching the same public profile page anyone's browser would see, without you needing to log in.",
+      "It's a tool that looks up a public Instagram account's profile information (photo, name, bio, follower counts) by fetching the same public profile page anyone's browser would see, without you needing to log in.",
   },
   {
     question: "Can I view public Instagram Stories without logging in?",
     answer:
-      "No — and neither can this tool. Instagram only serves Story media through a logged-in session, even for public accounts; it's never exposed on the public, unauthenticated profile page. This tool doesn't attempt to bypass that, so it never returns Story content — only public profile information.",
+      "No, and neither can this tool. Instagram only serves Story media through a logged-in session, even for public accounts; it's never exposed on the public, unauthenticated profile page. This tool doesn't attempt to bypass that, so it never returns Story content, only public profile information.",
   },
   {
     question: "Why can't some Stories be retrieved?",
     answer:
-      "Stories aren't sometimes unavailable — they're never retrievable through public, unauthenticated access, on any account. Unlike a profile's basic info, Instagram doesn't expose Story media outside of a logged-in session. This isn't a bug or a temporary limitation; it's how Instagram's access control works.",
+      "Stories aren't sometimes unavailable: they're never retrievable through public, unauthenticated access, on any account. Unlike a profile's basic info, Instagram doesn't expose Story media outside of a logged-in session. This isn't a bug or a temporary limitation; it's how Instagram's access control works.",
   },
   {
     question: "Does this tool work with private accounts?",
@@ -42,14 +42,14 @@ const homeFaqs = [
   {
     question: "How does this tool retrieve profile information?",
     answer:
-      "By fetching a public account's Instagram profile page the same way any anonymous, logged-out visitor's browser would, then reading the public information Instagram includes in that page — no login, no private API, no bypass of any access control.",
+      "By fetching a public account's Instagram profile page the same way any anonymous, logged-out visitor's browser would, then reading the public information Instagram includes in that page: no login, no private API, no bypass of any access control.",
   },
 ];
 
 const DO_ITEMS = [
   "Fetch a public profile page the same way any anonymous browser would",
   "Show whatever public information Instagram includes on that page",
-  "Nothing else — no feed browsing, no messaging, no account management",
+  "Nothing else: no feed browsing, no messaging, no account management",
 ];
 
 const DONT_ITEMS = [
@@ -89,11 +89,11 @@ export default function HomePage() {
             </h1>
             <p className="mt-5 text-lg text-foreground/70 sm:text-xl">
               Enter a public Instagram username to see their public profile
-              info instantly — no login required.
+              info instantly, no login required.
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm text-foreground/50 lg:mx-0">
               Story media itself can&apos;t be retrieved without an Instagram
-              login, on any account — see why in the FAQ below.
+              login, on any account. See why in the FAQ below.
             </p>
 
             <div className="mx-auto mt-8 max-w-xl text-left lg:mx-0">
@@ -143,7 +143,7 @@ export default function HomePage() {
                 Why Use Our Instagram Story Viewer?
               </h2>
               <p className="mt-3 text-foreground/65">
-                A fast, honest way to check a public profile — nothing more,
+                A fast, honest way to check a public profile: nothing more,
                 nothing hidden.
               </p>
             </div>
@@ -191,8 +191,8 @@ export default function HomePage() {
           </h2>
           <p className="mt-4 leading-relaxed text-foreground/70">
             {SITE_NAME} is a single-purpose tool: enter a public Instagram
-            username and see their public profile information — photo,
-            name, bio, follower counts — without logging into Instagram
+            username and see their public profile information (photo,
+            name, bio, follower counts) without logging into Instagram
             yourself.
           </p>
         </div>
@@ -247,7 +247,7 @@ export default function HomePage() {
           </h2>
           <p className="mt-4 leading-relaxed text-foreground/70">
             Questions, feedback, or a request related to publicly displayed
-            content — reach out and we&apos;ll get back to you.
+            content: reach out and we&apos;ll get back to you.
           </p>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
@@ -274,7 +274,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-2 text-sm text-foreground/65">
               Enter a public Instagram username and see their profile
-              instantly — no login required.
+              instantly, no login required.
             </p>
             <Link
               href="/#search"

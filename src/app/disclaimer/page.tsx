@@ -41,7 +41,7 @@ export default function DisclaimerPage() {
           <p className="mt-2">
             We will never ask for your Instagram password. Any website that
             requests your Instagram login credentials to &quot;view
-            stories&quot; should be treated as untrustworthy — {SITE_NAME}{" "}
+            stories&quot; should be treated as untrustworthy. {SITE_NAME}{" "}
             never does this.
           </p>
         </section>
@@ -54,7 +54,7 @@ export default function DisclaimerPage() {
             &quot;Anonymous&quot; on this site means your personal Instagram
             account is not used to open a Story, so it isn&apos;t added to
             the account owner&apos;s native viewer list. It does not mean
-            guaranteed technical anonymity in every sense — we rely on
+            guaranteed technical anonymity in every sense: we rely on
             third-party infrastructure to retrieve data, and we can&apos;t
             make guarantees about systems outside our control.
           </p>

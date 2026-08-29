@@ -5,7 +5,7 @@ export const SITE_URL = (
 ).replace(/\/$/, "");
 
 export const SITE_DESCRIPTION =
-  "View publicly available Instagram Stories anonymously. Enter a public Instagram username — no login, no password, no account required.";
+  "View publicly available Instagram Stories anonymously. Enter a public Instagram username: no login, no password, no account required.";
 
 export const SITE_SHORT_DESCRIPTION =
   "Anonymous Instagram Story viewer. No login required.";

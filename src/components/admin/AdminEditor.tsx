@@ -274,7 +274,7 @@ export function AdminEditor({
           <div className="space-y-3">
             <Field
               label="Custom JSON-LD"
-              hint="Added alongside this page's built-in schema (WebSite, Organization, etc.) — not a replacement for it. Must be valid JSON."
+              hint="Added alongside this page's built-in schema (WebSite, Organization, etc.), not a replacement for it. Must be valid JSON."
             >
               <TextArea
                 value={settings.schemaJsonLd}
@@ -291,7 +291,7 @@ export function AdminEditor({
           <div className="space-y-3">
             <Field
               label="Header Scripts"
-              hint="Paste <script>…</script> and/or <style>…</style> blocks. This is admin-authored, trusted content, injected as-is — never paste anything you don't control."
+              hint="Paste <script>…</script> and/or <style>…</style> blocks. This is admin-authored, trusted content, injected as-is: never paste anything you don't control."
             >
               <TextArea
                 value={settings.headerScripts}
@@ -311,7 +311,7 @@ export function AdminEditor({
 
         {tab === "notes" && (
           <div className="space-y-3">
-            <Field label="Notes" hint="Internal reference only — never shown on the public page.">
+            <Field label="Notes" hint="Internal reference only. Never shown on the public page.">
               <TextArea
                 value={settings.notes}
                 onChange={(v) => update("notes", v)}

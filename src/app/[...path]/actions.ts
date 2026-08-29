@@ -31,7 +31,7 @@ export async function saveSettingsAction(
     try {
       JSON.parse(settings.schemaJsonLd);
     } catch {
-      return { ok: false, message: "Schema JSON-LD is not valid JSON — fix it before saving." };
+      return { ok: false, message: "Schema JSON-LD is not valid JSON. Fix it before saving." };
     }
   }
 
@@ -43,7 +43,7 @@ export async function saveSettingsAction(
     if (err instanceof SettingsStoreNotConfiguredError) {
       return {
         ok: false,
-        message: "Storage isn't connected yet — finish the Upstash Redis setup, then retry.",
+        message: "Storage isn't connected yet. Finish the Upstash Redis setup, then retry.",
       };
     }
     console.error("[admin] failed to save page settings:", err);

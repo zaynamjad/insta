@@ -8,7 +8,7 @@ import { SITE_NAME } from "@/lib/site";
 export async function generateMetadata(): Promise<Metadata> {
   return buildMetadataWithOverrides({
     title: `About ${SITE_NAME}`,
-    description: `Learn what ${SITE_NAME} does, how it works, and why it only ever shows public Instagram profile data — never Story media.`,
+    description: `Learn what ${SITE_NAME} does, how it works, and why it only ever shows public Instagram profile data, never Story media.`,
     path: "/about/",
   });
 }
@@ -25,8 +25,8 @@ export default function AboutPage() {
       <div className="mt-8 space-y-5 text-base leading-relaxed text-foreground/80">
         <p>
           {SITE_NAME} is a single-purpose tool: enter a public Instagram
-          username, and see their public profile information — photo,
-          name, bio, follower counts — without needing to log into
+          username, and see their public profile information (photo,
+          name, bio, follower counts) without needing to log into
           Instagram yourself.
         </p>
         <h2 className="mt-8 text-xl font-bold text-foreground">
@@ -38,8 +38,8 @@ export default function AboutPage() {
           public information Instagram includes in that page. Story media
           specifically is never part of that: Instagram only serves Story
           content through a logged-in session, on every account, so no
-          tool that respects Instagram&apos;s access controls — including
-          this one — can show it. That&apos;s the whole product — no feed
+          tool that respects Instagram&apos;s access controls, including
+          this one, can show it. That&apos;s the whole product: no feed
           browsing, no messaging, no account management.
         </p>
         <h2 className="mt-8 text-xl font-bold text-foreground">

@@ -11,7 +11,7 @@ export const PAGE_REGISTRY: PageRegistryEntry[] = [
   {
     path: "/",
     label: "Home",
-    defaultTitle: `${SITE_NAME} — Instagram Story Viewer | View Stories Anonymously`,
+    defaultTitle: `${SITE_NAME}: Instagram Story Viewer | View Stories Anonymously`,
     defaultDescription: SITE_DESCRIPTION,
   },
   { path: "/about/", label: "About", defaultTitle: `About ${SITE_NAME}`, defaultDescription: "" },

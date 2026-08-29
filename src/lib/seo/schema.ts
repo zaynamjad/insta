@@ -35,7 +35,7 @@ export function softwareApplicationSchema(): SchemaObject {
   return {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    name: `${SITE_NAME} — Instagram Story Viewer`,
+    name: `${SITE_NAME}: Instagram Story Viewer`,
     applicationCategory: "UtilitiesApplication",
     operatingSystem: "Web",
     url: SITE_URL,

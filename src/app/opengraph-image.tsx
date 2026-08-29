@@ -56,7 +56,7 @@ export default function OpengraphImage() {
             display: "flex",
           }}
         >
-          Instagram Story Viewer — View Stories Anonymously
+          Instagram Story Viewer: View Stories Anonymously
         </div>
       </div>
     ),

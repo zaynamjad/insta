@@ -23,7 +23,7 @@ export default function ContactPage() {
       </h1>
       <p className="mt-4 text-base leading-relaxed text-foreground/75">
         Questions, feedback, or a request related to publicly displayed
-        content — reach out and we&apos;ll get back to you.
+        content: reach out and we&apos;ll get back to you.
       </p>
 
       <div className="mt-8 rounded-2xl border border-border bg-surface p-6">

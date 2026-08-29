@@ -45,8 +45,8 @@ export default function PrivacyPolicyPage() {
             <li>
               <strong>Usernames you search.</strong> The Instagram username
               you enter is sent to our server to look up public Story data.
-              We do not require or collect your own Instagram credentials —
-              never enter your Instagram password on this site.
+              We do not require or collect your own Instagram credentials.
+              Never enter your Instagram password on this site.
             </li>
             <li>
               <strong>Technical data.</strong> Standard request metadata
@@ -91,7 +91,7 @@ export default function PrivacyPolicyPage() {
           <p className="mt-2">
             To retrieve public Story data, requests may be routed to a
             third-party data provider. We only transmit the username you
-            search — no personal account information about you.
+            search, no personal account information about you.
           </p>
         </section>
 
