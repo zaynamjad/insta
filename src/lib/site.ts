@@ -15,7 +15,9 @@ export const TWITTER_HANDLE = "@instaviewstories";
 export const CONTACT_EMAIL = "info@instaviewstories.com";
 
 export const NAV_LINKS = [
+  { href: "/#how-it-works", label: "How It Works" },
   { href: "/#about", label: "About" },
+  { href: "/#faq", label: "FAQ" },
   { href: "/#contact", label: "Contact" },
 ];
 

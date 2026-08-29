@@ -103,7 +103,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
+      <section id="how-it-works" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <h2 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
           How It Works
         </h2>
@@ -262,7 +262,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
+      <section id="faq" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <Faq items={homeFaqs} />
       </section>
 
