@@ -57,8 +57,11 @@ function decodeHtmlEntities(text: string): string {
  * used for this for a long time, but this is a heuristic, not a contract).
  */
 function findProfileRecord(html: string): Record<string, unknown> | null {
+  // Instagram sometimes inserts extra attributes (e.g. data-content-len)
+  // between type="application/json" and data-sjs — match on the presence
+  // of both rather than an exact adjacent sequence.
   const blocks = html.matchAll(
-    /<script type="application\/json" data-sjs>([\s\S]*?)<\/script>/g,
+    /<script type="application\/json"[^>]*\bdata-sjs>([\s\S]*?)<\/script>/g,
   );
 
   for (const block of blocks) {
@@ -68,7 +71,10 @@ function findProfileRecord(html: string): Record<string, unknown> | null {
     } catch {
       continue;
     }
-    const found = findObjectWithKey(parsed, "is_private", 6);
+    // Instagram wraps this in a `require: [[module, fn, null, [args...]]]`
+    // bootstrap envelope, which puts the actual profile record well past a
+    // shallow depth — observed at depth 13 on the current markup.
+    const found = findObjectWithKey(parsed, "is_private", 20);
     if (found) return found;
   }
 

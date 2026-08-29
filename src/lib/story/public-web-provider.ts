@@ -10,6 +10,22 @@ import { SITE_NAME, SITE_URL } from "@/lib/site";
 const FETCH_TIMEOUT_MS = 8_000;
 const MAX_RESPONSE_BYTES = 4_000_000; // real profile pages run ~0.5-1MB; this is generous headroom, not a target
 
+// Optional: routes the fetch below through Scrapfly's managed anti-bot Web
+// Scraping API instead of a raw fetch, when Instagram's bot detection blocks
+// direct requests (see docs/story-retrieval-limitations.md). This changes
+// nothing about *what* is fetched — still the same public, unauthenticated
+// profile page, no login, no session — only *how* the HTTP request itself
+// gets past bot detection. Falls back to the direct fetch below when unset.
+const SCRAPFLY_API_KEY = process.env.SCRAPFLY_API_KEY;
+const SCRAPFLY_ENDPOINT = "https://api.scrapfly.io/scrape";
+const SCRAPFLY_TIMEOUT_MS = 20_000; // anti-bot challenge solving is slower than a plain fetch
+
+interface FetchedPage {
+  status: number;
+  finalUrl: string;
+  html: string;
+}
+
 /**
  * Retrieves a public Instagram profile by fetching and parsing
  * `https://www.instagram.com/<username>/` as any anonymous, logged-out
@@ -27,6 +43,12 @@ const MAX_RESPONSE_BYTES = 4_000_000; // real profile pages run ~0.5-1MB; this i
  * but running it in production is a deliberate, informed decision to
  * proceed despite that policy, made by this project's owner. See
  * docs/story-retrieval-limitations.md before deploying this.
+ *
+ * When `SCRAPFLY_API_KEY` is set, the fetch is routed through Scrapfly's
+ * managed anti-bot Web Scraping API instead of a raw `fetch()`, since
+ * Instagram's bot detection reliably blocks direct requests in production.
+ * The target and the data retrieved are identical either way — still the
+ * same public, unauthenticated page, still never Stories.
  */
 export class PublicWebStoryProvider implements StoryProvider {
   async getProfile(usernameInput: string): Promise<Profile | null> {
@@ -49,11 +71,11 @@ export class PublicWebStoryProvider implements StoryProvider {
     // the project's SSRF boundary; see validation.ts.
     const targetUrl = `https://www.instagram.com/${normalized}/`;
 
-    let response: Response;
-    let html: string;
+    let page: FetchedPage;
     try {
-      response = await this.fetchWithTimeout(targetUrl);
-      html = await this.readBodyWithLimit(response);
+      page = SCRAPFLY_API_KEY
+        ? await this.fetchViaScrapfly(targetUrl)
+        : await this.fetchDirect(targetUrl);
     } catch (err) {
       if (err instanceof ProviderError) throw err;
       const isTimeout = err instanceof Error && err.name === "AbortError";
@@ -64,24 +86,24 @@ export class PublicWebStoryProvider implements StoryProvider {
       );
     }
 
-    if (response.status === 404) return null;
+    if (page.status === 404) return null;
 
-    if (!response.ok) {
+    if (page.status < 200 || page.status >= 300) {
       throw new ProviderError(
         "Public profile page returned an unexpected status.",
         "UPSTREAM_ERROR",
-        `status=${response.status}`,
+        `status=${page.status}`,
       );
     }
 
-    if (looksLikeAccessBlocked(response.url, html)) {
+    if (looksLikeAccessBlocked(page.finalUrl, page.html)) {
       throw new ProviderError(
         "Instagram served a login/checkpoint wall instead of the public profile.",
         "CONTENT_UNAVAILABLE",
       );
     }
 
-    const raw = parseProfilePage(html);
+    const raw = parseProfilePage(page.html);
 
     if (!hasEnoughDataToNormalize(raw)) {
       throw new ProviderError(
@@ -93,11 +115,12 @@ export class PublicWebStoryProvider implements StoryProvider {
     return normalizeProfile(raw, normalized);
   }
 
-  private async fetchWithTimeout(url: string): Promise<Response> {
+  private async fetchDirect(url: string): Promise<FetchedPage> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
+    let response: Response;
     try {
-      return await fetch(url, {
+      response = await fetch(url, {
         signal: controller.signal,
         redirect: "follow",
         cache: "no-store",
@@ -112,6 +135,55 @@ export class PublicWebStoryProvider implements StoryProvider {
     } finally {
       clearTimeout(timer);
     }
+
+    const html = await this.readBodyWithLimit(response);
+    return { status: response.status, finalUrl: response.url, html };
+  }
+
+  /**
+   * Same public profile page as `fetchDirect`, retrieved through Scrapfly's
+   * Web Scraping API (`asp=true`) instead of a direct fetch, so Instagram's
+   * bot detection doesn't block the request before it reaches our parser.
+   */
+  private async fetchViaScrapfly(url: string): Promise<FetchedPage> {
+    const apiUrl = `${SCRAPFLY_ENDPOINT}?key=${SCRAPFLY_API_KEY}&url=${encodeURIComponent(url)}&asp=true&country=us`;
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), SCRAPFLY_TIMEOUT_MS);
+    let response: Response;
+    try {
+      response = await fetch(apiUrl, { signal: controller.signal, cache: "no-store" });
+    } finally {
+      clearTimeout(timer);
+    }
+
+    if (!response.ok) {
+      throw new ProviderError(
+        "Anti-bot fetch service returned an unexpected status.",
+        "UPSTREAM_ERROR",
+        `status=${response.status}`,
+      );
+    }
+
+    const body = (await response.json()) as {
+      result?: { status_code: number; url: string; content: string; size: number };
+    };
+    const result = body.result;
+    if (!result || typeof result.content !== "string") {
+      throw new ProviderError(
+        "Anti-bot fetch service returned an unexpected response shape.",
+        "UPSTREAM_ERROR",
+      );
+    }
+
+    if (result.size > MAX_RESPONSE_BYTES) {
+      throw new ProviderError(
+        "Public profile page exceeded the response size limit.",
+        "UPSTREAM_ERROR",
+      );
+    }
+
+    return { status: result.status_code, finalUrl: result.url, html: result.content };
   }
 
   private async readBodyWithLimit(response: Response): Promise<string> {
