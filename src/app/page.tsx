@@ -76,8 +76,8 @@ export default function HomePage() {
             width={1086}
             height={1448}
             priority
-            className="order-first mx-auto w-36 sm:w-44 lg:order-last lg:mx-0 lg:w-[380px] lg:shrink-0"
-            sizes="(min-width: 1024px) 380px, (min-width: 640px) 176px, 144px"
+            className="order-first mx-auto w-20 sm:w-44 lg:order-last lg:mx-0 lg:w-[380px] lg:shrink-0"
+            sizes="(min-width: 1024px) 380px, (min-width: 640px) 176px, 80px"
           />
 
           <div className="mt-4 text-center lg:mt-0 lg:flex-1 lg:text-left">
