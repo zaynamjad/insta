@@ -1,7 +1,7 @@
-export const SITE_NAME = "StoryPeek";
+export const SITE_NAME = "InstaViewStories";
 export const SITE_TAGLINE = "Instagram Story Viewer";
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.storypeek.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.instaviewstories.com"
 ).replace(/\/$/, "");
 
 export const SITE_DESCRIPTION =
@@ -10,9 +10,9 @@ export const SITE_DESCRIPTION =
 export const SITE_SHORT_DESCRIPTION =
   "Anonymous Instagram Story viewer. No login required.";
 
-export const TWITTER_HANDLE = "@storypeek";
+export const TWITTER_HANDLE = "@instaviewstories";
 
-export const CONTACT_EMAIL = "hello@storypeek.com";
+export const CONTACT_EMAIL = "info@instaviewstories.com";
 
 export const NAV_LINKS = [
   { href: "/#about", label: "About" },

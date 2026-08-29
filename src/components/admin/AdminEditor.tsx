@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, TWITTER_HANDLE } from "@/lib/site";
 import type { PageSeoSettings } from "@/types/page-settings";
 import { saveSettingsAction } from "@/app/[...path]/actions";
 import { logoutAction } from "@/app/admin/login/actions";
@@ -201,14 +201,14 @@ export function AdminEditor({
                 <TextInput
                   value={settings.twitterSite}
                   onChange={(v) => update("twitterSite", v)}
-                  placeholder="@storypeek"
+                  placeholder={TWITTER_HANDLE}
                 />
               </Field>
               <Field label="Twitter Creator (twitter:creator)">
                 <TextInput
                   value={settings.twitterCreator}
                   onChange={(v) => update("twitterCreator", v)}
-                  placeholder="@storypeek"
+                  placeholder={TWITTER_HANDLE}
                 />
               </Field>
             </div>

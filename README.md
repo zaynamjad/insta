@@ -1,4 +1,4 @@
-# StoryPeek — Instagram Story Viewer
+# InstaViewStories — Instagram Story Viewer
 
 An SEO-first, AdSense-ready Instagram public-profile & Story lookup tool
 built with Next.js (App Router), TypeScript, and Tailwind CSS. Enter a

@@ -5,6 +5,7 @@ import { validateUsername } from "./validation";
 import { checkOutboundRateLimit } from "./rate-limit";
 import { parseProfilePage, looksLikeAccessBlocked } from "./parser";
 import { hasEnoughDataToNormalize, normalizeProfile } from "./normalizer";
+import { SITE_NAME, SITE_URL } from "@/lib/site";
 
 const FETCH_TIMEOUT_MS = 8_000;
 const MAX_RESPONSE_BYTES = 4_000_000; // real profile pages run ~0.5-1MB; this is generous headroom, not a target
@@ -104,7 +105,7 @@ export class PublicWebStoryProvider implements StoryProvider {
           // Standard bot self-identification format (the same convention
           // Googlebot/Bingbot use) — this declares what it is, it does not
           // claim to be a browser.
-          "User-Agent": "Mozilla/5.0 (compatible; StoryPeek/1.0; +https://www.storypeek.com/about/)",
+          "User-Agent": `Mozilla/5.0 (compatible; ${SITE_NAME}/1.0; +${SITE_URL}/about/)`,
           Accept: "text/html",
         },
       });
