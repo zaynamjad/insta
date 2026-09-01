@@ -69,7 +69,7 @@ export default function HomePage() {
           aria-hidden
           className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-3xl brand-gradient"
         />
-        <div className="relative mx-auto max-w-6xl px-4 pt-12 pb-12 sm:pt-16 sm:pb-16 lg:flex lg:items-center lg:gap-12 lg:pt-20">
+        <div className="relative mx-auto max-w-6xl px-4 pt-7 pb-12 sm:pt-16 sm:pb-16 lg:flex lg:items-center lg:gap-12 lg:pt-20">
           <Image
             src="/mascot.png"
             alt=""
