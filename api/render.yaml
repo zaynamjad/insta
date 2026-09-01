@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: insta-stories-api
+    runtime: docker
+    dockerfilePath: ./api/Dockerfile
+    dockerContext: ./api
+    plan: free
+    envVars:
+      - key: INSTAGRAM_USERNAME
+        sync: false
+      - key: INSTAGRAM_PASSWORD
+        sync: false
+      - key: API_SECRET_KEY
+        sync: false
+      - key: INSTA_SESSION_B64
+        sync: false
