@@ -6,7 +6,7 @@ import { checkOutboundRateLimit } from "./rate-limit";
 
 const INSTA_API_URL = process.env.INSTA_API_URL;
 const INSTA_API_SECRET = process.env.INSTA_API_SECRET ?? "";
-const FETCH_TIMEOUT_MS = 25_000; // Instaloader calls are slower than a simple page scrape
+const FETCH_TIMEOUT_MS = 55_000; // Render free tier cold-starts can take 30s+ before the request even begins
 
 /**
  * Story provider that delegates to the FastAPI Instaloader backend.
