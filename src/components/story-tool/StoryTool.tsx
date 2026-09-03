@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { validateUsername } from "@/lib/story/validation";
@@ -9,7 +9,7 @@ import type { Profile } from "@/types/profile";
 import { StoryViewerModal } from "./StoryViewerModal";
 import { PostsGrid } from "./PostsGrid";
 import { DownloadButton } from "./DownloadButton";
-import { Turnstile } from "./Turnstile";
+import { Turnstile, type TurnstileHandle } from "./Turnstile";
 
 type Status = "idle" | "loading" | "result";
 type Tab = "stories" | "posts";
@@ -27,8 +27,7 @@ export function StoryTool({
   const [formError, setFormError] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab>("stories");
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
-  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
+  const turnstileRef = useRef<TurnstileHandle>(null);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -40,16 +39,15 @@ export function StoryTool({
       return;
     }
 
-    if (TURNSTILE_ENABLED && !turnstileToken) {
-      setFormError("Please complete the verification below.");
-      return;
-    }
-
+    // Show the loading state immediately — verification (below) and the
+    // actual lookup both happen while it's visible, so the user isn't
+    // staring at an unchanged form during either step.
     setStatus("loading");
     setResult(null);
     setTab("stories");
 
     try {
+      const turnstileToken = TURNSTILE_ENABLED ? await turnstileRef.current?.getToken() : null;
       const res = await fetch("/api/story-viewer/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -65,9 +63,6 @@ export function StoryTool({
         message: "We couldn't retrieve public content right now. Please try again later.",
       });
       setStatus("result");
-    } finally {
-      setTurnstileToken(null);
-      setTurnstileResetSignal((n) => n + 1);
     }
   }
 
@@ -108,16 +103,14 @@ export function StoryTool({
         </div>
         <button
           type="submit"
-          disabled={status === "loading" || (TURNSTILE_ENABLED && !turnstileToken)}
+          disabled={status === "loading"}
           className="brand-gradient shrink-0 rounded-2xl px-8 py-4 text-base font-semibold text-white shadow-md transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "loading" ? "Searching…" : "View Stories"}
         </button>
       </form>
 
-      {TURNSTILE_ENABLED && (
-        <Turnstile onVerify={setTurnstileToken} resetSignal={turnstileResetSignal} />
-      )}
+      {TURNSTILE_ENABLED && <Turnstile ref={turnstileRef} />}
 
       {formError && (
         <p role="alert" className="mt-2 text-sm font-medium text-red-600">
