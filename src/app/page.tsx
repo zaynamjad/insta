@@ -64,23 +64,6 @@ export default function HomePage() {
       <JsonLd data={softwareApplicationSchema()} />
       <PageOverridesRenderer path="/" />
 
-      {/* h-0 keeps this out of normal document flow height-wise, so the
-          sticky image below scrolls up with the page to its `top` offset
-          and then stays in view for the rest of the (much taller) page,
-          instead of pushing content down or staying glued to the viewport
-          corner regardless of scroll position. */}
-      <div className="pointer-events-none relative z-20 hidden h-0 sm:block">
-        <Image
-          src="/mascot.png"
-          alt=""
-          aria-hidden
-          width={1086}
-          height={1448}
-          className="sticky top-20 ml-auto mr-4 w-16 drop-shadow-lg md:w-20"
-          sizes="80px"
-        />
-      </div>
-
       <section id="search" className="relative overflow-hidden">
         <div
           aria-hidden

@@ -12,7 +12,13 @@ declare global {
         container: string | HTMLElement,
         options: {
           sitekey: string;
-          size?: "normal" | "invisible";
+          size?: "normal" | "compact" | "flexible";
+          // "execute" defers the challenge until execute() is called
+          // instead of running immediately on render — this, not a
+          // (nonexistent) size="invisible", is Turnstile's actual
+          // invisible-mode mechanism.
+          execution?: "render" | "execute";
+          appearance?: "always" | "execute" | "interaction-only";
           callback: (token: string) => void;
           "error-callback"?: () => void;
         },
@@ -29,10 +35,12 @@ export interface TurnstileHandle {
 }
 
 /**
- * Renders no visible UI — the widget runs in invisible mode and only
- * executes when `getToken()` is called (from the search form's submit
- * handler), so verification happens after the user clicks search rather
- * than gating the button itself.
+ * Renders no visible UI for most visitors: `execution: "execute"` defers
+ * the challenge until `getToken()` is called (from the search form's
+ * submit handler, not on render), and `appearance: "interaction-only"`
+ * keeps the widget hidden unless a visitor is actually flagged for an
+ * interactive challenge. Verification this way happens after the user
+ * clicks search rather than gating the button itself.
  */
 export const Turnstile = forwardRef<TurnstileHandle>(function Turnstile(_props, ref) {
   const containerId = `turnstile-${useId().replace(/:/g, "")}`;
@@ -43,7 +51,8 @@ export const Turnstile = forwardRef<TurnstileHandle>(function Turnstile(_props, 
     if (!SITE_KEY || !window.turnstile || widgetId.current) return;
     widgetId.current = window.turnstile.render(`#${containerId}`, {
       sitekey: SITE_KEY,
-      size: "invisible",
+      execution: "execute",
+      appearance: "interaction-only",
       callback: (token) => {
         pending.current?.resolve(token);
         pending.current = null;
@@ -64,6 +73,10 @@ export const Turnstile = forwardRef<TurnstileHandle>(function Turnstile(_props, 
         }
         if (!window.turnstile || !widgetId.current) {
           reject(new Error("Verification is still loading. Please try again."));
+          return;
+        }
+        if (pending.current) {
+          reject(new Error("Verification already in progress."));
           return;
         }
         pending.current = { resolve, reject };
