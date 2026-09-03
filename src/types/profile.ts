@@ -18,4 +18,8 @@ export interface Profile {
   isVerified: boolean;
   isPublic: boolean;
   stories: Story[];
+  /** Business/creator category label (e.g. "Clothing (brand)"), when Instagram exposes one. */
+  category: string | null;
+  /** The single external link shown on the profile, if any. */
+  externalUrl: string | null;
 }

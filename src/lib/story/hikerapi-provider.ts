@@ -21,6 +21,8 @@ interface HikerUser {
   media_count: number | null;
   is_private: boolean;
   is_verified: boolean;
+  category?: string | null;
+  external_url?: string | null;
 }
 
 interface HikerStoryItem {
@@ -102,6 +104,8 @@ export class HikerApiStoryProvider implements StoryProvider {
       isVerified: user.is_verified,
       isPublic,
       stories,
+      category: user.category || null,
+      externalUrl: user.external_url || null,
     };
   }
 

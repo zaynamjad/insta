@@ -54,6 +54,8 @@ export function normalizeProfile(raw: RawProfileData, username: string): Profile
     isVerified: raw.isVerified ?? false,
     isPublic: raw.isPrivate === false,
     stories: [],
+    category: null,
+    externalUrl: null,
   };
 }
 

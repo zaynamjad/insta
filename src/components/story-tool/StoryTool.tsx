@@ -228,15 +228,16 @@ function ResultState({
 
   return (
     <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
-      <div className="flex items-start justify-between gap-4">
-        <ProfileHeader profile={profile} />
+      <div className="flex justify-end">
         <button
           onClick={onReset}
-          className="shrink-0 text-xs font-medium text-foreground/50 hover:text-foreground"
+          className="shrink-0 text-sm font-medium text-foreground/50 hover:text-foreground"
         >
           Search another
         </button>
       </div>
+
+      <ProfileHeader profile={profile} />
 
       <div className="mt-5 flex gap-2 border-b border-border">
         <TabButton active={tab === "stories"} onClick={() => onTabChange("stories")}>
@@ -329,54 +330,88 @@ function TabButton({
 
 function ProfileHeader({ profile }: { profile: Profile }) {
   return (
-    <div className="flex items-start gap-3">
-      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full brand-gradient p-[2px]">
-        <div className="h-full w-full overflow-hidden rounded-full bg-surface">
-          {profile.profileImage ? (
-            <Image
-              src={profile.profileImage}
-              alt={profile.username}
-              width={56}
-              height={56}
-              className="h-full w-full object-cover"
-              unoptimized
-            />
-          ) : (
-            <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-foreground/40">
-              {profile.username.slice(0, 2).toUpperCase()}
-            </div>
-          )}
+    <div>
+      <div className="flex items-start gap-4 sm:gap-6">
+        <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full brand-gradient p-[3px] sm:h-24 sm:w-24">
+          <div className="h-full w-full overflow-hidden rounded-full bg-surface p-[2px]">
+            {profile.profileImage ? (
+              <Image
+                src={profile.profileImage}
+                alt={profile.username}
+                width={96}
+                height={96}
+                className="h-full w-full rounded-full object-cover"
+                unoptimized
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center rounded-full text-lg font-semibold text-foreground/40">
+                {profile.username.slice(0, 2).toUpperCase()}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="min-w-0 flex-1 pt-1">
+          <div className="flex items-center gap-1.5">
+            <p className="truncate text-lg font-bold text-foreground sm:text-xl">
+              {profile.fullName ?? `@${profile.username}`}
+            </p>
+            {profile.isVerified && (
+              <svg aria-label="Verified" width="17" height="17" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-accent">
+                <path d="M12 2l2.4 2.1 3.1-.5 1 3 2.8 1.5-.5 3.1L23 14l-2.2 2.4.5 3.1-2.8 1.5-1 3-3.1-.5L12 26l-2.4-2.1-3.1.5-1-3-2.8-1.5.5-3.1L1 14l2.2-2.4-.5-3.1 2.8-1.5 1-3 3.1.5z" />
+              </svg>
+            )}
+          </div>
+          <p className="text-sm text-foreground/50">@{profile.username}</p>
+
+          <div className="mt-3 flex gap-5 sm:gap-8">
+            <Stat count={profile.posts} label="posts" />
+            <Stat count={profile.followers} label="followers" />
+            <Stat count={profile.following} label="following" />
+          </div>
         </div>
       </div>
-      <div className="min-w-0">
-        <div className="flex items-center gap-1.5">
-          <p className="truncate font-semibold text-foreground">
-            {profile.fullName ?? `@${profile.username}`}
-          </p>
-          {profile.isVerified && (
-            <svg aria-label="Verified" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-accent">
-              <path d="M12 2l2.4 2.1 3.1-.5 1 3 2.8 1.5-.5 3.1L23 14l-2.2 2.4.5 3.1-2.8 1.5-1 3-3.1-.5L12 26l-2.4-2.1-3.1.5-1-3-2.8-1.5.5-3.1L1 14l2.2-2.4-.5-3.1 2.8-1.5 1-3 3.1.5z" />
-            </svg>
-          )}
-        </div>
-        <p className="text-xs text-foreground/50">@{profile.username}</p>
-        {profile.bio && (
-          <p className="mt-1 max-w-sm text-sm leading-snug text-foreground/70">{profile.bio}</p>
+
+      <div className="mt-4">
+        {profile.category && (
+          <p className="text-sm text-foreground/50">{profile.category}</p>
         )}
-        <div className="mt-1.5 flex gap-3 text-xs text-foreground/60">
-          {typeof profile.followers === "number" && (
-            <span><strong className="text-foreground">{formatCount(profile.followers)}</strong> followers</span>
-          )}
-          {typeof profile.following === "number" && (
-            <span><strong className="text-foreground">{formatCount(profile.following)}</strong> following</span>
-          )}
-          {typeof profile.posts === "number" && (
-            <span><strong className="text-foreground">{formatCount(profile.posts)}</strong> posts</span>
-          )}
-        </div>
+        {profile.bio && (
+          <p className="mt-1 whitespace-pre-line text-base leading-relaxed text-foreground/80">
+            {profile.bio}
+          </p>
+        )}
+        {profile.externalUrl && (
+          <a
+            href={profile.externalUrl}
+            target="_blank"
+            rel="nofollow noopener noreferrer"
+            className="mt-1 inline-flex items-center gap-1 text-base font-medium text-accent hover:underline"
+          >
+            <svg aria-hidden width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+            </svg>
+            {formatUrlForDisplay(profile.externalUrl)}
+          </a>
+        )}
       </div>
     </div>
   );
+}
+
+function Stat({ count, label }: { count: number | null; label: string }) {
+  if (typeof count !== "number") return null;
+  return (
+    <div>
+      <p className="text-base font-bold text-foreground sm:text-lg">{formatCount(count)}</p>
+      <p className="text-sm text-foreground/50">{label}</p>
+    </div>
+  );
+}
+
+function formatUrlForDisplay(url: string): string {
+  return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 }
 
 function formatCount(n: number): string {
