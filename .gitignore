@@ -46,13 +46,3 @@ next-env.d.ts
 docs
 
 .vercel
-
-# Python / Instaloader
-__pycache__/
-*.pyc
-*.pyo
-*.session
-downloads/
-scraped_stories.json
-
-.vercel

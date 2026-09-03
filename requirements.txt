@@ -1,2 +1,0 @@
-instaloader==4.13.2
-python-dotenv==1.0.1
