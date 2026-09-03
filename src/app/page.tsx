@@ -64,6 +64,16 @@ export default function HomePage() {
       <JsonLd data={softwareApplicationSchema()} />
       <PageOverridesRenderer path="/" />
 
+      <Image
+        src="/mascot.png"
+        alt=""
+        aria-hidden
+        width={1086}
+        height={1448}
+        className="pointer-events-none fixed bottom-4 right-4 z-20 hidden w-16 drop-shadow-lg sm:block md:w-20"
+        sizes="80px"
+      />
+
       <section id="search" className="relative overflow-hidden">
         <div
           aria-hidden
