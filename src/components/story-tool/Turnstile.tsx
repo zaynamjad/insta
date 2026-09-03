@@ -46,7 +46,6 @@ export function Turnstile({
   useEffect(() => {
     if (resetSignal === undefined || !widgetId.current || !window.turnstile) return;
     window.turnstile.reset(widgetId.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetSignal]);
 
   if (!SITE_KEY) return null;

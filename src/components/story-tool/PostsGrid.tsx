@@ -79,28 +79,34 @@ export function PostsGrid({ username }: { username: string }) {
         {posts.map((post, index) => {
           const cover = post.items[0];
           return (
-            <button
+            <div
               key={post.id}
-              onClick={() => setViewerIndex(index)}
               className="group relative aspect-square overflow-hidden rounded-xl border border-border bg-surface-muted"
-              aria-label={`Open post ${index + 1}`}
             >
-              {cover?.thumbnailUrl && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={cover.thumbnailUrl}
-                  alt=""
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                />
-              )}
-              {post.items.length > 1 && (
-                <span className="absolute right-1.5 top-1.5 rounded-full bg-black/50 p-1 text-white">
-                  <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M4 8h12v12H4z" opacity=".5" />
-                    <path d="M8 4h12v12H8z" />
-                  </svg>
-                </span>
-              )}
+              <button
+                onClick={() => setViewerIndex(index)}
+                className="absolute inset-0 h-full w-full"
+                aria-label={`Open post ${index + 1}`}
+              >
+                {cover?.thumbnailUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={cover.thumbnailUrl}
+                    alt=""
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                )}
+                {post.items.length > 1 && (
+                  <span className="absolute right-1.5 top-1.5 rounded-full bg-black/50 p-1 text-white">
+                    <svg aria-hidden width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M4 8h12v12H4z" opacity=".5" />
+                      <path d="M8 4h12v12H8z" />
+                    </svg>
+                  </span>
+                )}
+                <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
+              </button>
+              {/* Sibling, not nested inside the button above — an <a> inside a <button> is invalid HTML and misfires clicks. */}
               {cover && (
                 <DownloadButton
                   mediaUrl={cover.mediaUrl}
@@ -108,8 +114,7 @@ export function PostsGrid({ username }: { username: string }) {
                   className="absolute bottom-1.5 right-1.5 rounded-full bg-black/50 p-1.5 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
                 />
               )}
-              <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
-            </button>
+            </div>
           );
         })}
       </div>

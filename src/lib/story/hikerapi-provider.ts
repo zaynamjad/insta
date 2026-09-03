@@ -220,7 +220,10 @@ export class HikerApiStoryProvider implements StoryProvider {
       mediaUrl,
       thumbnailUrl: imageUrl ?? null,
       timestamp: item.taken_at ? new Date(item.taken_at * 1000).toISOString() : null,
-      duration: item.video_duration ?? 0,
+      // video_duration only exists for videos; images get Instagram's
+      // standard 5s display duration rather than 0 (which would make the
+      // viewer's auto-advance timer fire instantly and close on open).
+      duration: item.video_duration ?? 5,
     };
   }
 

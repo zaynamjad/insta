@@ -268,27 +268,32 @@ function ResultState({
             }`}
           >
             {profile.stories.map((story, index) => (
-              <button
+              <div
                 key={story.id}
-                onClick={() => onOpenViewer(index)}
                 className="group relative aspect-[9/16] overflow-hidden rounded-xl border border-border bg-surface-muted"
-                aria-label={`Open story ${index + 1}`}
               >
-                {story.thumbnailUrl && (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={story.thumbnailUrl}
-                    alt=""
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
-                )}
+                <button
+                  onClick={() => onOpenViewer(index)}
+                  className="absolute inset-0 h-full w-full"
+                  aria-label={`Open story ${index + 1}`}
+                >
+                  {story.thumbnailUrl && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={story.thumbnailUrl}
+                      alt=""
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    />
+                  )}
+                  <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
+                </button>
+                {/* Sibling, not nested inside the button above — an <a> inside a <button> is invalid HTML and misfires clicks. */}
                 <DownloadButton
                   mediaUrl={story.mediaUrl}
                   label={`Download story ${index + 1}`}
                   className="absolute bottom-1.5 right-1.5 rounded-full bg-black/50 p-1.5 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
                 />
-                <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
-              </button>
+              </div>
             ))}
           </div>
         )

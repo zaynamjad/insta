@@ -68,7 +68,10 @@ export function StoryViewerModal({
 
   useEffect(() => {
     if (paused || current.type === "video") return;
-    const timer = setTimeout(goNext, current.duration * 1000);
+    // A non-positive duration would otherwise fire this instantly and
+    // close the viewer on open — fall back to Instagram's standard 5s.
+    const durationSeconds = current.duration > 0 ? current.duration : 5;
+    const timer = setTimeout(goNext, durationSeconds * 1000);
     return () => clearTimeout(timer);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [index, paused, current.duration, current.type]);
