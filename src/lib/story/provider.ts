@@ -1,4 +1,5 @@
 import type { Profile } from "@/types/profile";
+import type { Post } from "@/types/post";
 
 /**
  * Machine-readable reason a lookup failed, surfaced to the client
@@ -46,4 +47,13 @@ export interface StoryProvider {
    * false`), not an error.
    */
   getProfile(username: string): Promise<Profile | null>;
+
+  /**
+   * Optional: recent feed posts for a username, fetched separately from
+   * `getProfile` since it's a distinct (and separately billed, for paid
+   * providers) capability the UI only needs when the Posts tab is opened.
+   * Providers that can't retrieve posts simply don't implement this —
+   * callers must treat it as absent, not assume every provider has it.
+   */
+  getPosts?(username: string): Promise<Post[]>;
 }

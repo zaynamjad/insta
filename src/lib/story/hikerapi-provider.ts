@@ -2,6 +2,7 @@ import type { StoryProvider } from "./provider";
 import { ProviderError } from "./provider";
 import type { Profile } from "@/types/profile";
 import type { Story } from "@/types/story";
+import type { Post, PostMediaItem } from "@/types/post";
 import { validateUsername } from "./validation";
 import { checkOutboundRateLimit } from "./rate-limit";
 
@@ -34,6 +35,29 @@ interface HikerStoryItem {
 interface HikerStoriesResponse {
   reel: { items?: HikerStoryItem[] } | null;
   status: string;
+}
+
+interface HikerMediaResource {
+  media_type: number; // 1 = photo, 2 = video
+  thumbnail_url?: string | null;
+  video_url?: string | null;
+  image_versions?: { url: string }[];
+  video_versions?: { url: string }[];
+}
+
+interface HikerMediaItem extends HikerMediaResource {
+  pk: string | number;
+  id: string;
+  code?: string | null;
+  // The medias/chunk endpoint's `taken_at` is already an ISO string —
+  // `taken_at_ts` is the parallel unix-seconds field, unlike the stories
+  // endpoint where `taken_at` itself is numeric.
+  taken_at: string;
+  taken_at_ts?: number;
+  caption_text?: string | null;
+  like_count?: number | null;
+  comment_count?: number | null;
+  resources?: HikerMediaResource[];
 }
 
 /**
@@ -78,6 +102,69 @@ export class HikerApiStoryProvider implements StoryProvider {
       isVerified: user.is_verified,
       isPublic,
       stories,
+    };
+  }
+
+  async getPosts(usernameInput: string): Promise<Post[]> {
+    const { valid, normalized } = validateUsername(usernameInput);
+    if (!valid) {
+      throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
+    }
+
+    if (!checkOutboundRateLimit().allowed) {
+      throw new ProviderError(
+        "Upstream request budget exceeded for this window.",
+        "RATE_LIMITED",
+      );
+    }
+
+    if (!HIKERAPI_KEY) {
+      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+    }
+
+    const user = await this.fetchUser(normalized);
+    if (!user || user.is_private !== false) return [];
+
+    const res = await this.request(`/v1/user/medias/chunk?user_id=${encodeURIComponent(String(user.pk))}`);
+    if (!res.ok) return [];
+
+    const body = (await res.json()) as [HikerMediaItem[], string | null] | HikerMediaItem[];
+    const items = Array.isArray(body[0]) ? (body[0] as HikerMediaItem[]) : (body as HikerMediaItem[]);
+
+    return items
+      .map((item) => this.normalizeMediaPost(item))
+      .filter((post): post is Post => post !== null);
+  }
+
+  private normalizeMediaPost(item: HikerMediaItem): Post | null {
+    const ownItem = this.normalizeMediaItem(item);
+    const childItems = item.resources?.map((r) => this.normalizeMediaItem(r)).filter((m): m is PostMediaItem => m !== null) ?? [];
+    const mediaItems = childItems.length > 0 ? childItems : ownItem ? [ownItem] : [];
+    if (mediaItems.length === 0) return null;
+
+    return {
+      id: String(item.pk ?? item.id),
+      shortcode: item.code ?? null,
+      caption: item.caption_text ?? null,
+      timestamp: item.taken_at_ts
+        ? new Date(item.taken_at_ts * 1000).toISOString()
+        : item.taken_at || null,
+      likeCount: item.like_count ?? null,
+      commentCount: item.comment_count ?? null,
+      items: mediaItems,
+    };
+  }
+
+  private normalizeMediaItem(item: HikerMediaResource): PostMediaItem | null {
+    const videoUrl = item.video_url ?? item.video_versions?.[0]?.url;
+    const imageUrl = item.thumbnail_url ?? item.image_versions?.[0]?.url;
+    const mediaUrl = videoUrl ?? imageUrl;
+    if (!mediaUrl) return null;
+
+    return {
+      type: item.media_type === 2 ? "video" : "image",
+      mediaUrl,
+      thumbnailUrl: imageUrl ?? null,
     };
   }
 

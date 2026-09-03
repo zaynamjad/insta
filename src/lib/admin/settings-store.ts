@@ -7,11 +7,19 @@ const INDEX_KEY = "page-settings:__index";
 
 let client: Redis | null | undefined;
 
-/** Lazily constructed so a build/render without Redis env vars yet configured never crashes. */
+/**
+ * Lazily constructed so a build/render without Redis env vars yet
+ * configured never crashes. Accepts both the `UPSTASH_REDIS_REST_*` names
+ * (Upstash's own convention, and what `.env.example` documents) and
+ * `KV_REST_API_*` (what Vercel's Marketplace Upstash integration actually
+ * provisions) — the two diverged in practice, and reading only one name
+ * silently left this store looking "unconfigured" even with Redis fully
+ * provisioned.
+ */
 function getClient(): Redis | null {
   if (client !== undefined) return client;
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  const url = process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
   client = url && token ? new Redis({ url, token }) : null;
   return client;
 }

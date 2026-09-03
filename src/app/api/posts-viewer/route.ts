@@ -1,22 +1,21 @@
 import { NextRequest, NextResponse } from "next/server";
-import { lookupStory } from "@/lib/story/lookup";
+import { lookupPosts } from "@/lib/story/posts-lookup";
 import { validateUsername } from "@/lib/story/validation";
 import { checkClientRateLimit } from "@/lib/story/rate-limit";
 import { getClientIp, isCrossSiteRequest } from "@/lib/story/request-guards";
-import { verifyTurnstileToken } from "@/lib/story/turnstile";
-import type { StoryLookupResult, StoryErrorCode } from "@/types/story";
+import type { PostsLookupResult, PostsErrorCode } from "@/types/post";
 
 export const runtime = "nodejs";
 
-const MAX_BODY_BYTES = 4_000; // username plus a Turnstile token, which can run a few hundred bytes
+const MAX_BODY_BYTES = 2_000; // this endpoint only ever needs a short username string
 
 function jsonError(
   status: number,
-  code: StoryErrorCode,
+  code: PostsErrorCode,
   message: string,
   extra?: Record<string, unknown>,
 ) {
-  const body: StoryLookupResult = { status: "error", code, message };
+  const body: PostsLookupResult = { status: "error", code, message };
   return NextResponse.json({ ...body, ...extra }, { status });
 }
 
@@ -53,21 +52,12 @@ export async function POST(req: NextRequest) {
       ? (body as { username: unknown }).username
       : undefined;
 
-  const turnstileToken =
-    typeof body === "object" && body !== null && "turnstileToken" in body
-      ? (body as { turnstileToken: unknown }).turnstileToken
-      : undefined;
-
   const { valid, error } = validateUsername(usernameInput);
   if (!valid) {
     return jsonError(400, "INVALID_USERNAME", error ?? "Invalid username.");
   }
 
-  if (!(await verifyTurnstileToken(turnstileToken, ip))) {
-    return jsonError(403, "INVALID_REQUEST", "Verification failed. Please try again.");
-  }
-
-  const result = await lookupStory(usernameInput);
+  const result = await lookupPosts(usernameInput);
   const status = result.status === "error" ? 502 : 200;
   return NextResponse.json(result, { status });
 }

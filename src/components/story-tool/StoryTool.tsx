@@ -7,8 +7,14 @@ import { validateUsername } from "@/lib/story/validation";
 import type { StoryLookupResult } from "@/types/story";
 import type { Profile } from "@/types/profile";
 import { StoryViewerModal } from "./StoryViewerModal";
+import { PostsGrid } from "./PostsGrid";
+import { DownloadButton } from "./DownloadButton";
+import { Turnstile } from "./Turnstile";
 
 type Status = "idle" | "loading" | "result";
+type Tab = "stories" | "posts";
+
+const TURNSTILE_ENABLED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 
 export function StoryTool({
   variant = "hero",
@@ -20,6 +26,9 @@ export function StoryTool({
   const [result, setResult] = useState<StoryLookupResult | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+  const [tab, setTab] = useState<Tab>("stories");
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
+  const [turnstileResetSignal, setTurnstileResetSignal] = useState(0);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -31,14 +40,20 @@ export function StoryTool({
       return;
     }
 
+    if (TURNSTILE_ENABLED && !turnstileToken) {
+      setFormError("Please complete the verification below.");
+      return;
+    }
+
     setStatus("loading");
     setResult(null);
+    setTab("stories");
 
     try {
       const res = await fetch("/api/story-viewer/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: normalized }),
+        body: JSON.stringify({ username: normalized, turnstileToken }),
       });
       const data: StoryLookupResult = await res.json();
       setResult(data);
@@ -50,6 +65,9 @@ export function StoryTool({
         message: "We couldn't retrieve public content right now. Please try again later.",
       });
       setStatus("result");
+    } finally {
+      setTurnstileToken(null);
+      setTurnstileResetSignal((n) => n + 1);
     }
   }
 
@@ -58,6 +76,7 @@ export function StoryTool({
     setResult(null);
     setInput("");
     setFormError(null);
+    setTab("stories");
   }
 
   return (
@@ -89,12 +108,16 @@ export function StoryTool({
         </div>
         <button
           type="submit"
-          disabled={status === "loading"}
+          disabled={status === "loading" || (TURNSTILE_ENABLED && !turnstileToken)}
           className="brand-gradient shrink-0 rounded-2xl px-8 py-4 text-base font-semibold text-white shadow-md transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
         >
           {status === "loading" ? "Searching…" : "View Stories"}
         </button>
       </form>
+
+      {TURNSTILE_ENABLED && (
+        <Turnstile onVerify={setTurnstileToken} resetSignal={turnstileResetSignal} />
+      )}
 
       {formError && (
         <p role="alert" className="mt-2 text-sm font-medium text-red-600">
@@ -112,6 +135,8 @@ export function StoryTool({
           <ResultState
             result={result}
             variant={variant}
+            tab={tab}
+            onTabChange={setTab}
             onReset={reset}
             onOpenViewer={(index) => setViewerIndex(index)}
           />
@@ -162,11 +187,15 @@ function LoadingState() {
 function ResultState({
   result,
   variant,
+  tab,
+  onTabChange,
   onReset,
   onOpenViewer,
 }: {
   result: StoryLookupResult;
   variant: "hero" | "compact";
+  tab: Tab;
+  onTabChange: (tab: Tab) => void;
   onReset: () => void;
   onOpenViewer: (index: number) => void;
 }) {
@@ -194,26 +223,13 @@ function ResultState({
     );
   }
 
-  if (result.status === "no_stories") {
-    return (
-      <StateCard tone="neutral" onReset={onReset} profile={result.profile}>
-        No publicly available stories found for this username.{" "}
-        <Link
-          href={`/profile/${result.profile.username}/`}
-          className="font-semibold text-accent hover:underline"
-        >
-          View public profile info
-        </Link>
-        .
-      </StateCard>
-    );
-  }
+  // status === "ok" or "no_stories" — a confirmed public profile either way
+  const profile = result.profile;
 
-  // status === "ok"
   return (
     <div className="rounded-2xl border border-border bg-surface p-5 sm:p-6">
-      <div className="flex items-center justify-between gap-4">
-        <ProfileHeader profile={result.profile} storyCount={result.profile.stories.length} />
+      <div className="flex items-start justify-between gap-4">
+        <ProfileHeader profile={profile} />
         <button
           onClick={onReset}
           className="shrink-0 text-xs font-medium text-foreground/50 hover:text-foreground"
@@ -222,54 +238,101 @@ function ResultState({
         </button>
       </div>
 
-      <div
-        className={`mt-5 grid gap-3 ${
-          variant === "hero"
-            ? "grid-cols-3 sm:grid-cols-4 md:grid-cols-6"
-            : "grid-cols-4 sm:grid-cols-6"
-        }`}
-      >
-        {result.profile.stories.map((story, index) => (
-          <button
-            key={story.id}
-            onClick={() => onOpenViewer(index)}
-            className="group relative aspect-[9/16] overflow-hidden rounded-xl border border-border bg-surface-muted"
-            aria-label={`Open story ${index + 1}`}
-          >
-            {story.thumbnailUrl && (
-              // Provider thumbnails are untrusted remote URLs at arbitrary sizes.
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={story.thumbnailUrl}
-                alt=""
-                className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            )}
-            <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
-          </button>
-        ))}
+      <div className="mt-5 flex gap-2 border-b border-border">
+        <TabButton active={tab === "stories"} onClick={() => onTabChange("stories")}>
+          Stories {result.status === "ok" ? `(${profile.stories.length})` : ""}
+        </TabButton>
+        <TabButton active={tab === "posts"} onClick={() => onTabChange("posts")}>
+          Posts
+        </TabButton>
       </div>
+
+      {tab === "stories" ? (
+        result.status === "no_stories" ? (
+          <p className="mt-5 text-sm text-foreground/60">
+            No publicly available stories found for this username.{" "}
+            <Link
+              href={`/profile/${profile.username}/`}
+              className="font-semibold text-accent hover:underline"
+            >
+              View public profile info
+            </Link>
+            .
+          </p>
+        ) : (
+          <div
+            className={`mt-5 grid gap-3 ${
+              variant === "hero"
+                ? "grid-cols-3 sm:grid-cols-4 md:grid-cols-6"
+                : "grid-cols-4 sm:grid-cols-6"
+            }`}
+          >
+            {profile.stories.map((story, index) => (
+              <button
+                key={story.id}
+                onClick={() => onOpenViewer(index)}
+                className="group relative aspect-[9/16] overflow-hidden rounded-xl border border-border bg-surface-muted"
+                aria-label={`Open story ${index + 1}`}
+              >
+                {story.thumbnailUrl && (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={story.thumbnailUrl}
+                    alt=""
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                )}
+                <DownloadButton
+                  mediaUrl={story.mediaUrl}
+                  label={`Download story ${index + 1}`}
+                  className="absolute bottom-1.5 right-1.5 rounded-full bg-black/50 p-1.5 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
+                />
+                <span className="absolute inset-0 bg-black/0 transition-colors group-hover:bg-black/10" />
+              </button>
+            ))}
+          </div>
+        )
+      ) : (
+        <PostsGrid username={profile.username} />
+      )}
     </div>
   );
 }
 
-function ProfileHeader({
-  profile,
-  storyCount,
+function TabButton({
+  active,
+  onClick,
+  children,
 }: {
-  profile: Pick<Profile, "username" | "fullName" | "profileImage">;
-  storyCount?: number;
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-3">
-      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full brand-gradient p-[2px]">
+    <button
+      onClick={onClick}
+      className={`-mb-px border-b-2 px-3 py-2 text-sm font-semibold transition-colors ${
+        active
+          ? "border-accent text-foreground"
+          : "border-transparent text-foreground/50 hover:text-foreground"
+      }`}
+    >
+      {children}
+    </button>
+  );
+}
+
+function ProfileHeader({ profile }: { profile: Profile }) {
+  return (
+    <div className="flex items-start gap-3">
+      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full brand-gradient p-[2px]">
         <div className="h-full w-full overflow-hidden rounded-full bg-surface">
           {profile.profileImage ? (
             <Image
               src={profile.profileImage}
               alt={profile.username}
-              width={48}
-              height={48}
+              width={56}
+              height={56}
               className="h-full w-full object-cover"
               unoptimized
             />
@@ -280,18 +343,41 @@ function ProfileHeader({
           )}
         </div>
       </div>
-      <div>
-        <p className="font-semibold text-foreground">
-          {profile.fullName ?? `@${profile.username}`}
-        </p>
-        <p className="text-xs text-foreground/50">
-          @{profile.username}
-          {typeof storyCount === "number" &&
-            ` · ${storyCount} ${storyCount === 1 ? "story" : "stories"}`}
-        </p>
+      <div className="min-w-0">
+        <div className="flex items-center gap-1.5">
+          <p className="truncate font-semibold text-foreground">
+            {profile.fullName ?? `@${profile.username}`}
+          </p>
+          {profile.isVerified && (
+            <svg aria-label="Verified" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" className="shrink-0 text-accent">
+              <path d="M12 2l2.4 2.1 3.1-.5 1 3 2.8 1.5-.5 3.1L23 14l-2.2 2.4.5 3.1-2.8 1.5-1 3-3.1-.5L12 26l-2.4-2.1-3.1.5-1-3-2.8-1.5.5-3.1L1 14l2.2-2.4-.5-3.1 2.8-1.5 1-3 3.1.5z" />
+            </svg>
+          )}
+        </div>
+        <p className="text-xs text-foreground/50">@{profile.username}</p>
+        {profile.bio && (
+          <p className="mt-1 max-w-sm text-sm leading-snug text-foreground/70">{profile.bio}</p>
+        )}
+        <div className="mt-1.5 flex gap-3 text-xs text-foreground/60">
+          {typeof profile.followers === "number" && (
+            <span><strong className="text-foreground">{formatCount(profile.followers)}</strong> followers</span>
+          )}
+          {typeof profile.following === "number" && (
+            <span><strong className="text-foreground">{formatCount(profile.following)}</strong> following</span>
+          )}
+          {typeof profile.posts === "number" && (
+            <span><strong className="text-foreground">{formatCount(profile.posts)}</strong> posts</span>
+          )}
+        </div>
       </div>
     </div>
   );
+}
+
+function formatCount(n: number): string {
+  if (n >= 1_000_000) return `${(n / 1_000_000).toFixed(1).replace(/\.0$/, "")}M`;
+  if (n >= 1_000) return `${(n / 1_000).toFixed(1).replace(/\.0$/, "")}K`;
+  return n.toLocaleString();
 }
 
 function StateCard({
@@ -303,7 +389,7 @@ function StateCard({
   tone: "neutral" | "error";
   children: React.ReactNode;
   onReset: () => void;
-  profile?: Pick<Profile, "username" | "fullName" | "profileImage">;
+  profile?: Profile;
 }) {
   return (
     <div

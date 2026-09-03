@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import type { Profile } from "@/types/profile";
 import type { Story } from "@/types/story";
+import { DownloadButton } from "./DownloadButton";
 
 const SWIPE_CLOSE_THRESHOLD = 80;
 const SWIPE_NAV_THRESHOLD = 50;
@@ -143,16 +144,23 @@ export function StoryViewerModal({
               @{profile.username}
             </span>
           </div>
-          <button
-            ref={closeBtnRef}
-            onClick={onClose}
-            aria-label="Close story viewer"
-            className="rounded-full p-2 text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
-          >
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <path d="M18 6 6 18M6 6l12 12" />
-            </svg>
-          </button>
+          <div className="flex items-center gap-1">
+            <DownloadButton
+              mediaUrl={current.mediaUrl}
+              label="Download this story"
+              className="rounded-full p-2 text-white/90 hover:bg-white/10"
+            />
+            <button
+              ref={closeBtnRef}
+              onClick={onClose}
+              aria-label="Close story viewer"
+              className="rounded-full p-2 text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
+            >
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <path d="M18 6 6 18M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
         </div>
 
         <div className="relative flex-1 select-none bg-black">
