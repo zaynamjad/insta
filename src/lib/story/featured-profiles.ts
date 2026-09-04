@@ -1,5 +1,6 @@
 import { getProvider } from "./index";
 import { getCached, setCached } from "./cache";
+import { getRedisClient } from "@/lib/redis";
 import type { Profile } from "@/types/profile";
 
 export interface FeaturedProfileMeta {
@@ -47,16 +48,34 @@ const CACHE_KEY = "featured-profiles:all";
 // just keeps avatar URLs from going permanently stale, since Instagram's
 // CDN links expire.
 const CACHE_TTL_MS = 12 * 60 * 60_000;
+const CACHE_TTL_SECONDS = CACHE_TTL_MS / 1000;
 
 /**
  * Fetches (and caches) basic profile data for the static featured-account
  * list. Never throws — a provider failure for one or all accounts falls
  * back to the static `meta` info, since this is decorative, not a lookup
  * result the user is waiting on.
+ *
+ * Cached in Redis when configured, so the 12h TTL is real — it survives
+ * redeploys and is shared across every serverless instance, not just the
+ * one warm process that happened to serve the first request. Falls back
+ * to the in-memory cache (per-instance only) when Redis isn't configured
+ * or a Redis call fails, so this never blocks on the cache layer.
  */
 export async function getFeaturedProfiles(): Promise<FeaturedProfile[]> {
-  const cached = getCached<FeaturedProfile[]>(CACHE_KEY);
-  if (cached) return cached;
+  const redis = getRedisClient();
+
+  if (redis) {
+    try {
+      const cached = await redis.get<FeaturedProfile[]>(CACHE_KEY);
+      if (cached) return cached;
+    } catch (err) {
+      console.error("[featured-profiles] Redis read failed:", err);
+    }
+  } else {
+    const cached = getCached<FeaturedProfile[]>(CACHE_KEY);
+    if (cached) return cached;
+  }
 
   const provider = getProvider();
   const fetchOne = provider.getBasicProfile?.bind(provider) ?? provider.getProfile.bind(provider);
@@ -73,6 +92,15 @@ export async function getFeaturedProfiles(): Promise<FeaturedProfile[]> {
     };
   });
 
-  setCached(CACHE_KEY, profiles, CACHE_TTL_MS);
+  if (redis) {
+    try {
+      await redis.set(CACHE_KEY, profiles, { ex: CACHE_TTL_SECONDS });
+    } catch (err) {
+      console.error("[featured-profiles] Redis write failed:", err);
+    }
+  } else {
+    setCached(CACHE_KEY, profiles, CACHE_TTL_MS);
+  }
+
   return profiles;
 }
