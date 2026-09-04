@@ -104,3 +104,28 @@ body {
 .animate-skeleton {
   animation: skeleton-pulse 1.4s ease-in-out infinite;
 }
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    /* Track is the item list rendered twice back-to-back, so -50% is
+       exactly one full set — the loop point is invisible. */
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+}

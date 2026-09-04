@@ -1,12 +1,15 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { StoryTool } from "@/components/story-tool/StoryTool";
+import { FeaturedCarousel } from "@/components/story-tool/FeaturedCarousel";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { softwareApplicationSchema } from "@/lib/seo/schema";
 import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
 import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
+import { getFeaturedProfiles } from "@/lib/story/featured-profiles";
 import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -100,6 +103,19 @@ export default function HomePage() {
               <StoryTool variant="hero" />
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="border-y border-border bg-surface-muted py-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+          <p className="text-center text-sm font-medium text-foreground/50">
+            Try it on some of the most-followed accounts on Instagram
+          </p>
+        </div>
+        <div className="mt-6">
+          <Suspense fallback={<CarouselSkeleton />}>
+            <FeaturedCarouselSection />
+          </Suspense>
         </div>
       </section>
 
@@ -294,5 +310,28 @@ export default function HomePage() {
         </div>
       </section>
     </>
+  );
+}
+
+/**
+ * Fetches (via the long-cached getFeaturedProfiles) in its own Suspense
+ * boundary, so 20 profile lookups never block the hero/search tool above
+ * it from rendering immediately — this section streams in once ready.
+ */
+async function FeaturedCarouselSection() {
+  const profiles = await getFeaturedProfiles();
+  return <FeaturedCarousel profiles={profiles} />;
+}
+
+function CarouselSkeleton() {
+  return (
+    <div className="mx-auto flex max-w-6xl gap-6 overflow-hidden px-4 sm:px-6">
+      {Array.from({ length: 8 }).map((_, i) => (
+        <div key={i} className="flex w-28 shrink-0 flex-col items-center gap-2">
+          <div className="animate-skeleton h-16 w-16 rounded-full bg-surface-muted" />
+          <div className="animate-skeleton h-3 w-16 rounded bg-surface-muted" />
+        </div>
+      ))}
+    </div>
   );
 }

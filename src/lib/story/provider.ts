@@ -49,6 +49,14 @@ export interface StoryProvider {
   getProfile(username: string): Promise<Profile | null>;
 
   /**
+   * Optional: profile metadata only, skipping stories entirely — for
+   * callers (like a preview carousel) that don't need Story media and
+   * shouldn't pay for the extra provider call it costs. Falls back to
+   * `getProfile` for providers that don't implement it.
+   */
+  getBasicProfile?(username: string): Promise<Profile | null>;
+
+  /**
    * Optional: recent feed posts for a username, fetched separately from
    * `getProfile` since it's a distinct (and separately billed, for paid
    * providers) capability the UI only needs when the Posts tab is opened.

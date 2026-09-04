@@ -71,6 +71,21 @@ interface HikerMediaItem extends HikerMediaResource {
  */
 export class HikerApiStoryProvider implements StoryProvider {
   async getProfile(usernameInput: string): Promise<Profile | null> {
+    const user = await this.resolveUser(usernameInput);
+    if (!user) return null;
+
+    const isPublic = user.is_private === false;
+    const stories = isPublic ? await this.fetchStories(user.pk) : [];
+    return this.buildProfile(user, stories);
+  }
+
+  async getBasicProfile(usernameInput: string): Promise<Profile | null> {
+    const user = await this.resolveUser(usernameInput);
+    if (!user) return null;
+    return this.buildProfile(user, []);
+  }
+
+  private async resolveUser(usernameInput: string): Promise<HikerUser | null> {
     const { valid, normalized } = validateUsername(usernameInput);
     if (!valid) {
       throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
@@ -87,12 +102,10 @@ export class HikerApiStoryProvider implements StoryProvider {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
-    const user = await this.fetchUser(normalized);
-    if (!user) return null;
+    return this.fetchUser(normalized);
+  }
 
-    const isPublic = user.is_private === false;
-    const stories = isPublic ? await this.fetchStories(user.pk) : [];
-
+  private buildProfile(user: HikerUser, stories: Story[]): Profile {
     return {
       username: user.username,
       profileImage: user.profile_pic_url,
@@ -102,7 +115,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       following: user.following_count,
       posts: user.media_count,
       isVerified: user.is_verified,
-      isPublic,
+      isPublic: user.is_private === false,
       stories,
       category: user.category || null,
       externalUrl: user.external_url || null,

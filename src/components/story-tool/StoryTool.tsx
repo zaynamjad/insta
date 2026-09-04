@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { validateUsername } from "@/lib/story/validation";
@@ -18,6 +18,9 @@ type LoadingPhase = "verifying" | "searching";
 const TURNSTILE_ENABLED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const MIN_LOADING_MS = 900; // avoids a jarring instant flash on a fast response
 
+/** Dispatched by anything outside this component (e.g. the featured-accounts carousel) that wants to trigger a search. */
+export const SEARCH_USERNAME_EVENT = "iv:search-username";
+
 export function StoryTool({
   variant = "hero",
 }: {
@@ -32,11 +35,10 @@ export function StoryTool({
   const [tab, setTab] = useState<Tab>("stories");
   const turnstileRef = useRef<TurnstileHandle>(null);
 
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
+  const runSearch = useCallback(async (usernameInput: string) => {
     setFormError(null);
 
-    const { valid, normalized, error } = validateUsername(input);
+    const { valid, normalized, error } = validateUsername(usernameInput);
     if (!valid) {
       setFormError(error ?? "Enter a valid Instagram username.");
       return;
@@ -76,7 +78,23 @@ export function StoryTool({
 
     setResult(data);
     setStatus("result");
+  }, []);
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+    runSearch(input);
   }
+
+  useEffect(() => {
+    function onExternalSearch(e: Event) {
+      const username = (e as CustomEvent<string>).detail;
+      if (typeof username !== "string") return;
+      setInput(username);
+      runSearch(username);
+    }
+    window.addEventListener(SEARCH_USERNAME_EVENT, onExternalSearch);
+    return () => window.removeEventListener(SEARCH_USERNAME_EVENT, onExternalSearch);
+  }, [runSearch]);
 
   function reset() {
     setStatus("idle");
