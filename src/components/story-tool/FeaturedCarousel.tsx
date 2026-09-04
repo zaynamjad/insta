@@ -21,7 +21,7 @@ export function FeaturedCarousel({ profiles }: { profiles: FeaturedProfile[] }) 
 
   return (
     <div className="overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_5%,black_95%,transparent)]">
-      <div className="flex w-max gap-6 py-2 animate-marquee">
+      <div className="flex w-max gap-8 py-2 animate-marquee">
         {track.map((item, i) => {
           const name = item.profile?.fullName ?? item.meta.displayName;
           const avatar = item.profile?.profileImage;
@@ -33,28 +33,28 @@ export function FeaturedCarousel({ profiles }: { profiles: FeaturedProfile[] }) 
               key={`${item.meta.username}-${i}`}
               onClick={() => triggerSearch(item.meta.username)}
               aria-label={`View ${item.meta.displayName}'s public profile`}
-              className="flex w-28 shrink-0 flex-col items-center gap-2 text-center"
+              className="flex w-36 shrink-0 flex-col items-center gap-2.5 text-center"
             >
-              <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full brand-gradient p-[2px]">
+              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full brand-gradient p-[3px]">
                 <div className="h-full w-full overflow-hidden rounded-full bg-surface">
                   {avatar ? (
                     <Image
                       src={avatar}
                       alt=""
-                      width={64}
-                      height={64}
+                      width={96}
+                      height={96}
                       unoptimized
                       className="h-full w-full object-cover"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center text-sm font-semibold text-foreground/40">
+                    <div className="flex h-full w-full items-center justify-center text-lg font-semibold text-foreground/40">
                       {item.meta.displayName.slice(0, 2).toUpperCase()}
                     </div>
                   )}
                 </div>
               </div>
-              <p className="w-full truncate text-xs font-semibold text-foreground">{name}</p>
-              <p className="text-[11px] text-foreground/50">{followers} followers</p>
+              <p className="w-full truncate text-sm font-semibold text-foreground">{name}</p>
+              <p className="text-xs text-foreground/50">{followers} followers</p>
             </button>
           );
         })}

@@ -117,7 +117,9 @@ body {
 }
 
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  /* Longer than 40s to keep scroll speed steady now that the cards are
+     bigger — a wider track at the same duration would scroll faster. */
+  animation: marquee 52s linear infinite;
 }
 
 .animate-marquee:hover {
