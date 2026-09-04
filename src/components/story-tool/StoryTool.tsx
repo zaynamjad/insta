@@ -13,8 +13,10 @@ import { Turnstile, type TurnstileHandle } from "./Turnstile";
 
 type Status = "idle" | "loading" | "result";
 type Tab = "stories" | "posts";
+type LoadingPhase = "verifying" | "searching";
 
 const TURNSTILE_ENABLED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+const MIN_LOADING_MS = 900; // avoids a jarring instant flash on a fast response
 
 export function StoryTool({
   variant = "hero",
@@ -23,6 +25,7 @@ export function StoryTool({
 }) {
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<Status>("idle");
+  const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("verifying");
   const [result, setResult] = useState<StoryLookupResult | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
@@ -39,31 +42,40 @@ export function StoryTool({
       return;
     }
 
-    // Show the loading state immediately — verification (below) and the
-    // actual lookup both happen while it's visible, so the user isn't
-    // staring at an unchanged form during either step.
+    // Show the loading state immediately — verification and the actual
+    // lookup both happen while it's visible, so the user isn't staring at
+    // an unchanged form during either real step.
+    const startedAt = Date.now();
     setStatus("loading");
+    setLoadingPhase("verifying");
     setResult(null);
     setTab("stories");
 
+    let data: StoryLookupResult;
     try {
       const turnstileToken = TURNSTILE_ENABLED ? await turnstileRef.current?.getToken() : null;
+      setLoadingPhase("searching");
       const res = await fetch("/api/story-viewer/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username: normalized, turnstileToken }),
       });
-      const data: StoryLookupResult = await res.json();
-      setResult(data);
-      setStatus("result");
+      data = await res.json();
     } catch {
-      setResult({
+      data = {
         status: "error",
         code: "UPSTREAM_ERROR",
         message: "We couldn't retrieve public content right now. Please try again later.",
-      });
-      setStatus("result");
+      };
     }
+
+    const elapsed = Date.now() - startedAt;
+    if (elapsed < MIN_LOADING_MS) {
+      await new Promise((r) => setTimeout(r, MIN_LOADING_MS - elapsed));
+    }
+
+    setResult(data);
+    setStatus("result");
   }
 
   function reset() {
@@ -123,7 +135,7 @@ export function StoryTool({
       </p>
 
       <div className="mt-6">
-        {status === "loading" && <LoadingState />}
+        {status === "loading" && <LoadingState phase={loadingPhase} />}
         {status === "result" && result && (
           <ResultState
             result={result}
@@ -148,16 +160,27 @@ export function StoryTool({
   );
 }
 
-function LoadingState() {
+function LoadingState({ phase }: { phase: LoadingPhase }) {
   return (
     <div
       role="status"
       aria-live="polite"
       className="rounded-2xl border border-border bg-surface p-6"
     >
-      <p className="text-sm font-medium text-foreground/70">
-        Finding publicly available stories…
-      </p>
+      <div className="flex items-center gap-2.5">
+        <svg
+          aria-hidden
+          className="h-4 w-4 shrink-0 animate-spin text-accent"
+          viewBox="0 0 24 24"
+          fill="none"
+        >
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+          <path className="opacity-90" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.4 0 0 5.4 0 12h4Z" />
+        </svg>
+        <p className="text-sm font-medium text-foreground/70">
+          {phase === "verifying" ? "Verifying your request…" : "Searching for public stories…"}
+        </p>
+      </div>
       <div className="mt-4 flex items-center gap-3">
         <div className="animate-skeleton h-14 w-14 shrink-0 rounded-full bg-surface-muted" />
         <div className="flex-1 space-y-2">
