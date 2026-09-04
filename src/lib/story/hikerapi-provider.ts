@@ -153,6 +153,46 @@ export class HikerApiStoryProvider implements StoryProvider {
       .filter((post): post is Post => post !== null);
   }
 
+  async getPostByShortcode(shortcode: string): Promise<Post | null> {
+    if (!/^[A-Za-z0-9_-]{2,20}$/.test(shortcode)) {
+      throw new ProviderError("Invalid post URL.", "UPSTREAM_ERROR");
+    }
+
+    if (!checkOutboundRateLimit().allowed) {
+      throw new ProviderError(
+        "Upstream request budget exceeded for this window.",
+        "RATE_LIMITED",
+      );
+    }
+
+    if (!HIKERAPI_KEY) {
+      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+    }
+
+    const res = await this.request(`/v1/media/by/code?code=${encodeURIComponent(shortcode)}`);
+
+    if (res.status === 404) return null;
+
+    if (res.status === 401) {
+      throw new ProviderError("HikerAPI rejected the access key.", "UPSTREAM_ERROR", "401 Unauthorized");
+    }
+
+    if (res.status === 429) {
+      throw new ProviderError("Rate limited by HikerAPI.", "RATE_LIMITED");
+    }
+
+    if (!res.ok) {
+      throw new ProviderError(
+        "HikerAPI returned an unexpected status.",
+        "UPSTREAM_ERROR",
+        `status=${res.status}`,
+      );
+    }
+
+    const item = (await res.json()) as HikerMediaItem;
+    return this.normalizeMediaPost(item);
+  }
+
   private normalizeMediaPost(item: HikerMediaItem): Post | null {
     const ownItem = this.normalizeMediaItem(item);
     const childItems = item.resources?.map((r) => this.normalizeMediaItem(r)).filter((m): m is PostMediaItem => m !== null) ?? [];

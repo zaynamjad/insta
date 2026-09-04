@@ -4,12 +4,15 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from "react"
 import Image from "next/image";
 import Link from "next/link";
 import { validateUsername } from "@/lib/story/validation";
+import { extractPostShortcode } from "@/lib/story/post-url";
 import type { StoryLookupResult } from "@/types/story";
+import type { PostLookupResult } from "@/types/post";
 import type { Profile } from "@/types/profile";
 import { StoryViewerModal } from "./StoryViewerModal";
 import { PostsGrid } from "./PostsGrid";
 import { DownloadButton } from "./DownloadButton";
 import { Turnstile, type TurnstileHandle } from "./Turnstile";
+import { SinglePostResult } from "./SinglePostResult";
 
 type Status = "idle" | "loading" | "result";
 type Tab = "stories" | "posts";
@@ -17,6 +20,13 @@ type LoadingPhase = "verifying" | "searching";
 
 const TURNSTILE_ENABLED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
 const MIN_LOADING_MS = 900; // avoids a jarring instant flash on a fast response
+
+async function waitOutMinLoading(startedAt: number) {
+  const elapsed = Date.now() - startedAt;
+  if (elapsed < MIN_LOADING_MS) {
+    await new Promise((r) => setTimeout(r, MIN_LOADING_MS - elapsed));
+  }
+}
 
 /** Dispatched by anything outside this component (e.g. the featured-accounts carousel) that wants to trigger a search. */
 export const SEARCH_USERNAME_EVENT = "iv:search-username";
@@ -30,18 +40,23 @@ export function StoryTool({
   const [status, setStatus] = useState<Status>("idle");
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("verifying");
   const [result, setResult] = useState<StoryLookupResult | null>(null);
+  const [postResult, setPostResult] = useState<PostLookupResult | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab>("stories");
   const turnstileRef = useRef<TurnstileHandle>(null);
 
-  const runSearch = useCallback(async (usernameInput: string) => {
+  const runSearch = useCallback(async (searchInput: string) => {
     setFormError(null);
 
-    const { valid, normalized, error } = validateUsername(usernameInput);
-    if (!valid) {
-      setFormError(error ?? "Enter a valid Instagram username.");
-      return;
+    const shortcode = extractPostShortcode(searchInput);
+
+    if (!shortcode) {
+      const { valid, error } = validateUsername(searchInput);
+      if (!valid) {
+        setFormError(error ?? "Enter a valid Instagram username or paste a post link.");
+        return;
+      }
     }
 
     // Show the loading state immediately — verification and the actual
@@ -51,32 +66,47 @@ export function StoryTool({
     setStatus("loading");
     setLoadingPhase("verifying");
     setResult(null);
+    setPostResult(null);
     setTab("stories");
 
-    let data: StoryLookupResult;
     try {
       const turnstileToken = TURNSTILE_ENABLED ? await turnstileRef.current?.getToken() : null;
       setLoadingPhase("searching");
-      const res = await fetch("/api/story-viewer/", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: normalized, turnstileToken }),
-      });
-      data = await res.json();
+
+      if (shortcode) {
+        const res = await fetch("/api/post-viewer/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: searchInput, turnstileToken }),
+        });
+        const data: PostLookupResult = await res.json();
+        await waitOutMinLoading(startedAt);
+        setPostResult(data);
+      } else {
+        const { normalized } = validateUsername(searchInput);
+        const res = await fetch("/api/story-viewer/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: normalized, turnstileToken }),
+        });
+        const data: StoryLookupResult = await res.json();
+        await waitOutMinLoading(startedAt);
+        setResult(data);
+      }
     } catch {
-      data = {
-        status: "error",
-        code: "UPSTREAM_ERROR",
+      await waitOutMinLoading(startedAt);
+      const errorResult = {
+        status: "error" as const,
+        code: "UPSTREAM_ERROR" as const,
         message: "We couldn't retrieve public content right now. Please try again later.",
       };
+      if (shortcode) {
+        setPostResult(errorResult);
+      } else {
+        setResult(errorResult);
+      }
     }
 
-    const elapsed = Date.now() - startedAt;
-    if (elapsed < MIN_LOADING_MS) {
-      await new Promise((r) => setTimeout(r, MIN_LOADING_MS - elapsed));
-    }
-
-    setResult(data);
     setStatus("result");
   }, []);
 
@@ -99,6 +129,7 @@ export function StoryTool({
   function reset() {
     setStatus("idle");
     setResult(null);
+    setPostResult(null);
     setInput("");
     setFormError(null);
     setTab("stories");
@@ -109,15 +140,17 @@ export function StoryTool({
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-3 sm:flex-row"
-        aria-label="Search Instagram stories by username"
+        aria-label="Search Instagram by username or post link"
       >
         <div className="relative flex-1">
-          <span
-            aria-hidden
-            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40"
-          >
-            @
-          </span>
+          {!/^https?:\/\//i.test(input) && (
+            <span
+              aria-hidden
+              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40"
+            >
+              @
+            </span>
+          )}
           <input
             type="text"
             inputMode="text"
@@ -126,9 +159,11 @@ export function StoryTool({
             spellCheck={false}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Enter Instagram username"
-            aria-label="Instagram username"
-            className="w-full rounded-2xl border border-border bg-surface px-4 py-4 pl-8 text-base text-foreground shadow-sm outline-none ring-accent/30 transition focus:ring-4"
+            placeholder="Username or paste a post/reel link"
+            aria-label="Instagram username or post URL"
+            className={`w-full rounded-2xl border border-border bg-surface py-4 pr-4 text-base text-foreground shadow-sm outline-none ring-accent/30 transition focus:ring-4 ${
+              /^https?:\/\//i.test(input) ? "pl-4" : "pl-8"
+            }`}
           />
         </div>
         <button
@@ -163,6 +198,9 @@ export function StoryTool({
             onReset={reset}
             onOpenViewer={(index) => setViewerIndex(index)}
           />
+        )}
+        {status === "result" && postResult && (
+          <SinglePostResult result={postResult} onReset={reset} />
         )}
       </div>
 

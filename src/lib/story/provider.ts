@@ -64,4 +64,12 @@ export interface StoryProvider {
    * callers must treat it as absent, not assume every provider has it.
    */
   getPosts?(username: string): Promise<Post[]>;
+
+  /**
+   * Optional: a single post/reel by its shortcode (the id in an Instagram
+   * post URL, e.g. instagram.com/p/<shortcode>/), for when a user pastes a
+   * direct post link into the search box instead of a username. Returns
+   * null when no post exists at that shortcode.
+   */
+  getPostByShortcode?(shortcode: string): Promise<Post | null>;
 }

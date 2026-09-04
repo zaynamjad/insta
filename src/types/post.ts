@@ -30,3 +30,9 @@ export type PostsLookupResult =
   | { status: "not_found"; username: string }
   | { status: "private"; username: string }
   | { status: "error"; code: PostsErrorCode; message: string };
+
+/** Result of looking up a single post/reel pasted as a URL, rather than a username. */
+export type PostLookupResult =
+  | { status: "ok"; post: Post }
+  | { status: "not_found" }
+  | { status: "error"; code: PostsErrorCode; message: string };
