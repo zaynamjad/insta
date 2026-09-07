@@ -1,9 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
-import { NAV_LINKS, SITE_NAME } from "@/lib/site";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { SITE_NAME } from "@/lib/site";
 import { MobileNav } from "@/components/MobileNav";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
-export function Header() {
+export async function Header() {
+  const t = await getTranslations("Header");
+
   return (
     <header className="sticky top-0 z-40">
       <div className="mx-auto flex h-28 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
@@ -14,28 +19,26 @@ export function Header() {
             width={500}
             height={250}
             priority
-            className="h-20 w-auto sm:h-24"
+            className="logo-light h-20 w-auto sm:h-24"
+          />
+          <Image
+            src="/logo-dark.png"
+            alt={SITE_NAME}
+            width={500}
+            height={250}
+            priority
+            className="logo-dark h-20 w-auto sm:h-24"
           />
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {NAV_LINKS.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="rounded text-sm font-medium text-foreground/70 outline-none transition-colors hover:text-foreground focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
         <div className="flex shrink-0 items-center gap-2">
+          <LanguageSwitcher />
+          <ThemeToggle />
           <Link
             href="/"
             className="brand-gradient hidden shrink-0 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90 md:inline-block"
           >
-            View Stories
+            {t("viewStories")}
           </Link>
           <MobileNav />
         </div>

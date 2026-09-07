@@ -9,7 +9,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { formatCount } from "@/lib/format";
 
-type Props = PageProps<"/profile/[username]">;
+type Props = PageProps<"/[locale]/profile/[username]">;
 
 /**
  * Deliberately `noindex` on every profile page, regardless of how much

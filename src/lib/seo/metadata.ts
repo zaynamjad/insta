@@ -15,6 +15,10 @@ interface BuildMetadataArgs {
   description: string;
   /** Site-relative path starting with "/", e.g. "/about/" */
   path: string;
+  /** The current locale's actual URL path for this page, if it differs from `path` (which stays the canonical, unprefixed lookup key). Falls back to `path` when omitted. */
+  localizedPath?: string;
+  /** Per-locale URLs for this same page, keyed by locale code plus "x-default"; rendered as `alternates.languages`. */
+  languageAlternates?: Record<string, string>;
   ogImagePath?: string;
   noindex?: boolean;
   keywords?: string[];
@@ -37,6 +41,8 @@ export function buildMetadata({
   title,
   description,
   path,
+  localizedPath,
+  languageAlternates,
   ogImagePath,
   noindex,
   keywords,
@@ -47,7 +53,7 @@ export function buildMetadata({
   robots,
   canonicalUrl,
 }: BuildMetadataArgs): Metadata {
-  const url = `${SITE_URL}${path}`;
+  const url = `${SITE_URL}${localizedPath ?? path}`;
   const canonical = canonicalUrl ? resolveUrl(canonicalUrl) : url;
   const ogImage = ogImagePath ? resolveUrl(ogImagePath) : undefined;
   const ogTitle = socialTitle || title;
@@ -68,7 +74,10 @@ export function buildMetadata({
     title,
     description,
     ...(keywords && keywords.length > 0 ? { keywords } : {}),
-    alternates: { canonical },
+    alternates: {
+      canonical,
+      ...(languageAlternates ? { languages: languageAlternates } : {}),
+    },
     robots: resolvedRobots,
     openGraph: {
       title: ogTitle,

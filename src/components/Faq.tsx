@@ -6,10 +6,10 @@ import { faqPageSchema, type FaqItem } from "@/lib/seo/schema";
 
 export function Faq({
   items,
-  title = "Frequently Asked Questions",
+  title,
 }: {
   items: FaqItem[];
-  title?: string;
+  title: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 

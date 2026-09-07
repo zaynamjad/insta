@@ -6,6 +6,8 @@ interface BaseMetadataArgs {
   title: string;
   description: string;
   path: string;
+  localizedPath?: string;
+  languageAlternates?: Record<string, string>;
   ogImagePath?: string;
   noindex?: boolean;
 }
@@ -37,6 +39,8 @@ export async function buildMetadataWithOverrides(base: BaseMetadataArgs): Promis
     title: overrides.metaTitle || base.title,
     description: overrides.metaDescription || base.description,
     path: base.path,
+    localizedPath: base.localizedPath,
+    languageAlternates: base.languageAlternates,
     ogImagePath:
       overrides.useDefaultImageForSocial || !overrides.socialImageUrl
         ? base.ogImagePath

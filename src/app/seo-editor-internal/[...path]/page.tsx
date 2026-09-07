@@ -8,18 +8,23 @@ import { AdminEditor } from "@/components/admin/AdminEditor";
 export const dynamic = "force-dynamic";
 export const metadata = { robots: { index: false, follow: false } };
 
-type Props = PageProps<"/[...path]">;
+interface Props {
+  params: Promise<{ path: string[] }>;
+}
 
 /**
- * Catch-all for exactly one shape of URL: `<any known page>/admin-edit/`.
- * Everything else that reaches here (i.e. doesn't match a more specific
- * static/dynamic route elsewhere in `app/`) is a genuinely unmatched
- * route and 404s, same as before this route existed.
- *
- * This has to be a *required* catch-all rather than the more obvious
- * `[[...path]]/admin-edit/` nested route, because Next.js doesn't allow
- * a literal segment after a catch-all — so the "admin-edit" suffix is
- * checked here in code instead of in the file path.
+ * Lives under the static `seo-editor-internal` segment rather than directly
+ * at the app root, because a bare `[...path]` catch-all can't be a sibling
+ * of the `[locale]` segment the rest of the site now lives under — Next.js
+ * requires every dynamic segment at a given tree position to share the
+ * same param name, and `locale` vs `path` don't. (A leading-underscore name
+ * like `_admin-edit` would dodge that conflict too, but Next.js treats any
+ * leading-underscore folder as a private folder excluded from routing
+ * entirely, which silently drops the route instead.) `proxy.ts` rewrites
+ * `<any known page>/admin-edit/` requests here internally (after its own
+ * auth check) while leaving the visible URL unchanged, so this still only
+ * ever handles that one shape of request; the `admin-edit` suffix check
+ * below is a second, defense-in-depth confirmation of that.
  */
 export default async function CatchAllPage({ params }: Props) {
   const { path: segments } = await params;

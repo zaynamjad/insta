@@ -3,7 +3,7 @@
 import { useState, useTransition } from "react";
 import { SITE_URL, TWITTER_HANDLE } from "@/lib/site";
 import type { PageSeoSettings } from "@/types/page-settings";
-import { saveSettingsAction } from "@/app/[...path]/actions";
+import { saveSettingsAction } from "@/app/seo-editor-internal/actions";
 import { logoutAction } from "@/app/admin/login/actions";
 
 type Tab = "seo" | "social" | "robots" | "schema" | "scripts" | "notes";

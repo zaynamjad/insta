@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { StoryTool } from "@/components/story-tool/StoryTool";
 import { FeaturedCarousel } from "@/components/story-tool/FeaturedCarousel";
 import { Faq } from "@/components/Faq";
@@ -10,58 +11,42 @@ import { softwareApplicationSchema } from "@/lib/seo/schema";
 import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
 import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
 import { getFeaturedProfiles } from "@/lib/story/featured-profiles";
+import { getPathname } from "@/i18n/navigation";
+import { buildLanguageAlternates } from "@/i18n/alternates";
 import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
 
-export async function generateMetadata(): Promise<Metadata> {
+type Props = PageProps<"/[locale]">;
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "HomePage" });
   return buildMetadataWithOverrides({
-    title: `${SITE_NAME}: Instagram Story Viewer | View Stories Anonymously`,
-    description:
-      "Enter a public Instagram username to view publicly available Stories without logging into Instagram. No password, no account, no app install.",
+    title: t("metaTitle", { siteName: SITE_NAME }),
+    description: t("metaDescription"),
     path: "/",
+    localizedPath: getPathname({ href: "/", locale }),
+    languageAlternates: buildLanguageAlternates("/"),
   });
 }
 
-const homeFaqs = [
-  {
-    question: "What is an Instagram Story Viewer?",
-    answer:
-      "It's a tool that looks up a public Instagram account's profile information (photo, name, bio, follower counts) by fetching the same public profile page anyone's browser would see, without you needing to log in.",
-  },
-  {
-    question: "Can I view public Instagram Stories without logging in?",
-    answer:
-      "No, and neither can this tool. Instagram only serves Story media through a logged-in session, even for public accounts; it's never exposed on the public, unauthenticated profile page. This tool doesn't attempt to bypass that, so it never returns Story content, only public profile information.",
-  },
-  {
-    question: "Why can't some Stories be retrieved?",
-    answer:
-      "Stories aren't sometimes unavailable: they're never retrievable through public, unauthenticated access, on any account. Unlike a profile's basic info, Instagram doesn't expose Story media outside of a logged-in session. This isn't a bug or a temporary limitation; it's how Instagram's access control works.",
-  },
-  {
-    question: "Does this tool work with private accounts?",
-    answer:
-      "No. It only works with public profiles. Private accounts require the owner's approval inside Instagram itself, and this tool never attempts to bypass that.",
-  },
-  {
-    question: "How does this tool retrieve profile information?",
-    answer:
-      "By fetching a public account's Instagram profile page the same way any anonymous, logged-out visitor's browser would, then reading the public information Instagram includes in that page: no login, no private API, no bypass of any access control.",
-  },
-];
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "HomePage" });
 
-const DO_ITEMS = [
-  "Fetch a public profile page the same way any anonymous browser would",
-  "Show whatever public information Instagram includes on that page",
-  "Nothing else: no feed browsing, no messaging, no account management",
-];
+  const homeFaqs = [1, 2, 3, 4, 5].map((n) => ({
+    question: t(`faq${n}Q` as "faq1Q"),
+    answer: t(`faq${n}A` as "faq1A"),
+  }));
 
-const DONT_ITEMS = [
-  "Never ask for your Instagram password or login credentials",
-  "Never access private accounts or bypass privacy settings",
-  "Never require an account to use the tool",
-];
+  const howItWorksSteps = [1, 2, 3].map((n) => ({
+    title: t(`step${n}Title` as "step1Title"),
+    text: t(`step${n}Text` as "step1Text"),
+  }));
 
-export default function HomePage() {
+  const features = [1, 2, 3, 4, 5, 6].map((n) => t(`feature${n}` as "feature1"));
+  const doItems = [1, 2, 3].map((n) => t(`doItem${n}` as "doItem1"));
+  const dontItems = [1, 2, 3].map((n) => t(`dontItem${n}` as "dontItem1"));
+
   return (
     <>
       <JsonLd data={softwareApplicationSchema()} />
@@ -85,18 +70,16 @@ export default function HomePage() {
 
           <div className="mt-4 text-center lg:mt-0 lg:flex-1 lg:text-left">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
-              Public profiles only · No login required
+              {t("badge")}
             </span>
             <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl">
-              Instagram Story Viewer
+              {t("h1")}
             </h1>
             <p className="mt-5 text-lg text-foreground/70 sm:text-xl">
-              Enter a public Instagram username to see their public profile
-              info instantly, no login required.
+              {t("sub1")}
             </p>
             <p className="mx-auto mt-2 max-w-md text-sm text-foreground/50 lg:mx-0">
-              Story media itself can&apos;t be retrieved without an Instagram
-              login, on any account. See why in the FAQ below.
+              {t("sub2")}
             </p>
 
             <div className="mx-auto mt-8 max-w-xl text-left lg:mx-0">
@@ -106,10 +89,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-y border-border bg-surface-muted py-10">
+      <section className="border-b border-border bg-surface-muted py-10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <p className="text-center text-sm font-medium text-foreground/50">
-            Try it on some of the most-followed accounts on Instagram
+            {t("trendingCaption")}
           </p>
         </div>
         <div className="mt-6">
@@ -121,14 +104,10 @@ export default function HomePage() {
 
       <section id="how-it-works" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <h2 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
-          How It Works
+          {t("howItWorksTitle")}
         </h2>
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
-          {[
-            { title: "Enter a username", text: "Type any public Instagram handle into the search box." },
-            { title: "Search public Stories", text: "We check whether that account currently has active public Stories." },
-            { title: "View available Stories", text: "Browse them instantly in a clean, full-screen viewer." },
-          ].map((item, i) => (
+          {howItWorksSteps.map((item, i) => (
             <div
               key={item.title}
               className="rounded-2xl border border-border bg-surface p-6 text-center transition-shadow hover:shadow-sm"
@@ -156,23 +135,13 @@ export default function HomePage() {
             />
             <div className="mt-6 text-center lg:mt-0 lg:flex-1 lg:text-left">
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-                Why Use Our Instagram Story Viewer?
+                {t("whyTitle")}
               </h2>
-              <p className="mt-3 text-foreground/65">
-                A fast, honest way to check a public profile: nothing more,
-                nothing hidden.
-              </p>
+              <p className="mt-3 text-foreground/65">{t("whyText")}</p>
             </div>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              "No Instagram login required",
-              "Simple username search",
-              "Fast story lookup",
-              "Mobile-friendly viewer",
-              "Public profiles only",
-              "No account registration",
-            ].map((item) => (
+            {features.map((item) => (
               <div
                 key={item}
                 className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4"
@@ -203,21 +172,18 @@ export default function HomePage() {
       <section id="about" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            About {SITE_NAME}
+            {t("aboutTitle", { siteName: SITE_NAME })}
           </h2>
           <p className="mt-4 leading-relaxed text-foreground/70">
-            {SITE_NAME} is a single-purpose tool: enter a public Instagram
-            username and see their public profile information (photo,
-            name, bio, follower counts) without logging into Instagram
-            yourself.
+            {t("aboutText", { siteName: SITE_NAME })}
           </p>
         </div>
 
         <div className="mt-10 grid gap-4 sm:grid-cols-2">
           <div className="rounded-2xl border border-border bg-surface p-6">
-            <h3 className="font-semibold text-foreground">What we do</h3>
+            <h3 className="font-semibold text-foreground">{t("whatWeDoTitle")}</h3>
             <ul className="mt-4 space-y-3">
-              {DO_ITEMS.map((item) => (
+              {doItems.map((item) => (
                 <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/70">
                   <svg aria-hidden className="mt-0.5 shrink-0 text-accent" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6 9 17l-5-5" />
@@ -228,9 +194,9 @@ export default function HomePage() {
             </ul>
           </div>
           <div className="rounded-2xl border border-border bg-surface p-6">
-            <h3 className="font-semibold text-foreground">What we don&apos;t do</h3>
+            <h3 className="font-semibold text-foreground">{t("whatWeDontTitle")}</h3>
             <ul className="mt-4 space-y-3">
-              {DONT_ITEMS.map((item) => (
+              {dontItems.map((item) => (
                 <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/70">
                   <svg aria-hidden className="mt-0.5 shrink-0 text-foreground/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
                     <path d="M18 6 6 18M6 6l12 12" />
@@ -243,27 +209,29 @@ export default function HomePage() {
         </div>
 
         <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-foreground/50">
-          {SITE_NAME} is independent and not affiliated with, endorsed by,
-          or connected to Instagram or Meta Platforms, Inc. Read the full{" "}
-          <Link href="/about/" className="font-medium text-accent hover:underline">
-            About page
-          </Link>{" "}
-          or{" "}
-          <Link href="/privacy-policy/" className="font-medium text-accent hover:underline">
-            Privacy Policy
-          </Link>
-          .
+          {t.rich("aboutFooterText", {
+            siteName: SITE_NAME,
+            aboutLink: (chunks) => (
+              <Link href="/about/" className="font-medium text-accent hover:underline">
+                {chunks}
+              </Link>
+            ),
+            privacyLink: (chunks) => (
+              <Link href="/privacy-policy/" className="font-medium text-accent hover:underline">
+                {chunks}
+              </Link>
+            ),
+          })}
         </p>
       </section>
 
       <section id="contact" className="bg-surface-muted py-16">
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            Contact
+            {t("contactTitle")}
           </h2>
           <p className="mt-4 leading-relaxed text-foreground/70">
-            Questions, feedback, or a request related to publicly displayed
-            content: reach out and we&apos;ll get back to you.
+            {t("contactText")}
           </p>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
@@ -279,24 +247,23 @@ export default function HomePage() {
       </section>
 
       <section id="faq" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <Faq items={homeFaqs} />
+        <Faq items={homeFaqs} title={t("faqTitle")} />
       </section>
 
       <section className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
         <div className="flex flex-col-reverse items-center gap-6 rounded-3xl border border-border bg-surface p-8 sm:flex-row sm:justify-center sm:gap-10">
           <div className="text-center sm:text-right">
             <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
-              Ready to look up a profile?
+              {t("finalCtaTitle")}
             </h2>
             <p className="mt-2 text-sm text-foreground/65">
-              Enter a public Instagram username and see their profile
-              instantly, no login required.
+              {t("finalCtaText")}
             </p>
             <Link
               href="/#search"
               className="brand-gradient mt-4 inline-block rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
             >
-              View Stories
+              {t("finalCtaButton")}
             </Link>
           </div>
           <Image

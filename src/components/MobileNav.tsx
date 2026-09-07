@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { usePathname } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { NAV_LINKS } from "@/lib/site";
 
 export function MobileNav() {
+  const t = useTranslations();
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
@@ -33,7 +35,7 @@ export function MobileNav() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? t("MobileNav.closeMenu") : t("MobileNav.openMenu")}
         className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border text-foreground/80 active:scale-95"
       >
         {open ? (
@@ -64,7 +66,7 @@ export function MobileNav() {
                 href="/"
                 className="brand-gradient mb-2 rounded-xl px-4 py-3.5 text-center text-base font-semibold text-white"
               >
-                View Stories
+                {t("Header.viewStories")}
               </Link>
               {NAV_LINKS.map((link) => (
                 <Link
@@ -72,7 +74,7 @@ export function MobileNav() {
                   href={link.href}
                   className="rounded-xl px-4 py-3.5 text-base font-medium text-foreground/80 active:bg-surface-muted"
                 >
-                  {link.label}
+                  {t(`Nav.${link.key}`)}
                 </Link>
               ))}
             </nav>

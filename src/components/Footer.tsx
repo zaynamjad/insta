@@ -1,8 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
-import { SITE_NAME, SITE_SHORT_DESCRIPTION, FOOTER_COMPANY_LINKS } from "@/lib/site";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
+import { SITE_NAME, FOOTER_COMPANY_LINKS } from "@/lib/site";
 
-export function Footer() {
+export async function Footer() {
+  const t = await getTranslations("Footer");
+
   return (
     <footer className="mt-24 border-t border-border bg-surface-muted">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
@@ -13,10 +16,17 @@ export function Footer() {
               alt={SITE_NAME}
               width={500}
               height={250}
-              className="h-12 w-auto"
+              className="logo-light h-12 w-auto"
+            />
+            <Image
+              src="/logo-dark.png"
+              alt={SITE_NAME}
+              width={500}
+              height={250}
+              className="logo-dark h-12 w-auto"
             />
             <p className="mt-2 max-w-xs text-sm text-foreground/65">
-              {SITE_SHORT_DESCRIPTION}
+              {t("tagline")}
             </p>
           </div>
 
@@ -28,7 +38,7 @@ export function Footer() {
                     href={link.href}
                     className="text-sm text-foreground/65 transition-colors hover:text-foreground"
                   >
-                    {link.label}
+                    {t(link.key)}
                   </Link>
                 </li>
               ))}
@@ -37,21 +47,12 @@ export function Footer() {
         </div>
 
         <div className="mt-10 space-y-3 border-t border-border pt-6 text-xs leading-relaxed text-foreground/55">
-          <p>
-            {SITE_NAME} works only with publicly available Instagram content.
-            We are not affiliated with, endorsed by, or connected to
-            Instagram or Meta Platforms, Inc. &quot;Instagram&quot; is a
-            trademark of Meta Platforms, Inc.
-          </p>
-          <p>
-            Never enter your Instagram password on this site. {SITE_NAME}{" "}
-            never asks for your Instagram login and cannot access private
-            accounts.
-          </p>
+          <p>{t("disclaimer1", { siteName: SITE_NAME })}</p>
+          <p>{t("disclaimer2", { siteName: SITE_NAME })}</p>
         </div>
 
         <p className="mt-6 text-xs text-foreground/45">
-          © {new Date().getFullYear()} {SITE_NAME}. All rights reserved.
+          {t("copyright", { year: new Date().getFullYear(), siteName: SITE_NAME })}
         </p>
       </div>
     </footer>

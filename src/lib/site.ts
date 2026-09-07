@@ -15,16 +15,16 @@ export const TWITTER_HANDLE = "@instaviewstories";
 export const CONTACT_EMAIL = "info@instaviewstories.com";
 
 export const NAV_LINKS = [
-  { href: "/#how-it-works", label: "How It Works" },
-  { href: "/#about", label: "About" },
-  { href: "/#faq", label: "FAQ" },
-  { href: "/#contact", label: "Contact" },
-];
+  { href: "/#how-it-works", key: "howItWorks" },
+  { href: "/#about", key: "about" },
+  { href: "/#faq", key: "faq" },
+  { href: "/#contact", key: "contact" },
+] as const;
 
 export const FOOTER_COMPANY_LINKS = [
-  { href: "/about/", label: "About" },
-  { href: "/contact/", label: "Contact" },
-  { href: "/privacy-policy/", label: "Privacy Policy" },
-  { href: "/terms/", label: "Terms of Service" },
-  { href: "/disclaimer/", label: "Disclaimer" },
-];
+  { href: "/about/", key: "linkAbout" },
+  { href: "/contact/", key: "linkContact" },
+  { href: "/privacy-policy/", key: "linkPrivacy" },
+  { href: "/terms/", key: "linkTerms" },
+  { href: "/disclaimer/", key: "linkDisclaimer" },
+] as const;

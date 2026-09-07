@@ -1,9 +1,11 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { breadcrumbSchema, type BreadcrumbItem } from "@/lib/seo/schema";
 
-export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
-  const full: BreadcrumbItem[] = [{ name: "Home", path: "/" }, ...items];
+export async function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+  const t = await getTranslations("Breadcrumbs");
+  const full: BreadcrumbItem[] = [{ name: t("home"), path: "/" }, ...items];
 
   return (
     <>
