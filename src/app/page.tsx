@@ -67,7 +67,7 @@ export default function HomePage() {
       <JsonLd data={softwareApplicationSchema()} />
       <PageOverridesRenderer path="/" />
 
-      <section id="search" className="relative overflow-hidden">
+      <section id="search" className="relative">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-40 left-1/2 h-[480px] w-[900px] -translate-x-1/2 rounded-full opacity-20 blur-3xl brand-gradient"
