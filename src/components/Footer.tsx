@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { SITE_NAME, SITE_SHORT_DESCRIPTION, FOOTER_COMPANY_LINKS } from "@/lib/site";
 
@@ -6,8 +7,14 @@ export function Footer() {
     <footer className="mt-24 border-t border-border bg-surface-muted">
       <div className="mx-auto max-w-4xl px-4 py-12 sm:px-6">
         <div className="flex flex-col items-center gap-6 text-center sm:flex-row sm:items-start sm:justify-between sm:text-left">
-          <div>
-            <span className="text-lg font-bold tracking-tight">{SITE_NAME}</span>
+          <div className="flex flex-col items-center sm:items-start">
+            <Image
+              src="/logo.png"
+              alt={SITE_NAME}
+              width={500}
+              height={250}
+              className="h-12 w-auto"
+            />
             <p className="mt-2 max-w-xs text-sm text-foreground/65">
               {SITE_SHORT_DESCRIPTION}
             </p>
