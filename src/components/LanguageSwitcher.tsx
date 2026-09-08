@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
       >
         {LOCALES.map((l) => (
           <option key={l.code} value={l.code}>
-            {l.nativeName}
+            {l.flag} {l.nativeName} ({l.countryCode})
           </option>
         ))}
       </select>
