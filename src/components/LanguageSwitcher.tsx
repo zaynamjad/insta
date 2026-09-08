@@ -11,6 +11,12 @@ export function LanguageSwitcher() {
 
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value;
+    // Sync the cookie next-intl's own middleware reads for locale
+    // detection before navigating — without this, switching back to the
+    // default locale (an unprefixed URL, e.g. "/") gets silently
+    // overridden by a stale NEXT_LOCALE cookie from an earlier switch,
+    // redirecting straight back to that old locale.
+    document.cookie = `NEXT_LOCALE=${nextLocale};path=/;max-age=${60 * 60 * 24 * 365}`;
     // A full navigation (not next-intl's client-side router) because
     // <html lang>/dir> and the locale context live in the root layout,
     // above the [locale] segment — Next.js doesn't re-render that layout
