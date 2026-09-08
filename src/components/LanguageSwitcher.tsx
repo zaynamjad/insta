@@ -1,22 +1,23 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { useTransition } from "react";
-import { usePathname, useRouter } from "@/i18n/navigation";
+import { usePathname, getPathname } from "@/i18n/navigation";
 import { LOCALES } from "@/i18n/locales";
 
 export function LanguageSwitcher() {
   const t = useTranslations("LanguageSwitcher");
   const locale = useLocale();
   const pathname = usePathname();
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
 
   function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
     const nextLocale = event.target.value;
-    startTransition(() => {
-      router.replace(pathname, { locale: nextLocale });
-    });
+    // A full navigation (not next-intl's client-side router) because
+    // <html lang>/dir> and the locale context live in the root layout,
+    // above the [locale] segment — Next.js doesn't re-render that layout
+    // on a soft transition between locale values, so a client-side switch
+    // leaves the switcher, dir, and any client-only translated text stuck
+    // showing the old locale even though the page content updates.
+    window.location.href = getPathname({ href: pathname, locale: nextLocale });
   }
 
   return (
@@ -28,13 +29,12 @@ export function LanguageSwitcher() {
         id="language-switcher"
         value={locale}
         onChange={handleChange}
-        disabled={isPending}
         aria-label={t("label")}
-        className="h-10 cursor-pointer appearance-none rounded-full border border-border bg-surface pl-3 pr-7 text-sm font-medium text-foreground/80 outline-none transition-colors hover:text-foreground disabled:opacity-60"
+        className="h-10 cursor-pointer appearance-none rounded-full border border-border bg-surface pl-3 pr-7 text-sm font-medium text-foreground/80 outline-none transition-colors hover:text-foreground"
       >
         {LOCALES.map((l) => (
           <option key={l.code} value={l.code}>
-            {l.flag} {l.nativeName} ({l.countryCode})
+            {l.flag} {l.countryCode}
           </option>
         ))}
       </select>
