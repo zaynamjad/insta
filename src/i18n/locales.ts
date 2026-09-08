@@ -3,13 +3,15 @@ export interface LocaleMeta {
   name: string;
   nativeName: string;
   dir: "ltr" | "rtl";
-  /** Representative country for the flag shown in the language switcher. */
+  /** ISO 3166-1 country code for the flag image shown in the language switcher — must stay a real country code (flagcdn.com lookup key), independent of what text label is displayed. */
   countryCode: string;
+  /** Text shown next to the flag; falls back to countryCode when omitted. */
+  displayCode?: string;
   flag: string;
 }
 
 export const LOCALES: LocaleMeta[] = [
-  { code: "en", name: "English", nativeName: "English", dir: "ltr", countryCode: "EN", flag: "🇺🇸" },
+  { code: "en", name: "English", nativeName: "English", dir: "ltr", countryCode: "US", displayCode: "EN", flag: "🇺🇸" },
   { code: "es", name: "Spanish", nativeName: "Español", dir: "ltr", countryCode: "ES", flag: "🇪🇸" },
   { code: "fr", name: "French", nativeName: "Français", dir: "ltr", countryCode: "FR", flag: "🇫🇷" },
   { code: "de", name: "German", nativeName: "Deutsch", dir: "ltr", countryCode: "DE", flag: "🇩🇪" },

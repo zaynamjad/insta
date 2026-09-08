@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
 import { NAV_LINKS } from "@/lib/site";
+import { LOCALES } from "@/i18n/locales";
+import { switchLocale } from "@/lib/switch-locale";
+import { FlagIcon } from "@/components/FlagIcon";
 
 export function MobileNav() {
   const t = useTranslations();
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
@@ -77,6 +81,31 @@ export function MobileNav() {
                   {t(`Nav.${link.key}`)}
                 </Link>
               ))}
+
+              <p className="mt-4 px-4 text-xs font-semibold uppercase tracking-wide text-foreground/45">
+                {t("LanguageSwitcher.label")}
+              </p>
+              <div className="mt-2 grid grid-cols-4 gap-2 px-4 pb-2">
+                {LOCALES.map((l) => {
+                  const active = l.code === locale;
+                  return (
+                    <button
+                      key={l.code}
+                      type="button"
+                      aria-current={active}
+                      onClick={() => switchLocale(pathname, l.code)}
+                      className={`flex flex-col items-center gap-1 rounded-xl border px-2 py-2.5 text-xs font-medium transition-colors ${
+                        active
+                          ? "brand-gradient border-transparent text-white"
+                          : "border-border text-foreground/75 active:bg-surface-muted"
+                      }`}
+                    >
+                      <FlagIcon countryCode={l.countryCode} />
+                      {l.displayCode ?? l.countryCode}
+                    </button>
+                  );
+                })}
+              </div>
             </nav>
           </div>
         </>

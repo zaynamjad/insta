@@ -1,63 +1,98 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname, getPathname } from "@/i18n/navigation";
-import { LOCALES } from "@/i18n/locales";
+import { usePathname } from "@/i18n/navigation";
+import { LOCALES, getLocaleMeta } from "@/i18n/locales";
+import { switchLocale } from "@/lib/switch-locale";
+import { FlagIcon } from "@/components/FlagIcon";
 
+/** Desktop-only trigger + popover; mobile gets the language list inline in MobileNav instead. */
 export function LanguageSwitcher() {
   const t = useTranslations("LanguageSwitcher");
   const locale = useLocale();
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
-  function handleChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value;
-    // Sync the cookie next-intl's own middleware reads for locale
-    // detection before navigating — without this, switching back to the
-    // default locale (an unprefixed URL, e.g. "/") gets silently
-    // overridden by a stale NEXT_LOCALE cookie from an earlier switch,
-    // redirecting straight back to that old locale.
-    document.cookie = `NEXT_LOCALE=${nextLocale};path=/;max-age=${60 * 60 * 24 * 365}`;
-    // A full navigation (not next-intl's client-side router) because
-    // <html lang>/dir> and the locale context live in the root layout,
-    // above the [locale] segment — Next.js doesn't re-render that layout
-    // on a soft transition between locale values, so a client-side switch
-    // leaves the switcher, dir, and any client-only translated text stuck
-    // showing the old locale even though the page content updates.
-    window.location.href = getPathname({ href: pathname, locale: nextLocale });
-  }
+  useEffect(() => {
+    if (!open) return;
+
+    function onPointerDown(e: MouseEvent) {
+      if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+    document.addEventListener("mousedown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  const current = getLocaleMeta(locale);
 
   return (
-    <div className="relative flex shrink-0 items-center">
-      <label htmlFor="language-switcher" className="sr-only">
-        {t("label")}
-      </label>
-      <select
-        id="language-switcher"
-        value={locale}
-        onChange={handleChange}
+    <div ref={rootRef} className="relative hidden shrink-0 items-center md:flex">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-haspopup="listbox"
+        aria-expanded={open}
         aria-label={t("label")}
-        className="h-10 cursor-pointer appearance-none rounded-full border border-border bg-surface pl-3 pr-7 text-sm font-medium text-foreground/80 outline-none transition-colors hover:text-foreground"
+        className="flex h-10 items-center gap-1.5 rounded-full border border-border bg-surface pl-3 pr-2.5 text-sm font-medium text-foreground/80 outline-none transition-colors hover:text-foreground"
       >
-        {LOCALES.map((l) => (
-          <option key={l.code} value={l.code}>
-            {l.flag} {l.countryCode}
-          </option>
-        ))}
-      </select>
-      <svg
-        aria-hidden
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="pointer-events-none absolute right-2.5 text-foreground/50"
-      >
-        <path d="m6 9 6 6 6-6" />
-      </svg>
+        <FlagIcon countryCode={current.countryCode} />
+        <span>{current.displayCode ?? current.countryCode}</span>
+        <svg
+          aria-hidden
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className={`text-foreground/50 transition-transform ${open ? "rotate-180" : ""}`}
+        >
+          <path d="m6 9 6 6 6-6" />
+        </svg>
+      </button>
+
+      {open && (
+        <ul
+          role="listbox"
+          aria-label={t("label")}
+          className="absolute right-0 top-full z-50 mt-2 max-h-80 w-44 overflow-y-auto rounded-2xl border border-border bg-surface p-1.5 shadow-lg"
+        >
+          {LOCALES.map((l) => {
+            const active = l.code === locale;
+            return (
+              <li key={l.code} role="none">
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected={active}
+                  onClick={() => switchLocale(pathname, l.code)}
+                  className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                    active
+                      ? "brand-gradient text-white"
+                      : "text-foreground/80 hover:bg-surface-muted"
+                  }`}
+                >
+                  <FlagIcon countryCode={l.countryCode} />
+                  <span>{l.displayCode ?? l.countryCode}</span>
+                </button>
+              </li>
+            );
+          })}
+        </ul>
+      )}
     </div>
   );
 }
