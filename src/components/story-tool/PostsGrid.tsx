@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { PostsLookupResult, Post } from "@/types/post";
+import { errorMessageKey } from "@/lib/story/error-messages";
 import { DownloadButton } from "./DownloadButton";
 import { PostViewerModal } from "./PostViewerModal";
 
@@ -12,9 +14,10 @@ import { PostViewerModal } from "./PostViewerModal";
  * loading/error/grid state.
  */
 export function PostsGrid({ username }: { username: string }) {
+  const t = useTranslations("StoryTool");
   const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
   const [posts, setPosts] = useState<Post[]>([]);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [errorKey, setErrorKey] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
   useEffect(() => {
@@ -38,12 +41,12 @@ export function PostsGrid({ username }: { username: string }) {
           setPosts([]);
           setState("loaded");
         } else {
-          setErrorMessage(data.message);
+          setErrorKey(errorMessageKey(data.code));
           setState("error");
         }
       } catch {
         if (!cancelled) {
-          setErrorMessage("We couldn't retrieve posts right now. Please try again later.");
+          setErrorKey("postsNetworkError");
           setState("error");
         }
       }
@@ -66,11 +69,11 @@ export function PostsGrid({ username }: { username: string }) {
   }
 
   if (state === "error") {
-    return <p className="mt-5 text-sm text-foreground/60">{errorMessage}</p>;
+    return <p className="mt-5 text-sm text-foreground/60">{errorKey ? t(errorKey) : null}</p>;
   }
 
   if (posts.length === 0) {
-    return <p className="mt-5 text-sm text-foreground/60">No public posts found for this username.</p>;
+    return <p className="mt-5 text-sm text-foreground/60">{t("noPublicPosts")}</p>;
   }
 
   return (
@@ -86,7 +89,7 @@ export function PostsGrid({ username }: { username: string }) {
               <button
                 onClick={() => setViewerIndex(index)}
                 className="absolute inset-0 h-full w-full"
-                aria-label={`Open post ${index + 1}`}
+                aria-label={t("openPost", { index: index + 1 })}
               >
                 {cover?.thumbnailUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -110,7 +113,7 @@ export function PostsGrid({ username }: { username: string }) {
               {cover && (
                 <DownloadButton
                   mediaUrl={cover.mediaUrl}
-                  label={`Download post ${index + 1}`}
+                  label={t("downloadPost", { index: index + 1 })}
                   className="absolute bottom-1.5 right-1.5 rounded-full bg-black/50 p-1.5 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
                 />
               )}

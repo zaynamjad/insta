@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import type { PostLookupResult } from "@/types/post";
+import { errorMessageKey } from "@/lib/story/error-messages";
 import { DownloadButton } from "./DownloadButton";
 
 /** Shown below the search box when the input was a pasted post/reel URL rather than a username. */
@@ -12,19 +14,18 @@ export function SinglePostResult({
   result: PostLookupResult;
   onReset: () => void;
 }) {
+  const t = useTranslations("StoryTool");
   const [itemIndex, setItemIndex] = useState(0);
 
   if (result.status === "error") {
     return (
-      <ErrorCard onReset={onReset}>{result.message}</ErrorCard>
+      <ErrorCard onReset={onReset}>{t(errorMessageKey(result.code))}</ErrorCard>
     );
   }
 
   if (result.status === "not_found") {
     return (
-      <ErrorCard onReset={onReset}>
-        We couldn&apos;t find a public post at that link.
-      </ErrorCard>
+      <ErrorCard onReset={onReset}>{t("postNotFound")}</ErrorCard>
     );
   }
 
@@ -38,7 +39,7 @@ export function SinglePostResult({
           onClick={onReset}
           className="shrink-0 text-sm font-medium text-foreground/50 hover:text-foreground"
         >
-          Search another
+          {t("searchAnother")}
         </button>
       </div>
 
@@ -60,7 +61,7 @@ export function SinglePostResult({
           {post.items.length > 1 && (
             <>
               <button
-                aria-label="Previous item"
+                aria-label={t("previousItem")}
                 disabled={itemIndex === 0}
                 onClick={() => setItemIndex((i) => Math.max(0, i - 1))}
                 className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
@@ -68,7 +69,7 @@ export function SinglePostResult({
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
               <button
-                aria-label="Next item"
+                aria-label={t("nextItem")}
                 disabled={itemIndex === post.items.length - 1}
                 onClick={() => setItemIndex((i) => Math.min(post.items.length - 1, i + 1))}
                 className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
@@ -90,15 +91,19 @@ export function SinglePostResult({
               <p className="line-clamp-3 text-sm leading-relaxed text-foreground/80">{post.caption}</p>
             )}
             <div className="mt-2 flex gap-3 text-xs text-foreground/50">
-              {typeof post.likeCount === "number" && <span>{post.likeCount.toLocaleString()} likes</span>}
-              {typeof post.commentCount === "number" && <span>{post.commentCount.toLocaleString()} comments</span>}
+              {typeof post.likeCount === "number" && (
+                <span>{t("likes", { count: post.likeCount.toLocaleString() })}</span>
+              )}
+              {typeof post.commentCount === "number" && (
+                <span>{t("comments", { count: post.commentCount.toLocaleString() })}</span>
+              )}
             </div>
           </div>
 
           {item && (
             <DownloadButton
               mediaUrl={item.mediaUrl}
-              label="Download"
+              label={t("download")}
               showLabel
               className="brand-gradient flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
             />
@@ -110,11 +115,12 @@ export function SinglePostResult({
 }
 
 function ErrorCard({ children, onReset }: { children: React.ReactNode; onReset: () => void }) {
+  const t = useTranslations("StoryTool");
   return (
     <div className="rounded-2xl border border-border bg-surface p-6">
       <p className="text-sm leading-relaxed text-foreground/75">{children}</p>
       <button onClick={onReset} className="mt-4 text-sm font-semibold text-accent hover:underline">
-        Search another
+        {t("searchAnother")}
       </button>
     </div>
   );

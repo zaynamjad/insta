@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 import type { Post } from "@/types/post";
 import { DownloadButton } from "./DownloadButton";
 
@@ -13,6 +14,7 @@ export function PostViewerModal({
   initialIndex: number;
   onClose: () => void;
 }) {
+  const t = useTranslations("StoryTool");
   const [postIndex, setPostIndex] = useState(initialIndex);
   const [itemIndex, setItemIndex] = useState(0);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -49,7 +51,7 @@ export function PostViewerModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Post from @${post.id}`}
+      aria-label={t("postFromUser", { id: post.id })}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-0 sm:p-6"
     >
       <div className="relative flex h-full w-full max-w-md flex-col sm:h-[92vh] sm:rounded-2xl sm:overflow-hidden bg-black">
@@ -68,14 +70,14 @@ export function PostViewerModal({
             {item && (
               <DownloadButton
                 mediaUrl={item.mediaUrl}
-                label="Download this media"
+                label={t("downloadThisMedia")}
                 className="rounded-full p-2 text-white/90 hover:bg-white/10"
               />
             )}
             <button
               ref={closeBtnRef}
               onClick={onClose}
-              aria-label="Close post viewer"
+              aria-label={t("closePostViewer")}
               className="rounded-full p-2 text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -107,7 +109,7 @@ export function PostViewerModal({
           {post.items.length > 1 && (
             <>
               <button
-                aria-label="Previous item"
+                aria-label={t("previousItem")}
                 disabled={itemIndex === 0}
                 onClick={() => setItemIndex((i) => Math.max(0, i - 1))}
                 className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
@@ -115,7 +117,7 @@ export function PostViewerModal({
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
               <button
-                aria-label="Next item"
+                aria-label={t("nextItem")}
                 disabled={itemIndex === post.items.length - 1}
                 onClick={() => setItemIndex((i) => Math.min(post.items.length - 1, i + 1))}
                 className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
@@ -132,15 +134,19 @@ export function PostViewerModal({
           )}
           <div className="flex items-center justify-between text-xs text-white/60">
             <div className="flex gap-3">
-              {typeof post.likeCount === "number" && <span>{post.likeCount.toLocaleString()} likes</span>}
-              {typeof post.commentCount === "number" && <span>{post.commentCount.toLocaleString()} comments</span>}
+              {typeof post.likeCount === "number" && (
+                <span>{t("likes", { count: post.likeCount.toLocaleString() })}</span>
+              )}
+              {typeof post.commentCount === "number" && (
+                <span>{t("comments", { count: post.commentCount.toLocaleString() })}</span>
+              )}
             </div>
             <div className="flex gap-3">
               <button onClick={goPrevPost} disabled={postIndex === 0} className="font-medium disabled:opacity-30">
-                Prev post
+                {t("prevPost")}
               </button>
               <button onClick={goNextPost} disabled={postIndex === posts.length - 1} className="font-medium disabled:opacity-30">
-                Next post
+                {t("nextPost")}
               </button>
             </div>
           </div>

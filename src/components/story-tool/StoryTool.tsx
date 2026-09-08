@@ -2,9 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 import { validateUsername } from "@/lib/story/validation";
 import { extractPostShortcode } from "@/lib/story/post-url";
+import { errorMessageKey } from "@/lib/story/error-messages";
 import type { StoryLookupResult } from "@/types/story";
 import type { PostLookupResult } from "@/types/post";
 import type { Profile } from "@/types/profile";
@@ -36,6 +38,7 @@ export function StoryTool({
 }: {
   variant?: "hero" | "compact";
 }) {
+  const t = useTranslations("StoryTool");
   const [input, setInput] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("verifying");
@@ -52,9 +55,9 @@ export function StoryTool({
     const shortcode = extractPostShortcode(searchInput);
 
     if (!shortcode) {
-      const { valid, error } = validateUsername(searchInput);
+      const { valid } = validateUsername(searchInput);
       if (!valid) {
-        setFormError(error ?? "Enter a valid Instagram username or paste a post link.");
+        setFormError(t("validationFallback"));
         return;
       }
     }
@@ -98,7 +101,7 @@ export function StoryTool({
       const errorResult = {
         status: "error" as const,
         code: "UPSTREAM_ERROR" as const,
-        message: "We couldn't retrieve public content right now. Please try again later.",
+        message: "",
       };
       if (shortcode) {
         setPostResult(errorResult);
@@ -108,7 +111,7 @@ export function StoryTool({
     }
 
     setStatus("result");
-  }, []);
+  }, [t]);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -140,7 +143,7 @@ export function StoryTool({
       <form
         onSubmit={handleSubmit}
         className="flex flex-col gap-3 sm:flex-row"
-        aria-label="Search Instagram by username or post link"
+        aria-label={t("searchAriaLabel")}
       >
         <div className="relative flex-1">
           {!/^https?:\/\//i.test(input) && (
@@ -159,8 +162,8 @@ export function StoryTool({
             spellCheck={false}
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Username or paste a post/reel link"
-            aria-label="Instagram username or post URL"
+            placeholder={t("inputPlaceholder")}
+            aria-label={t("inputAriaLabel")}
             className={`w-full rounded-2xl border border-border bg-surface py-4 pr-4 text-base text-foreground shadow-sm outline-none ring-accent/30 transition focus:ring-4 ${
               /^https?:\/\//i.test(input) ? "pl-4" : "pl-8"
             }`}
@@ -171,7 +174,7 @@ export function StoryTool({
           disabled={status === "loading"}
           className="brand-gradient shrink-0 rounded-2xl px-8 py-4 text-base font-semibold text-white shadow-md transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-70"
         >
-          {status === "loading" ? "Searching…" : "View Stories"}
+          {status === "loading" ? t("searching") : t("viewStories")}
         </button>
       </form>
 
@@ -183,9 +186,7 @@ export function StoryTool({
         </p>
       )}
 
-      <p className="mt-3 text-xs text-foreground/50">
-        Public profiles only. We never ask for your Instagram password.
-      </p>
+      <p className="mt-3 text-xs text-foreground/50">{t("disclaimer")}</p>
 
       <div className="mt-6">
         {status === "loading" && <LoadingState phase={loadingPhase} />}
@@ -217,6 +218,7 @@ export function StoryTool({
 }
 
 function LoadingState({ phase }: { phase: LoadingPhase }) {
+  const t = useTranslations("StoryTool");
   return (
     <div
       role="status"
@@ -234,7 +236,7 @@ function LoadingState({ phase }: { phase: LoadingPhase }) {
           <path className="opacity-90" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.4 0 0 5.4 0 12h4Z" />
         </svg>
         <p className="text-sm font-medium text-foreground/70">
-          {phase === "verifying" ? "Verifying your request…" : "Searching for public stories…"}
+          {phase === "verifying" ? t("loadingVerifying") : t("loadingSearching")}
         </p>
       </div>
       <div className="mt-4 flex items-center gap-3">
@@ -271,10 +273,12 @@ function ResultState({
   onReset: () => void;
   onOpenViewer: (index: number) => void;
 }) {
+  const t = useTranslations("StoryTool");
+
   if (result.status === "error") {
     return (
       <StateCard tone="error" onReset={onReset}>
-        {result.message}
+        {t(errorMessageKey(result.code))}
       </StateCard>
     );
   }
@@ -282,7 +286,7 @@ function ResultState({
   if (result.status === "not_found") {
     return (
       <StateCard tone="neutral" onReset={onReset}>
-        We couldn&apos;t find this public profile.
+        {t("notFoundProfile")}
       </StateCard>
     );
   }
@@ -290,7 +294,7 @@ function ResultState({
   if (result.status === "private") {
     return (
       <StateCard tone="neutral" onReset={onReset} profile={result.profile}>
-        This profile is private. Only public profiles are supported.
+        {t("privateProfile")}
       </StateCard>
     );
   }
@@ -305,7 +309,7 @@ function ResultState({
           onClick={onReset}
           className="shrink-0 text-sm font-medium text-foreground/50 hover:text-foreground"
         >
-          Search another
+          {t("searchAnother")}
         </button>
       </div>
 
@@ -313,22 +317,22 @@ function ResultState({
 
       <div className="mt-5 flex gap-2 border-b border-border">
         <TabButton active={tab === "stories"} onClick={() => onTabChange("stories")}>
-          Stories {result.status === "ok" ? `(${profile.stories.length})` : ""}
+          {t("tabStories")} {result.status === "ok" ? `(${profile.stories.length})` : ""}
         </TabButton>
         <TabButton active={tab === "posts"} onClick={() => onTabChange("posts")}>
-          Posts
+          {t("tabPosts")}
         </TabButton>
       </div>
 
       {tab === "stories" ? (
         result.status === "no_stories" ? (
           <p className="mt-5 text-sm text-foreground/60">
-            No publicly available stories found for this username.{" "}
+            {t("noStoriesFound")}{" "}
             <Link
               href={`/profile/${profile.username}/`}
               className="font-semibold text-accent hover:underline"
             >
-              View public profile info
+              {t("viewPublicProfileInfo")}
             </Link>
             .
           </p>
@@ -348,7 +352,7 @@ function ResultState({
                 <button
                   onClick={() => onOpenViewer(index)}
                   className="absolute inset-0 h-full w-full"
-                  aria-label={`Open story ${index + 1}`}
+                  aria-label={t("openStory", { index: index + 1 })}
                 >
                   {story.thumbnailUrl && (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -363,7 +367,7 @@ function ResultState({
                 {/* Sibling, not nested inside the button above — an <a> inside a <button> is invalid HTML and misfires clicks. */}
                 <DownloadButton
                   mediaUrl={story.mediaUrl}
-                  label={`Download story ${index + 1}`}
+                  label={t("downloadStory", { index: index + 1 })}
                   className="absolute bottom-1.5 right-1.5 rounded-full bg-black/50 p-1.5 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
                 />
               </div>
@@ -401,6 +405,7 @@ function TabButton({
 }
 
 function ProfileHeader({ profile }: { profile: Profile }) {
+  const t = useTranslations("StoryTool");
   return (
     <div>
       <div className="flex items-start gap-4 sm:gap-6">
@@ -437,9 +442,9 @@ function ProfileHeader({ profile }: { profile: Profile }) {
           <p className="text-sm text-foreground/50">@{profile.username}</p>
 
           <div className="mt-3 flex gap-5 sm:gap-8">
-            <Stat count={profile.posts} label="posts" />
-            <Stat count={profile.followers} label="followers" />
-            <Stat count={profile.following} label="following" />
+            <Stat count={profile.posts} label={t("statPosts")} />
+            <Stat count={profile.followers} label={t("statFollowers")} />
+            <Stat count={profile.following} label={t("statFollowing")} />
           </div>
         </div>
       </div>
@@ -503,6 +508,7 @@ function StateCard({
   onReset: () => void;
   profile?: Profile;
 }) {
+  const t = useTranslations("StoryTool");
   return (
     <div
       className={`rounded-2xl border p-6 ${
@@ -521,7 +527,7 @@ function StateCard({
         onClick={onReset}
         className="mt-4 text-sm font-semibold text-accent hover:underline"
       >
-        Search another username
+        {t("searchAnotherUsername")}
       </button>
     </div>
   );

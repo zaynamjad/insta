@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useTranslations } from "next-intl";
 import type { Profile } from "@/types/profile";
 import type { Story } from "@/types/story";
 import { DownloadButton } from "./DownloadButton";
@@ -19,6 +20,7 @@ export function StoryViewerModal({
   initialIndex: number;
   onClose: () => void;
 }) {
+  const t = useTranslations("StoryTool");
   const [index, setIndex] = useState(initialIndex);
   const [paused, setPaused] = useState(false);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
@@ -102,7 +104,7 @@ export function StoryViewerModal({
     <div
       role="dialog"
       aria-modal="true"
-      aria-label={`Stories from @${profile.username}`}
+      aria-label={t("storiesFromUser", { username: profile.username })}
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-0 sm:p-6"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
@@ -150,13 +152,13 @@ export function StoryViewerModal({
           <div className="flex items-center gap-1">
             <DownloadButton
               mediaUrl={current.mediaUrl}
-              label="Download this story"
+              label={t("downloadThisStory")}
               className="rounded-full p-2 text-white/90 hover:bg-white/10"
             />
             <button
               ref={closeBtnRef}
               onClick={onClose}
-              aria-label="Close story viewer"
+              aria-label={t("closeStoryViewer")}
               className="rounded-full p-2 text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
@@ -182,19 +184,19 @@ export function StoryViewerModal({
             <img
               key={current.id}
               src={current.mediaUrl}
-              alt={`Story from @${profile.username}`}
+              alt={t("storyFromUser", { username: profile.username })}
               className="h-full w-full object-contain"
             />
           )}
 
           <button
-            aria-label="Previous story"
+            aria-label={t("previousStory")}
             onClick={goPrev}
             onMouseDown={(e) => e.preventDefault()}
             className="absolute left-0 top-0 h-full w-1/3 cursor-default"
           />
           <button
-            aria-label="Next story"
+            aria-label={t("nextStory")}
             onClick={goNext}
             onMouseDown={(e) => e.preventDefault()}
             className="absolute right-0 top-0 h-full w-2/3 cursor-default"
