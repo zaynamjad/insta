@@ -41,22 +41,36 @@ export default async function HomePage({ params }: Props) {
     text: t(`step${n}Text` as "step1Text"),
   }));
 
-  const featureCards = Array.from({ length: 10 }, (_, i) => i + 1).map((n) => ({
+  const featureCards = [1, 2, 3, 4, 5, 9].map((n) => ({
     title: t(`featureCard${n}Title` as "featureCard1Title"),
     text: t(`featureCard${n}Text` as "featureCard1Text"),
   }));
-  const whyItems = Array.from({ length: 8 }, (_, i) => i + 1).map((n) => ({
+  const whyItems = [1, 2, 4, 8].map((n) => ({
     title: t(`whyItem${n}Title` as "whyItem1Title"),
     text: t(`whyItem${n}Text` as "whyItem1Text"),
   }));
-  const doItems = [1, 2, 3].map((n) => t(`doItem${n}` as "doItem1"));
-  const dontItems = [1, 2, 3].map((n) => t(`dontItem${n}` as "dontItem1"));
+
+  const featureIcons = [
+    // Story Viewer
+    <svg key="1" aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v8"/><path d="M8 12h8"/></svg>,
+    // Profile Viewer
+    <svg key="2" aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>,
+    // Posts Browser
+    <svg key="3" aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>,
+    // Highlights Viewer
+    <svg key="4" aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>,
+    // Story Downloader
+    <svg key="5" aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>,
+    // Reels Downloader
+    <svg key="6" aria-hidden width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="2.18" ry="2.18"/><line x1="7" x2="7" y1="2" y2="22"/><line x1="17" x2="17" y1="2" y2="22"/><line x1="2" x2="22" y1="12" y2="12"/><line x1="2" x2="7" y1="7" y2="7"/><line x1="2" x2="7" y1="17" y2="17"/><line x1="17" x2="22" y1="17" y2="17"/><line x1="17" x2="22" y1="7" y2="7"/></svg>
+  ];
 
   return (
     <>
       <JsonLd data={softwareApplicationSchema()} />
       <PageOverridesRenderer path="/" />
 
+      {/* ── Hero ──────────────────────────────────────────────── */}
       <section id="search" className="relative">
         <div
           aria-hidden
@@ -79,9 +93,11 @@ export default async function HomePage({ params }: Props) {
             </p>
             <div className="mt-3 flex flex-wrap justify-center gap-2 lg:justify-start">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
+                <svg aria-hidden width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M20 6 9 17l-5-5" /></svg>
                 {t("badgeFree")}
               </span>
               <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
+                <svg aria-hidden width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent"><path d="M20 6 9 17l-5-5" /></svg>
                 {t("badgeNoRegistration")}
               </span>
             </div>
@@ -99,6 +115,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── Trending Carousel ─────────────────────────────────── */}
       <section className="border-b border-border bg-surface-muted py-10">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <p className="text-center text-sm font-medium text-foreground/50">
@@ -110,6 +127,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── Features (6 cards, no duplicates with Why section) ── */}
       <section className="bg-surface-muted py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
@@ -118,11 +136,19 @@ export default async function HomePage({ params }: Props) {
             </h2>
             <p className="mt-3 text-foreground/65">{t("featuresIntro")}</p>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featureCards.map((item) => (
-              <div key={item.title} className="rounded-2xl border border-border bg-surface p-5">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {featureCards.map((item, i) => (
+              <div
+                key={item.title}
+                className="group rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:shadow-md hover:border-accent/30"
+              >
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors duration-200 group-hover:bg-accent/20">
+                  {featureIcons[i]}
+                </div>
                 <h3 className="font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/65">{item.text}</p>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/60">
+                  {item.text}
+                </p>
               </div>
             ))}
           </div>
@@ -132,6 +158,7 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── How It Works ──────────────────────────────────────── */}
       <section id="how-it-works" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
@@ -143,7 +170,7 @@ export default async function HomePage({ params }: Props) {
           {howItWorksSteps.map((item, i) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-border bg-surface p-6 text-center transition-shadow hover:shadow-sm"
+              className="rounded-2xl border border-border bg-surface p-6 text-center transition-all duration-200 hover:shadow-md hover:border-accent/30"
             >
               <span className="brand-gradient mx-auto flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-white">
                 {i + 1}
@@ -158,6 +185,7 @@ export default async function HomePage({ params }: Props) {
         </p>
       </section>
 
+      {/* ── Why Choose Us ─────────────────────────────────────── */}
       <section className="bg-surface-muted py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="lg:flex lg:items-center lg:gap-10">
@@ -176,11 +204,11 @@ export default async function HomePage({ params }: Props) {
               <p className="mt-3 text-foreground/65">{t("whyText")}</p>
             </div>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
             {whyItems.map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border border-border bg-surface p-4"
+                className="rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:shadow-md hover:border-accent/30"
               >
                 <div className="flex items-center gap-2.5">
                   <svg
@@ -211,69 +239,8 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <section id="about" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            {t("introTitle")}
-          </h2>
-          <p className="mt-4 leading-relaxed text-foreground/70">
-            {t("introText1")}
-          </p>
-          <p className="mt-4 leading-relaxed text-foreground/70">
-            {t("introText2")}
-          </p>
-          <p className="mt-4 leading-relaxed text-foreground/70">
-            {t("introText3")}
-          </p>
-        </div>
-
-        <div className="mt-10 grid gap-4 sm:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-surface p-6">
-            <h3 className="font-semibold text-foreground">{t("whatWeDoTitle")}</h3>
-            <ul className="mt-4 space-y-3">
-              {doItems.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/70">
-                  <svg aria-hidden className="mt-0.5 shrink-0 text-accent" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="rounded-2xl border border-border bg-surface p-6">
-            <h3 className="font-semibold text-foreground">{t("whatWeDontTitle")}</h3>
-            <ul className="mt-4 space-y-3">
-              {dontItems.map((item) => (
-                <li key={item} className="flex items-start gap-2.5 text-sm leading-relaxed text-foreground/70">
-                  <svg aria-hidden className="mt-0.5 shrink-0 text-foreground/35" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                    <path d="M18 6 6 18M6 6l12 12" />
-                  </svg>
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-foreground/50">
-          {t.rich("aboutFooterText", {
-            siteName: SITE_NAME,
-            aboutLink: (chunks) => (
-              <Link href="/about/" className="font-medium text-accent hover:underline">
-                {chunks}
-              </Link>
-            ),
-            privacyLink: (chunks) => (
-              <Link href="/privacy-policy/" className="font-medium text-accent hover:underline">
-                {chunks}
-              </Link>
-            ),
-          })}
-        </p>
-      </section>
-
-      <section id="contact" className="bg-surface-muted py-16">
+      {/* ── Contact ───────────────────────────────────────────── */}
+      <section id="contact" className="py-16">
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
             {t("contactTitle")}
@@ -283,7 +250,7 @@ export default async function HomePage({ params }: Props) {
           </p>
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="brand-gradient mt-6 inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+            className="brand-gradient mt-6 inline-flex cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
           >
             <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="4" width="20" height="16" rx="2" />
@@ -294,11 +261,15 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
-      <section id="faq" className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <Faq items={homeFaqs} title={t("faqTitle")} />
+      {/* ── FAQ ────────────────────────────────────────────────── */}
+      <section id="faq" className="bg-surface-muted py-16">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <Faq items={homeFaqs} title={t("faqTitle")} />
+        </div>
       </section>
 
-      <section className="mx-auto max-w-3xl px-4 pb-20 sm:px-6">
+      {/* ── Final CTA ─────────────────────────────────────────── */}
+      <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
         <div className="flex flex-col-reverse items-center gap-6 rounded-3xl border border-border bg-surface p-8 sm:flex-row sm:justify-center sm:gap-10">
           <div className="text-center sm:text-right">
             <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
@@ -312,7 +283,7 @@ export default async function HomePage({ params }: Props) {
             </p>
             <Link
               href="/#search"
-              className="brand-gradient mt-4 inline-block rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
+              className="brand-gradient mt-4 inline-block cursor-pointer rounded-full px-6 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90"
             >
               {t("finalCtaButton")}
             </Link>
