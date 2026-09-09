@@ -45,7 +45,8 @@ export default async function HomePage({ params }: Props) {
     title: t(`featureCard${n}Title` as "featureCard1Title"),
     text: t(`featureCard${n}Text` as "featureCard1Text"),
   }));
-  const whyItems = [1, 2, 4, 8].map((n) => ({
+  const whyItems = [1, 2, 3, 4, 5, 6, 7, 8, 9].map((n) => ({
+    number: n,
     title: t(`whyItem${n}Title` as "whyItem1Title"),
     text: t(`whyItem${n}Text` as "whyItem1Text"),
   }));
@@ -204,25 +205,14 @@ export default async function HomePage({ params }: Props) {
               <p className="mt-3 text-foreground/65">{t("whyText")}</p>
             </div>
           </div>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {whyItems.map((item) => (
               <div
                 key={item.title}
                 className="group flex flex-col justify-start rounded-2xl border border-border/80 bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5"
               >
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
-                  <svg
-                    aria-hidden
-                    className="h-5 w-5"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M20 6 9 17l-5-5" />
-                  </svg>
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 font-extrabold text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
+                  {item.number}
                 </div>
                 <h3 className="mt-3 text-base font-bold text-foreground transition-colors duration-200 group-hover:text-accent">
                   {item.title}
