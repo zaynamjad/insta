@@ -266,8 +266,16 @@ export default async function HomePage({ params }: Props) {
 
       {/* ── Final CTA ─────────────────────────────────────────── */}
       <section className="mx-auto max-w-3xl px-4 py-16 sm:px-6">
-        <div className="flex flex-col-reverse items-center gap-6 rounded-3xl border border-border bg-surface p-8 sm:flex-row sm:justify-center sm:gap-10">
-          <div className="text-center sm:text-right">
+        <div className="flex flex-col items-center gap-6 rounded-3xl border border-border bg-surface p-8 sm:flex-row sm:justify-center sm:gap-10">
+          <Image
+            src="/mascot-pointing.png"
+            alt=""
+            width={1156}
+            height={1367}
+            className="w-40 shrink-0 scale-x-[-1] sm:w-48"
+            sizes="192px"
+          />
+          <div className="text-center sm:text-left">
             <h2 className="text-xl font-bold tracking-tight sm:text-2xl">
               {t("finalCtaTitle")}
             </h2>
@@ -287,14 +295,6 @@ export default async function HomePage({ params }: Props) {
               {t("finalCtaSupportingText")}
             </p>
           </div>
-          <Image
-            src="/mascot-pointing.png"
-            alt=""
-            width={1156}
-            height={1367}
-            className="w-40 shrink-0 sm:w-48"
-            sizes="192px"
-          />
         </div>
       </section>
     </>
