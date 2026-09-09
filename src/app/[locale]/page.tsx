@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
 import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -10,7 +9,6 @@ import { JsonLd } from "@/components/JsonLd";
 import { softwareApplicationSchema } from "@/lib/seo/schema";
 import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
 import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
-import { getFeaturedProfiles } from "@/lib/story/featured-profiles";
 import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
@@ -96,9 +94,7 @@ export default async function HomePage({ params }: Props) {
           </p>
         </div>
         <div className="mt-6">
-          <Suspense fallback={<CarouselSkeleton />}>
-            <FeaturedCarouselSection />
-          </Suspense>
+          <FeaturedCarousel />
         </div>
       </section>
 
@@ -277,28 +273,5 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
     </>
-  );
-}
-
-/**
- * Fetches (via the long-cached getFeaturedProfiles) in its own Suspense
- * boundary, so 20 profile lookups never block the hero/search tool above
- * it from rendering immediately — this section streams in once ready.
- */
-async function FeaturedCarouselSection() {
-  const profiles = await getFeaturedProfiles();
-  return <FeaturedCarousel profiles={profiles} />;
-}
-
-function CarouselSkeleton() {
-  return (
-    <div className="mx-auto flex max-w-6xl gap-6 overflow-hidden px-4 sm:px-6">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <div key={i} className="flex w-28 shrink-0 flex-col items-center gap-2">
-          <div className="animate-skeleton h-16 w-16 rounded-full bg-surface-muted" />
-          <div className="animate-skeleton h-3 w-16 rounded bg-surface-muted" />
-        </div>
-      ))}
-    </div>
   );
 }

@@ -46,8 +46,11 @@ const CACHE_KEY = "featured-profiles:all";
 // accounts, not a live lookup, so it shouldn't hit the provider on every
 // page view. Refreshing periodically (rather than fetching once forever)
 // just keeps avatar URLs from going permanently stale, since Instagram's
-// CDN links expire.
-const CACHE_TTL_MS = 12 * 60 * 60_000;
+// CDN links expire. Configurable via env since the right tradeoff (avatar
+// staleness vs. HikerAPI credit spend) depends on plan/traffic, not code.
+const DEFAULT_CACHE_TTL_HOURS = 120;
+const CACHE_TTL_HOURS = Number(process.env.FEATURED_PROFILES_CACHE_TTL_HOURS) || DEFAULT_CACHE_TTL_HOURS;
+const CACHE_TTL_MS = CACHE_TTL_HOURS * 60 * 60_000;
 const CACHE_TTL_SECONDS = CACHE_TTL_MS / 1000;
 
 /**
