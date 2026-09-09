@@ -140,13 +140,13 @@ export default async function HomePage({ params }: Props) {
             {featureCards.map((item, i) => (
               <div
                 key={item.title}
-                className="group rounded-2xl border border-border bg-surface p-6 transition-all duration-200 hover:shadow-md hover:border-accent/30"
+                className="group flex flex-col justify-start rounded-2xl border border-border/80 bg-surface p-6 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5"
               >
-                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors duration-200 group-hover:bg-accent/20">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
                   {featureIcons[i]}
                 </div>
-                <h3 className="font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/60">
+                <h3 className="font-bold text-foreground transition-colors duration-200 group-hover:text-accent">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/65">
                   {item.text}
                 </p>
               </div>
@@ -170,12 +170,12 @@ export default async function HomePage({ params }: Props) {
           {howItWorksSteps.map((item, i) => (
             <div
               key={item.title}
-              className="rounded-2xl border border-border bg-surface p-6 text-center transition-all duration-200 hover:shadow-md hover:border-accent/30"
+              className="group flex flex-col justify-start rounded-2xl border border-border/80 bg-surface p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5"
             >
-              <span className="brand-gradient mx-auto flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-white">
+              <span className="brand-gradient mx-auto flex h-10 w-10 items-center justify-center rounded-full text-base font-bold text-white shadow-sm transition-transform duration-200 group-hover:scale-110">
                 {i + 1}
               </span>
-              <h3 className="mt-4 font-semibold text-foreground">{item.title}</h3>
+              <h3 className="mt-4 font-bold text-foreground transition-colors duration-200 group-hover:text-accent">{item.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-foreground/65">{item.text}</p>
             </div>
           ))}
@@ -204,18 +204,16 @@ export default async function HomePage({ params }: Props) {
               <p className="mt-3 text-foreground/65">{t("whyText")}</p>
             </div>
           </div>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {whyItems.map((item) => (
               <div
                 key={item.title}
-                className="rounded-xl border border-border bg-surface p-4 transition-all duration-200 hover:shadow-md hover:border-accent/30"
+                className="group flex flex-col justify-start rounded-2xl border border-border/80 bg-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-xl hover:shadow-accent/5"
               >
-                <div className="flex items-center gap-2.5">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-accent/10 text-accent transition-colors duration-200 group-hover:bg-accent group-hover:text-white">
                   <svg
                     aria-hidden
-                    className="shrink-0 text-accent"
-                    width="20"
-                    height="20"
+                    className="h-5 w-5"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -225,17 +223,25 @@ export default async function HomePage({ params }: Props) {
                   >
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
-                  <span className="text-sm font-semibold text-foreground/80">
-                    {item.title}
-                  </span>
                 </div>
-                <p className="mt-2 text-sm leading-relaxed text-foreground/60">{item.text}</p>
+                <h3 className="mt-3 text-base font-bold text-foreground transition-colors duration-200 group-hover:text-accent">
+                  {item.title}
+                </h3>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-foreground/65">
+                  {item.text}
+                </p>
               </div>
             ))}
           </div>
-          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-foreground/50">
-            {t("whyNote")}
-          </p>
+          <div className="mt-8 flex justify-center">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-surface px-4 py-2 text-xs font-medium text-foreground/70 shadow-sm">
+              <svg aria-hidden className="h-4 w-4 shrink-0 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+              </svg>
+              <span>{t("whyNote")}</span>
+            </div>
+          </div>
         </div>
       </section>
 

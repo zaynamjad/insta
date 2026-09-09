@@ -28,9 +28,6 @@ export async function Footer() {
             <p className="mt-2 max-w-xs text-sm text-foreground/65">
               {t("tagline")}
             </p>
-            <p className="mt-1 max-w-xs text-xs text-foreground/45">
-              {t("independenceNote")}
-            </p>
           </div>
 
           <nav aria-label="Footer">
@@ -49,12 +46,31 @@ export async function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 space-y-3 border-t border-border pt-6 text-xs leading-relaxed text-foreground/55">
-          <p>{t("disclaimer1", { siteName: SITE_NAME })}</p>
-          <p>{t("disclaimer2", { siteName: SITE_NAME })}</p>
+        {/* Highlighted Disclaimer & Security Banner */}
+        <div className="mt-10 rounded-2xl border border-accent/25 bg-accent/5 p-5 shadow-sm backdrop-blur-sm sm:p-6">
+          <div className="flex items-start gap-3.5">
+            <svg
+              className="mt-0.5 h-5 w-5 shrink-0 text-accent"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth="2"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M12 9v3.75m0-10.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.75c0 5.592 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.57-.598-3.75h-.002A11.959 11.959 0 0112 2.964zM12 15.75h.007v.008H12v-.008z"
+              />
+            </svg>
+            <div className="space-y-2 text-xs leading-relaxed text-foreground/80 sm:text-sm">
+              <p className="font-medium text-foreground">{t("disclaimer1", { siteName: SITE_NAME })}</p>
+              <p className="font-medium text-foreground/90">{t("disclaimer2", { siteName: SITE_NAME })}</p>
+            </div>
+          </div>
         </div>
 
-        <p className="mt-6 text-xs text-foreground/45">
+        <p className="mt-6 text-xs font-medium text-foreground/50">
           {t("copyright", { year: new Date().getFullYear(), siteName: SITE_NAME })}
         </p>
       </div>
