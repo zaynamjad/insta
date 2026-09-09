@@ -49,7 +49,11 @@ export async function lookupPosts(usernameInput: unknown): Promise<PostsLookupRe
     }
 
     if (!storyResult || storyResult.status === "error") {
-      const profile = await provider.getProfile(normalized);
+      // getBasicProfile (skips the stories fetch) when available — we only
+      // need public/private + not-found here, not Story media, and
+      // getPosts() below resolves the user itself anyway.
+      const fetchProfile = provider.getBasicProfile?.bind(provider) ?? provider.getProfile.bind(provider);
+      const profile = await fetchProfile(normalized);
       if (!profile) {
         const result: PostsLookupResult = { status: "not_found", username: normalized };
         setCached(cacheKey, result, 60_000);

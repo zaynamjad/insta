@@ -28,6 +28,9 @@ export async function Footer() {
             <p className="mt-2 max-w-xs text-sm text-foreground/65">
               {t("tagline")}
             </p>
+            <p className="mt-1 max-w-xs text-xs text-foreground/45">
+              {t("independenceNote")}
+            </p>
           </div>
 
           <nav aria-label="Footer">

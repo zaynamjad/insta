@@ -3,6 +3,7 @@ import { ProviderError } from "./provider";
 import type { Profile } from "@/types/profile";
 import type { Story } from "@/types/story";
 import type { Post, PostMediaItem } from "@/types/post";
+import type { HighlightMeta } from "@/types/highlight";
 import { validateUsername } from "./validation";
 import { checkOutboundRateLimit } from "./rate-limit";
 
@@ -16,6 +17,8 @@ interface HikerUser {
   full_name: string | null;
   biography: string | null;
   profile_pic_url: string | null;
+  /** Present on /v2/user/by/username; absent (or null) elsewhere. */
+  hd_profile_pic_url_info?: { url: string } | null;
   follower_count: number | null;
   following_count: number | null;
   media_count: number | null;
@@ -60,6 +63,39 @@ interface HikerMediaItem extends HikerMediaResource {
   like_count?: number | null;
   comment_count?: number | null;
   resources?: HikerMediaResource[];
+  /** "clips" for a Reel; other values (or absent) for a regular feed post. */
+  product_type?: string | null;
+}
+
+interface HikerHighlightCoverMedia {
+  cropped_image_version?: { url?: string } | null;
+}
+
+interface HikerHighlightMeta {
+  pk?: string | number;
+  id?: string;
+  title: string;
+  media_count?: number | null;
+  cover_media?: HikerHighlightCoverMedia | null;
+}
+
+interface HikerHighlightItem {
+  pk?: string | number;
+  id?: string;
+  // Unlike the stories endpoint (numeric unix seconds), /v1/highlight/by/url
+  // returns this as an ISO datetime string — verified against a live
+  // response, not just the docs summary.
+  taken_at: string;
+  media_type: number; // 1 = photo, 2 = video
+  thumbnail_url?: string | null;
+  video_url?: string | null;
+  video_duration?: number;
+}
+
+interface HikerHighlightDetail {
+  title?: string;
+  cover_media?: HikerHighlightCoverMedia | null;
+  items?: HikerHighlightItem[];
 }
 
 /**
@@ -109,6 +145,7 @@ export class HikerApiStoryProvider implements StoryProvider {
     return {
       username: user.username,
       profileImage: user.profile_pic_url,
+      profileImageHd: user.hd_profile_pic_url_info?.url ?? user.profile_pic_url,
       fullName: user.full_name,
       bio: user.biography,
       followers: user.follower_count,
@@ -193,6 +230,108 @@ export class HikerApiStoryProvider implements StoryProvider {
     return this.normalizeMediaPost(item);
   }
 
+  async getHighlights(usernameInput: string): Promise<HighlightMeta[]> {
+    const { valid, normalized } = validateUsername(usernameInput);
+    if (!valid) {
+      throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
+    }
+
+    if (!checkOutboundRateLimit().allowed) {
+      throw new ProviderError(
+        "Upstream request budget exceeded for this window.",
+        "RATE_LIMITED",
+      );
+    }
+
+    if (!HIKERAPI_KEY) {
+      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+    }
+
+    const user = await this.fetchUser(normalized);
+    if (!user || user.is_private !== false) return [];
+
+    const res = await this.request(`/v1/user/highlights?user_id=${encodeURIComponent(String(user.pk))}`);
+    if (!res.ok) return [];
+
+    const body = (await res.json()) as HikerHighlightMeta[];
+    if (!Array.isArray(body)) return [];
+
+    return body.map((h) => this.normalizeHighlightMeta(h));
+  }
+
+  async getHighlightItems(
+    highlightUrl: string,
+  ): Promise<{ title: string; coverImageUrl: string | null; items: Story[] } | null> {
+    if (!/^https:\/\/(www\.)?instagram\.com\/stories\/highlights\/\d+\/?$/i.test(highlightUrl)) {
+      throw new ProviderError("Invalid highlight URL.", "UPSTREAM_ERROR");
+    }
+
+    if (!checkOutboundRateLimit().allowed) {
+      throw new ProviderError(
+        "Upstream request budget exceeded for this window.",
+        "RATE_LIMITED",
+      );
+    }
+
+    if (!HIKERAPI_KEY) {
+      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+    }
+
+    const res = await this.request(`/v1/highlight/by/url?url=${encodeURIComponent(highlightUrl)}`);
+
+    if (res.status === 404) return null;
+
+    if (res.status === 401) {
+      throw new ProviderError("HikerAPI rejected the access key.", "UPSTREAM_ERROR", "401 Unauthorized");
+    }
+
+    if (res.status === 429) {
+      throw new ProviderError("Rate limited by HikerAPI.", "RATE_LIMITED");
+    }
+
+    if (!res.ok) {
+      throw new ProviderError(
+        "HikerAPI returned an unexpected status.",
+        "UPSTREAM_ERROR",
+        `status=${res.status}`,
+      );
+    }
+
+    const detail = (await res.json()) as HikerHighlightDetail;
+    const items = (detail.items ?? [])
+      .map((item) => this.normalizeHighlightItem(item))
+      .filter((story): story is Story => story !== null);
+
+    return {
+      title: detail.title ?? "",
+      coverImageUrl: detail.cover_media?.cropped_image_version?.url ?? null,
+      items,
+    };
+  }
+
+  private normalizeHighlightMeta(h: HikerHighlightMeta): HighlightMeta {
+    return {
+      id: String(h.pk ?? h.id),
+      title: h.title,
+      coverImageUrl: h.cover_media?.cropped_image_version?.url ?? null,
+      mediaCount: h.media_count ?? null,
+    };
+  }
+
+  private normalizeHighlightItem(item: HikerHighlightItem): Story | null {
+    const mediaUrl = item.video_url ?? item.thumbnail_url;
+    if (!mediaUrl) return null;
+
+    return {
+      id: String(item.pk ?? item.id ?? item.taken_at),
+      type: item.media_type === 2 ? "video" : "image",
+      mediaUrl,
+      thumbnailUrl: item.thumbnail_url ?? null,
+      timestamp: item.taken_at || null,
+      duration: item.video_duration ?? 5,
+    };
+  }
+
   private normalizeMediaPost(item: HikerMediaItem): Post | null {
     const ownItem = this.normalizeMediaItem(item);
     const childItems = item.resources?.map((r) => this.normalizeMediaItem(r)).filter((m): m is PostMediaItem => m !== null) ?? [];
@@ -209,6 +348,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       likeCount: item.like_count ?? null,
       commentCount: item.comment_count ?? null,
       items: mediaItems,
+      isReel: item.product_type === "clips",
     };
   }
 

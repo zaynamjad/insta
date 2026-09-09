@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Taal",
-    "close": "Taalmenu sluiten"
+    "close": "Taalmenu sluiten",
+    "search": "Taal zoeken…",
+    "noResults": "Geen talen gevonden"
   },
   "Breadcrumbs": {
     "home": "Home"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Instagram-storyviewer | Stories anoniem bekijken",
     "metaDescription": "Voer een openbare Instagram-gebruikersnaam in om openbaar beschikbare stories te bekijken zonder in te loggen op Instagram. Geen wachtwoord, geen account, geen app-installatie.",
-    "badge": "Alleen openbare profielen · Geen login vereist",
     "h1": "Instagram-storyviewer",
     "sub1": "Voer een openbare Instagram-gebruikersnaam in om direct de openbare profielinformatie te zien, zonder in te loggen.",
-    "sub2": "De storyinhoud zelf kan niet worden opgehaald zonder Instagram-login, bij geen enkel account. Lees waarom in de veelgestelde vragen hieronder.",
     "trendingCaption": "Probeer het met enkele van de meest gevolgde accounts op Instagram",
     "howItWorksTitle": "Hoe het werkt",
     "step1Title": "Voer een gebruikersnaam in",
@@ -56,14 +56,6 @@
     "step3Text": "Blader er direct doorheen in een overzichtelijke volledig-scherm viewer.",
     "whyTitle": "Waarom onze Instagram-storyviewer gebruiken?",
     "whyText": "Een snelle, eerlijke manier om een openbaar profiel te controleren: niets meer, niets verborgen.",
-    "feature1": "Geen Instagram-login vereist",
-    "feature2": "Eenvoudige zoekopdracht op gebruikersnaam",
-    "feature3": "Snel stories opzoeken",
-    "feature4": "Mobielvriendelijke viewer",
-    "feature5": "Alleen openbare profielen",
-    "feature6": "Geen accountregistratie",
-    "aboutTitle": "Over {siteName}",
-    "aboutText": "{siteName} is een tool met één doel: voer een openbare Instagram-gebruikersnaam in en bekijk de openbare profielinformatie (foto, naam, bio, aantal volgers) zonder zelf in te loggen op Instagram.",
     "whatWeDoTitle": "Wat we doen",
     "doItem1": "Een openbare profielpagina ophalen op dezelfde manier als elke anonieme browser dat zou doen",
     "doItem2": "Alle openbare informatie tonen die Instagram op die pagina opneemt",
@@ -87,7 +79,6 @@
     "faq5Q": "Hoe haalt deze tool profielinformatie op?",
     "faq5A": "Door de openbare Instagram-profielpagina van een account op dezelfde manier op te halen als de browser van elke anonieme, uitgelogde bezoeker zou doen, en vervolgens de openbare informatie te lezen die Instagram op die pagina opneemt: geen login, geen privé-API, geen omzeiling van enige toegangscontrole.",
     "finalCtaTitle": "Klaar om een profiel op te zoeken?",
-    "finalCtaText": "Voer een openbare Instagram-gebruikersnaam in en bekijk direct het profiel, zonder login.",
     "finalCtaButton": "Stories bekijken"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Vragen over deze voorwaarden? Schrijf naar <email>email</email> of bezoek onze <contactLink>contactpagina</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Instagram doorzoeken op gebruikersnaam of berichtlink",
-    "inputPlaceholder": "Gebruikersnaam of plak een bericht-/reellink",
-    "inputAriaLabel": "Instagram-gebruikersnaam of bericht-URL",
+    "searchAriaLabel": "Instagram doorzoeken op gebruikersnaam of bericht-/reel-/highlightlink",
+    "inputPlaceholder": "Gebruikersnaam of plak een bericht-/reel-/highlightlink",
+    "inputAriaLabel": "Instagram-gebruikersnaam, of bericht-, reel- of highlight-URL",
     "searching": "Zoeken…",
     "viewStories": "Stories bekijken",
     "disclaimer": "Alleen openbare profielen. We vragen nooit om je Instagram-wachtwoord.",
-    "validationFallback": "Voer een geldige Instagram-gebruikersnaam in of plak een berichtlink.",
+    "validationFallback": "Voer een geldige Instagram-gebruikersnaam in of plak een bericht-/highlightlink.",
     "loadingVerifying": "Je aanvraag wordt geverifieerd…",
     "loadingSearching": "Bezig met zoeken naar openbare stories…",
     "notFoundProfile": "We konden dit openbare profiel niet vinden.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Nog een gebruikersnaam zoeken",
     "tabStories": "Stories",
     "tabPosts": "Berichten",
+    "tabReels": "Reels",
+    "tabHighlights": "Highlights",
+    "tabProfilePicture": "Profielfoto",
     "noStoriesFound": "Er zijn geen openbaar beschikbare stories gevonden voor deze gebruikersnaam.",
     "viewPublicProfileInfo": "Openbare profielinformatie bekijken",
     "openStory": "Story {index} openen",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Er zijn geen openbare berichten gevonden voor deze gebruikersnaam.",
     "openPost": "Bericht {index} openen",
     "downloadPost": "Bericht {index} downloaden",
+    "noPublicReels": "Er zijn geen openbare reels gevonden voor deze gebruikersnaam.",
+    "openReel": "Reel {index} openen",
+    "downloadReel": "Reel {index} downloaden",
+    "noPublicHighlights": "Er zijn geen openbare highlights gevonden voor deze gebruikersnaam.",
+    "openHighlight": "Highlight {title} openen",
+    "highlightNotFound": "We konden geen highlight vinden op die link.",
+    "highlightsNetworkError": "We konden de highlights nu niet ophalen. Probeer het later opnieuw.",
+    "noProfilePicture": "Er is geen profielfoto gevonden voor deze gebruikersnaam.",
+    "downloadProfilePicture": "Profielfoto downloaden",
     "postNotFound": "We konden geen openbaar bericht vinden op die link.",
     "previousItem": "Vorig item",
     "nextItem": "Volgend item",

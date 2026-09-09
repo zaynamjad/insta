@@ -82,7 +82,7 @@ body {
 /* Offsets same-page anchor scrolling (nav → #about / #contact) so the
    sticky header never covers the top of the target section. */
 [id] {
-  scroll-margin-top: 5.5rem;
+  scroll-margin-top: 6.5rem;
 }
 
 ::selection {

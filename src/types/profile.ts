@@ -10,6 +10,8 @@ import type { Story } from "./story";
 export interface Profile {
   username: string;
   profileImage: string | null;
+  /** Highest-resolution profile picture available, when the provider exposes one separately from `profileImage`. Falls back to `profileImage`. */
+  profileImageHd: string | null;
   fullName: string | null;
   bio: string | null;
   followers: number | null;

@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Lingua",
-    "close": "Chiudi menu della lingua"
+    "close": "Chiudi menu della lingua",
+    "search": "Cerca lingua…",
+    "noResults": "Nessuna lingua trovata"
   },
   "Breadcrumbs": {
     "home": "Home"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Visualizzatore di storie Instagram | Vedi le storie in modo anonimo",
     "metaDescription": "Inserisci un nome utente pubblico di Instagram per vedere le storie disponibili pubblicamente senza accedere a Instagram. Nessuna password, nessun account, nessuna app da installare.",
-    "badge": "Solo profili pubblici · Nessun accesso richiesto",
     "h1": "Visualizzatore di storie Instagram",
     "sub1": "Inserisci un nome utente pubblico di Instagram per vedere subito le informazioni del suo profilo pubblico, senza bisogno di accedere.",
-    "sub2": "Il contenuto delle storie non può essere recuperato senza accedere a Instagram, su nessun account. Scopri il perché nelle FAQ qui sotto.",
     "trendingCaption": "Provalo con alcuni degli account più seguiti su Instagram",
     "howItWorksTitle": "Come funziona",
     "step1Title": "Inserisci un nome utente",
@@ -56,14 +56,6 @@
     "step3Text": "Sfoglia le storie all'istante in un visualizzatore pulito a schermo intero.",
     "whyTitle": "Perché usare il nostro visualizzatore di storie Instagram?",
     "whyText": "Un modo rapido e onesto per controllare un profilo pubblico: niente di più, niente di nascosto.",
-    "feature1": "Nessun accesso a Instagram richiesto",
-    "feature2": "Ricerca semplice per nome utente",
-    "feature3": "Ricerca rapida delle storie",
-    "feature4": "Visualizzatore ottimizzato per dispositivi mobili",
-    "feature5": "Solo profili pubblici",
-    "feature6": "Nessuna registrazione dell'account",
-    "aboutTitle": "Chi è {siteName}",
-    "aboutText": "{siteName} è uno strumento con un unico scopo: inserisci un nome utente pubblico di Instagram e visualizza le informazioni del suo profilo pubblico (foto, nome, biografia, numero di follower) senza accedere tu stesso a Instagram.",
     "whatWeDoTitle": "Cosa facciamo",
     "doItem1": "Recuperare una pagina di profilo pubblico nello stesso modo in cui lo farebbe qualsiasi browser anonimo",
     "doItem2": "Mostrare qualsiasi informazione pubblica che Instagram include in quella pagina",
@@ -87,7 +79,6 @@
     "faq5Q": "Come recupera questo strumento le informazioni del profilo?",
     "faq5A": "Recuperando la pagina di profilo pubblico di Instagram di un account nello stesso modo in cui lo farebbe il browser di qualsiasi visitatore anonimo e non autenticato, e poi leggendo le informazioni pubbliche che Instagram include in quella pagina: nessun accesso, nessuna API privata, nessun aggiramento di alcun controllo di accesso.",
     "finalCtaTitle": "Pronto a cercare un profilo?",
-    "finalCtaText": "Inserisci un nome utente pubblico di Instagram e visualizza il suo profilo all'istante, senza bisogno di accedere.",
     "finalCtaButton": "Vedi storie"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Domande su questi termini? Scrivi a <email>email</email> o visita la nostra <contactLink>pagina Contatti</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Cerca su Instagram per nome utente o link del post",
-    "inputPlaceholder": "Nome utente o incolla un link a un post/reel",
-    "inputAriaLabel": "Nome utente Instagram o URL del post",
+    "searchAriaLabel": "Cerca su Instagram per nome utente o link a un post, reel o in evidenza",
+    "inputPlaceholder": "Nome utente o incolla un link a un post/reel/in evidenza",
+    "inputAriaLabel": "Nome utente Instagram, o URL di un post, reel o in evidenza",
     "searching": "Ricerca in corso…",
     "viewStories": "Vedi storie",
     "disclaimer": "Solo profili pubblici. Non chiediamo mai la tua password di Instagram.",
-    "validationFallback": "Inserisci un nome utente Instagram valido o incolla un link a un post.",
+    "validationFallback": "Inserisci un nome utente Instagram valido o incolla un link a un post/in evidenza.",
     "loadingVerifying": "Verifica della tua richiesta in corso…",
     "loadingSearching": "Ricerca di storie pubbliche in corso…",
     "notFoundProfile": "Non siamo riusciti a trovare questo profilo pubblico.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Cerca un altro nome utente",
     "tabStories": "Storie",
     "tabPosts": "Post",
+    "tabReels": "Reel",
+    "tabHighlights": "In evidenza",
+    "tabProfilePicture": "Foto profilo",
     "noStoriesFound": "Non sono state trovate storie disponibili pubblicamente per questo nome utente.",
     "viewPublicProfileInfo": "Visualizza le informazioni del profilo pubblico",
     "openStory": "Apri storia {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Nessun post pubblico trovato per questo nome utente.",
     "openPost": "Apri post {index}",
     "downloadPost": "Scarica post {index}",
+    "noPublicReels": "Nessun reel pubblico trovato per questo nome utente.",
+    "openReel": "Apri reel {index}",
+    "downloadReel": "Scarica reel {index}",
+    "noPublicHighlights": "Nessuna storia in evidenza pubblica trovata per questo nome utente.",
+    "openHighlight": "Apri in evidenza {title}",
+    "highlightNotFound": "Non siamo riusciti a trovare una storia in evidenza a quel link.",
+    "highlightsNetworkError": "Non siamo riusciti a recuperare le storie in evidenza ora. Riprova più tardi.",
+    "noProfilePicture": "Nessuna foto profilo trovata per questo nome utente.",
+    "downloadProfilePicture": "Scarica foto profilo",
     "postNotFound": "Non siamo riusciti a trovare un post pubblico a quel link.",
     "previousItem": "Elemento precedente",
     "nextItem": "Elemento successivo",

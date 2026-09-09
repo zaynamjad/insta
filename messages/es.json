@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Idioma",
-    "close": "Cerrar menú de idioma"
+    "close": "Cerrar menú de idioma",
+    "search": "Buscar idioma…",
+    "noResults": "No se encontraron idiomas"
   },
   "Breadcrumbs": {
     "home": "Inicio"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Visor de historias de Instagram | Ver historias de forma anónima",
     "metaDescription": "Introduce un nombre de usuario público de Instagram para ver sus historias disponibles públicamente sin iniciar sesión en Instagram. Sin contraseña, sin cuenta, sin instalar ninguna app.",
-    "badge": "Solo perfiles públicos · Sin inicio de sesión",
     "h1": "Visor de historias de Instagram",
     "sub1": "Introduce un nombre de usuario público de Instagram y ve la información de su perfil público al instante, sin necesidad de iniciar sesión.",
-    "sub2": "El contenido de las historias en sí no se puede obtener sin iniciar sesión en Instagram, en ninguna cuenta. Descubre por qué en las preguntas frecuentes.",
     "trendingCaption": "Pruébalo con algunas de las cuentas más seguidas de Instagram",
     "howItWorksTitle": "Cómo funciona",
     "step1Title": "Introduce un nombre de usuario",
@@ -56,14 +56,6 @@
     "step3Text": "Míralas al instante en un visor limpio a pantalla completa.",
     "whyTitle": "¿Por qué usar nuestro visor de historias de Instagram?",
     "whyText": "Una forma rápida y honesta de consultar un perfil público: nada más, nada oculto.",
-    "feature1": "No requiere inicio de sesión en Instagram",
-    "feature2": "Búsqueda sencilla por nombre de usuario",
-    "feature3": "Búsqueda de historias rápida",
-    "feature4": "Visor compatible con móviles",
-    "feature5": "Solo perfiles públicos",
-    "feature6": "Sin registro de cuenta",
-    "aboutTitle": "Acerca de {siteName}",
-    "aboutText": "{siteName} es una herramienta con un único propósito: introduce un nombre de usuario público de Instagram y consulta su información pública de perfil (foto, nombre, biografía, número de seguidores) sin iniciar sesión tú mismo en Instagram.",
     "whatWeDoTitle": "Qué hacemos",
     "doItem1": "Obtener una página de perfil público tal como lo haría cualquier navegador anónimo",
     "doItem2": "Mostrar la información pública que Instagram incluye en esa página",
@@ -87,7 +79,6 @@
     "faq5Q": "¿Cómo obtiene esta herramienta la información del perfil?",
     "faq5A": "Obteniendo la página de perfil público de Instagram de una cuenta de la misma forma que lo haría el navegador de cualquier visitante anónimo sin iniciar sesión, y luego leyendo la información pública que Instagram incluye en esa página: sin inicio de sesión, sin API privada, sin eludir ningún control de acceso.",
     "finalCtaTitle": "¿Listo para consultar un perfil?",
-    "finalCtaText": "Introduce un nombre de usuario público de Instagram y consulta su perfil al instante, sin necesidad de iniciar sesión.",
     "finalCtaButton": "Ver historias"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "¿Preguntas sobre estos términos? Escribe a <email>email</email> o visita nuestra <contactLink>página de contacto</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Buscar en Instagram por nombre de usuario o enlace de publicación",
-    "inputPlaceholder": "Usuario o pega un enlace de publicación/reel",
-    "inputAriaLabel": "Nombre de usuario de Instagram o URL de publicación",
+    "searchAriaLabel": "Buscar en Instagram por nombre de usuario o enlace de publicación, reel o destacada",
+    "inputPlaceholder": "Usuario o pega un enlace de publicación/reel/destacada",
+    "inputAriaLabel": "Nombre de usuario de Instagram, o URL de publicación, reel o destacada",
     "searching": "Buscando…",
     "viewStories": "Ver historias",
     "disclaimer": "Solo perfiles públicos. Nunca pedimos tu contraseña de Instagram.",
-    "validationFallback": "Introduce un nombre de usuario de Instagram válido o pega un enlace de publicación.",
+    "validationFallback": "Introduce un nombre de usuario de Instagram válido o pega un enlace de publicación/destacada.",
     "loadingVerifying": "Verificando tu solicitud…",
     "loadingSearching": "Buscando historias públicas…",
     "notFoundProfile": "No pudimos encontrar este perfil público.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Buscar otro nombre de usuario",
     "tabStories": "Historias",
     "tabPosts": "Publicaciones",
+    "tabReels": "Reels",
+    "tabHighlights": "Destacadas",
+    "tabProfilePicture": "Foto de perfil",
     "noStoriesFound": "No se encontraron historias disponibles públicamente para este usuario.",
     "viewPublicProfileInfo": "Ver información del perfil público",
     "openStory": "Abrir historia {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "No se encontraron publicaciones públicas para este usuario.",
     "openPost": "Abrir publicación {index}",
     "downloadPost": "Descargar publicación {index}",
+    "noPublicReels": "No se encontraron reels públicos para este usuario.",
+    "openReel": "Abrir reel {index}",
+    "downloadReel": "Descargar reel {index}",
+    "noPublicHighlights": "No se encontraron destacadas públicas para este usuario.",
+    "openHighlight": "Abrir destacada {title}",
+    "highlightNotFound": "No pudimos encontrar una destacada en ese enlace.",
+    "highlightsNetworkError": "No pudimos obtener las destacadas ahora. Inténtalo de nuevo más tarde.",
+    "noProfilePicture": "No se encontró foto de perfil para este usuario.",
+    "downloadProfilePicture": "Descargar foto de perfil",
     "postNotFound": "No pudimos encontrar una publicación pública en ese enlace.",
     "previousItem": "Elemento anterior",
     "nextItem": "Elemento siguiente",

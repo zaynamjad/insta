@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Dil",
-    "close": "Dil menüsünü kapat"
+    "close": "Dil menüsünü kapat",
+    "search": "Dil ara…",
+    "noResults": "Dil bulunamadı"
   },
   "Breadcrumbs": {
     "home": "Ana sayfa"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Instagram Hikaye Görüntüleyici | Hikayeleri Anonim Olarak Görüntüleyin",
     "metaDescription": "Instagram'a giriş yapmadan herkese açık hikayeleri görüntülemek için herkese açık bir Instagram kullanıcı adı girin. Şifre yok, hesap yok, uygulama yüklemeye gerek yok.",
-    "badge": "Yalnızca herkese açık profiller · Giriş gerekmez",
     "h1": "Instagram Hikaye Görüntüleyici",
     "sub1": "Herkese açık profil bilgilerini anında görmek için herkese açık bir Instagram kullanıcı adı girin, giriş yapmanıza gerek yok.",
-    "sub2": "Hikaye içeriğinin kendisi hiçbir hesapta Instagram girişi yapılmadan alınamaz. Aşağıdaki SSS bölümünde nedenini öğrenin.",
     "trendingCaption": "Instagram'da en çok takip edilen hesaplardan bazılarında deneyin",
     "howItWorksTitle": "Nasıl çalışır",
     "step1Title": "Kullanıcı adı girin",
@@ -56,14 +56,6 @@
     "step3Text": "Temiz, tam ekran bir görüntüleyicide anında göz atın.",
     "whyTitle": "Neden Instagram Hikaye Görüntüleyicimizi kullanmalısınız?",
     "whyText": "Herkese açık bir profili kontrol etmenin hızlı ve dürüst bir yolu: fazlası yok, gizlisi yok.",
-    "feature1": "Instagram girişi gerekmez",
-    "feature2": "Basit kullanıcı adı araması",
-    "feature3": "Hızlı hikaye arama",
-    "feature4": "Mobil uyumlu görüntüleyici",
-    "feature5": "Yalnızca herkese açık profiller",
-    "feature6": "Hesap kaydı yok",
-    "aboutTitle": "{siteName} hakkında",
-    "aboutText": "{siteName} tek amaçlı bir araçtır: herkese açık bir Instagram kullanıcı adı girin ve kendiniz Instagram'a giriş yapmadan profil bilgilerini (fotoğraf, ad, biyografi, takipçi sayısı) görün.",
     "whatWeDoTitle": "Ne yaparız",
     "doItem1": "Herhangi bir anonim tarayıcının yapacağı gibi herkese açık bir profil sayfasını getiririz",
     "doItem2": "Instagram'ın o sayfada yer verdiği herhangi bir herkese açık bilgiyi gösteririz",
@@ -87,7 +79,6 @@
     "faq5Q": "Bu araç profil bilgilerini nasıl alır?",
     "faq5A": "Herhangi bir anonim, oturum açmamış ziyaretçinin tarayıcısının göreceği gibi bir hesabın herkese açık Instagram profil sayfasını getirerek ve ardından Instagram'ın o sayfada yer verdiği herkese açık bilgileri okuyarak: giriş yok, özel API yok, herhangi bir erişim kontrolünü aşma yok.",
     "finalCtaTitle": "Bir profile bakmaya hazır mısınız?",
-    "finalCtaText": "Herkese açık bir Instagram kullanıcı adı girin ve profilini anında görün, giriş yapmanıza gerek yok.",
     "finalCtaButton": "Hikayeleri görüntüle"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Bu koşullar hakkında sorularınız mı var? <email>email</email> adresine yazın veya <contactLink>İletişim sayfamızı</contactLink> ziyaret edin."
   },
   "StoryTool": {
-    "searchAriaLabel": "Instagram'da kullanıcı adı veya gönderi bağlantısıyla ara",
-    "inputPlaceholder": "Kullanıcı adı veya bir gönderi/reels bağlantısı yapıştırın",
-    "inputAriaLabel": "Instagram kullanıcı adı veya gönderi URL'si",
+    "searchAriaLabel": "Instagram'da kullanıcı adı veya gönderi/reels/öne çıkan bağlantısıyla ara",
+    "inputPlaceholder": "Kullanıcı adı veya bir gönderi/reels/öne çıkan bağlantısı yapıştırın",
+    "inputAriaLabel": "Instagram kullanıcı adı, gönderi, reels veya öne çıkan URL'si",
     "searching": "Aranıyor…",
     "viewStories": "Hikayeleri görüntüle",
     "disclaimer": "Yalnızca herkese açık profiller. Instagram şifrenizi asla istemeyiz.",
-    "validationFallback": "Geçerli bir Instagram kullanıcı adı girin veya bir gönderi bağlantısı yapıştırın.",
+    "validationFallback": "Geçerli bir Instagram kullanıcı adı girin veya bir gönderi/öne çıkan bağlantısı yapıştırın.",
     "loadingVerifying": "İsteğiniz doğrulanıyor…",
     "loadingSearching": "Herkese açık hikayeler aranıyor…",
     "notFoundProfile": "Bu herkese açık profili bulamadık.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Başka bir kullanıcı adı ara",
     "tabStories": "Hikayeler",
     "tabPosts": "Gönderiler",
+    "tabReels": "Reels",
+    "tabHighlights": "Öne Çıkanlar",
+    "tabProfilePicture": "Profil Fotoğrafı",
     "noStoriesFound": "Bu kullanıcı adı için herkese açık hikaye bulunamadı.",
     "viewPublicProfileInfo": "Herkese açık profil bilgilerini görüntüle",
     "openStory": "{index}. hikayeyi aç",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Bu kullanıcı adı için herkese açık gönderi bulunamadı.",
     "openPost": "{index}. gönderiyi aç",
     "downloadPost": "{index}. gönderiyi indir",
+    "noPublicReels": "Bu kullanıcı adı için herkese açık reels bulunamadı.",
+    "openReel": "{index}. reels'i aç",
+    "downloadReel": "{index}. reels'i indir",
+    "noPublicHighlights": "Bu kullanıcı adı için herkese açık öne çıkan bulunamadı.",
+    "openHighlight": "{title} öne çıkanını aç",
+    "highlightNotFound": "Bu bağlantıda bir öne çıkan bulamadık.",
+    "highlightsNetworkError": "Öne çıkanları şu anda alamadık. Lütfen daha sonra tekrar deneyin.",
+    "noProfilePicture": "Bu kullanıcı adı için profil fotoğrafı bulunamadı.",
+    "downloadProfilePicture": "Profil fotoğrafını indir",
     "postNotFound": "Bu bağlantıda herkese açık bir gönderi bulamadık.",
     "previousItem": "Önceki öğe",
     "nextItem": "Sonraki öğe",

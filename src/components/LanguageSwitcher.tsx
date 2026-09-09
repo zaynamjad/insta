@@ -13,10 +13,14 @@ export function LanguageSwitcher() {
   const locale = useLocale();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [query, setQuery] = useState("");
   const rootRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (!open) return;
+    setQuery("");
+    searchRef.current?.focus();
 
     function onPointerDown(e: MouseEvent) {
       if (rootRef.current && !rootRef.current.contains(e.target as Node)) {
@@ -35,6 +39,15 @@ export function LanguageSwitcher() {
   }, [open]);
 
   const current = getLocaleMeta(locale);
+  const q = query.trim().toLowerCase();
+  const filteredLocales = q
+    ? LOCALES.filter(
+        (l) =>
+          l.name.toLowerCase().includes(q) ||
+          l.nativeName.toLowerCase().includes(q) ||
+          l.code.toLowerCase().includes(q),
+      )
+    : LOCALES;
 
   return (
     <div ref={rootRef} className="relative hidden shrink-0 items-center md:flex">
@@ -65,33 +78,49 @@ export function LanguageSwitcher() {
       </button>
 
       {open && (
-        <ul
-          role="listbox"
-          aria-label={t("label")}
-          className="absolute right-0 top-full z-50 mt-2 max-h-80 w-44 overflow-y-auto rounded-2xl border border-border bg-surface p-1.5 shadow-lg"
-        >
-          {LOCALES.map((l) => {
-            const active = l.code === locale;
-            return (
-              <li key={l.code} role="none">
-                <button
-                  type="button"
-                  role="option"
-                  aria-selected={active}
-                  onClick={() => switchLocale(pathname, l.code)}
-                  className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
-                    active
-                      ? "brand-gradient text-white"
-                      : "text-foreground/80 hover:bg-surface-muted"
-                  }`}
-                >
-                  <FlagIcon countryCode={l.countryCode} />
-                  <span>{l.displayCode ?? l.countryCode}</span>
-                </button>
-              </li>
-            );
-          })}
-        </ul>
+        <div className="absolute right-0 top-full z-50 mt-2 w-56 overflow-hidden rounded-2xl border border-border bg-surface shadow-lg">
+          <div className="border-b border-border p-1.5">
+            <input
+              ref={searchRef}
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder={t("search")}
+              aria-label={t("search")}
+              className="w-full rounded-xl bg-surface-muted px-3 py-2 text-sm text-foreground outline-none placeholder:text-foreground/40"
+            />
+          </div>
+          <ul role="listbox" aria-label={t("label")} className="max-h-72 overflow-y-auto p-1.5">
+            {filteredLocales.length === 0 ? (
+              <li className="px-3 py-2 text-sm text-foreground/50">{t("noResults")}</li>
+            ) : (
+              filteredLocales.map((l) => {
+                const active = l.code === locale;
+                return (
+                  <li key={l.code} role="none">
+                    <button
+                      type="button"
+                      role="option"
+                      aria-selected={active}
+                      onClick={() => switchLocale(pathname, l.code)}
+                      className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
+                        active
+                          ? "brand-gradient text-white"
+                          : "text-foreground/80 hover:bg-surface-muted"
+                      }`}
+                    >
+                      <FlagIcon countryCode={l.countryCode} />
+                      <span className="truncate">{l.nativeName}</span>
+                      <span className="ml-auto shrink-0 text-xs text-foreground/40">
+                        {l.displayCode ?? l.countryCode}
+                      </span>
+                    </button>
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </div>
       )}
     </div>
   );

@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Språk",
-    "close": "Stäng språkmenyn"
+    "close": "Stäng språkmenyn",
+    "search": "Sök språk…",
+    "noResults": "Inga språk hittades"
   },
   "Breadcrumbs": {
     "home": "Hem"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Instagram-storyvisare | Se stories anonymt",
     "metaDescription": "Ange ett offentligt Instagram-användarnamn för att se offentligt tillgängliga stories utan att logga in på Instagram. Inget lösenord, inget konto, ingen app-installation.",
-    "badge": "Endast offentliga profiler · Ingen inloggning krävs",
     "h1": "Instagram-storyvisare",
     "sub1": "Ange ett offentligt Instagram-användarnamn för att direkt se dess offentliga profilinformation, ingen inloggning krävs.",
-    "sub2": "Själva storyinnehållet kan inte hämtas utan Instagram-inloggning, på något konto. Se varför i vanliga frågor nedan.",
     "trendingCaption": "Prova med några av de mest följda kontona på Instagram",
     "howItWorksTitle": "Så fungerar det",
     "step1Title": "Ange ett användarnamn",
@@ -56,14 +56,6 @@
     "step3Text": "Bläddra igenom dem direkt i en ren visare i helskärm.",
     "whyTitle": "Varför använda vår Instagram-storyvisare?",
     "whyText": "Ett snabbt, ärligt sätt att kontrollera en offentlig profil: inget mer, inget dolt.",
-    "feature1": "Ingen Instagram-inloggning krävs",
-    "feature2": "Enkel sökning på användarnamn",
-    "feature3": "Snabb storysökning",
-    "feature4": "Mobilanpassad visare",
-    "feature5": "Endast offentliga profiler",
-    "feature6": "Ingen kontoregistrering",
-    "aboutTitle": "Om {siteName}",
-    "aboutText": "{siteName} är ett verktyg med ett enda syfte: ange ett offentligt Instagram-användarnamn och se dess offentliga profilinformation (foto, namn, biografi, antal följare) utan att själv logga in på Instagram.",
     "whatWeDoTitle": "Vad vi gör",
     "doItem1": "Hämtar en offentlig profilsida på samma sätt som vilken anonym webbläsare som helst skulle göra",
     "doItem2": "Visar all offentlig information som Instagram inkluderar på den sidan",
@@ -87,7 +79,6 @@
     "faq5Q": "Hur hämtar det här verktyget profilinformation?",
     "faq5A": "Genom att hämta ett kontos offentliga Instagram-profilsida på samma sätt som webbläsaren för vilken anonym, utloggad besökare som helst skulle göra, och sedan läsa den offentliga informationen som Instagram inkluderar på den sidan: ingen inloggning, inget privat API, ingen kringgående av någon åtkomstkontroll.",
     "finalCtaTitle": "Redo att slå upp en profil?",
-    "finalCtaText": "Ange ett offentligt Instagram-användarnamn och se dess profil direkt, ingen inloggning krävs.",
     "finalCtaButton": "Visa stories"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Har du frågor om dessa villkor? Skriv till <email>email</email> eller besök vår <contactLink>kontaktsida</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Sök på Instagram efter användarnamn eller inläggslänk",
-    "inputPlaceholder": "Användarnamn eller klistra in en inläggs-/reel-länk",
-    "inputAriaLabel": "Instagram-användarnamn eller inläggs-URL",
+    "searchAriaLabel": "Sök på Instagram efter användarnamn eller inläggs-/reel-/höjdpunktslänk",
+    "inputPlaceholder": "Användarnamn eller klistra in en inläggs-/reel-/höjdpunktslänk",
+    "inputAriaLabel": "Instagram-användarnamn, eller inläggs-, reel- eller höjdpunkts-URL",
     "searching": "Söker…",
     "viewStories": "Visa stories",
     "disclaimer": "Endast offentliga profiler. Vi frågar aldrig efter ditt Instagram-lösenord.",
-    "validationFallback": "Ange ett giltigt Instagram-användarnamn eller klistra in en inläggslänk.",
+    "validationFallback": "Ange ett giltigt Instagram-användarnamn eller klistra in en inläggs-/höjdpunktslänk.",
     "loadingVerifying": "Verifierar din förfrågan…",
     "loadingSearching": "Söker efter offentliga stories…",
     "notFoundProfile": "Vi kunde inte hitta den här offentliga profilen.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Sök ett annat användarnamn",
     "tabStories": "Stories",
     "tabPosts": "Inlägg",
+    "tabReels": "Reels",
+    "tabHighlights": "Höjdpunkter",
+    "tabProfilePicture": "Profilbild",
     "noStoriesFound": "Inga offentligt tillgängliga stories hittades för det här användarnamnet.",
     "viewPublicProfileInfo": "Visa offentlig profilinformation",
     "openStory": "Öppna story {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Inga offentliga inlägg hittades för det här användarnamnet.",
     "openPost": "Öppna inlägg {index}",
     "downloadPost": "Ladda ner inlägg {index}",
+    "noPublicReels": "Inga offentliga reels hittades för det här användarnamnet.",
+    "openReel": "Öppna reel {index}",
+    "downloadReel": "Ladda ner reel {index}",
+    "noPublicHighlights": "Inga offentliga höjdpunkter hittades för det här användarnamnet.",
+    "openHighlight": "Öppna höjdpunkt {title}",
+    "highlightNotFound": "Vi kunde inte hitta en höjdpunkt på den länken.",
+    "highlightsNetworkError": "Vi kunde inte hämta höjdpunkterna just nu. Försök igen senare.",
+    "noProfilePicture": "Ingen profilbild hittades för det här användarnamnet.",
+    "downloadProfilePicture": "Ladda ner profilbild",
     "postNotFound": "Vi kunde inte hitta ett offentligt inlägg på den länken.",
     "previousItem": "Föregående objekt",
     "nextItem": "Nästa objekt",

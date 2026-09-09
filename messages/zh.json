@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "语言",
-    "close": "关闭语言菜单"
+    "close": "关闭语言菜单",
+    "search": "搜索语言…",
+    "noResults": "未找到语言"
   },
   "Breadcrumbs": {
     "home": "首页"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}：Instagram 快拍查看器 | 匿名查看快拍",
     "metaDescription": "输入公开的 Instagram 用户名，无需登录 Instagram 即可查看公开可用的快拍。无需密码，无需账户，无需安装应用程序。",
-    "badge": "仅限公开个人资料 · 无需登录",
     "h1": "Instagram 快拍查看器",
     "sub1": "输入公开的 Instagram 用户名，即可立即查看其公开个人资料信息，无需登录。",
-    "sub2": "无论哪个账户，快拍内容本身都无法在不登录 Instagram 的情况下获取。请在下方常见问题中了解原因。",
     "trendingCaption": "试试 Instagram 上一些关注度最高的账户",
     "howItWorksTitle": "工作原理",
     "step1Title": "输入用户名",
@@ -56,14 +56,6 @@
     "step3Text": "在简洁的全屏查看器中即时浏览。",
     "whyTitle": "为什么使用我们的 Instagram 快拍查看器？",
     "whyText": "一种快速、诚实的方式来查看公开个人资料：不多不少，毫无隐瞒。",
-    "feature1": "无需登录 Instagram",
-    "feature2": "简单的用户名搜索",
-    "feature3": "快速的快拍查询",
-    "feature4": "移动端友好的查看器",
-    "feature5": "仅限公开个人资料",
-    "feature6": "无需账户注册",
-    "aboutTitle": "关于 {siteName}",
-    "aboutText": "{siteName} 是一款单一用途的工具：输入公开的 Instagram 用户名，无需自己登录 Instagram，即可查看其公开个人资料信息（照片、姓名、简介、粉丝数）。",
     "whatWeDoTitle": "我们做什么",
     "doItem1": "以任何匿名浏览器相同的方式获取公开个人资料页面",
     "doItem2": "显示 Instagram 在该页面上包含的任何公开信息",
@@ -87,7 +79,6 @@
     "faq5Q": "此工具如何获取个人资料信息？",
     "faq5A": "通过以任何匿名、未登录访问者的浏览器相同的方式获取账户的公开 Instagram 个人资料页面，然后读取 Instagram 在该页面上包含的公开信息：无需登录，无私有 API，不绕过任何访问控制。",
     "finalCtaTitle": "准备好查询个人资料了吗？",
-    "finalCtaText": "输入公开的 Instagram 用户名，无需登录即可立即查看其个人资料。",
     "finalCtaButton": "查看快拍"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "对这些条款有疑问？请发送邮件至 <email>email</email> 或访问我们的<contactLink>联系页面</contactLink>。"
   },
   "StoryTool": {
-    "searchAriaLabel": "通过用户名或帖子链接搜索 Instagram",
-    "inputPlaceholder": "用户名或粘贴帖子/短视频链接",
-    "inputAriaLabel": "Instagram 用户名或帖子网址",
+    "searchAriaLabel": "通过用户名或帖子/短视频/精选链接搜索 Instagram",
+    "inputPlaceholder": "用户名或粘贴帖子/短视频/精选链接",
+    "inputAriaLabel": "Instagram 用户名，或帖子、短视频、精选网址",
     "searching": "搜索中…",
     "viewStories": "查看快拍",
     "disclaimer": "仅限公开个人资料。我们绝不会索取您的 Instagram 密码。",
-    "validationFallback": "请输入有效的 Instagram 用户名或粘贴帖子链接。",
+    "validationFallback": "请输入有效的 Instagram 用户名或粘贴帖子/精选链接。",
     "loadingVerifying": "正在验证您的请求…",
     "loadingSearching": "正在搜索公开快拍…",
     "notFoundProfile": "我们找不到这个公开个人资料。",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "搜索其他用户名",
     "tabStories": "快拍",
     "tabPosts": "帖子",
+    "tabReels": "短视频",
+    "tabHighlights": "精选",
+    "tabProfilePicture": "头像",
     "noStoriesFound": "未找到此用户名的公开快拍。",
     "viewPublicProfileInfo": "查看公开个人资料信息",
     "openStory": "打开快拍 {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "未找到此用户名的公开帖子。",
     "openPost": "打开帖子 {index}",
     "downloadPost": "下载帖子 {index}",
+    "noPublicReels": "未找到此用户名的公开短视频。",
+    "openReel": "打开短视频 {index}",
+    "downloadReel": "下载短视频 {index}",
+    "noPublicHighlights": "未找到此用户名的公开精选。",
+    "openHighlight": "打开精选 {title}",
+    "highlightNotFound": "我们在该链接找不到精选。",
+    "highlightsNetworkError": "目前无法获取精选，请稍后再试。",
+    "noProfilePicture": "未找到此用户名的头像。",
+    "downloadProfilePicture": "下载头像",
     "postNotFound": "我们在该链接找不到公开帖子。",
     "previousItem": "上一项",
     "nextItem": "下一项",

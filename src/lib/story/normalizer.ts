@@ -46,6 +46,10 @@ export function normalizeProfile(raw: RawProfileData, username: string): Profile
   return {
     username,
     profileImage: raw.profilePicUrl ?? raw.ogImage ?? null,
+    // The public profile page never exposes a distinct HD variant — same
+    // image as `profileImage`, unlike HikerApiStoryProvider's separate
+    // `hd_profile_pic_url_info` field.
+    profileImageHd: raw.profilePicUrl ?? raw.ogImage ?? null,
     fullName: raw.fullName ?? extractNameFromOgTitle(raw.ogTitle),
     bio: raw.biography,
     followers: raw.followerCount ?? ogCounts.followers,

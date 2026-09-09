@@ -31,7 +31,7 @@ export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "HomePage" });
 
-  const homeFaqs = [1, 2, 3, 4, 5].map((n) => ({
+  const homeFaqs = Array.from({ length: 12 }, (_, i) => i + 1).map((n) => ({
     question: t(`faq${n}Q` as "faq1Q"),
     answer: t(`faq${n}A` as "faq1A"),
   }));
@@ -41,7 +41,14 @@ export default async function HomePage({ params }: Props) {
     text: t(`step${n}Text` as "step1Text"),
   }));
 
-  const features = [1, 2, 3, 4, 5, 6].map((n) => t(`feature${n}` as "feature1"));
+  const featureCards = Array.from({ length: 10 }, (_, i) => i + 1).map((n) => ({
+    title: t(`featureCard${n}Title` as "featureCard1Title"),
+    text: t(`featureCard${n}Text` as "featureCard1Text"),
+  }));
+  const whyItems = Array.from({ length: 8 }, (_, i) => i + 1).map((n) => ({
+    title: t(`whyItem${n}Title` as "whyItem1Title"),
+    text: t(`whyItem${n}Text` as "whyItem1Text"),
+  }));
   const doItems = [1, 2, 3].map((n) => t(`doItem${n}` as "doItem1"));
   const dontItems = [1, 2, 3].map((n) => t(`dontItem${n}` as "dontItem1"));
 
@@ -67,17 +74,22 @@ export default async function HomePage({ params }: Props) {
           />
 
           <div className="mt-4 text-center lg:mt-0 lg:flex-1 lg:text-left">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
-              {t("badge")}
-            </span>
+            <p className="text-sm font-semibold uppercase tracking-wide text-accent">
+              {t("heroEyebrow")}
+            </p>
+            <div className="mt-3 flex flex-wrap justify-center gap-2 lg:justify-start">
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
+                {t("badgeFree")}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-surface px-3 py-1 text-xs font-medium text-foreground/60">
+                {t("badgeNoRegistration")}
+              </span>
+            </div>
             <h1 className="mt-5 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl md:text-6xl">
               {t("h1")}
             </h1>
             <p className="mt-5 text-lg text-foreground/70 sm:text-xl">
               {t("sub1")}
-            </p>
-            <p className="mx-auto mt-2 max-w-md text-sm text-foreground/50 lg:mx-0">
-              {t("sub2")}
             </p>
 
             <div className="mx-auto mt-8 max-w-xl text-left lg:mx-0">
@@ -98,10 +110,35 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      <section className="bg-surface-muted py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              {t("featuresTitle")}
+            </h2>
+            <p className="mt-3 text-foreground/65">{t("featuresIntro")}</p>
+          </div>
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {featureCards.map((item) => (
+              <div key={item.title} className="rounded-2xl border border-border bg-surface p-5">
+                <h3 className="font-semibold text-foreground">{item.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/65">{item.text}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-foreground/50">
+            {t("featuresClosing")}
+          </p>
+        </div>
+      </section>
+
       <section id="how-it-works" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
-        <h2 className="text-center text-2xl font-bold tracking-tight sm:text-3xl">
-          {t("howItWorksTitle")}
-        </h2>
+        <div className="mx-auto max-w-2xl text-center">
+          <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+            {t("howItWorksTitle")}
+          </h2>
+          <p className="mt-3 text-foreground/65">{t("howItWorksIntro")}</p>
+        </div>
         <div className="mt-10 grid gap-6 sm:grid-cols-3">
           {howItWorksSteps.map((item, i) => (
             <div
@@ -116,6 +153,9 @@ export default async function HomePage({ params }: Props) {
             </div>
           ))}
         </div>
+        <p className="mx-auto mt-8 max-w-2xl text-center text-sm leading-relaxed text-foreground/60">
+          {t("howItWorksCta")}
+        </p>
       </section>
 
       <section className="bg-surface-muted py-16">
@@ -137,41 +177,53 @@ export default async function HomePage({ params }: Props) {
             </div>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {features.map((item) => (
+            {whyItems.map((item) => (
               <div
-                key={item}
-                className="flex items-center gap-3 rounded-xl border border-border bg-surface p-4"
+                key={item.title}
+                className="rounded-xl border border-border bg-surface p-4"
               >
-                <svg
-                  aria-hidden
-                  className="shrink-0 text-accent"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M20 6 9 17l-5-5" />
-                </svg>
-                <span className="text-sm font-medium text-foreground/80">
-                  {item}
-                </span>
+                <div className="flex items-center gap-2.5">
+                  <svg
+                    aria-hidden
+                    className="shrink-0 text-accent"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="M20 6 9 17l-5-5" />
+                  </svg>
+                  <span className="text-sm font-semibold text-foreground/80">
+                    {item.title}
+                  </span>
+                </div>
+                <p className="mt-2 text-sm leading-relaxed text-foreground/60">{item.text}</p>
               </div>
             ))}
           </div>
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-foreground/50">
+            {t("whyNote")}
+          </p>
         </div>
       </section>
 
       <section id="about" className="mx-auto max-w-5xl px-4 py-16 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            {t("aboutTitle", { siteName: SITE_NAME })}
+            {t("introTitle")}
           </h2>
           <p className="mt-4 leading-relaxed text-foreground/70">
-            {t("aboutText", { siteName: SITE_NAME })}
+            {t("introText1")}
+          </p>
+          <p className="mt-4 leading-relaxed text-foreground/70">
+            {t("introText2")}
+          </p>
+          <p className="mt-4 leading-relaxed text-foreground/70">
+            {t("introText3")}
           </p>
         </div>
 
@@ -253,7 +305,10 @@ export default async function HomePage({ params }: Props) {
               {t("finalCtaTitle")}
             </h2>
             <p className="mt-2 text-sm text-foreground/65">
-              {t("finalCtaText")}
+              {t("finalCtaText1")}
+            </p>
+            <p className="mt-1 text-sm text-foreground/65">
+              {t("finalCtaText2")}
             </p>
             <Link
               href="/#search"
@@ -261,6 +316,9 @@ export default async function HomePage({ params }: Props) {
             >
               {t("finalCtaButton")}
             </Link>
+            <p className="mt-3 text-xs text-foreground/45">
+              {t("finalCtaSupportingText")}
+            </p>
           </div>
           <Image
             src="/mascot-pointing.png"

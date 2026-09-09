@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Ngôn ngữ",
-    "close": "Đóng menu ngôn ngữ"
+    "close": "Đóng menu ngôn ngữ",
+    "search": "Tìm ngôn ngữ…",
+    "noResults": "Không tìm thấy ngôn ngữ"
   },
   "Breadcrumbs": {
     "home": "Trang chủ"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Trình xem Story Instagram | Xem Story ẩn danh",
     "metaDescription": "Nhập tên người dùng Instagram công khai để xem các Story công khai mà không cần đăng nhập vào Instagram. Không cần mật khẩu, không cần tài khoản, không cần cài đặt ứng dụng.",
-    "badge": "Chỉ hồ sơ công khai · Không cần đăng nhập",
     "h1": "Trình xem Story Instagram",
     "sub1": "Nhập tên người dùng Instagram công khai để xem ngay thông tin hồ sơ công khai của họ, không cần đăng nhập.",
-    "sub2": "Bản thân nội dung Story không thể lấy được nếu không đăng nhập Instagram, trên bất kỳ tài khoản nào. Xem lý do tại phần câu hỏi thường gặp bên dưới.",
     "trendingCaption": "Hãy thử với một số tài khoản được theo dõi nhiều nhất trên Instagram",
     "howItWorksTitle": "Cách hoạt động",
     "step1Title": "Nhập tên người dùng",
@@ -56,14 +56,6 @@
     "step3Text": "Duyệt qua chúng ngay lập tức trong trình xem toàn màn hình gọn gàng.",
     "whyTitle": "Tại sao nên sử dụng Trình xem Story Instagram của chúng tôi?",
     "whyText": "Một cách nhanh chóng, trung thực để kiểm tra một hồ sơ công khai: không gì hơn, không gì ẩn giấu.",
-    "feature1": "Không cần đăng nhập Instagram",
-    "feature2": "Tìm kiếm tên người dùng đơn giản",
-    "feature3": "Tra cứu Story nhanh chóng",
-    "feature4": "Trình xem thân thiện với thiết bị di động",
-    "feature5": "Chỉ hồ sơ công khai",
-    "feature6": "Không cần đăng ký tài khoản",
-    "aboutTitle": "Giới thiệu về {siteName}",
-    "aboutText": "{siteName} là công cụ với một mục đích duy nhất: nhập tên người dùng Instagram công khai và xem thông tin hồ sơ công khai của họ (ảnh, tên, tiểu sử, số lượng người theo dõi) mà không cần tự đăng nhập vào Instagram.",
     "whatWeDoTitle": "Những gì chúng tôi làm",
     "doItem1": "Lấy trang hồ sơ công khai theo cách mà bất kỳ trình duyệt ẩn danh nào cũng làm",
     "doItem2": "Hiển thị bất kỳ thông tin công khai nào mà Instagram bao gồm trên trang đó",
@@ -87,7 +79,6 @@
     "faq5Q": "Công cụ này lấy thông tin hồ sơ như thế nào?",
     "faq5A": "Bằng cách lấy trang hồ sơ công khai Instagram của một tài khoản theo cách mà trình duyệt của bất kỳ khách truy cập ẩn danh, chưa đăng nhập nào cũng làm, sau đó đọc thông tin công khai mà Instagram bao gồm trên trang đó: không đăng nhập, không có API riêng tư, không vượt qua bất kỳ kiểm soát truy cập nào.",
     "finalCtaTitle": "Sẵn sàng tra cứu một hồ sơ?",
-    "finalCtaText": "Nhập tên người dùng Instagram công khai và xem ngay hồ sơ của họ, không cần đăng nhập.",
     "finalCtaButton": "Xem Story"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Có câu hỏi về các điều khoản này? Viết cho <email>email</email> hoặc truy cập <contactLink>trang Liên hệ</contactLink> của chúng tôi."
   },
   "StoryTool": {
-    "searchAriaLabel": "Tìm kiếm trên Instagram theo tên người dùng hoặc liên kết bài viết",
-    "inputPlaceholder": "Tên người dùng hoặc dán liên kết bài viết/reel",
-    "inputAriaLabel": "Tên người dùng Instagram hoặc URL bài viết",
+    "searchAriaLabel": "Tìm kiếm trên Instagram theo tên người dùng hoặc liên kết bài viết/reel/tin nổi bật",
+    "inputPlaceholder": "Tên người dùng hoặc dán liên kết bài viết/reel/tin nổi bật",
+    "inputAriaLabel": "Tên người dùng Instagram, hoặc URL bài viết, reel hay tin nổi bật",
     "searching": "Đang tìm kiếm…",
     "viewStories": "Xem Story",
     "disclaimer": "Chỉ hồ sơ công khai. Chúng tôi không bao giờ hỏi mật khẩu Instagram của bạn.",
-    "validationFallback": "Nhập tên người dùng Instagram hợp lệ hoặc dán liên kết bài viết.",
+    "validationFallback": "Nhập tên người dùng Instagram hợp lệ hoặc dán liên kết bài viết/tin nổi bật.",
     "loadingVerifying": "Đang xác minh yêu cầu của bạn…",
     "loadingSearching": "Đang tìm kiếm Story công khai…",
     "notFoundProfile": "Chúng tôi không thể tìm thấy hồ sơ công khai này.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Tìm tên người dùng khác",
     "tabStories": "Story",
     "tabPosts": "Bài viết",
+    "tabReels": "Reels",
+    "tabHighlights": "Tin nổi bật",
+    "tabProfilePicture": "Ảnh đại diện",
     "noStoriesFound": "Không tìm thấy Story công khai nào cho tên người dùng này.",
     "viewPublicProfileInfo": "Xem thông tin hồ sơ công khai",
     "openStory": "Mở Story {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Không tìm thấy bài viết công khai nào cho tên người dùng này.",
     "openPost": "Mở bài viết {index}",
     "downloadPost": "Tải xuống bài viết {index}",
+    "noPublicReels": "Không tìm thấy reel công khai nào cho tên người dùng này.",
+    "openReel": "Mở reel {index}",
+    "downloadReel": "Tải xuống reel {index}",
+    "noPublicHighlights": "Không tìm thấy tin nổi bật công khai nào cho tên người dùng này.",
+    "openHighlight": "Mở tin nổi bật {title}",
+    "highlightNotFound": "Chúng tôi không thể tìm thấy tin nổi bật tại liên kết đó.",
+    "highlightsNetworkError": "Chúng tôi không thể lấy tin nổi bật lúc này. Vui lòng thử lại sau.",
+    "noProfilePicture": "Không tìm thấy ảnh đại diện cho tên người dùng này.",
+    "downloadProfilePicture": "Tải xuống ảnh đại diện",
     "postNotFound": "Chúng tôi không thể tìm thấy bài viết công khai tại liên kết đó.",
     "previousItem": "Mục trước",
     "nextItem": "Mục tiếp theo",

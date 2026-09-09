@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "言語",
-    "close": "言語メニューを閉じる"
+    "close": "言語メニューを閉じる",
+    "search": "言語を検索…",
+    "noResults": "言語が見つかりません"
   },
   "Breadcrumbs": {
     "home": "ホーム"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Instagramストーリービューアー | 匿名でストーリーを閲覧",
     "metaDescription": "Instagramにログインせずに公開されているストーリーを閲覧するには、公開のInstagramユーザー名を入力してください。パスワード不要、アカウント不要、アプリのインストール不要。",
-    "badge": "公開プロフィールのみ · ログイン不要",
     "h1": "Instagramストーリービューアー",
     "sub1": "公開のInstagramユーザー名を入力すると、ログインせずに公開プロフィール情報をすぐに確認できます。",
-    "sub2": "ストーリーコンテンツ自体は、どのアカウントでもInstagramにログインしないと取得できません。理由は以下のFAQをご覧ください。",
     "trendingCaption": "Instagramで最もフォロワーの多いアカウントの一部で試してみてください",
     "howItWorksTitle": "使い方",
     "step1Title": "ユーザー名を入力",
@@ -56,14 +56,6 @@
     "step3Text": "すっきりとしたフルスクリーンビューアーですぐに閲覧できます。",
     "whyTitle": "なぜ私たちのInstagramストーリービューアーを使うのか?",
     "whyText": "公開プロフィールを確認する迅速で正直な方法：それ以上でもそれ以下でもなく、隠されたものは何もありません。",
-    "feature1": "Instagramへのログイン不要",
-    "feature2": "シンプルなユーザー名検索",
-    "feature3": "高速なストーリー検索",
-    "feature4": "モバイル対応ビューアー",
-    "feature5": "公開プロフィールのみ",
-    "feature6": "アカウント登録不要",
-    "aboutTitle": "{siteName}について",
-    "aboutText": "{siteName}は単一目的のツールです：公開のInstagramユーザー名を入力すると、自分でInstagramにログインすることなく、その公開プロフィール情報（写真、名前、自己紹介、フォロワー数）を確認できます。",
     "whatWeDoTitle": "私たちが行うこと",
     "doItem1": "匿名のブラウザと同じ方法で公開プロフィールページを取得します",
     "doItem2": "Instagramがそのページに含めている公開情報を表示します",
@@ -87,7 +79,6 @@
     "faq5Q": "このツールはどのようにプロフィール情報を取得しますか?",
     "faq5A": "匿名のログアウトした訪問者のブラウザと同じ方法でアカウントの公開Instagramプロフィールページを取得し、Instagramがそのページに含める公開情報を読み取ります：ログインなし、非公開APIなし、アクセス制御の回避なし。",
     "finalCtaTitle": "プロフィールを調べる準備はできましたか?",
-    "finalCtaText": "公開のInstagramユーザー名を入力すると、ログイン不要でそのプロフィールをすぐに確認できます。",
     "finalCtaButton": "ストーリーを見る"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "この規約についてご質問がありますか? <email>email</email>までご連絡いただくか、<contactLink>お問い合わせページ</contactLink>をご覧ください。"
   },
   "StoryTool": {
-    "searchAriaLabel": "ユーザー名または投稿リンクでInstagramを検索",
-    "inputPlaceholder": "ユーザー名または投稿/リールのリンクを貼り付け",
-    "inputAriaLabel": "Instagramのユーザー名または投稿URL",
+    "searchAriaLabel": "ユーザー名、投稿、リール、またはハイライトのリンクでInstagramを検索",
+    "inputPlaceholder": "ユーザー名または投稿/リール/ハイライトのリンクを貼り付け",
+    "inputAriaLabel": "Instagramのユーザー名、投稿、リール、またはハイライトのURL",
     "searching": "検索中…",
     "viewStories": "ストーリーを見る",
     "disclaimer": "公開プロフィールのみ。Instagramのパスワードを尋ねることは一切ありません。",
-    "validationFallback": "有効なInstagramのユーザー名を入力するか、投稿リンクを貼り付けてください。",
+    "validationFallback": "有効なInstagramのユーザー名を入力するか、投稿/ハイライトのリンクを貼り付けてください。",
     "loadingVerifying": "リクエストを確認しています…",
     "loadingSearching": "公開ストーリーを検索しています…",
     "notFoundProfile": "この公開プロフィールが見つかりませんでした。",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "別のユーザー名を検索",
     "tabStories": "ストーリー",
     "tabPosts": "投稿",
+    "tabReels": "リール",
+    "tabHighlights": "ハイライト",
+    "tabProfilePicture": "プロフィール写真",
     "noStoriesFound": "このユーザー名の公開されているストーリーは見つかりませんでした。",
     "viewPublicProfileInfo": "公開プロフィール情報を見る",
     "openStory": "ストーリー{index}を開く",
@@ -223,6 +217,15 @@
     "noPublicPosts": "このユーザー名の公開投稿は見つかりませんでした。",
     "openPost": "投稿{index}を開く",
     "downloadPost": "投稿{index}をダウンロード",
+    "noPublicReels": "このユーザー名の公開リールは見つかりませんでした。",
+    "openReel": "リール{index}を開く",
+    "downloadReel": "リール{index}をダウンロード",
+    "noPublicHighlights": "このユーザー名の公開ハイライトは見つかりませんでした。",
+    "openHighlight": "ハイライト{title}を開く",
+    "highlightNotFound": "そのリンクにハイライトが見つかりませんでした。",
+    "highlightsNetworkError": "現在ハイライトを取得できませんでした。しばらくしてからもう一度お試しください。",
+    "noProfilePicture": "このユーザー名のプロフィール写真は見つかりませんでした。",
+    "downloadProfilePicture": "プロフィール写真をダウンロード",
     "postNotFound": "そのリンクに公開投稿が見つかりませんでした。",
     "previousItem": "前の項目",
     "nextItem": "次の項目",

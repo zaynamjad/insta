@@ -8,15 +8,18 @@ import { DownloadButton } from "./DownloadButton";
 import { PostViewerModal } from "./PostViewerModal";
 
 /**
- * Self-contained Posts tab: fetches lazily on mount (only when the tab is
- * actually rendered, since a posts fetch is a separate, separately billed
+ * Self-contained Posts/Reels tab: fetches lazily on mount (only when the
+ * tab is actually rendered, since it's a separate, separately billed
  * HikerAPI call the user might never ask for) and owns its own
- * loading/error/grid state.
+ * loading/error/grid state. `filter="reels"` shows only Reels/clips from
+ * the same fetched set; `filter="posts"` (default) excludes them — both
+ * variants share one request (short-lived server cache keeps a same-page
+ * tab switch from re-billing HikerAPI).
  */
-export function PostsGrid({ username }: { username: string }) {
+export function PostsGrid({ username, filter = "posts" }: { username: string; filter?: "posts" | "reels" }) {
   const t = useTranslations("StoryTool");
   const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
-  const [posts, setPosts] = useState<Post[]>([]);
+  const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [errorKey, setErrorKey] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
 
@@ -35,10 +38,10 @@ export function PostsGrid({ username }: { username: string }) {
         if (cancelled) return;
 
         if (data.status === "ok") {
-          setPosts(data.posts);
+          setAllPosts(data.posts);
           setState("loaded");
         } else if (data.status === "not_found" || data.status === "private") {
-          setPosts([]);
+          setAllPosts([]);
           setState("loaded");
         } else {
           setErrorKey(errorMessageKey(data.code));
@@ -58,6 +61,8 @@ export function PostsGrid({ username }: { username: string }) {
     };
   }, [username]);
 
+  const posts = allPosts.filter((p) => (filter === "reels" ? p.isReel : !p.isReel));
+
   if (state === "loading") {
     return (
       <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
@@ -73,7 +78,7 @@ export function PostsGrid({ username }: { username: string }) {
   }
 
   if (posts.length === 0) {
-    return <p className="mt-5 text-sm text-foreground/60">{t("noPublicPosts")}</p>;
+    return <p className="mt-5 text-sm text-foreground/60">{t(filter === "reels" ? "noPublicReels" : "noPublicPosts")}</p>;
   }
 
   return (
@@ -89,7 +94,7 @@ export function PostsGrid({ username }: { username: string }) {
               <button
                 onClick={() => setViewerIndex(index)}
                 className="absolute inset-0 h-full w-full"
-                aria-label={t("openPost", { index: index + 1 })}
+                aria-label={t(filter === "reels" ? "openReel" : "openPost", { index: index + 1 })}
               >
                 {cover?.thumbnailUrl && (
                   // eslint-disable-next-line @next/next/no-img-element
@@ -113,7 +118,7 @@ export function PostsGrid({ username }: { username: string }) {
               {cover && (
                 <DownloadButton
                   mediaUrl={cover.mediaUrl}
-                  label={t("downloadPost", { index: index + 1 })}
+                  label={t(filter === "reels" ? "downloadReel" : "downloadPost", { index: index + 1 })}
                   className="absolute bottom-1.5 right-1.5 rounded-full bg-black/50 p-1.5 text-white opacity-0 transition-opacity hover:bg-black/70 group-hover:opacity-100"
                 />
               )}

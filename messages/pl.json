@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Język",
-    "close": "Zamknij menu języka"
+    "close": "Zamknij menu języka",
+    "search": "Szukaj języka…",
+    "noResults": "Nie znaleziono języków"
   },
   "Breadcrumbs": {
     "home": "Strona główna"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Przeglądarka relacji Instagram | Oglądaj relacje anonimowo",
     "metaDescription": "Wpisz publiczną nazwę użytkownika Instagram, aby zobaczyć publicznie dostępne relacje bez logowania się do Instagrama. Bez hasła, bez konta, bez instalowania aplikacji.",
-    "badge": "Tylko profile publiczne · Bez logowania",
     "h1": "Przeglądarka relacji Instagram",
     "sub1": "Wpisz publiczną nazwę użytkownika Instagram, aby natychmiast zobaczyć informacje o jego publicznym profilu, bez konieczności logowania.",
-    "sub2": "Samej treści relacji nie można pobrać bez zalogowania się do Instagrama, na żadnym koncie. Dowiedz się dlaczego w sekcji FAQ poniżej.",
     "trendingCaption": "Wypróbuj z jednym z najczęściej obserwowanych kont na Instagramie",
     "howItWorksTitle": "Jak to działa",
     "step1Title": "Wpisz nazwę użytkownika",
@@ -56,14 +56,6 @@
     "step3Text": "Przeglądaj je natychmiast w czytelnej przeglądarce pełnoekranowej.",
     "whyTitle": "Dlaczego warto korzystać z naszej przeglądarki relacji Instagram?",
     "whyText": "Szybki, uczciwy sposób na sprawdzenie publicznego profilu: nic więcej, nic ukrytego.",
-    "feature1": "Nie wymaga logowania do Instagrama",
-    "feature2": "Proste wyszukiwanie po nazwie użytkownika",
-    "feature3": "Szybkie wyszukiwanie relacji",
-    "feature4": "Przeglądarka przyjazna urządzeniom mobilnym",
-    "feature5": "Tylko profile publiczne",
-    "feature6": "Bez rejestracji konta",
-    "aboutTitle": "O {siteName}",
-    "aboutText": "{siteName} to narzędzie o jednym celu: wpisz publiczną nazwę użytkownika Instagram i zobacz informacje o jego publicznym profilu (zdjęcie, imię, opis, liczbę obserwujących) bez samodzielnego logowania się do Instagrama.",
     "whatWeDoTitle": "Co robimy",
     "doItem1": "Pobieramy publiczną stronę profilu w taki sam sposób, jak zrobiłaby to każda anonimowa przeglądarka",
     "doItem2": "Wyświetlamy wszelkie publiczne informacje, które Instagram zamieszcza na tej stronie",
@@ -87,7 +79,6 @@
     "faq5Q": "Jak to narzędzie pobiera informacje o profilu?",
     "faq5A": "Pobierając publiczną stronę profilu Instagram konta w taki sam sposób, jak zrobiłaby to przeglądarka dowolnego anonimowego, wylogowanego odwiedzającego, a następnie odczytując publiczne informacje, które Instagram zamieszcza na tej stronie: bez logowania, bez prywatnego API, bez omijania jakiejkolwiek kontroli dostępu.",
     "finalCtaTitle": "Gotowy, aby sprawdzić profil?",
-    "finalCtaText": "Wpisz publiczną nazwę użytkownika Instagram i natychmiast zobacz jego profil, bez konieczności logowania.",
     "finalCtaButton": "Zobacz relacje"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Masz pytania dotyczące tego regulaminu? Napisz na <email>email</email> lub odwiedź naszą <contactLink>stronę kontaktową</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Wyszukaj na Instagramie według nazwy użytkownika lub linku do posta",
-    "inputPlaceholder": "Nazwa użytkownika lub wklej link do posta/rolki",
-    "inputAriaLabel": "Nazwa użytkownika Instagram lub adres URL posta",
+    "searchAriaLabel": "Wyszukaj na Instagramie według nazwy użytkownika lub linku do posta, rolki albo relacji wyróżnionej",
+    "inputPlaceholder": "Nazwa użytkownika lub wklej link do posta/rolki/relacji wyróżnionej",
+    "inputAriaLabel": "Nazwa użytkownika Instagram lub adres URL posta, rolki albo relacji wyróżnionej",
     "searching": "Wyszukiwanie…",
     "viewStories": "Zobacz relacje",
     "disclaimer": "Tylko profile publiczne. Nigdy nie prosimy o Twoje hasło do Instagrama.",
-    "validationFallback": "Wpisz prawidłową nazwę użytkownika Instagram lub wklej link do posta.",
+    "validationFallback": "Wpisz prawidłową nazwę użytkownika Instagram lub wklej link do posta/relacji wyróżnionej.",
     "loadingVerifying": "Weryfikowanie Twojego żądania…",
     "loadingSearching": "Wyszukiwanie publicznych relacji…",
     "notFoundProfile": "Nie udało nam się znaleźć tego publicznego profilu.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Wyszukaj inną nazwę użytkownika",
     "tabStories": "Relacje",
     "tabPosts": "Posty",
+    "tabReels": "Rolki",
+    "tabHighlights": "Wyróżnione",
+    "tabProfilePicture": "Zdjęcie profilowe",
     "noStoriesFound": "Nie znaleziono publicznie dostępnych relacji dla tej nazwy użytkownika.",
     "viewPublicProfileInfo": "Zobacz informacje o profilu publicznym",
     "openStory": "Otwórz relację {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Nie znaleziono publicznych postów dla tej nazwy użytkownika.",
     "openPost": "Otwórz post {index}",
     "downloadPost": "Pobierz post {index}",
+    "noPublicReels": "Nie znaleziono publicznych rolek dla tej nazwy użytkownika.",
+    "openReel": "Otwórz rolkę {index}",
+    "downloadReel": "Pobierz rolkę {index}",
+    "noPublicHighlights": "Nie znaleziono publicznych relacji wyróżnionych dla tej nazwy użytkownika.",
+    "openHighlight": "Otwórz relację wyróżnioną {title}",
+    "highlightNotFound": "Nie udało nam się znaleźć relacji wyróżnionej pod tym linkiem.",
+    "highlightsNetworkError": "Nie udało nam się teraz pobrać relacji wyróżnionych. Spróbuj ponownie później.",
+    "noProfilePicture": "Nie znaleziono zdjęcia profilowego dla tej nazwy użytkownika.",
+    "downloadProfilePicture": "Pobierz zdjęcie profilowe",
     "postNotFound": "Nie udało nam się znaleźć publicznego posta pod tym linkiem.",
     "previousItem": "Poprzedni element",
     "nextItem": "Następny element",

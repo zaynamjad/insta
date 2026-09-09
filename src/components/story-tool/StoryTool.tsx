@@ -5,19 +5,23 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { validateUsername } from "@/lib/story/validation";
-import { extractPostShortcode } from "@/lib/story/post-url";
+import { extractPostShortcode, extractHighlightUrl } from "@/lib/story/post-url";
 import { errorMessageKey } from "@/lib/story/error-messages";
 import type { StoryLookupResult } from "@/types/story";
 import type { PostLookupResult } from "@/types/post";
+import type { HighlightItemsLookupResult } from "@/types/highlight";
 import type { Profile } from "@/types/profile";
 import { StoryViewerModal } from "./StoryViewerModal";
 import { PostsGrid } from "./PostsGrid";
+import { HighlightsGrid } from "./HighlightsGrid";
+import { ProfilePictureTab } from "./ProfilePictureTab";
 import { DownloadButton } from "./DownloadButton";
 import { Turnstile, type TurnstileHandle } from "./Turnstile";
 import { SinglePostResult } from "./SinglePostResult";
+import { SingleHighlightResult } from "./SingleHighlightResult";
 
 type Status = "idle" | "loading" | "result";
-type Tab = "stories" | "posts";
+type Tab = "stories" | "posts" | "reels" | "highlights" | "profile";
 type LoadingPhase = "verifying" | "searching";
 
 const TURNSTILE_ENABLED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
@@ -44,17 +48,29 @@ export function StoryTool({
   const [loadingPhase, setLoadingPhase] = useState<LoadingPhase>("verifying");
   const [result, setResult] = useState<StoryLookupResult | null>(null);
   const [postResult, setPostResult] = useState<PostLookupResult | null>(null);
+  const [highlightResult, setHighlightResult] = useState<HighlightItemsLookupResult | null>(null);
   const [formError, setFormError] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab>("stories");
   const turnstileRef = useRef<TurnstileHandle>(null);
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  // Scrolls the results section into view as soon as a search starts
+  // loading, rather than leaving the page at whatever scroll position it
+  // was at (or letting it jump to the very top) once results render in.
+  useEffect(() => {
+    if (status === "loading") {
+      resultsRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [status]);
 
   const runSearch = useCallback(async (searchInput: string) => {
     setFormError(null);
 
-    const shortcode = extractPostShortcode(searchInput);
+    const highlightUrl = extractHighlightUrl(searchInput);
+    const shortcode = highlightUrl ? null : extractPostShortcode(searchInput);
 
-    if (!shortcode) {
+    if (!highlightUrl && !shortcode) {
       const { valid } = validateUsername(searchInput);
       if (!valid) {
         setFormError(t("validationFallback"));
@@ -70,13 +86,23 @@ export function StoryTool({
     setLoadingPhase("verifying");
     setResult(null);
     setPostResult(null);
+    setHighlightResult(null);
     setTab("stories");
 
     try {
       const turnstileToken = TURNSTILE_ENABLED ? await turnstileRef.current?.getToken() : null;
       setLoadingPhase("searching");
 
-      if (shortcode) {
+      if (highlightUrl) {
+        const res = await fetch("/api/highlight-viewer/", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ url: highlightUrl, turnstileToken }),
+        });
+        const data: HighlightItemsLookupResult = await res.json();
+        await waitOutMinLoading(startedAt);
+        setHighlightResult(data);
+      } else if (shortcode) {
         const res = await fetch("/api/post-viewer/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -103,7 +129,9 @@ export function StoryTool({
         code: "UPSTREAM_ERROR" as const,
         message: "",
       };
-      if (shortcode) {
+      if (highlightUrl) {
+        setHighlightResult(errorResult);
+      } else if (shortcode) {
         setPostResult(errorResult);
       } else {
         setResult(errorResult);
@@ -133,6 +161,7 @@ export function StoryTool({
     setStatus("idle");
     setResult(null);
     setPostResult(null);
+    setHighlightResult(null);
     setInput("");
     setFormError(null);
     setTab("stories");
@@ -188,7 +217,7 @@ export function StoryTool({
 
       <p className="mt-3 text-xs text-foreground/50">{t("disclaimer")}</p>
 
-      <div className="mt-6">
+      <div ref={resultsRef} className="mt-6 scroll-mt-24">
         {status === "loading" && <LoadingState phase={loadingPhase} />}
         {status === "result" && result && (
           <ResultState
@@ -202,6 +231,9 @@ export function StoryTool({
         )}
         {status === "result" && postResult && (
           <SinglePostResult result={postResult} onReset={reset} />
+        )}
+        {status === "result" && highlightResult && (
+          <SingleHighlightResult result={highlightResult} onReset={reset} />
         )}
       </div>
 
@@ -315,12 +347,21 @@ function ResultState({
 
       <ProfileHeader profile={profile} />
 
-      <div className="mt-5 flex gap-2 border-b border-border">
+      <div className="mt-5 flex gap-2 overflow-x-auto border-b border-border">
         <TabButton active={tab === "stories"} onClick={() => onTabChange("stories")}>
           {t("tabStories")} {result.status === "ok" ? `(${profile.stories.length})` : ""}
         </TabButton>
         <TabButton active={tab === "posts"} onClick={() => onTabChange("posts")}>
           {t("tabPosts")}
+        </TabButton>
+        <TabButton active={tab === "reels"} onClick={() => onTabChange("reels")}>
+          {t("tabReels")}
+        </TabButton>
+        <TabButton active={tab === "highlights"} onClick={() => onTabChange("highlights")}>
+          {t("tabHighlights")}
+        </TabButton>
+        <TabButton active={tab === "profile"} onClick={() => onTabChange("profile")}>
+          {t("tabProfilePicture")}
         </TabButton>
       </div>
 
@@ -374,8 +415,14 @@ function ResultState({
             ))}
           </div>
         )
+      ) : tab === "posts" ? (
+        <PostsGrid username={profile.username} filter="posts" />
+      ) : tab === "reels" ? (
+        <PostsGrid username={profile.username} filter="reels" />
+      ) : tab === "highlights" ? (
+        <HighlightsGrid username={profile.username} />
       ) : (
-        <PostsGrid username={profile.username} />
+        <ProfilePictureTab profile={profile} />
       )}
     </div>
   );

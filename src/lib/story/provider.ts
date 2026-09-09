@@ -1,5 +1,7 @@
 import type { Profile } from "@/types/profile";
 import type { Post } from "@/types/post";
+import type { Story } from "@/types/story";
+import type { HighlightMeta } from "@/types/highlight";
 
 /**
  * Machine-readable reason a lookup failed, surfaced to the client
@@ -72,4 +74,21 @@ export interface StoryProvider {
    * null when no post exists at that shortcode.
    */
   getPostByShortcode?(shortcode: string): Promise<Post | null>;
+
+  /**
+   * Optional: a username's highlight tray (cover + title per highlight,
+   * no story items yet — those are a separate, per-highlight call). Empty
+   * array for a not-found or private profile, matching `getPosts`.
+   */
+  getHighlights?(username: string): Promise<HighlightMeta[]>;
+
+  /**
+   * Optional: the story items inside one highlight, given its public
+   * Instagram URL (e.g. instagram.com/stories/highlights/<id>/) — used
+   * both when a tray item is clicked and when a user pastes a highlight
+   * link directly. Returns null when the highlight doesn't exist.
+   */
+  getHighlightItems?(
+    highlightUrl: string,
+  ): Promise<{ title: string; coverImageUrl: string | null; items: Story[] } | null>;
 }

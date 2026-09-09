@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Sprache",
-    "close": "Sprachmenü schließen"
+    "close": "Sprachmenü schließen",
+    "search": "Sprache suchen…",
+    "noResults": "Keine Sprachen gefunden"
   },
   "Breadcrumbs": {
     "home": "Startseite"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Instagram-Story-Viewer | Stories anonym ansehen",
     "metaDescription": "Gib einen öffentlichen Instagram-Benutzernamen ein, um öffentlich verfügbare Stories anzusehen, ohne dich bei Instagram anzumelden. Kein Passwort, kein Konto, keine App-Installation.",
-    "badge": "Nur öffentliche Profile · Kein Login erforderlich",
     "h1": "Instagram-Story-Viewer",
     "sub1": "Gib einen öffentlichen Instagram-Benutzernamen ein, um sofort dessen öffentliche Profilinformationen zu sehen, ohne dich anmelden zu müssen.",
-    "sub2": "Der Story-Inhalt selbst kann ohne Instagram-Login bei keinem Konto abgerufen werden. Erfahre warum in den FAQ unten.",
     "trendingCaption": "Probier es mit einigen der meistgefolgten Konten auf Instagram",
     "howItWorksTitle": "So funktioniert's",
     "step1Title": "Benutzernamen eingeben",
@@ -56,14 +56,6 @@
     "step3Text": "Durchsuche sie sofort in einem übersichtlichen Vollbild-Viewer.",
     "whyTitle": "Warum unseren Instagram-Story-Viewer nutzen?",
     "whyText": "Eine schnelle, ehrliche Möglichkeit, ein öffentliches Profil zu prüfen: nichts weiter, nichts versteckt.",
-    "feature1": "Kein Instagram-Login erforderlich",
-    "feature2": "Einfache Suche nach Benutzernamen",
-    "feature3": "Schnelle Story-Suche",
-    "feature4": "Mobilfreundlicher Viewer",
-    "feature5": "Nur öffentliche Profile",
-    "feature6": "Keine Kontoregistrierung",
-    "aboutTitle": "Über {siteName}",
-    "aboutText": "{siteName} ist ein Tool mit nur einem Zweck: Gib einen öffentlichen Instagram-Benutzernamen ein und sieh dir dessen öffentliche Profilinformationen (Foto, Name, Bio, Follower-Zahl) an, ohne dich selbst bei Instagram anzumelden.",
     "whatWeDoTitle": "Was wir tun",
     "doItem1": "Eine öffentliche Profilseite genauso abrufen wie jeder anonyme Browser",
     "doItem2": "Alle öffentlichen Informationen anzeigen, die Instagram auf dieser Seite bereitstellt",
@@ -87,7 +79,6 @@
     "faq5Q": "Wie ruft dieses Tool Profilinformationen ab?",
     "faq5A": "Indem es die öffentliche Instagram-Profilseite eines Kontos genauso abruft wie der Browser eines anonymen, abgemeldeten Besuchers, und dann die öffentlichen Informationen liest, die Instagram auf dieser Seite bereitstellt: kein Login, keine private API, keine Umgehung jeglicher Zugriffskontrolle.",
     "finalCtaTitle": "Bereit, ein Profil nachzuschlagen?",
-    "finalCtaText": "Gib einen öffentlichen Instagram-Benutzernamen ein und sieh dir sofort dessen Profil an, ohne Login.",
     "finalCtaButton": "Stories ansehen"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Fragen zu diesen Bedingungen? Schreib an <email>email</email> oder besuche unsere <contactLink>Kontaktseite</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Instagram nach Benutzername oder Beitragslink durchsuchen",
-    "inputPlaceholder": "Benutzername oder Beitrags-/Reel-Link einfügen",
-    "inputAriaLabel": "Instagram-Benutzername oder Beitrags-URL",
+    "searchAriaLabel": "Instagram nach Benutzername, Beitrags-, Reel- oder Highlight-Link durchsuchen",
+    "inputPlaceholder": "Benutzername oder Beitrags-/Reel-/Highlight-Link einfügen",
+    "inputAriaLabel": "Instagram-Benutzername, Beitrags-, Reel- oder Highlight-URL",
     "searching": "Suche läuft…",
     "viewStories": "Stories ansehen",
     "disclaimer": "Nur öffentliche Profile. Wir fragen niemals nach deinem Instagram-Passwort.",
-    "validationFallback": "Gib einen gültigen Instagram-Benutzernamen ein oder füge einen Beitragslink ein.",
+    "validationFallback": "Gib einen gültigen Instagram-Benutzernamen ein oder füge einen Beitrags-/Highlight-Link ein.",
     "loadingVerifying": "Deine Anfrage wird überprüft…",
     "loadingSearching": "Suche nach öffentlichen Stories…",
     "notFoundProfile": "Wir konnten dieses öffentliche Profil nicht finden.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Weiteren Benutzernamen suchen",
     "tabStories": "Stories",
     "tabPosts": "Beiträge",
+    "tabReels": "Reels",
+    "tabHighlights": "Highlights",
+    "tabProfilePicture": "Profilbild",
     "noStoriesFound": "Für diesen Benutzernamen wurden keine öffentlich verfügbaren Stories gefunden.",
     "viewPublicProfileInfo": "Öffentliche Profilinformationen ansehen",
     "openStory": "Story {index} öffnen",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Für diesen Benutzernamen wurden keine öffentlichen Beiträge gefunden.",
     "openPost": "Beitrag {index} öffnen",
     "downloadPost": "Beitrag {index} herunterladen",
+    "noPublicReels": "Für diesen Benutzernamen wurden keine öffentlichen Reels gefunden.",
+    "openReel": "Reel {index} öffnen",
+    "downloadReel": "Reel {index} herunterladen",
+    "noPublicHighlights": "Für diesen Benutzernamen wurden keine öffentlichen Highlights gefunden.",
+    "openHighlight": "Highlight {title} öffnen",
+    "highlightNotFound": "Wir konnten unter diesem Link kein Highlight finden.",
+    "highlightsNetworkError": "Wir konnten die Highlights gerade nicht abrufen. Bitte versuche es später erneut.",
+    "noProfilePicture": "Für diesen Benutzernamen wurde kein Profilbild gefunden.",
+    "downloadProfilePicture": "Profilbild herunterladen",
     "postNotFound": "Wir konnten unter diesem Link keinen öffentlichen Beitrag finden.",
     "previousItem": "Vorheriges Element",
     "nextItem": "Nächstes Element",

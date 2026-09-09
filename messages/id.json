@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Bahasa",
-    "close": "Tutup menu bahasa"
+    "close": "Tutup menu bahasa",
+    "search": "Cari bahasa…",
+    "noResults": "Bahasa tidak ditemukan"
   },
   "Breadcrumbs": {
     "home": "Beranda"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName}: Penampil Story Instagram | Lihat Story Secara Anonim",
     "metaDescription": "Masukkan nama pengguna Instagram publik untuk melihat Story yang tersedia untuk umum tanpa masuk ke Instagram. Tanpa kata sandi, tanpa akun, tanpa instalasi aplikasi.",
-    "badge": "Hanya profil publik · Tidak perlu login",
     "h1": "Penampil Story Instagram",
     "sub1": "Masukkan nama pengguna Instagram publik untuk melihat informasi profil publiknya secara instan, tanpa perlu login.",
-    "sub2": "Konten Story itu sendiri tidak dapat diambil tanpa login Instagram, pada akun mana pun. Lihat alasannya di FAQ di bawah.",
     "trendingCaption": "Coba pada beberapa akun yang paling banyak diikuti di Instagram",
     "howItWorksTitle": "Cara kerja",
     "step1Title": "Masukkan nama pengguna",
@@ -56,14 +56,6 @@
     "step3Text": "Jelajahi secara instan dalam penampil layar penuh yang bersih.",
     "whyTitle": "Mengapa menggunakan Penampil Story Instagram kami?",
     "whyText": "Cara yang cepat dan jujur untuk memeriksa profil publik: tidak lebih, tidak ada yang disembunyikan.",
-    "feature1": "Tidak perlu login Instagram",
-    "feature2": "Pencarian nama pengguna yang sederhana",
-    "feature3": "Pencarian Story yang cepat",
-    "feature4": "Penampil ramah seluler",
-    "feature5": "Hanya profil publik",
-    "feature6": "Tanpa pendaftaran akun",
-    "aboutTitle": "Tentang {siteName}",
-    "aboutText": "{siteName} adalah alat dengan satu tujuan: masukkan nama pengguna Instagram publik dan lihat informasi profil publiknya (foto, nama, bio, jumlah pengikut) tanpa login ke Instagram sendiri.",
     "whatWeDoTitle": "Yang kami lakukan",
     "doItem1": "Mengambil halaman profil publik dengan cara yang sama seperti browser anonim mana pun",
     "doItem2": "Menampilkan informasi publik apa pun yang disertakan Instagram di halaman tersebut",
@@ -87,7 +79,6 @@
     "faq5Q": "Bagaimana alat ini mengambil informasi profil?",
     "faq5A": "Dengan mengambil halaman profil publik Instagram sebuah akun dengan cara yang sama seperti browser pengunjung anonim yang tidak login mana pun, lalu membaca informasi publik yang disertakan Instagram di halaman tersebut: tanpa login, tanpa API privat, tanpa melewati kontrol akses apa pun.",
     "finalCtaTitle": "Siap mencari profil?",
-    "finalCtaText": "Masukkan nama pengguna Instagram publik dan lihat profilnya secara instan, tanpa perlu login.",
     "finalCtaButton": "Lihat Story"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Ada pertanyaan tentang ketentuan ini? Tulis ke <email>email</email> atau kunjungi <contactLink>halaman Kontak</contactLink> kami."
   },
   "StoryTool": {
-    "searchAriaLabel": "Cari di Instagram berdasarkan nama pengguna atau tautan postingan",
-    "inputPlaceholder": "Nama pengguna atau tempel tautan postingan/reel",
-    "inputAriaLabel": "Nama pengguna Instagram atau URL postingan",
+    "searchAriaLabel": "Cari di Instagram berdasarkan nama pengguna atau tautan postingan/reel/sorotan",
+    "inputPlaceholder": "Nama pengguna atau tempel tautan postingan/reel/sorotan",
+    "inputAriaLabel": "Nama pengguna Instagram, atau URL postingan/reel/sorotan",
     "searching": "Mencari…",
     "viewStories": "Lihat Story",
     "disclaimer": "Hanya profil publik. Kami tidak pernah meminta kata sandi Instagram Anda.",
-    "validationFallback": "Masukkan nama pengguna Instagram yang valid atau tempel tautan postingan.",
+    "validationFallback": "Masukkan nama pengguna Instagram yang valid atau tempel tautan postingan/sorotan.",
     "loadingVerifying": "Memverifikasi permintaan Anda…",
     "loadingSearching": "Mencari Story publik…",
     "notFoundProfile": "Kami tidak dapat menemukan profil publik ini.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Cari nama pengguna lain",
     "tabStories": "Story",
     "tabPosts": "Postingan",
+    "tabReels": "Reels",
+    "tabHighlights": "Sorotan",
+    "tabProfilePicture": "Foto Profil",
     "noStoriesFound": "Tidak ditemukan Story yang tersedia untuk umum untuk nama pengguna ini.",
     "viewPublicProfileInfo": "Lihat informasi profil publik",
     "openStory": "Buka Story {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Tidak ditemukan postingan publik untuk nama pengguna ini.",
     "openPost": "Buka postingan {index}",
     "downloadPost": "Unduh postingan {index}",
+    "noPublicReels": "Tidak ditemukan reel publik untuk nama pengguna ini.",
+    "openReel": "Buka reel {index}",
+    "downloadReel": "Unduh reel {index}",
+    "noPublicHighlights": "Tidak ditemukan sorotan publik untuk nama pengguna ini.",
+    "openHighlight": "Buka sorotan {title}",
+    "highlightNotFound": "Kami tidak dapat menemukan sorotan di tautan itu.",
+    "highlightsNetworkError": "Kami tidak dapat mengambil sorotan saat ini. Silakan coba lagi nanti.",
+    "noProfilePicture": "Tidak ditemukan foto profil untuk nama pengguna ini.",
+    "downloadProfilePicture": "Unduh foto profil",
     "postNotFound": "Kami tidak dapat menemukan postingan publik di tautan itu.",
     "previousItem": "Item sebelumnya",
     "nextItem": "Item berikutnya",

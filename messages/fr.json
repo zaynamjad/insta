@@ -18,7 +18,9 @@
   },
   "LanguageSwitcher": {
     "label": "Langue",
-    "close": "Fermer le menu de langue"
+    "close": "Fermer le menu de langue",
+    "search": "Rechercher une langue…",
+    "noResults": "Aucune langue trouvée"
   },
   "Breadcrumbs": {
     "home": "Accueil"
@@ -42,10 +44,8 @@
   "HomePage": {
     "metaTitle": "{siteName} : Visionneuse de stories Instagram | Voir les stories anonymement",
     "metaDescription": "Saisissez un nom d'utilisateur Instagram public pour voir ses stories accessibles au public sans vous connecter à Instagram. Sans mot de passe, sans compte, sans installation d'application.",
-    "badge": "Profils publics uniquement · Aucune connexion requise",
     "h1": "Visionneuse de stories Instagram",
     "sub1": "Saisissez un nom d'utilisateur Instagram public pour voir instantanément les informations de son profil public, sans connexion requise.",
-    "sub2": "Le contenu des stories lui-même ne peut pas être récupéré sans connexion à Instagram, sur aucun compte. Découvrez pourquoi dans la FAQ ci-dessous.",
     "trendingCaption": "Essayez avec quelques-uns des comptes les plus suivis sur Instagram",
     "howItWorksTitle": "Comment ça marche",
     "step1Title": "Saisissez un nom d'utilisateur",
@@ -56,14 +56,6 @@
     "step3Text": "Parcourez-les instantanément dans une visionneuse épurée en plein écran.",
     "whyTitle": "Pourquoi utiliser notre visionneuse de stories Instagram ?",
     "whyText": "Un moyen rapide et honnête de consulter un profil public : rien de plus, rien de caché.",
-    "feature1": "Aucune connexion Instagram requise",
-    "feature2": "Recherche simple par nom d'utilisateur",
-    "feature3": "Recherche rapide de stories",
-    "feature4": "Visionneuse compatible mobile",
-    "feature5": "Profils publics uniquement",
-    "feature6": "Aucune inscription de compte",
-    "aboutTitle": "À propos de {siteName}",
-    "aboutText": "{siteName} est un outil à usage unique : saisissez un nom d'utilisateur Instagram public et consultez les informations de son profil public (photo, nom, bio, nombre d'abonnés) sans vous connecter vous-même à Instagram.",
     "whatWeDoTitle": "Ce que nous faisons",
     "doItem1": "Récupérer une page de profil public de la même manière que n'importe quel navigateur anonyme",
     "doItem2": "Afficher les informations publiques qu'Instagram inclut sur cette page",
@@ -87,7 +79,6 @@
     "faq5Q": "Comment cet outil récupère-t-il les informations de profil ?",
     "faq5A": "En récupérant la page de profil public Instagram d'un compte de la même manière que le navigateur de n'importe quel visiteur anonyme et déconnecté, puis en lisant les informations publiques qu'Instagram inclut sur cette page : sans connexion, sans API privée, sans contournement d'aucun contrôle d'accès.",
     "finalCtaTitle": "Prêt à consulter un profil ?",
-    "finalCtaText": "Saisissez un nom d'utilisateur Instagram public et consultez son profil instantanément, sans connexion requise.",
     "finalCtaButton": "Voir les stories"
   },
   "AboutPage": {
@@ -189,13 +180,13 @@
     "contactText": "Des questions sur ces conditions ? Écrivez à <email>email</email> ou visitez notre <contactLink>page de contact</contactLink>."
   },
   "StoryTool": {
-    "searchAriaLabel": "Rechercher sur Instagram par nom d'utilisateur ou lien de publication",
-    "inputPlaceholder": "Nom d'utilisateur ou collez un lien de publication/reel",
-    "inputAriaLabel": "Nom d'utilisateur Instagram ou URL de publication",
+    "searchAriaLabel": "Rechercher sur Instagram par nom d'utilisateur ou lien de publication, reel ou story à la une",
+    "inputPlaceholder": "Nom d'utilisateur ou collez un lien de publication/reel/story à la une",
+    "inputAriaLabel": "Nom d'utilisateur Instagram, ou URL de publication, reel ou story à la une",
     "searching": "Recherche en cours…",
     "viewStories": "Voir les stories",
     "disclaimer": "Profils publics uniquement. Nous ne demandons jamais votre mot de passe Instagram.",
-    "validationFallback": "Saisissez un nom d'utilisateur Instagram valide ou collez un lien de publication.",
+    "validationFallback": "Saisissez un nom d'utilisateur Instagram valide ou collez un lien de publication/story à la une.",
     "loadingVerifying": "Vérification de votre demande…",
     "loadingSearching": "Recherche de stories publiques…",
     "notFoundProfile": "Nous n'avons pas trouvé ce profil public.",
@@ -204,6 +195,9 @@
     "searchAnotherUsername": "Chercher un autre nom d'utilisateur",
     "tabStories": "Stories",
     "tabPosts": "Publications",
+    "tabReels": "Reels",
+    "tabHighlights": "À la une",
+    "tabProfilePicture": "Photo de profil",
     "noStoriesFound": "Aucune story accessible au public trouvée pour ce nom d'utilisateur.",
     "viewPublicProfileInfo": "Voir les informations du profil public",
     "openStory": "Ouvrir la story {index}",
@@ -223,6 +217,15 @@
     "noPublicPosts": "Aucune publication publique trouvée pour ce nom d'utilisateur.",
     "openPost": "Ouvrir la publication {index}",
     "downloadPost": "Télécharger la publication {index}",
+    "noPublicReels": "Aucun reel public trouvé pour ce nom d'utilisateur.",
+    "openReel": "Ouvrir le reel {index}",
+    "downloadReel": "Télécharger le reel {index}",
+    "noPublicHighlights": "Aucune story à la une publique trouvée pour ce nom d'utilisateur.",
+    "openHighlight": "Ouvrir la story à la une {title}",
+    "highlightNotFound": "Nous n'avons pas trouvé de story à la une à ce lien.",
+    "highlightsNetworkError": "Impossible de récupérer les stories à la une pour le moment. Veuillez réessayer plus tard.",
+    "noProfilePicture": "Aucune photo de profil trouvée pour ce nom d'utilisateur.",
+    "downloadProfilePicture": "Télécharger la photo de profil",
     "postNotFound": "Nous n'avons pas trouvé de publication publique à ce lien.",
     "previousItem": "Élément précédent",
     "nextItem": "Élément suivant",

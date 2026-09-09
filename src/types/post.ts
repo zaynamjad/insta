@@ -21,6 +21,8 @@ export interface Post {
   likeCount: number | null;
   commentCount: number | null;
   items: PostMediaItem[];
+  /** True for a Reel/clip, false for a regular feed photo/video/carousel post. */
+  isReel: boolean;
 }
 
 export type PostsErrorCode = ProviderErrorCode | "INVALID_USERNAME" | "INVALID_REQUEST" | "NOT_SUPPORTED";
