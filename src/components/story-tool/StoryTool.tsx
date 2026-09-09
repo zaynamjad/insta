@@ -175,14 +175,6 @@ export function StoryTool({
         aria-label={t("searchAriaLabel")}
       >
         <div className="relative flex-1">
-          {!/^https?:\/\//i.test(input) && (
-            <span
-              aria-hidden
-              className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-foreground/40"
-            >
-              @
-            </span>
-          )}
           <input
             type="text"
             inputMode="text"
@@ -193,9 +185,7 @@ export function StoryTool({
             onChange={(e) => setInput(e.target.value)}
             placeholder={t("inputPlaceholder")}
             aria-label={t("inputAriaLabel")}
-            className={`w-full rounded-2xl border border-border bg-surface py-4 pr-4 text-base text-foreground shadow-sm outline-none ring-accent/30 transition focus:ring-4 ${
-              /^https?:\/\//i.test(input) ? "pl-4" : "pl-8"
-            }`}
+            className="w-full rounded-2xl border border-border bg-surface px-5 py-4 text-base text-foreground shadow-sm outline-none ring-accent/30 transition focus:ring-4"
           />
         </div>
         <button

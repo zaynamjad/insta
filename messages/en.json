@@ -248,7 +248,7 @@
   },
   "StoryTool": {
     "searchAriaLabel": "Search Instagram by username, post, reel, or highlight link",
-    "inputPlaceholder": "@Username or paste a post/reel link",
+    "inputPlaceholder": "Username or paste a post/reel link",
     "inputAriaLabel": "Instagram username, post, reel, or highlight URL",
     "searching": "Searching…",
     "viewStories": "View Stories",
