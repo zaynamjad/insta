@@ -10,7 +10,7 @@ export async function Header() {
   const t = await getTranslations("Header");
 
   return (
-    <header className="sticky top-0 z-40">
+    <header>
       <div className="mx-auto flex h-32 max-w-6xl items-center justify-between gap-3 px-4 sm:px-6">
         <Link href="/" className="flex min-w-0 shrink-0 items-center">
           <Image
