@@ -75,47 +75,6 @@ export default async function HomePage({ params }: Props) {
           aria-hidden
           className="pointer-events-none absolute -top-20 left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full opacity-15 blur-3xl brand-gradient sm:-top-40 sm:h-[480px] sm:w-[900px] sm:opacity-20"
         />
-
-        {/* Floating accent badges — decorative, shown only once there's real
-            room beside the centered content column so they never overlap it. */}
-        <div
-          aria-hidden
-          className="animate-float pointer-events-none absolute left-6 top-12 hidden w-40 items-start gap-2 rounded-2xl border border-border bg-surface p-3 shadow-lg 2xl:flex"
-        >
-          <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-accent">
-            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-          </svg>
-          <p className="text-xs font-medium leading-snug text-foreground/75">
-            {t("floatingBadgeNoLogin")}
-          </p>
-        </div>
-        <div
-          aria-hidden
-          className="animate-float pointer-events-none absolute right-6 top-24 hidden w-40 items-start gap-2 rounded-2xl p-3 text-white shadow-lg brand-gradient 2xl:flex"
-          style={{ animationDelay: "1.4s" }}
-        >
-          <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
-            <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-          <p className="text-xs font-medium leading-snug">
-            {t("floatingBadgeAnonymous")}
-          </p>
-        </div>
-        <div
-          aria-hidden
-          className="animate-float pointer-events-none absolute left-10 bottom-10 hidden w-36 items-start gap-2 rounded-2xl border border-border bg-surface p-3 shadow-lg 2xl:flex"
-          style={{ animationDelay: "2.8s" }}
-        >
-          <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0 text-accent">
-            <path d="M13 2 3 14h7l-1 8 10-12h-7z" />
-          </svg>
-          <p className="text-xs font-medium leading-snug text-foreground/75">
-            {t("floatingBadgeFast")}
-          </p>
-        </div>
-
         <div className="relative mx-auto max-w-6xl px-4 pt-6 pb-10 sm:px-6 sm:pt-8 sm:pb-14 lg:flex lg:items-center lg:gap-12 lg:py-16">
           <Image
             src="/mascot.png"

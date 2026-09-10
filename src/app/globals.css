@@ -172,23 +172,8 @@ svg {
   animation-play-state: paused;
 }
 
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
-.animate-float {
-  animation: float-slow 6s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-float {
+  .animate-marquee {
     animation: none;
   }
 }
