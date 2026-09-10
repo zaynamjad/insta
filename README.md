@@ -133,13 +133,11 @@ src/
     profile/[username]/     Server-rendered public profile lookup page
     about/ contact/         Trust & legal pages
     privacy-policy/ terms/ disclaimer/
-    admin/ [...path]/       Login-gated per-page SEO/meta editor
     sitemap.ts robots.ts    Technical SEO
   components/                Shared UI (Header, Footer, Faq, story-tool/*)
   lib/
     story/                    Provider interface, retrieval, parsing, cache, rate limiting
     seo/                      Metadata + schema.org builders
-    admin/                    Auth, settings store, page-overrides
   types/                      Profile, Story, and lookup-result types
 ```
 

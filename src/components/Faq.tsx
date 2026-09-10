@@ -16,7 +16,7 @@ export function Faq({
   return (
     <section aria-labelledby="faq-heading">
       <JsonLd data={faqPageSchema(items)} />
-      <h2 id="faq-heading" className="text-2xl font-bold tracking-tight sm:text-3xl">
+      <h2 id="faq-heading" className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
         {title}
       </h2>
       <div className="mt-6 divide-y divide-border rounded-2xl border border-border bg-surface">
@@ -28,9 +28,9 @@ export function Faq({
                 type="button"
                 onClick={() => setOpenIndex(open ? null : index)}
                 aria-expanded={open}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+                className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-5"
               >
-                <span className="font-medium text-foreground">
+                <span className="min-w-0 break-words font-medium text-foreground">
                   {item.question}
                 </span>
                 <span
@@ -45,7 +45,7 @@ export function Faq({
                 </span>
               </button>
               {open && (
-                <div className="px-5 pb-4 text-sm leading-relaxed text-foreground/70">
+                <div className="break-words px-4 pb-4 text-sm leading-relaxed text-foreground/70 sm:px-5">
                   {item.answer}
                 </div>
               )}

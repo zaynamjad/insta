@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
-import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
+import { buildMetadata } from "@/lib/seo/metadata";
 import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { SITE_NAME } from "@/lib/site";
@@ -13,7 +12,7 @@ type Props = PageProps<"/[locale]/about">;
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "AboutPage" });
-  return buildMetadataWithOverrides({
+  return buildMetadata({
     title: t("metaTitle", { siteName: SITE_NAME }),
     description: t("metaDescription", { siteName: SITE_NAME }),
     path: "/about/",
@@ -28,7 +27,6 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <PageOverridesRenderer path="/about/" />
       <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/about/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1", { siteName: SITE_NAME })}

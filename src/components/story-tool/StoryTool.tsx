@@ -337,7 +337,7 @@ function ResultState({
 
       <ProfileHeader profile={profile} />
 
-      <div className="mt-5 flex gap-2 overflow-x-auto border-b border-border">
+      <div className="no-scrollbar mt-5 flex gap-2 overflow-x-auto border-b border-border">
         <TabButton active={tab === "stories"} onClick={() => onTabChange("stories")}>
           {t("tabStories")} {result.status === "ok" ? `(${profile.stories.length})` : ""}
         </TabButton>
@@ -430,7 +430,7 @@ function TabButton({
   return (
     <button
       onClick={onClick}
-      className={`-mb-px border-b-2 px-3 py-2 text-sm font-semibold transition-colors ${
+      className={`-mb-px shrink-0 whitespace-nowrap border-b-2 px-3 py-2 text-sm font-semibold transition-colors ${
         active
           ? "border-accent text-foreground"
           : "border-transparent text-foreground/50 hover:text-foreground"
@@ -491,7 +491,7 @@ function ProfileHeader({ profile }: { profile: Profile }) {
           <p className="text-sm text-foreground/50">{profile.category}</p>
         )}
         {profile.bio && (
-          <p className="mt-1 whitespace-pre-line text-base leading-relaxed text-foreground/80">
+          <p className="mt-1 whitespace-pre-line break-words text-base leading-relaxed text-foreground/80">
             {profile.bio}
           </p>
         )}
@@ -500,13 +500,13 @@ function ProfileHeader({ profile }: { profile: Profile }) {
             href={profile.externalUrl}
             target="_blank"
             rel="nofollow noopener noreferrer"
-            className="mt-1 inline-flex items-center gap-1 text-base font-medium text-accent hover:underline"
+            className="mt-1 inline-flex max-w-full items-start gap-1 text-base font-medium text-accent hover:underline"
           >
-            <svg aria-hidden width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg aria-hidden width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-1 shrink-0">
               <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
               <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
             </svg>
-            {formatUrlForDisplay(profile.externalUrl)}
+            <span className="min-w-0 break-all">{formatUrlForDisplay(profile.externalUrl)}</span>
           </a>
         )}
       </div>

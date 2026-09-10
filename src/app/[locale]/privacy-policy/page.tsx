@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { buildMetadataWithOverrides } from "@/lib/admin/apply-overrides";
-import { PageOverridesRenderer } from "@/components/admin/PageOverridesRenderer";
+import { buildMetadata } from "@/lib/seo/metadata";
 import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
@@ -15,7 +14,7 @@ const LAST_UPDATED = "August 25, 2026";
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "PrivacyPolicyPage" });
-  return buildMetadataWithOverrides({
+  return buildMetadata({
     title: t("metaTitle"),
     description: t("metaDescription", { siteName: SITE_NAME }),
     path: "/privacy-policy/",
@@ -30,7 +29,6 @@ export default async function PrivacyPolicyPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <PageOverridesRenderer path="/privacy-policy/" />
       <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/privacy-policy/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1")}
@@ -107,7 +105,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
           <p className="mt-2">
             {t.rich("contactText", {
               email: () => (
-                <a href={`mailto:${CONTACT_EMAIL}`} className="text-accent hover:underline">
+                <a href={`mailto:${CONTACT_EMAIL}`} className="break-all text-accent hover:underline">
                   {CONTACT_EMAIL}
                 </a>
               ),

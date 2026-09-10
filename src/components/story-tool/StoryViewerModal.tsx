@@ -153,13 +153,13 @@ export function StoryViewerModal({
             <DownloadButton
               mediaUrl={current.mediaUrl}
               label={t("downloadThisStory")}
-              className="rounded-full p-2 text-white/90 hover:bg-white/10"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-white/90 hover:bg-white/10"
             />
             <button
               ref={closeBtnRef}
               onClick={onClose}
               aria-label={t("closeStoryViewer")}
-              className="rounded-full p-2 text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M18 6 6 18M6 6l12 12" />

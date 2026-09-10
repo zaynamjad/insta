@@ -72,7 +72,7 @@ export default async function ProfilePage({ params }: Props) {
 
   if (result.status === "error") {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-16 text-center sm:px-6">
+      <div className="mx-auto max-w-2xl px-4 py-12 text-center sm:px-6 sm:py-16">
         <Breadcrumbs items={[{ name: `@${normalized}`, path: `/profile/${normalized}/` }]} />
         <p className="mt-8 text-lg text-foreground/70">
           We couldn&apos;t retrieve public content right now. Please try again later.
@@ -132,12 +132,12 @@ export default async function ProfilePage({ params }: Props) {
         <p className="mt-1 text-foreground/55">@{profile.username}</p>
 
         {profile.bio && (
-          <p className="mt-4 max-w-md text-sm leading-relaxed text-foreground/75">
+          <p className="mt-4 max-w-md break-words text-sm leading-relaxed text-foreground/75">
             {profile.bio}
           </p>
         )}
 
-        <div className="mt-6 flex gap-8">
+        <div className="mt-6 flex gap-6 sm:gap-8">
           <Stat label="Followers" value={formatCount(profile.followers)} />
           <Stat label="Following" value={formatCount(profile.following)} />
           <Stat label="Posts" value={formatCount(profile.posts)} />

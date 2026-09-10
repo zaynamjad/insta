@@ -64,7 +64,7 @@ export function SinglePostResult({
                 aria-label={t("previousItem")}
                 disabled={itemIndex === 0}
                 onClick={() => setItemIndex((i) => Math.max(0, i - 1))}
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
+                className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white disabled:opacity-0"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -72,7 +72,7 @@ export function SinglePostResult({
                 aria-label={t("nextItem")}
                 disabled={itemIndex === post.items.length - 1}
                 onClick={() => setItemIndex((i) => Math.min(post.items.length - 1, i + 1))}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
+                className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white disabled:opacity-0"
               >
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
               </button>

@@ -7,9 +7,28 @@ import type { HighlightMeta } from "@/types/highlight";
 import { validateUsername } from "./validation";
 import { checkOutboundRateLimit } from "./rate-limit";
 
-const HIKERAPI_KEY = process.env.HIKERAPI_KEY;
 const HIKERAPI_BASE = "https://api.hikerapi.com";
 const FETCH_TIMEOUT_MS = 15_000;
+
+/**
+ * All configured HikerAPI access keys, in fallback order: the primary
+ * `HIKERAPI_KEY`, then `HIKERAPI_Fallback_1_KEY`, `_2_KEY`, `_3_KEY`, and
+ * so on for however many are set — adding a `HIKERAPI_Fallback_4_KEY`
+ * later needs no code change. `request()` walks this list and moves to
+ * the next key the moment one stops working (bad key, rate-limited,
+ * HikerAPI-side error), so one exhausted or blocked account doesn't take
+ * lookups down.
+ */
+export function getHikerApiKeys(): string[] {
+  const keys: string[] = [];
+  if (process.env.HIKERAPI_KEY) keys.push(process.env.HIKERAPI_KEY);
+  for (let i = 1; ; i++) {
+    const key = process.env[`HIKERAPI_Fallback_${i}_KEY`];
+    if (!key) break;
+    keys.push(key);
+  }
+  return keys;
+}
 
 interface HikerUser {
   pk: number | string;
@@ -134,7 +153,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (!HIKERAPI_KEY) {
+    if (getHikerApiKeys().length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -172,7 +191,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (!HIKERAPI_KEY) {
+    if (getHikerApiKeys().length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -202,29 +221,12 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (!HIKERAPI_KEY) {
+    if (getHikerApiKeys().length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
     const res = await this.request(`/v1/media/by/code?code=${encodeURIComponent(shortcode)}`);
-
     if (res.status === 404) return null;
-
-    if (res.status === 401) {
-      throw new ProviderError("HikerAPI rejected the access key.", "UPSTREAM_ERROR", "401 Unauthorized");
-    }
-
-    if (res.status === 429) {
-      throw new ProviderError("Rate limited by HikerAPI.", "RATE_LIMITED");
-    }
-
-    if (!res.ok) {
-      throw new ProviderError(
-        "HikerAPI returned an unexpected status.",
-        "UPSTREAM_ERROR",
-        `status=${res.status}`,
-      );
-    }
 
     const item = (await res.json()) as HikerMediaItem;
     return this.normalizeMediaPost(item);
@@ -243,7 +245,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (!HIKERAPI_KEY) {
+    if (getHikerApiKeys().length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -273,29 +275,12 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (!HIKERAPI_KEY) {
+    if (getHikerApiKeys().length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
     const res = await this.request(`/v1/highlight/by/url?url=${encodeURIComponent(highlightUrl)}`);
-
     if (res.status === 404) return null;
-
-    if (res.status === 401) {
-      throw new ProviderError("HikerAPI rejected the access key.", "UPSTREAM_ERROR", "401 Unauthorized");
-    }
-
-    if (res.status === 429) {
-      throw new ProviderError("Rate limited by HikerAPI.", "RATE_LIMITED");
-    }
-
-    if (!res.ok) {
-      throw new ProviderError(
-        "HikerAPI returned an unexpected status.",
-        "UPSTREAM_ERROR",
-        `status=${res.status}`,
-      );
-    }
 
     const detail = (await res.json()) as HikerHighlightDetail;
     const items = (detail.items ?? [])
@@ -367,24 +352,7 @@ export class HikerApiStoryProvider implements StoryProvider {
 
   private async fetchUser(username: string): Promise<HikerUser | null> {
     const res = await this.request(`/v2/user/by/username?username=${encodeURIComponent(username)}`);
-
     if (res.status === 404) return null;
-
-    if (res.status === 401) {
-      throw new ProviderError("HikerAPI rejected the access key.", "UPSTREAM_ERROR", "401 Unauthorized");
-    }
-
-    if (res.status === 429) {
-      throw new ProviderError("Rate limited by HikerAPI.", "RATE_LIMITED");
-    }
-
-    if (!res.ok) {
-      throw new ProviderError(
-        "HikerAPI returned an unexpected status.",
-        "UPSTREAM_ERROR",
-        `status=${res.status}`,
-      );
-    }
 
     const body = (await res.json()) as { user?: HikerUser };
     return body.user ?? null;
@@ -424,7 +392,46 @@ export class HikerApiStoryProvider implements StoryProvider {
     };
   }
 
+  /**
+   * Tries each configured HikerAPI key in order and returns the first
+   * response that's either a success or a genuine 404 — neither of which
+   * a different key would change, since both reflect the requested
+   * resource rather than the account making the request. Anything else
+   * (401 bad key, 403 blocked, 429 rate-limited, a 5xx on HikerAPI's
+   * side, or the request failing/timing out outright) is treated as
+   * "this key isn't working right now" and moves on to the next one;
+   * only once every configured key has failed does this throw.
+   */
   private async request(path: string): Promise<Response> {
+    const keys = getHikerApiKeys();
+    let lastError: ProviderError | null = null;
+
+    for (let i = 0; i < keys.length; i++) {
+      let res: Response;
+      try {
+        res = await this.attempt(path, keys[i]);
+      } catch (err) {
+        lastError = err instanceof ProviderError ? err : new ProviderError("Failed to reach HikerAPI.", "UPSTREAM_ERROR", err);
+        continue;
+      }
+
+      if (res.ok || res.status === 404) return res;
+
+      lastError = new ProviderError(
+        res.status === 401
+          ? "HikerAPI rejected the access key."
+          : res.status === 429
+            ? "Rate limited by HikerAPI."
+            : "HikerAPI returned an unexpected status.",
+        res.status === 429 ? "RATE_LIMITED" : "UPSTREAM_ERROR",
+        `status=${res.status}, key ${i + 1}/${keys.length}`,
+      );
+    }
+
+    throw lastError ?? new ProviderError("HikerAPI is unavailable.", "UPSTREAM_ERROR");
+  }
+
+  private async attempt(path: string, key: string): Promise<Response> {
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
     try {
@@ -433,7 +440,7 @@ export class HikerApiStoryProvider implements StoryProvider {
         cache: "no-store",
         headers: {
           accept: "application/json",
-          "x-access-key": HIKERAPI_KEY as string,
+          "x-access-key": key,
         },
       });
     } catch (err) {

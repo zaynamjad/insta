@@ -71,14 +71,14 @@ export function PostViewerModal({
               <DownloadButton
                 mediaUrl={item.mediaUrl}
                 label={t("downloadThisMedia")}
-                className="rounded-full p-2 text-white/90 hover:bg-white/10"
+                className="flex h-11 w-11 items-center justify-center rounded-full text-white/90 hover:bg-white/10"
               />
             )}
             <button
               ref={closeBtnRef}
               onClick={onClose}
               aria-label={t("closePostViewer")}
-              className="rounded-full p-2 text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
+              className="flex h-11 w-11 items-center justify-center rounded-full text-white/90 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/60"
             >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                 <path d="M18 6 6 18M6 6l12 12" />
@@ -112,7 +112,7 @@ export function PostViewerModal({
                 aria-label={t("previousItem")}
                 disabled={itemIndex === 0}
                 onClick={() => setItemIndex((i) => Math.max(0, i - 1))}
-                className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
+                className="absolute left-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white disabled:opacity-0"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M15 18l-6-6 6-6" /></svg>
               </button>
@@ -120,7 +120,7 @@ export function PostViewerModal({
                 aria-label={t("nextItem")}
                 disabled={itemIndex === post.items.length - 1}
                 onClick={() => setItemIndex((i) => Math.min(post.items.length - 1, i + 1))}
-                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/40 p-2 text-white disabled:opacity-0"
+                className="absolute right-2 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/40 text-white disabled:opacity-0"
               >
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M9 18l6-6-6-6" /></svg>
               </button>
@@ -141,11 +141,11 @@ export function PostViewerModal({
                 <span>{t("comments", { count: post.commentCount.toLocaleString() })}</span>
               )}
             </div>
-            <div className="flex gap-3">
-              <button onClick={goPrevPost} disabled={postIndex === 0} className="font-medium disabled:opacity-30">
+            <div className="flex gap-1">
+              <button onClick={goPrevPost} disabled={postIndex === 0} className="min-h-11 px-2 font-medium disabled:opacity-30">
                 {t("prevPost")}
               </button>
-              <button onClick={goNextPost} disabled={postIndex === posts.length - 1} className="font-medium disabled:opacity-30">
+              <button onClick={goNextPost} disabled={postIndex === posts.length - 1} className="min-h-11 px-2 font-medium disabled:opacity-30">
                 {t("nextPost")}
               </button>
             </div>
