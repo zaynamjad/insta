@@ -158,7 +158,11 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* ── How It Works ──────────────────────────────────────── */}
-      <section id="how-it-works" className="mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+      <section id="how-it-works" className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-10 left-1/2 h-[260px] w-[520px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient sm:-top-16 sm:h-[360px] sm:w-[760px] sm:opacity-15"
+        />
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
             {t("howItWorksTitle")}
@@ -234,7 +238,11 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* ── Contact ───────────────────────────────────────────── */}
-      <section id="contact" className="py-12 sm:py-16">
+      <section id="contact" className="relative py-12 sm:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-10 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient sm:-top-14 sm:h-[300px] sm:w-[620px] sm:opacity-15"
+        />
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
           <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
             {t("contactTitle")}
@@ -263,7 +271,11 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────── */}
-      <section className="mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="relative mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-8 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient sm:-top-12 sm:h-[300px] sm:w-[620px] sm:opacity-15"
+        />
         <div className="flex flex-col items-center gap-5 rounded-3xl border border-border bg-surface p-6 sm:flex-row sm:gap-8 sm:p-8">
           <Image
             src="/mascot-pointing.png"
