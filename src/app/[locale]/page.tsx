@@ -70,7 +70,7 @@ export default async function HomePage({ params }: Props) {
       <JsonLd data={softwareApplicationSchema()} />
 
       {/* ── Hero ──────────────────────────────────────────────── */}
-      <section id="search" className="relative overflow-hidden">
+      <section id="search" className="relative">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-20 left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full opacity-15 blur-3xl brand-gradient sm:-top-40 sm:h-[480px] sm:w-[900px] sm:opacity-20"
