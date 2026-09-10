@@ -68,7 +68,11 @@ html,
 body,
 main {
   max-width: 100%;
-  overflow-x: hidden;
+  /* `clip`, not `hidden` — setting overflow-x alone to `hidden` makes
+     browsers silently upgrade the unset overflow-y to `auto`, which then
+     clips vertical overflow too (e.g. decorative elements meant to bleed
+     upward behind the sticky header). `clip` restricts only this axis. */
+  overflow-x: clip;
 }
 
 html {
