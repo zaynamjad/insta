@@ -16,14 +16,14 @@ export async function Footer() {
               alt={SITE_NAME}
               width={500}
               height={250}
-              className="logo-light h-9 w-auto sm:h-12"
+              className="logo-light h-12 w-auto sm:h-16"
             />
             <Image
               src="/logo-dark.png"
               alt={SITE_NAME}
               width={500}
               height={250}
-              className="logo-dark h-9 w-auto sm:h-12"
+              className="logo-dark h-12 w-auto sm:h-16"
             />
             <p className="mt-2 max-w-xs text-xs text-foreground/65 sm:text-sm">
               {t("tagline")}

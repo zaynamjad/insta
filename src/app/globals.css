@@ -100,6 +100,66 @@ svg {
   scrollbar-width: none;
 }
 
+/* CSS-only 3D cube — used as the loading indicator while a search result
+   is generating. Pure transforms, no canvas/WebGL, so it costs nothing
+   extra to ship. */
+.loader-cube-scene {
+  perspective: 300px;
+}
+.loader-cube {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  transform-style: preserve-3d;
+  animation: loader-cube-spin 1.8s linear infinite;
+}
+.loader-cube__face {
+  position: absolute;
+  inset: 0;
+  border-radius: 6px;
+  opacity: 0.92;
+}
+.loader-cube__face--front {
+  transform: translateZ(14px);
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-mid));
+}
+.loader-cube__face--back {
+  transform: rotateY(180deg) translateZ(14px);
+  background: linear-gradient(135deg, var(--brand-mid), var(--brand-end));
+}
+.loader-cube__face--right {
+  transform: rotateY(90deg) translateZ(14px);
+  background: linear-gradient(135deg, var(--brand-start), var(--brand-end));
+}
+.loader-cube__face--left {
+  transform: rotateY(-90deg) translateZ(14px);
+  background: linear-gradient(135deg, var(--brand-end), var(--brand-mid));
+}
+.loader-cube__face--top {
+  transform: rotateX(90deg) translateZ(14px);
+  background: linear-gradient(135deg, var(--brand-mid), var(--brand-start));
+}
+.loader-cube__face--bottom {
+  transform: rotateX(-90deg) translateZ(14px);
+  background: linear-gradient(135deg, var(--brand-end), var(--brand-start));
+}
+
+@keyframes loader-cube-spin {
+  0% {
+    transform: rotateX(-25deg) rotateY(0deg);
+  }
+  100% {
+    transform: rotateX(-25deg) rotateY(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .loader-cube {
+    animation: none;
+    transform: rotateX(-25deg) rotateY(35deg);
+  }
+}
+
 /* Offsets same-page anchor scrolling (nav → #about / #contact) so the
    sticky header never covers the top of the target section. */
 [id] {

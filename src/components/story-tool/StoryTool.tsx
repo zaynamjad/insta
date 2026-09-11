@@ -247,16 +247,17 @@ function LoadingState({ phase }: { phase: LoadingPhase }) {
       aria-live="polite"
       className="rounded-2xl border border-border bg-surface p-6"
     >
-      <div className="flex items-center gap-2.5">
-        <svg
-          aria-hidden
-          className="h-4 w-4 shrink-0 animate-spin text-accent"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
-          <path className="opacity-90" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.4 0 0 5.4 0 12h4Z" />
-        </svg>
+      <div className="flex items-center gap-3">
+        <div aria-hidden className="loader-cube-scene shrink-0">
+          <div className="loader-cube">
+            <div className="loader-cube__face loader-cube__face--front" />
+            <div className="loader-cube__face loader-cube__face--back" />
+            <div className="loader-cube__face loader-cube__face--right" />
+            <div className="loader-cube__face loader-cube__face--left" />
+            <div className="loader-cube__face loader-cube__face--top" />
+            <div className="loader-cube__face loader-cube__face--bottom" />
+          </div>
+        </div>
         <p className="text-sm font-medium text-foreground/70">
           {phase === "verifying" ? t("loadingVerifying") : t("loadingSearching")}
         </p>

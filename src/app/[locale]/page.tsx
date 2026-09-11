@@ -138,7 +138,7 @@ export default async function HomePage({ params }: Props) {
             alt=""
             width={1254}
             height={1254}
-            className="order-first mx-auto w-72 shrink-0 sm:w-96 lg:order-last lg:mx-0 lg:w-[480px]"
+            className="order-first mx-auto w-72 shrink-0 rounded-[20px] sm:w-96 lg:order-last lg:mx-0 lg:w-[480px]"
             sizes="(min-width: 1024px) 480px, 384px"
           />
           <div className="mt-6 lg:mt-0 lg:flex-1">
@@ -266,21 +266,43 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* ── Contact ───────────────────────────────────────────── */}
-      <section id="contact" className="relative py-12 sm:py-16">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -top-10 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-14 sm:h-[300px] sm:w-[620px] sm:opacity-15"
-        />
-        <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
-          <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
-            {t("contactTitle")}
-          </h2>
-          <p className="mt-3 text-sm leading-relaxed text-foreground/70 sm:mt-4 sm:text-base">
-            {t("contactText")}
-          </p>
+      <section id="contact">
+        <h2 className="sr-only">{t("contactTitle")}</h2>
+        <p className="sr-only">{t("contactText")}</p>
+
+        <div className="relative sm:hidden">
+          <Image
+            src="/contact-mobile.png"
+            alt=""
+            width={1024}
+            height={1536}
+            className="h-auto w-full"
+            sizes="100vw"
+          />
           <a
             href={`mailto:${CONTACT_EMAIL}`}
-            className="brand-gradient mt-5 inline-flex max-w-full cursor-pointer items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90 sm:mt-6 sm:px-6"
+            className="brand-gradient absolute left-1/2 top-[47%] inline-flex max-w-[82%] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-lg transition-opacity hover:opacity-90"
+          >
+            <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
+              <rect x="2" y="4" width="20" height="16" rx="2" />
+              <path d="m2 7 10 6 10-6" />
+            </svg>
+            <span className="min-w-0 truncate">{CONTACT_EMAIL}</span>
+          </a>
+        </div>
+
+        <div className="relative hidden sm:block">
+          <Image
+            src="/contact.png"
+            alt=""
+            width={1944}
+            height={809}
+            className="h-auto w-full"
+            sizes="100vw"
+          />
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="brand-gradient absolute left-1/2 top-[62%] inline-flex max-w-[70%] -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-lg transition-opacity hover:opacity-90"
           >
             <svg aria-hidden width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0">
               <rect x="2" y="4" width="20" height="16" rx="2" />
