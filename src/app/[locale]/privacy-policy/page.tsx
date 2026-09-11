@@ -28,7 +28,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
   const t = await getTranslations({ locale, namespace: "PrivacyPolicyPage" });
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
+    <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
       <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/privacy-policy/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1")}
