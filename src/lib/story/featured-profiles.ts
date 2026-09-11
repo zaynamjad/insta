@@ -19,29 +19,33 @@ export interface FeaturedProfile {
 }
 
 const FEATURED_META: FeaturedProfileMeta[] = [
-  { username: "instagram", displayName: "Instagram", category: "Platform updates and features", country: null, fallbackFollowers: "686M" },
-  { username: "cristiano", displayName: "Cristiano Ronaldo", category: "Portuguese footballer", country: "Portugal", fallbackFollowers: "679M" },
-  { username: "leomessi", displayName: "Lionel Messi", category: "Argentine footballer", country: "Argentina", fallbackFollowers: "516M" },
-  { username: "selenagomez", displayName: "Selena Gomez", category: "American singer and actress", country: "United States", fallbackFollowers: "403M" },
-  { username: "therock", displayName: "Dwayne \"The Rock\" Johnson", category: "American actor and former wrestler", country: "United States", fallbackFollowers: "381M" },
-  { username: "kyliejenner", displayName: "Kylie Jenner", category: "American media personality and businesswoman", country: "United States", fallbackFollowers: "381M" },
-  { username: "arianagrande", displayName: "Ariana Grande", category: "American singer and actress", country: "United States", fallbackFollowers: "363M" },
-  { username: "kimkardashian", displayName: "Kim Kardashian", category: "American media personality and businesswoman", country: "United States", fallbackFollowers: "345M" },
-  { username: "beyonce", displayName: "Beyoncé", category: "American singer and songwriter", country: "United States", fallbackFollowers: "300M" },
-  { username: "khloekardashian", displayName: "Khloé Kardashian", category: "American media personality and model", country: "United States", fallbackFollowers: "293M" },
-  { username: "nike", displayName: "Nike", category: "Sportswear multinational", country: "United States", fallbackFollowers: "291M" },
-  { username: "lilbieber", displayName: "Justin Bieber", category: "Musician", country: "Canada", fallbackFollowers: "286M" },
-  { username: "kendalljenner", displayName: "Kendall Jenner", category: "Media personality", country: "United States", fallbackFollowers: "278M" },
-  { username: "taylorswift", displayName: "Taylor Swift", category: "Musician", country: "United States", fallbackFollowers: "273M" },
-  { username: "natgeo", displayName: "National Geographic", category: "Magazine", country: "United States", fallbackFollowers: "269M" },
-  { username: "neymarjr", displayName: "Neymar", category: "Footballer", country: "Brazil", fallbackFollowers: "241M" },
-  { username: "jlo", displayName: "Jennifer Lopez", category: "Musician and actress", country: "United States", fallbackFollowers: "240M" },
-  { username: "kourtneykardash", displayName: "Kourtney Kardashian", category: "Media personality", country: "United States", fallbackFollowers: "209M" },
-  { username: "miley", displayName: "Miley Cyrus", category: "Musician and actress", country: "United States", fallbackFollowers: "205M" },
-  { username: "katyperry", displayName: "Katy Perry", category: "Musician", country: "United States", fallbackFollowers: "195M" },
+  { username: "natgeo", displayName: "National Geographic", category: "Magazine and media brand", country: "United States", fallbackFollowers: "270M" },
+  { username: "nike", displayName: "Nike", category: "Sportswear multinational", country: "United States", fallbackFollowers: "305M" },
+  { username: "youtube", displayName: "YouTube", category: "Video platform", country: "United States", fallbackFollowers: "85M" },
+  { username: "nba", displayName: "NBA", category: "Basketball league", country: "United States", fallbackFollowers: "85M" },
+  { username: "nasa", displayName: "NASA", category: "Space agency", country: "United States", fallbackFollowers: "120M" },
+  { username: "netflix", displayName: "Netflix", category: "Streaming entertainment", country: "United States", fallbackFollowers: "40M" },
+  { username: "samsung", displayName: "Samsung", category: "Electronics multinational", country: "South Korea", fallbackFollowers: "35M" },
+  { username: "espn", displayName: "ESPN", category: "Sports media network", country: "United States", fallbackFollowers: "50M" },
+  { username: "marvel", displayName: "Marvel", category: "Entertainment and comics brand", country: "United States", fallbackFollowers: "60M" },
+  { username: "cnn", displayName: "CNN", category: "News network", country: "United States", fallbackFollowers: "18M" },
+  { username: "disney", displayName: "Disney", category: "Entertainment and media conglomerate", country: "United States", fallbackFollowers: "65M" },
+  { username: "victoriassecret", displayName: "Victoria's Secret", category: "Lingerie and fashion brand", country: "United States", fallbackFollowers: "70M" },
+  { username: "cocacola", displayName: "Coca-Cola", category: "Beverage multinational", country: "United States", fallbackFollowers: "110M" },
+  { username: "ufc", displayName: "UFC", category: "Mixed martial arts promotion", country: "United States", fallbackFollowers: "55M" },
+  { username: "playstation", displayName: "PlayStation", category: "Gaming brand", country: "Japan", fallbackFollowers: "40M" },
+  { username: "zara", displayName: "ZARA", category: "Fashion retailer", country: "Spain", fallbackFollowers: "60M" },
+  { username: "louisvuitton", displayName: "Louis Vuitton", category: "Luxury fashion house", country: "France", fallbackFollowers: "65M" },
+  { username: "sportscenter", displayName: "SportsCenter", category: "Sports news show", country: "United States", fallbackFollowers: "35M" },
+  { username: "nfl", displayName: "NFL", category: "American football league", country: "United States", fallbackFollowers: "40M" },
+  { username: "chanel", displayName: "Chanel", category: "Luxury fashion house", country: "France", fallbackFollowers: "60M" },
 ];
 
-const CACHE_KEY = "featured-profiles:all";
+// Bump the suffix whenever FEATURED_META's account list changes — the TTL
+// below is long (days) specifically so this doesn't hit the provider on
+// every page view, which means a stale cache would otherwise keep serving
+// the old account list in production for up to that whole window.
+const CACHE_KEY = "featured-profiles:all:v2";
 // Long TTL is the point — this is a decorative carousel of well-known
 // accounts, not a live lookup, so it shouldn't hit the provider on every
 // page view. Refreshing periodically (rather than fetching once forever)
