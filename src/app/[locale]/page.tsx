@@ -136,9 +136,9 @@ export default async function HomePage({ params }: Props) {
           <Image
             src="/anom.png"
             alt=""
-            width={1254}
-            height={1254}
-            className="order-first mx-auto w-72 shrink-0 rounded-[20px] sm:w-96 lg:order-last lg:mx-0 lg:w-[480px]"
+            width={1024}
+            height={1024}
+            className="order-first mx-auto w-72 shrink-0 sm:w-96 lg:order-last lg:mx-0 lg:w-[480px]"
             sizes="(min-width: 1024px) 480px, 384px"
           />
           <div className="mt-6 lg:mt-0 lg:flex-1">
