@@ -315,13 +315,13 @@ export default async function HomePage({ params }: Props) {
 
       {/* ── FAQ ────────────────────────────────────────────────── */}
       <section id="faq" className="bg-surface-muted py-12 sm:py-16">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
           <Faq items={homeFaqs} title={t("faqTitle")} subtitle={t("faqIntro")} />
         </div>
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────── */}
-      <section className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="relative mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-8 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-12 sm:h-[300px] sm:w-[620px] sm:opacity-15"
