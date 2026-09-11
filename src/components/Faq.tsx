@@ -7,9 +7,11 @@ import { faqPageSchema, type FaqItem } from "@/lib/seo/schema";
 export function Faq({
   items,
   title,
+  subtitle,
 }: {
   items: FaqItem[];
   title: string;
+  subtitle?: string;
 }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -19,6 +21,9 @@ export function Faq({
       <h2 id="faq-heading" className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
         {title}
       </h2>
+      {subtitle && (
+        <p className="mt-3 text-sm text-foreground/65 sm:text-base">{subtitle}</p>
+      )}
       <div className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
         {items.map((item, index) => {
           const open = openIndex === index;

@@ -316,7 +316,7 @@ export default async function HomePage({ params }: Props) {
       {/* ── FAQ ────────────────────────────────────────────────── */}
       <section id="faq" className="bg-surface-muted py-12 sm:py-16">
         <div className="mx-auto max-w-6xl px-4 sm:px-6">
-          <Faq items={homeFaqs} title={t("faqTitle")} />
+          <Faq items={homeFaqs} title={t("faqTitle")} subtitle={t("faqIntro")} />
         </div>
       </section>
 
