@@ -132,7 +132,7 @@ export default async function HomePage({ params }: Props) {
           aria-hidden
           className="pointer-events-none absolute -top-10 left-1/2 h-[240px] w-[480px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-14 sm:h-[320px] sm:w-[680px] sm:opacity-15"
         />
-        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:flex lg:items-center lg:gap-10">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:flex lg:items-center lg:gap-10">
           <Image
             src="/anom.png"
             alt=""
@@ -156,7 +156,7 @@ export default async function HomePage({ params }: Props) {
 
       {/* ── Features (6 cards, no duplicates with Why section) ── */}
       <section className="bg-surface-muted py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
             <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
               {t("featuresTitle")}
@@ -186,7 +186,7 @@ export default async function HomePage({ params }: Props) {
       </section>
 
       {/* ── How It Works ──────────────────────────────────────── */}
-      <section id="how-it-works" className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+      <section id="how-it-works" className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-10 left-1/2 h-[260px] w-[520px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-16 sm:h-[360px] sm:w-[760px] sm:opacity-15"
@@ -218,7 +218,7 @@ export default async function HomePage({ params }: Props) {
 
       {/* ── Why Choose Us ─────────────────────────────────────── */}
       <section className="bg-surface-muted py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <div className="flex flex-col items-center gap-4 text-center sm:gap-6 lg:flex-row lg:items-center lg:gap-10 lg:text-left">
             <Image
               src="/mascot-phone.png"
@@ -315,13 +315,13 @@ export default async function HomePage({ params }: Props) {
 
       {/* ── FAQ ────────────────────────────────────────────────── */}
       <section id="faq" className="bg-surface-muted py-12 sm:py-16">
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6">
           <Faq items={homeFaqs} title={t("faqTitle")} />
         </div>
       </section>
 
       {/* ── Final CTA ─────────────────────────────────────────── */}
-      <section className="relative mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
+      <section className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16">
         <div
           aria-hidden
           className="pointer-events-none absolute -top-8 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-12 sm:h-[300px] sm:w-[620px] sm:opacity-15"

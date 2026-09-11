@@ -72,7 +72,7 @@ export default async function ProfilePage({ params }: Props) {
 
   if (result.status === "error") {
     return (
-      <div className="mx-auto max-w-2xl px-4 py-12 text-center sm:px-6 sm:py-16">
+      <div className="mx-auto max-w-6xl px-4 py-12 text-center sm:px-6 sm:py-16">
         <Breadcrumbs items={[{ name: `@${normalized}`, path: `/profile/${normalized}/` }]} />
         <p className="mt-8 text-lg text-foreground/70">
           We couldn&apos;t retrieve public content right now. Please try again later.
@@ -85,7 +85,7 @@ export default async function ProfilePage({ params }: Props) {
   const path = `/profile/${profile.username}/`;
 
   return (
-    <div className="mx-auto max-w-2xl px-4 py-10 sm:px-6 sm:py-14">
+    <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14">
       <JsonLd
         data={profilePageSchema({
           username: profile.username,
