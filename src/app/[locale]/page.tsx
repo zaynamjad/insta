@@ -126,6 +126,24 @@ export default async function HomePage({ params }: Props) {
         </div>
       </section>
 
+      {/* ── Intro ─────────────────────────────────────────────── */}
+      <section className="relative py-12 sm:py-16">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-10 left-1/2 h-[240px] w-[480px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-14 sm:h-[320px] sm:w-[680px] sm:opacity-15"
+        />
+        <div className="mx-auto max-w-3xl px-4 sm:px-6">
+          <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
+            {t("introTitle")}
+          </h2>
+          <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/70 sm:text-base">
+            <p>{t("introText1")}</p>
+            <p>{t("introText2")}</p>
+            <p>{t("introText3")}</p>
+          </div>
+        </div>
+      </section>
+
       {/* ── Features (6 cards, no duplicates with Why section) ── */}
       <section className="bg-surface-muted py-12 sm:py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
