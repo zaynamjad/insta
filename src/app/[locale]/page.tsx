@@ -4,6 +4,7 @@ import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { StoryTool } from "@/components/story-tool/StoryTool";
 import { FeaturedCarousel } from "@/components/story-tool/FeaturedCarousel";
+import { HeroBlob3DLazy } from "@/components/HeroBlob3DLazy";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
 import { softwareApplicationSchema } from "@/lib/seo/schema";
@@ -75,6 +76,12 @@ export default async function HomePage({ params }: Props) {
           aria-hidden
           className="pointer-events-none absolute -top-20 left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full opacity-15 blur-3xl brand-gradient -z-10 sm:-top-40 sm:h-[480px] sm:w-[900px] sm:opacity-20"
         />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -top-4 right-0 -z-10 hidden h-[440px] w-[440px] [mask-image:radial-gradient(circle,black_45%,transparent_75%)] lg:block"
+        >
+          <HeroBlob3DLazy />
+        </div>
         <div className="relative mx-auto max-w-6xl px-4 pt-6 pb-10 sm:px-6 sm:pt-8 sm:pb-14 lg:flex lg:items-center lg:gap-12 lg:py-16">
           <Image
             src="/mascot.png"

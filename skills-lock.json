@@ -1,6 +1,18 @@
 {
   "version": 1,
   "skills": {
+    "3d-web-experience": {
+      "source": "sickn33/agentic-awesome-skills",
+      "sourceType": "github",
+      "skillPath": "skills/3d-web-experience/SKILL.md",
+      "computedHash": "ece6cc650690490b73b5fbe5870a0f9a83db1143720b0a7567d7c34a33a88787"
+    },
+    "threejs": {
+      "source": "nexu-io/open-design",
+      "sourceType": "github",
+      "skillPath": "skills/threejs/SKILL.md",
+      "computedHash": "96e60649f319bafa0c9f952d6f0e306c2e52bdf07cb9db736c55456b9a5566fa"
+    },
     "ui-ux-pro-max": {
       "source": "nextlevelbuilder/ui-ux-pro-max-skill",
       "sourceType": "github",
