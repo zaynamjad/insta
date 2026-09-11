@@ -8,46 +8,46 @@ export async function Footer() {
 
   return (
     <footer className="mt-12 border-t border-border bg-surface-muted sm:mt-20">
-      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="flex flex-col items-center gap-5 text-center sm:flex-row sm:items-start sm:justify-between sm:gap-6 sm:text-left">
-          <div className="flex flex-col items-center sm:items-start">
-            <Image
-              src="/logo.png"
-              alt={SITE_NAME}
-              width={500}
-              height={250}
-              className="logo-light h-12 w-auto sm:h-16"
-            />
-            <Image
-              src="/logo-dark.png"
-              alt={SITE_NAME}
-              width={500}
-              height={250}
-              className="logo-dark h-12 w-auto sm:h-16"
-            />
-            <p className="mt-2 max-w-xs text-xs text-foreground/65 sm:text-sm">
-              {t("tagline")}
-            </p>
-          </div>
+      <div className="mx-auto max-w-4xl px-4 py-10 text-center sm:px-6 sm:py-14">
+        <Link href="/" className="inline-flex flex-col items-center">
+          <Image
+            src="/logo.png"
+            alt={SITE_NAME}
+            width={500}
+            height={250}
+            className="logo-light h-12 w-auto sm:h-16"
+          />
+          <Image
+            src="/logo-dark.png"
+            alt={SITE_NAME}
+            width={500}
+            height={250}
+            className="logo-dark h-12 w-auto sm:h-16"
+          />
+        </Link>
+        <p className="mx-auto mt-3 max-w-sm text-sm leading-relaxed text-foreground/65">
+          {t("tagline")}
+        </p>
 
-          <nav aria-label="Footer">
-            <ul className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 sm:justify-end sm:gap-x-5">
-              {FOOTER_COMPANY_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-xs text-foreground/65 transition-colors hover:text-foreground sm:text-sm"
-                  >
-                    {t(link.key)}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
+        <nav aria-label="Footer" className="mt-6">
+          <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2.5">
+            {FOOTER_COMPANY_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className="text-sm font-medium text-foreground/65 transition-colors hover:text-accent"
+                >
+                  {t(link.key)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        <div className="mx-auto mt-8 h-px w-16 rounded-full brand-gradient sm:mt-10" />
 
         {/* Highlighted Disclaimer & Security Banner */}
-        <div className="mt-6 rounded-2xl border border-accent/25 bg-accent/5 p-4 shadow-sm sm:mt-8 sm:p-5">
+        <div className="mt-8 rounded-2xl border border-accent/25 bg-accent/5 p-4 text-left shadow-sm sm:p-5">
           <div className="flex items-start gap-3">
             <svg
               className="mt-0.5 h-4 w-4 shrink-0 text-accent sm:h-5 sm:w-5"
@@ -70,7 +70,7 @@ export async function Footer() {
           </div>
         </div>
 
-        <p className="mt-5 text-center text-xs font-medium text-foreground/50 sm:mt-6 sm:text-left">
+        <p className="mt-6 text-xs font-medium text-foreground/50">
           {t("copyright", { year: new Date().getFullYear(), siteName: SITE_NAME })}
         </p>
       </div>
