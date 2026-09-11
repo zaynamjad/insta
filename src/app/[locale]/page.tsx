@@ -132,14 +132,24 @@ export default async function HomePage({ params }: Props) {
           aria-hidden
           className="pointer-events-none absolute -top-10 left-1/2 h-[240px] w-[480px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-14 sm:h-[320px] sm:w-[680px] sm:opacity-15"
         />
-        <div className="mx-auto max-w-3xl px-4 sm:px-6">
-          <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
-            {t("introTitle")}
-          </h2>
-          <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/70 sm:text-base">
-            <p>{t("introText1")}</p>
-            <p>{t("introText2")}</p>
-            <p>{t("introText3")}</p>
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:flex lg:items-center lg:gap-10">
+          <Image
+            src="/anom.png"
+            alt=""
+            width={1254}
+            height={1254}
+            className="order-first mx-auto w-56 shrink-0 sm:w-72 lg:order-last lg:mx-0 lg:w-[360px]"
+            sizes="(min-width: 1024px) 360px, 288px"
+          />
+          <div className="mt-6 lg:mt-0 lg:flex-1">
+            <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
+              {t("introTitle")}
+            </h2>
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-foreground/70 sm:text-base">
+              <p>{t("introText1")}</p>
+              <p>{t("introText2")}</p>
+              <p>{t("introText3")}</p>
+            </div>
           </div>
         </div>
       </section>
