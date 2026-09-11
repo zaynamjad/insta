@@ -19,23 +19,23 @@ export function Faq({
       <h2 id="faq-heading" className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
         {title}
       </h2>
-      <div className="mt-6 divide-y divide-border rounded-2xl border border-border bg-surface">
+      <div className="mt-6 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
         {items.map((item, index) => {
           const open = openIndex === index;
           return (
-            <div key={item.question}>
+            <div key={item.question} className="group">
               <button
                 type="button"
                 onClick={() => setOpenIndex(open ? null : index)}
                 aria-expanded={open}
-                className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left sm:gap-4 sm:px-5"
+                className="flex w-full items-center justify-between gap-3 px-4 py-4 text-left transition-colors duration-200 hover:bg-surface-muted/60 sm:gap-4 sm:px-5"
               >
-                <span className="min-w-0 break-words font-medium text-foreground">
+                <span className="min-w-0 break-words font-medium text-foreground transition-colors duration-200 group-hover:text-accent">
                   {item.question}
                 </span>
                 <span
                   aria-hidden
-                  className={`shrink-0 text-foreground/50 transition-transform ${
+                  className={`shrink-0 text-foreground/50 transition-all duration-200 group-hover:text-accent ${
                     open ? "rotate-45" : ""
                   }`}
                 >

@@ -55,9 +55,9 @@ export function FeaturedCarousel() {
               key={`${item.meta.username}-${i}`}
               onClick={() => triggerSearch(item.meta.username)}
               aria-label={`View ${item.meta.displayName}'s public profile`}
-              className="flex w-36 shrink-0 flex-col items-center gap-2.5 text-center"
+              className="group flex w-36 shrink-0 flex-col items-center gap-2.5 text-center"
             >
-              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full brand-gradient p-[3px]">
+              <div className="h-24 w-24 shrink-0 overflow-hidden rounded-full brand-gradient p-[3px] shadow-sm transition-all duration-300 group-hover:-translate-y-1 group-hover:shadow-lg group-hover:shadow-accent/20">
                 <div className="h-full w-full overflow-hidden rounded-full bg-surface">
                   {avatar ? (
                     <Image
@@ -66,7 +66,7 @@ export function FeaturedCarousel() {
                       width={96}
                       height={96}
                       unoptimized
-                      className="h-full w-full object-cover"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                   ) : (
                     <div className="flex h-full w-full items-center justify-center text-lg font-semibold text-foreground/40">
@@ -75,7 +75,7 @@ export function FeaturedCarousel() {
                   )}
                 </div>
               </div>
-              <p className="w-full truncate text-sm font-semibold text-foreground">{name}</p>
+              <p className="w-full truncate text-sm font-semibold text-foreground transition-colors duration-200 group-hover:text-accent">{name}</p>
               <p className="text-xs text-foreground/50">{followers} followers</p>
             </button>
           );
