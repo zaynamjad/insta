@@ -73,7 +73,7 @@ export default async function HomePage({ params }: Props) {
       <section id="search" className="relative">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-20 left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full opacity-15 blur-3xl brand-gradient sm:-top-40 sm:h-[480px] sm:w-[900px] sm:opacity-20"
+          className="pointer-events-none absolute -top-20 left-1/2 h-[320px] w-[600px] -translate-x-1/2 rounded-full opacity-15 blur-3xl brand-gradient -z-10 sm:-top-40 sm:h-[480px] sm:w-[900px] sm:opacity-20"
         />
         <div className="relative mx-auto max-w-6xl px-4 pt-6 pb-10 sm:px-6 sm:pt-8 sm:pb-14 lg:flex lg:items-center lg:gap-12 lg:py-16">
           <Image
@@ -161,7 +161,7 @@ export default async function HomePage({ params }: Props) {
       <section id="how-it-works" className="relative mx-auto max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-10 left-1/2 h-[260px] w-[520px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient sm:-top-16 sm:h-[360px] sm:w-[760px] sm:opacity-15"
+          className="pointer-events-none absolute -top-10 left-1/2 h-[260px] w-[520px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-16 sm:h-[360px] sm:w-[760px] sm:opacity-15"
         />
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
@@ -241,7 +241,7 @@ export default async function HomePage({ params }: Props) {
       <section id="contact" className="relative py-12 sm:py-16">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-10 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient sm:-top-14 sm:h-[300px] sm:w-[620px] sm:opacity-15"
+          className="pointer-events-none absolute -top-10 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-14 sm:h-[300px] sm:w-[620px] sm:opacity-15"
         />
         <div className="mx-auto max-w-xl px-4 text-center sm:px-6">
           <h2 className="text-xl font-bold tracking-tight sm:text-2xl lg:text-3xl">
@@ -274,7 +274,7 @@ export default async function HomePage({ params }: Props) {
       <section className="relative mx-auto max-w-3xl px-4 py-12 sm:px-6 sm:py-16">
         <div
           aria-hidden
-          className="pointer-events-none absolute -top-8 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient sm:-top-12 sm:h-[300px] sm:w-[620px] sm:opacity-15"
+          className="pointer-events-none absolute -top-8 left-1/2 h-[220px] w-[440px] -translate-x-1/2 rounded-full opacity-10 blur-3xl brand-gradient -z-10 sm:-top-12 sm:h-[300px] sm:w-[620px] sm:opacity-15"
         />
         <div className="flex flex-col items-center gap-5 rounded-3xl border border-border bg-surface p-6 sm:flex-row sm:gap-8 sm:p-8">
           <Image
