@@ -57,24 +57,9 @@ export function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t("label")}
-        className="flex h-10 items-center gap-1.5 rounded-full border border-border bg-surface pl-3 pr-2.5 text-sm font-medium text-foreground/80 outline-none transition-colors hover:text-foreground"
+        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface outline-none transition-colors hover:border-foreground/30 sm:h-10 sm:w-10"
       >
-        <FlagIcon countryCode={current.countryCode} />
-        <span>{current.displayCode ?? current.countryCode}</span>
-        <svg
-          aria-hidden
-          width="14"
-          height="14"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={`text-foreground/50 transition-transform ${open ? "rotate-180" : ""}`}
-        >
-          <path d="m6 9 6 6 6-6" />
-        </svg>
+        <FlagIcon countryCode={current.countryCode} className="h-5 w-7 rounded-[3px] object-cover" />
       </button>
 
       {open && (
