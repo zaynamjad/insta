@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
-import { NAV_LINKS } from "@/lib/site";
 import { LOCALES } from "@/i18n/locales";
 import { switchLocale } from "@/lib/switch-locale";
 import { FlagIcon } from "@/components/FlagIcon";
@@ -83,17 +82,8 @@ export function MobileNav() {
               >
                 {t("Header.viewStories")}
               </Link>
-              {NAV_LINKS.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="rounded-xl px-4 py-3.5 text-base font-medium text-foreground/80 active:bg-surface-muted"
-                >
-                  {t(`Nav.${link.key}`)}
-                </Link>
-              ))}
 
-              <p className="mt-4 px-4 text-xs font-semibold uppercase tracking-wide text-foreground/45">
+              <p className="mt-2 px-4 text-xs font-semibold uppercase tracking-wide text-foreground/45">
                 {t("LanguageSwitcher.label")}
               </p>
               <div className="mt-2 px-4">
