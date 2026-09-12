@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
-import { LOCALES } from "@/i18n/locales";
+import { LOCALES, getLocaleMeta } from "@/i18n/locales";
 import { switchLocale } from "@/lib/switch-locale";
 import { FlagIcon } from "@/components/FlagIcon";
 
@@ -23,6 +23,8 @@ export function MobileNav() {
     setLastPathname(pathname);
     setOpen(false);
   }
+
+  const current = getLocaleMeta(locale);
 
   const langQ = langQuery.trim().toLowerCase();
   const filteredLocales = langQ
@@ -50,17 +52,10 @@ export function MobileNav() {
         aria-expanded={open}
         aria-controls="mobile-nav-panel"
         aria-label={open ? t("MobileNav.closeMenu") : t("MobileNav.openMenu")}
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border text-foreground/80 active:scale-95"
+        className="flex h-11 shrink-0 items-center gap-1.5 rounded-full border border-border bg-surface px-3 text-sm font-medium text-foreground/80 active:scale-95"
       >
-        {open ? (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M18 6 6 18M6 6l12 12" />
-          </svg>
-        ) : (
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-            <path d="M4 7h16M4 12h16M4 17h16" />
-          </svg>
-        )}
+        <FlagIcon countryCode={current.countryCode} className="h-5 w-7 rounded-[3px] object-cover" />
+        <span>{current.displayCode ?? current.countryCode}</span>
       </button>
 
       {open && (
