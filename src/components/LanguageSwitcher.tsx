@@ -57,9 +57,10 @@ export function LanguageSwitcher() {
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t("label")}
-        className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-surface outline-none transition-colors hover:border-foreground/30 sm:h-10 sm:w-10"
+        className="flex h-11 shrink-0 items-center gap-1.5 rounded-full border border-border bg-surface px-3 text-sm font-medium text-foreground/80 outline-none transition-colors hover:border-foreground/30 hover:text-foreground sm:h-10"
       >
         <FlagIcon countryCode={current.countryCode} className="h-5 w-7 rounded-[3px] object-cover" />
+        <span>{current.displayCode ?? current.countryCode}</span>
       </button>
 
       {open && (
