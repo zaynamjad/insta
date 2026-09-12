@@ -2,7 +2,6 @@ import Image from "next/image";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { SITE_NAME } from "@/lib/site";
-import { MobileNav } from "@/components/MobileNav";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 
@@ -40,7 +39,6 @@ export async function Header() {
           >
             {t("viewStories")}
           </Link>
-          <MobileNav />
         </div>
       </div>
     </header>

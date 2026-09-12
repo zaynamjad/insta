@@ -50,7 +50,7 @@ export function LanguageSwitcher() {
     : LOCALES;
 
   return (
-    <div ref={rootRef} className="relative hidden shrink-0 items-center md:flex">
+    <div ref={rootRef} className="relative flex shrink-0 items-center">
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
