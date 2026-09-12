@@ -1,7 +1,7 @@
 export const SITE_NAME = "InstaViewStories";
 export const SITE_TAGLINE = "Simple, Fast and Free Instagram Story Viewer";
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://www.instaviewstories.com"
+  process.env.NEXT_PUBLIC_SITE_URL || "https://instaviewstories.com"
 ).replace(/\/$/, "");
 
 export const SITE_DESCRIPTION =
