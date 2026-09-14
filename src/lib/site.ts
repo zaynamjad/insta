@@ -25,9 +25,9 @@ export const NAV_LINKS = [
 ] as const;
 
 export const FOOTER_COMPANY_LINKS = [
-  { href: "/about/", key: "linkAbout" },
-  { href: "/contact/", key: "linkContact" },
+  { href: "/about-us/", key: "linkAbout" },
+  { href: "/contact-us/", key: "linkContact" },
   { href: "/privacy-policy/", key: "linkPrivacy" },
-  { href: "/terms-condition/", key: "linkTerms" },
+  { href: "/terms-and-conditions/", key: "linkTerms" },
   { href: "/disclaimer/", key: "linkDisclaimer" },
 ] as const;

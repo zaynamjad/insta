@@ -153,7 +153,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
           <p className="mt-3">
             {t.rich("contactVisit", {
               contactLink: (chunks) => (
-                <Link href="/contact/" className="text-accent hover:underline">
+                <Link href="/contact-us/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),
@@ -162,12 +162,12 @@ export default async function PrivacyPolicyPage({ params }: Props) {
           <p className="mt-2">
             {t.rich("contactMore", {
               aboutLink: (chunks) => (
-                <Link href="/about/" className="text-accent hover:underline">
+                <Link href="/about-us/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),
               termsLink: (chunks) => (
-                <Link href="/terms-condition/" className="text-accent hover:underline">
+                <Link href="/terms-and-conditions/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),

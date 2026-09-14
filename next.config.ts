@@ -12,8 +12,14 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
-      { source: "/terms", destination: "/terms-condition", permanent: true },
-      { source: "/:locale/terms", destination: "/:locale/terms-condition", permanent: true },
+      { source: "/terms", destination: "/terms-and-conditions", permanent: true },
+      { source: "/:locale/terms", destination: "/:locale/terms-and-conditions", permanent: true },
+      { source: "/terms-condition", destination: "/terms-and-conditions", permanent: true },
+      { source: "/:locale/terms-condition", destination: "/:locale/terms-and-conditions", permanent: true },
+      { source: "/about", destination: "/about-us", permanent: true },
+      { source: "/:locale/about", destination: "/:locale/about-us", permanent: true },
+      { source: "/contact", destination: "/contact-us", permanent: true },
+      { source: "/:locale/contact", destination: "/:locale/contact-us", permanent: true },
     ];
   },
 };

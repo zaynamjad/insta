@@ -7,7 +7,7 @@ import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-type Props = PageProps<"/[locale]/contact">;
+type Props = PageProps<"/[locale]/contact-us">;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -15,9 +15,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: t("metaTitle"),
     description: t("metaDescription"),
-    path: "/contact/",
-    localizedPath: getPathname({ href: "/contact", locale }),
-    languageAlternates: buildLanguageAlternates("/contact"),
+    path: "/contact-us/",
+    localizedPath: getPathname({ href: "/contact-us", locale }),
+    languageAlternates: buildLanguageAlternates("/contact-us"),
   });
 }
 
@@ -27,7 +27,7 @@ export default async function ContactPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6 sm:py-14">
-      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/contact/" }]} />
+      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/contact-us/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1")}
       </h1>
@@ -71,7 +71,7 @@ export default async function ContactPage({ params }: Props) {
         <p>{t("helpfulIntro")}</p>
         <ul className="list-disc space-y-2 pl-5">
           <li>
-            <Link href="/about/" className="font-semibold text-accent hover:underline">
+            <Link href="/about-us/" className="font-semibold text-accent hover:underline">
               {t("helpfulAboutLabel")}
             </Link>{" "}
             — {t("helpfulAboutText")}
@@ -83,7 +83,7 @@ export default async function ContactPage({ params }: Props) {
             — {t("helpfulPrivacyText")}
           </li>
           <li>
-            <Link href="/terms-condition/" className="font-semibold text-accent hover:underline">
+            <Link href="/terms-and-conditions/" className="font-semibold text-accent hover:underline">
               {t("helpfulTermsLabel")}
             </Link>{" "}
             — {t("helpfulTermsText")}

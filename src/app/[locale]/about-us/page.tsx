@@ -7,7 +7,7 @@ import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-type Props = PageProps<"/[locale]/about">;
+type Props = PageProps<"/[locale]/about-us">;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
@@ -15,9 +15,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: t("metaTitle"),
     description: t("metaDescription"),
-    path: "/about/",
-    localizedPath: getPathname({ href: "/about", locale }),
-    languageAlternates: buildLanguageAlternates("/about"),
+    path: "/about-us/",
+    localizedPath: getPathname({ href: "/about-us", locale }),
+    languageAlternates: buildLanguageAlternates("/about-us"),
   });
 }
 
@@ -27,7 +27,7 @@ export default async function AboutPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
-      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/about/" }]} />
+      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/about-us/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1")}
       </h1>
@@ -98,7 +98,7 @@ export default async function AboutPage({ params }: Props) {
         <p>
           {t.rich("commitmentText3", {
             termsLink: (chunks) => (
-              <Link href="/terms-condition/" className="text-accent hover:underline">
+              <Link href="/terms-and-conditions/" className="text-accent hover:underline">
                 {chunks}
               </Link>
             ),
@@ -115,7 +115,7 @@ export default async function AboutPage({ params }: Props) {
         <p>
           {t.rich("contactText2", {
             contactLink: (chunks) => (
-              <Link href="/contact/" className="text-accent hover:underline">
+              <Link href="/contact-us/" className="text-accent hover:underline">
                 {chunks}
               </Link>
             ),

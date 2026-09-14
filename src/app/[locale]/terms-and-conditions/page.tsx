@@ -7,7 +7,7 @@ import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-type Props = PageProps<"/[locale]/terms-condition">;
+type Props = PageProps<"/[locale]/terms-and-conditions">;
 
 const LAST_UPDATED = "August 25, 2026";
 
@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: t("metaTitle"),
     description: t("metaDescription"),
-    path: "/terms-condition/",
-    localizedPath: getPathname({ href: "/terms-condition", locale }),
-    languageAlternates: buildLanguageAlternates("/terms-condition"),
+    path: "/terms-and-conditions/",
+    localizedPath: getPathname({ href: "/terms-and-conditions", locale }),
+    languageAlternates: buildLanguageAlternates("/terms-and-conditions"),
   });
 }
 
@@ -29,7 +29,7 @@ export default async function TermsPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
-      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/terms-condition/" }]} />
+      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/terms-and-conditions/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1")}
       </h1>
@@ -181,7 +181,7 @@ export default async function TermsPage({ params }: Props) {
           <p className="mt-3">
             {t.rich("contactVisit", {
               contactLink: (chunks) => (
-                <Link href="/contact/" className="text-accent hover:underline">
+                <Link href="/contact-us/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),
@@ -190,7 +190,7 @@ export default async function TermsPage({ params }: Props) {
           <p className="mt-2">
             {t.rich("contactMore", {
               aboutLink: (chunks) => (
-                <Link href="/about/" className="text-accent hover:underline">
+                <Link href="/about-us/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),
