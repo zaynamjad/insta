@@ -43,8 +43,8 @@
     "button": "Otvoriť prehliadač príbehov"
   },
   "HomePage": {
-    "metaTitle": "Anonymný prehliadač Instagram príbehov | Prehliadač a sťahovač IG príbehov",
-    "metaDescription": "Prehliadač Instagram príbehov vám umožní anonymne sledovať príbehy, profily, fotografie, videá, Reels a zvýraznené príbehy. Stiahnite si obsah jedným kliknutím na akomkoľvek zariadení. Bez registrácie.",
+    "metaTitle": "Anonymný prehliadač Instagram Stories",
+    "metaDescription": "Prehliadač Instagram príbehov vám umožní anonymne sledovať príbehy, profily, fotografie, videá, Reels a zvýraznené príbehy.",
     "heroEyebrow": "Anonymný prehliadač Instagram príbehov",
     "badgeFree": "100 % zadarmo",
     "badgeNoRegistration": "Registrácia nie je potrebná",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Prihlásenie do Instagramu nie je potrebné · Iba verejné profily"
   },
   "AboutPage": {
-    "metaTitle": "O nás InstaView Stories | Prehliadač Instagram príbehov",
-    "metaDescription": "Zistite viac o nás – InstaView Stories, jednoduchom prehliadači Instagram príbehov na preskúmanie verejných príbehov, profilov, zvýraznených príbehov, príspevkov, fotografií, videí a Reels na Instagrame.",
+    "metaTitle": "O nás",
+    "metaDescription": "Zistite viac o nás – InstaView Stories, jednoduchom prehliadači Instagram príbehov na preskúmanie verejných príbehov, profilov, zvýraznených príbehov,",
     "breadcrumb": "O nás",
     "h1": "O nás",
     "intro1": "Vitajte v InstaView Stories, jednoduchej online platforme navrhnutej na to, aby pomohla používateľom preskúmať verejne dostupný obsah na Instagrame z jedného pohodlného miesta.",
@@ -200,8 +200,8 @@
     "contactText3": "Vítame spätnú väzbu a návrhy, ktoré nám môžu pomôcť zlepšiť InstaView Stories a poskytnúť našim používateľom lepšie prostredie."
   },
   "ContactPage": {
-    "metaTitle": "Kontaktujte nás InstaView Stories | Podpora prehliadača Instagram príbehov",
-    "metaDescription": "Kontaktujte InstaView Stories s otázkami, spätnou väzbou alebo požiadavkami o podporu týkajúcimi sa nášho prehliadača Instagram príbehov, verejných príbehov, profilov, zvýraznených príbehov, príspevkov, Reels a sťahovania.",
+    "metaTitle": "Kontakt a podpora",
+    "metaDescription": "Kontaktujte InstaView Stories s otázkami, spätnou väzbou alebo požiadavkami o podporu týkajúcimi sa nášho prehliadača Instagram príbehov,",
     "breadcrumb": "Kontakt",
     "h1": "Kontaktujte nás",
     "intro1": "Máte otázku týkajúcu sa InstaView Stories, nášho prehliadača Instagram príbehov, alebo akejkoľvek funkcie dostupnej na našej webovej stránke? Sme tu, aby sme vám pomohli.",
@@ -239,8 +239,8 @@
     "privacyNote": "Pre žiadosti súvisiace so súkromím si pozrite naše <privacyLink>Zásady ochrany osobných údajov</privacyLink>, kde zistíte, ako nás kontaktovať ohľadom vašich údajov."
   },
   "DisclaimerPage": {
-    "metaTitle": "Vyhlásenie o odmietnutí zodpovednosti InstaView Stories | Prehliadač Instagram príbehov",
-    "metaDescription": "Prečítajte si Vyhlásenie o odmietnutí zodpovednosti InstaView Stories s informáciami o verejnom obsahu na Instagrame, funkciách prehliadača Instagram príbehov, sťahovaní, obsahu tretích strán a obmedzeniach služby.",
+    "metaTitle": "Vyhlásenie o vylúčení zodpovednosti",
+    "metaDescription": "Prečítajte si Vyhlásenie o odmietnutí zodpovednosti InstaView Stories s informáciami o verejnom obsahu na Instagrame, funkciách prehliadača Instagram.",
     "breadcrumb": "Vyhlásenie o odmietnutí zodpovednosti",
     "h1": "Vyhlásenie o odmietnutí zodpovednosti",
     "intro1": "Informácie a služby poskytované na InstaView Stories, dostupnom na instaviewstories.com, slúžia iba na všeobecné informačné a praktické účely.",
@@ -285,8 +285,8 @@
     "contactMore": "Pre ďalšie informácie si pozrite naše stránky <aboutLink>O nás</aboutLink>, <privacyLink>Zásady ochrany osobných údajov</privacyLink> a <termsLink>Podmienky používania</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Zásady ochrany osobných údajov InstaView Stories | Prehliadač Instagram príbehov",
-    "metaDescription": "Prečítajte si Zásady ochrany osobných údajov InstaView Stories a zistite, ako sú spracúvané informácie pri používaní nášho prehliadača Instagram príbehov na preskúmanie verejných príbehov, profilov, zvýraznených príbehov, príspevkov a Reels na Instagrame.",
+    "metaTitle": "Zásady ochrany osobných údajov",
+    "metaDescription": "Prečítajte si Zásady ochrany osobných údajov InstaView Stories a zistite, ako sú spracúvané informácie pri používaní nášho prehliadača Instagram príbehov.",
     "breadcrumb": "Zásady ochrany osobných údajov",
     "h1": "Zásady ochrany osobných údajov",
     "lastUpdated": "Naposledy aktualizované: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Pre viac informácií o našej webovej stránke a službe navštívte <aboutLink>O nás</aboutLink>. Môžete si tiež pozrieť naše <termsLink>Podmienky používania</termsLink> a <disclaimerLink>Vyhlásenie o odmietnutí zodpovednosti</disclaimerLink>."
   },
   "TermsPage": {
-    "metaTitle": "Podmienky používania InstaView Stories | Prehliadač Instagram príbehov",
-    "metaDescription": "Prečítajte si Podmienky používania InstaView Stories vrátane pravidiel pre používanie nášho prehliadača Instagram príbehov, verejného obsahu na Instagrame, sťahovania, súkromia a obsahu tretích strán.",
+    "metaTitle": "Podmienky používania",
+    "metaDescription": "Prečítajte si Podmienky používania InstaView Stories vrátane pravidiel pre používanie nášho prehliadača Instagram príbehov, verejného obsahu na Instagrame,",
     "breadcrumb": "Podmienky používania",
     "h1": "Podmienky používania",
     "lastUpdated": "Naposledy aktualizované: {date}",

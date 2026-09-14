@@ -43,8 +43,8 @@
     "button": "කථා දර්ශකය විවෘත කරන්න"
   },
   "HomePage": {
-    "metaTitle": "නිර්නාමික Instagram කථා දර්ශකය | IG කථා දර්ශකය සහ බාගැනීම් මෙවලම",
-    "metaDescription": "Instagram Story Viewer මඟින් ඔබට කථා, පැතිකඩ, ඡායාරූප, වීඩියෝ, Reels සහ විශේෂාංග නිර්නාමිකව බැලීමට හැකි වේ. ඕනෑම උපාංගයක එක් ක්ලික් කිරීමකින් බාගන්න. ලියාපදිංචියක් නොමැතිව.",
+    "metaTitle": "නිර්නාමික Instagram Story නරඹන්නා",
+    "metaDescription": "Instagram Story Viewer මඟින් ඔබට කථා, පැතිකඩ, ඡායාරූප, වීඩියෝ, Reels සහ විශේෂාංග නිර්නාමිකව බැලීමට හැකි වේ. ඕනෑම උපාංගයක එක් ක්ලික් කිරීමකින් බාගන්න.",
     "heroEyebrow": "නිර්නාමික Instagram Story Viewer",
     "badgeFree": "100% නොමිලේ",
     "badgeNoRegistration": "ලියාපදිංචිය අවශ්‍ය නොවේ",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Instagram පිවිසුමක් අවශ්‍ය නොවේ · පොදු පැතිකඩ පමණි"
   },
   "AboutPage": {
-    "metaTitle": "අප ගැන InstaView Stories | Instagram කථා දර්ශකය",
-    "metaDescription": "පොදු Instagram කථා, පැතිකඩ, විශේෂාංග, පළකිරීම්, ඡායාරූප, වීඩියෝ සහ Reels ගවේෂණය කිරීම සඳහා වූ සරල Instagram කථා දර්ශකයක් වන InstaView Stories පිළිබඳ තව දැන ගන්න.",
+    "metaTitle": "අප ගැන",
+    "metaDescription": "පොදු Instagram කථා, පැතිකඩ, විශේෂාංග, පළකිරීම්, ඡායාරූප, වීඩියෝ සහ Reels ගවේෂණය කිරීම සඳහා වූ සරල Instagram කථා දර්ශකයක් වන InstaView Stories පිළිබඳ තව.",
     "breadcrumb": "අප ගැන",
     "h1": "අප ගැන",
     "intro1": "පොදු වශයෙන් ලබාගත හැකි Instagram අන්තර්ගතය එක් පහසු ස්ථානයකින් ගවේෂණය කිරීමට පරිශීලකයන්ට උපකාර වීම සඳහා නිර්මාණය කරන ලද සරල අන්තර්ජාල වේදිකාවක් වන InstaView Stories වෙත සාදරයෙන් පිළිගනිමු.",
@@ -200,7 +200,7 @@
     "contactText3": "InstaView Stories වැඩිදියුණු කිරීමට සහ අපගේ පරිශීලකයන්ට වඩා හොඳ අත්දැකීමක් ලබා දීමට උපකාර විය හැකි ප්‍රතිපෝෂණ සහ යෝජනා අපි සාදරයෙන් පිළිගනිමු."
   },
   "ContactPage": {
-    "metaTitle": "සම්බන්ධ වන්න InstaView Stories | Instagram කථා දර්ශකයේ සහාය",
+    "metaTitle": "සම්බන්ධතා සහ සහාය",
     "metaDescription": "අපගේ Instagram කථා දර්ශකය, පොදු කථා, පැතිකඩ, විශේෂාංග, පළකිරීම්, Reels සහ බාගැනීම් පිළිබඳ ප්‍රශ්න, ප්‍රතිපෝෂණ, හෝ සහාය සඳහා InstaView Stories අමතන්න.",
     "breadcrumb": "සම්බන්ධ වන්න",
     "h1": "අප හා සම්බන්ධ වන්න",
@@ -239,8 +239,8 @@
     "privacyNote": "පෞද්ගලිකත්ව-සම්බන්ධ ඉල්ලීම් සඳහා, ඔබේ දත්ත පිළිබඳව අප හා සම්බන්ධ වන්නේ කෙසේද යන්න දැන ගැනීමට අපගේ <privacyLink>පෞද්ගලිකත්ව ප්‍රතිපත්තිය</privacyLink> බලන්න."
   },
   "DisclaimerPage": {
-    "metaTitle": "වගකීම් ප්‍රතික්ෂේපය InstaView Stories | Instagram කථා දර්ශකය",
-    "metaDescription": "පොදු Instagram අන්තර්ගතය, Instagram කථා දර්ශකයේ විශේෂාංග, බාගැනීම්, තෙවන පාර්ශව අන්තර්ගතය, සහ සේවා සීමාවන් පිළිබඳ තොරතුරු සඳහා InstaView Stories වගකීම් ප්‍රතික්ෂේපය කියවන්න.",
+    "metaTitle": "වගකීම් ප්‍රතික්ෂේපය",
+    "metaDescription": "පොදු Instagram අන්තර්ගතය, Instagram කථා දර්ශකයේ විශේෂාංග, බාගැනීම්, තෙවන පාර්ශව අන්තර්ගතය, සහ සේවා සීමාවන් පිළිබඳ තොරතුරු සඳහා InstaView Stories වගකීම්.",
     "breadcrumb": "වගකීම් ප්‍රතික්ෂේපය",
     "h1": "වගකීම් ප්‍රතික්ෂේපය",
     "intro1": "instaviewstories.com හි ලබාගත හැකි InstaView Stories මත සපයනු ලබන තොරතුරු සහ සේවාවන් සපයනු ලබන්නේ පොදු තොරතුරු සහ පහසුව සඳහා පමණි.",
@@ -285,8 +285,8 @@
     "contactMore": "අමතර තොරතුරු සඳහා, කරුණාකර අපගේ <aboutLink>අප ගැන</aboutLink>, <privacyLink>පෞද්ගලිකත්ව ප්‍රතිපත්තිය</privacyLink>, සහ <termsLink>භාවිත කොන්දේසි</termsLink> පිරික්සන්න."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "පෞද්ගලිකත්ව ප්‍රතිපත්තිය InstaView Stories | Instagram කථා දර්ශකය",
-    "metaDescription": "පොදු Instagram කථා, පැතිකඩ, විශේෂාංග, පළකිරීම් සහ Reels ගවේෂණය කිරීමට අපගේ Instagram කථා දර්ශකය භාවිතා කිරීමේදී තොරතුරු හසුරුවන ආකාරය දැන ගැනීමට InstaView Stories පෞද්ගලිකත්ව ප්‍රතිපත්තිය කියවන්න.",
+    "metaTitle": "පෞද්ගලිකත්ව ප්‍රතිපත්තිය",
+    "metaDescription": "පොදු Instagram කථා, පැතිකඩ, විශේෂාංග, පළකිරීම් සහ Reels ගවේෂණය කිරීමට අපගේ Instagram කථා දර්ශකය භාවිතා කිරීමේදී තොරතුරු හසුරුවන ආකාරය දැන ගැනීමට InstaView.",
     "breadcrumb": "පෞද්ගලිකත්ව ප්‍රතිපත්තිය",
     "h1": "පෞද්ගලිකත්ව ප්‍රතිපත්තිය",
     "lastUpdated": "අවසන් වරට යාවත්කාලීන කළේ: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "අපගේ වෙබ් අඩවිය සහ සේවාව පිළිබඳ වැඩි විස්තර සඳහා, <aboutLink>අප ගැන</aboutLink> වෙත පිවිසෙන්න. ඔබට අපගේ <termsLink>භාවිත කොන්දේසි</termsLink> සහ <disclaimerLink>වගකීම් ප්‍රතික්ෂේපය</disclaimerLink> ද පිරික්සිය හැක."
   },
   "TermsPage": {
-    "metaTitle": "භාවිත කොන්දේසි InstaView Stories | Instagram කථා දර්ශකය",
-    "metaDescription": "අපගේ Instagram කථා දර්ශකය, පොදු Instagram අන්තර්ගතය, බාගැනීම්, පෞද්ගලිකත්වය, සහ තෙවන පාර්ශව අන්තර්ගතය භාවිතා කිරීම සඳහා වූ නීති ඇතුළුව InstaView Stories සඳහා වූ භාවිත කොන්දේසි කියවන්න.",
+    "metaTitle": "භාවිත නියමයන්",
+    "metaDescription": "අපගේ Instagram කථා දර්ශකය, පොදු Instagram අන්තර්ගතය, බාගැනීම්, පෞද්ගලිකත්වය, සහ තෙවන පාර්ශව අන්තර්ගතය භාවිතා කිරීම සඳහා වූ නීති ඇතුළුව InstaView Stories.",
     "breadcrumb": "භාවිත කොන්දේසි",
     "h1": "භාවිත කොන්දේසි",
     "lastUpdated": "අවසන් වරට යාවත්කාලීන කළේ: {date}",

@@ -43,8 +43,8 @@
     "button": "Otvori preglednik priča"
   },
   "HomePage": {
-    "metaTitle": "Anonimni Instagram preglednik priča | IG preglednik i preuzimanje priča",
-    "metaDescription": "Instagram preglednik priča omogućuje anonimno gledanje priča, profila, fotografija, videozapisa, Reelsa i istaknutih priča. Preuzmite jednim klikom na bilo kojem uređaju. Bez registracije.",
+    "metaTitle": "Anonimni preglednik Instagram priča",
+    "metaDescription": "Instagram preglednik priča omogućuje anonimno gledanje priča, profila, fotografija, videozapisa, Reelsa i istaknutih priča.",
     "heroEyebrow": "Anonimni Instagram preglednik priča",
     "badgeFree": "100% besplatno",
     "badgeNoRegistration": "Registracija nije potrebna",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Prijava na Instagram nije potrebna · Samo javni profili"
   },
   "AboutPage": {
-    "metaTitle": "O nama – InstaView Stories | Instagram preglednik priča",
-    "metaDescription": "Saznajte više o InstaView Stories, jednostavnom Instagram pregledniku priča za istraživanje javnih Instagram priča, profila, istaknutih priča, objava, fotografija, videozapisa i Reelsa.",
+    "metaTitle": "O nama",
+    "metaDescription": "Saznajte više o InstaView Stories, jednostavnom Instagram pregledniku priča za istraživanje javnih Instagram priča, profila, istaknutih priča, objava,",
     "breadcrumb": "O nama",
     "h1": "O nama",
     "intro1": "Dobrodošli na InstaView Stories, jednostavnu internetsku platformu osmišljenu kako bi korisnicima pomogla istražiti javno dostupan Instagram sadržaj na jednom praktičnom mjestu.",
@@ -200,8 +200,8 @@
     "contactText3": "Rado primamo povratne informacije i prijedloge koji nam mogu pomoći unaprijediti InstaView Stories i pružiti bolje iskustvo našim korisnicima."
   },
   "ContactPage": {
-    "metaTitle": "Kontaktirajte nas – InstaView Stories | Podrška za Instagram preglednik priča",
-    "metaDescription": "Kontaktirajte InstaView Stories s pitanjima, povratnim informacijama ili zahtjevima za podršku vezanim uz naš Instagram preglednik priča, javne priče, profile, istaknute priče, objave, Reelse i preuzimanja.",
+    "metaTitle": "Kontakt i podrška",
+    "metaDescription": "Kontaktirajte InstaView Stories s pitanjima, povratnim informacijama ili zahtjevima za podršku vezanim uz naš Instagram preglednik priča, javne priče,",
     "breadcrumb": "Kontakt",
     "h1": "Kontaktirajte nas",
     "intro1": "Imate pitanje o InstaView Stories, našem Instagram pregledniku priča ili bilo kojoj od značajki dostupnih na našoj web-stranici? Tu smo da pomognemo.",
@@ -239,8 +239,8 @@
     "privacyNote": "Za zahtjeve vezane uz privatnost pogledajte naša <privacyLink>Pravila privatnosti</privacyLink> kako biste saznali kako nas kontaktirati u vezi sa svojim podacima."
   },
   "DisclaimerPage": {
-    "metaTitle": "Odricanje od odgovornosti – InstaView Stories | Instagram preglednik priča",
-    "metaDescription": "Pročitajte Odricanje od odgovornosti InstaView Stories za informacije o javnom Instagram sadržaju, značajkama Instagram preglednika priča, preuzimanjima, sadržaju trećih strana i ograničenjima usluge.",
+    "metaTitle": "Odricanje od odgovornosti",
+    "metaDescription": "Pročitajte Odricanje od odgovornosti InstaView Stories za informacije o javnom Instagram sadržaju, značajkama Instagram preglednika priča, preuzimanjima,",
     "breadcrumb": "Odricanje od odgovornosti",
     "h1": "Odricanje od odgovornosti",
     "intro1": "Informacije i usluge dostupne na InstaView Stories, na adresi instaviewstories.com, pružaju se isključivo u opće informativne i praktične svrhe.",
@@ -285,8 +285,8 @@
     "contactMore": "Za dodatne informacije pregledajte naše stranice <aboutLink>O nama</aboutLink>, <privacyLink>Pravila privatnosti</privacyLink> i <termsLink>Uvjete korištenja</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Pravila privatnosti – InstaView Stories | Instagram preglednik priča",
-    "metaDescription": "Pročitajte Pravila privatnosti InstaView Stories kako biste saznali kako se obrađuju informacije prilikom korištenja našeg Instagram preglednika priča za istraživanje javnih Instagram priča, profila, istaknutih priča, objava i Reelsa.",
+    "metaTitle": "Pravila o privatnosti",
+    "metaDescription": "Pročitajte Pravila privatnosti InstaView Stories kako biste saznali kako se obrađuju informacije prilikom korištenja našeg Instagram preglednika priča za.",
     "breadcrumb": "Pravila privatnosti",
     "h1": "Pravila privatnosti",
     "lastUpdated": "Zadnje ažuriranje: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Za više informacija o našoj web-stranici i usluzi posjetite <aboutLink>O nama</aboutLink>. Također možete pregledati naše <termsLink>Uvjete korištenja</termsLink> i <disclaimerLink>Odricanje od odgovornosti</disclaimerLink>."
   },
   "TermsPage": {
-    "metaTitle": "Uvjeti korištenja – InstaView Stories | Instagram preglednik priča",
-    "metaDescription": "Pročitajte Uvjete korištenja za InstaView Stories, uključujući pravila za korištenje našeg Instagram preglednika priča, javnog Instagram sadržaja, preuzimanja, privatnosti i sadržaja trećih strana.",
+    "metaTitle": "Uvjeti korištenja",
+    "metaDescription": "Pročitajte Uvjete korištenja za InstaView Stories, uključujući pravila za korištenje našeg Instagram preglednika priča, javnog Instagram sadržaja,",
     "breadcrumb": "Uvjeti korištenja",
     "h1": "Uvjeti korištenja",
     "lastUpdated": "Zadnje ažuriranje: {date}",

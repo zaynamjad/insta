@@ -43,8 +43,8 @@
     "button": "Ouvrir la visionneuse de stories"
   },
   "HomePage": {
-    "metaTitle": "Visionneuse Anonyme de Stories Instagram | Voir et Télécharger les Stories IG",
-    "metaDescription": "La visionneuse de stories Instagram permet de regarder anonymement les stories, profils, photos, vidéos, Reels et stories à la une. Téléchargement en un clic sur tout appareil, sans inscription.",
+    "metaTitle": "Visionneuse Anonyme de Stories Instagram",
+    "metaDescription": "La visionneuse de stories Instagram permet de regarder anonymement les stories, profils, photos, vidéos, Reels et stories à la une.",
     "heroEyebrow": "Visionneuse Instagram anonyme",
     "badgeFree": "100 % gratuit",
     "badgeNoRegistration": "Aucune inscription requise",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Aucune connexion Instagram requise · Profils publics uniquement"
   },
   "AboutPage": {
-    "metaTitle": "À propos d'InstaView Stories | Visionneuse de stories Instagram",
-    "metaDescription": "En savoir plus sur InstaView Stories, une visionneuse de stories Instagram simple pour explorer les stories, profils, stories à la une, publications, photos, vidéos et Reels Instagram publics.",
+    "metaTitle": "À Propos",
+    "metaDescription": "En savoir plus sur InstaView Stories, une visionneuse de stories Instagram simple pour explorer les stories, profils, stories à la une, publications,",
     "breadcrumb": "À propos",
     "h1": "À propos de nous",
     "intro1": "Bienvenue sur InstaView Stories, une plateforme en ligne simple conçue pour aider les utilisateurs à explorer le contenu Instagram accessible au public depuis un seul endroit pratique.",
@@ -200,8 +200,8 @@
     "contactText3": "Nous accueillons avec plaisir vos retours et suggestions qui nous aident à améliorer InstaView Stories et à offrir une meilleure expérience à nos utilisateurs."
   },
   "ContactPage": {
-    "metaTitle": "Contactez InstaView Stories | Assistance visionneuse de stories Instagram",
-    "metaDescription": "Contactez InstaView Stories pour toute question, retour ou demande d'assistance concernant notre visionneuse de stories Instagram, les stories, profils, stories à la une, publications, Reels et téléchargements publics.",
+    "metaTitle": "Contact et Support",
+    "metaDescription": "Contactez InstaView Stories pour toute question, retour ou demande d'assistance concernant notre visionneuse de stories Instagram, les stories, profils,",
     "breadcrumb": "Contact",
     "h1": "Nous contacter",
     "intro1": "Une question sur InstaView Stories, notre visionneuse de stories Instagram, ou l'une des fonctionnalités disponibles sur notre site ? Nous sommes là pour vous aider.",
@@ -239,8 +239,8 @@
     "privacyNote": "Pour toute demande relative à la confidentialité, consultez notre <privacyLink>Politique de confidentialité</privacyLink> pour savoir comment nous contacter au sujet de vos données."
   },
   "DisclaimerPage": {
-    "metaTitle": "Avertissement InstaView Stories | Visionneuse de stories Instagram",
-    "metaDescription": "Consultez l'avertissement d'InstaView Stories pour en savoir plus sur le contenu Instagram public, les fonctionnalités de la visionneuse de stories Instagram, les téléchargements, le contenu tiers et les limitations du service.",
+    "metaTitle": "Avis de Non-Responsabilité",
+    "metaDescription": "Consultez l'avertissement d'InstaView Stories pour en savoir plus sur le contenu Instagram public, les fonctionnalités de la visionneuse de stories.",
     "breadcrumb": "Avertissement",
     "h1": "Avertissement",
     "intro1": "Les informations et services proposés sur InstaView Stories, disponible à l'adresse instaviewstories.com, sont fournis à titre purement informatif et pratique.",
@@ -285,8 +285,8 @@
     "contactMore": "Pour plus d'informations, veuillez consulter notre page <aboutLink>À propos</aboutLink>, notre <privacyLink>Politique de confidentialité</privacyLink> et nos <termsLink>Conditions d'utilisation</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Politique de confidentialité InstaView Stories | Visionneuse de stories Instagram",
-    "metaDescription": "Consultez la politique de confidentialité d'InstaView Stories pour savoir comment les informations sont traitées lorsque vous utilisez notre visionneuse de stories Instagram pour explorer les stories, profils, stories à la une et Reels Instagram publics.",
+    "metaTitle": "Politique de Confidentialité",
+    "metaDescription": "Consultez la politique de confidentialité d'InstaView Stories pour savoir comment les informations sont traitées lorsque vous utilisez notre visionneuse.",
     "breadcrumb": "Politique de confidentialité",
     "h1": "Politique de confidentialité",
     "lastUpdated": "Dernière mise à jour : {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Pour en savoir plus sur notre site et notre service, consultez la page <aboutLink>À propos</aboutLink>. Vous pouvez également consulter nos <termsLink>Conditions d'utilisation</termsLink> et notre <disclaimerLink>Avertissement</disclaimerLink>."
   },
   "TermsPage": {
-    "metaTitle": "Conditions d'utilisation InstaView Stories | Visionneuse de stories Instagram",
-    "metaDescription": "Consultez les conditions d'utilisation d'InstaView Stories, y compris les règles d'utilisation de notre visionneuse de stories Instagram, du contenu Instagram public, des téléchargements, de la confidentialité et du contenu tiers.",
+    "metaTitle": "Conditions d'Utilisation",
+    "metaDescription": "Consultez les conditions d'utilisation d'InstaView Stories, y compris les règles d'utilisation de notre visionneuse de stories Instagram,",
     "breadcrumb": "Conditions d'utilisation",
     "h1": "Conditions d'utilisation",
     "lastUpdated": "Dernière mise à jour : {date}",

@@ -6,7 +6,7 @@ import { StoryTool } from "@/components/story-tool/StoryTool";
 import { FeaturedCarousel } from "@/components/story-tool/FeaturedCarousel";
 import { Faq } from "@/components/Faq";
 import { JsonLd } from "@/components/JsonLd";
-import { softwareApplicationSchema } from "@/lib/seo/schema";
+import { softwareApplicationSchema, faqPageSchema } from "@/lib/seo/schema";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
@@ -67,7 +67,7 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <>
-      <JsonLd data={softwareApplicationSchema()} />
+      <JsonLd data={[softwareApplicationSchema(), faqPageSchema(homeFaqs)]} />
 
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section id="search" className="relative">

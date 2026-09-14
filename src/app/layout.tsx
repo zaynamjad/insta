@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     icon: "/favicon.png",
   },
   verification: {
-    google: "e0Awf-5p9SiSD11ajA3m0p6F9EO8zaksAQ63gvpVAtE",
+    google: "ULm6yrKYNbMbqP3xl1PLHekKaqnBcKYE6Rpo8YOgt-0",
   },
 };
 
@@ -56,12 +56,13 @@ export const viewport = {
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const locale = await getLocale();
-  const { dir } = getLocaleMeta(locale);
+  const localeMeta = getLocaleMeta(locale);
+  const htmlLang = localeMeta.hreflangCode ?? localeMeta.code;
 
   return (
     <html
-      lang={locale}
-      dir={dir}
+      lang={htmlLang}
+      dir={localeMeta.dir}
       className={`${inter.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
@@ -72,6 +73,16 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
               document.documentElement.setAttribute('data-theme', t);
             }
           } catch (e) {}`}
+        </Script>
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-W5NQ4KV7QY" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-W5NQ4KV7QY');
+          `}
         </Script>
         <NextIntlClientProvider>
           <JsonLd data={[websiteSchema(), organizationSchema()]} />

@@ -43,8 +43,8 @@
     "button": "Mở Trình xem Story"
   },
   "HomePage": {
-    "metaTitle": "Trình xem Story Instagram ẩn danh | Công cụ xem và tải Story IG",
-    "metaDescription": "Trình xem Story Instagram giúp bạn xem ẩn danh các Story, hồ sơ, ảnh, video, Reels, tin nổi bật và nhiều nội dung khác. Tải xuống chỉ với một cú nhấp trên mọi thiết bị. Không cần đăng ký.",
+    "metaTitle": "Xem Story Instagram Ẩn Danh",
+    "metaDescription": "Trình xem Story Instagram giúp bạn xem ẩn danh các Story, hồ sơ, ảnh, video, Reels, tin nổi bật và nhiều nội dung khác.",
     "heroEyebrow": "Trình xem Story Instagram ẩn danh",
     "badgeFree": "100% Miễn phí",
     "badgeNoRegistration": "Không cần đăng ký",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Không cần đăng nhập Instagram · Chỉ hồ sơ công khai"
   },
   "AboutPage": {
-    "metaTitle": "Giới thiệu về InstaView Stories | Trình xem Story Instagram",
-    "metaDescription": "Tìm hiểu thêm về InstaView Stories, một Trình xem Story Instagram đơn giản giúp khám phá Story, hồ sơ, Tin nổi bật, bài viết, ảnh, video và Reels Instagram công khai.",
+    "metaTitle": "Về Chúng Tôi",
+    "metaDescription": "Tìm hiểu thêm về InstaView Stories, một Trình xem Story Instagram đơn giản giúp khám phá Story, hồ sơ, Tin nổi bật, bài viết, ảnh, video và Reels.",
     "breadcrumb": "Giới thiệu",
     "h1": "Giới thiệu về chúng tôi",
     "intro1": "Chào mừng bạn đến với InstaView Stories, một nền tảng trực tuyến đơn giản được thiết kế để giúp người dùng khám phá nội dung Instagram công khai từ một nơi thuận tiện duy nhất.",
@@ -200,8 +200,8 @@
     "contactText3": "Chúng tôi hoan nghênh mọi phản hồi và đề xuất giúp chúng tôi cải thiện InstaView Stories và mang đến trải nghiệm tốt hơn cho người dùng."
   },
   "ContactPage": {
-    "metaTitle": "Liên hệ InstaView Stories | Hỗ trợ Trình xem Story Instagram",
-    "metaDescription": "Liên hệ với InstaView Stories nếu bạn có câu hỏi, phản hồi, hoặc cần hỗ trợ về Trình xem Story Instagram, Story công khai, hồ sơ, Tin nổi bật, bài viết, Reels và các tính năng tải xuống của chúng tôi.",
+    "metaTitle": "Liên Hệ & Hỗ Trợ",
+    "metaDescription": "Liên hệ với InstaView Stories nếu bạn có câu hỏi, phản hồi, hoặc cần hỗ trợ về Trình xem Story Instagram, Story công khai, hồ sơ, Tin nổi bật, bài viết,",
     "breadcrumb": "Liên hệ",
     "h1": "Liên hệ với chúng tôi",
     "intro1": "Bạn có câu hỏi về InstaView Stories, Trình xem Story Instagram của chúng tôi, hay bất kỳ tính năng nào trên trang web? Chúng tôi luôn sẵn sàng hỗ trợ.",
@@ -239,8 +239,8 @@
     "privacyNote": "Đối với các yêu cầu liên quan đến quyền riêng tư, xem <privacyLink>Chính sách quyền riêng tư</privacyLink> của chúng tôi để biết cách liên hệ với chúng tôi về dữ liệu của bạn."
   },
   "DisclaimerPage": {
-    "metaTitle": "Tuyên bố miễn trừ trách nhiệm InstaView Stories | Trình xem Story Instagram",
-    "metaDescription": "Đọc Tuyên bố miễn trừ trách nhiệm của InstaView Stories để biết thông tin về nội dung Instagram công khai, tính năng của Trình xem Story Instagram, tải xuống, nội dung bên thứ ba và các giới hạn của dịch vụ.",
+    "metaTitle": "Tuyên Bố Miễn Trừ",
+    "metaDescription": "Đọc Tuyên bố miễn trừ trách nhiệm của InstaView Stories để biết thông tin về nội dung Instagram công khai, tính năng của Trình xem Story Instagram,",
     "breadcrumb": "Tuyên bố miễn trừ trách nhiệm",
     "h1": "Tuyên bố miễn trừ trách nhiệm",
     "intro1": "Thông tin và dịch vụ được cung cấp trên InstaView Stories, tại địa chỉ instaviewstories.com, chỉ nhằm mục đích cung cấp thông tin chung và sự thuận tiện.",
@@ -285,8 +285,8 @@
     "contactMore": "Để biết thêm thông tin, vui lòng xem <aboutLink>Giới thiệu</aboutLink>, <privacyLink>Chính sách quyền riêng tư</privacyLink>, và <termsLink>Điều khoản và Điều kiện</termsLink> của chúng tôi."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Chính sách quyền riêng tư InstaView Stories | Trình xem Story Instagram",
-    "metaDescription": "Đọc Chính sách quyền riêng tư của InstaView Stories để tìm hiểu cách thông tin được xử lý khi bạn sử dụng Trình xem Story Instagram của chúng tôi để khám phá Story, hồ sơ, Tin nổi bật và bài viết Instagram công khai.",
+    "metaTitle": "Chính Sách Bảo Mật",
+    "metaDescription": "Đọc Chính sách quyền riêng tư của InstaView Stories để tìm hiểu cách thông tin được xử lý khi bạn sử dụng Trình xem Story Instagram của chúng tôi để khám.",
     "breadcrumb": "Chính sách quyền riêng tư",
     "h1": "Chính sách quyền riêng tư",
     "lastUpdated": "Cập nhật lần cuối: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Để biết thêm thông tin về trang web và dịch vụ của chúng tôi, hãy truy cập <aboutLink>Giới thiệu</aboutLink>. Bạn cũng có thể xem <termsLink>Điều khoản và Điều kiện</termsLink> và <disclaimerLink>Tuyên bố miễn trừ trách nhiệm</disclaimerLink> của chúng tôi."
   },
   "TermsPage": {
-    "metaTitle": "Điều khoản và Điều kiện InstaView Stories | Trình xem Story Instagram",
-    "metaDescription": "Đọc Điều khoản và Điều kiện của InstaView Stories, bao gồm các quy tắc khi sử dụng Trình xem Story Instagram, nội dung Instagram công khai, tải xuống, quyền riêng tư, và nội dung bên thứ ba.",
+    "metaTitle": "Điều Khoản Sử Dụng",
+    "metaDescription": "Đọc Điều khoản và Điều kiện của InstaView Stories, bao gồm các quy tắc khi sử dụng Trình xem Story Instagram, nội dung Instagram công khai, tải xuống,",
     "breadcrumb": "Điều khoản và Điều kiện",
     "h1": "Điều khoản và Điều kiện",
     "lastUpdated": "Cập nhật lần cuối: {date}",

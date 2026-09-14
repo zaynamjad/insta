@@ -43,8 +43,8 @@
     "button": "Otwórz przeglądarkę relacji"
   },
   "HomePage": {
-    "metaTitle": "Anonimowa przeglądarka relacji Instagram | Przeglądarka i downloader IG",
-    "metaDescription": "Przeglądarka relacji Instagram do anonimowego oglądania relacji, profili, zdjęć, filmów, rolek i wyróżnionych. Pobieraj jednym kliknięciem na dowolnym urządzeniu. Bez rejestracji.",
+    "metaTitle": "Anonimowa Przeglądarka Relacji Instagram",
+    "metaDescription": "Przeglądarka relacji Instagram do anonimowego oglądania relacji, profili, zdjęć, filmów, rolek i wyróżnionych. Pobieraj jednym kliknięciem na dowolnym.",
     "heroEyebrow": "Anonimowa przeglądarka relacji Instagram",
     "badgeFree": "100% za darmo",
     "badgeNoRegistration": "Bez rejestracji",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Logowanie do Instagrama niewymagane · Tylko profile publiczne"
   },
   "AboutPage": {
-    "metaTitle": "O nas InstaView Stories | Przeglądarka relacji Instagram",
-    "metaDescription": "Dowiedz się więcej o InstaView Stories, prostej przeglądarce relacji Instagram do przeglądania publicznych relacji, profili, wyróżnionych, postów, zdjęć, filmów i rolek na Instagramie.",
+    "metaTitle": "O Nas",
+    "metaDescription": "Dowiedz się więcej o InstaView Stories, prostej przeglądarce relacji Instagram do przeglądania publicznych relacji, profili, wyróżnionych, postów, zdjęć,",
     "breadcrumb": "O nas",
     "h1": "O nas",
     "intro1": "Witamy w InstaView Stories, prostej platformie internetowej zaprojektowanej, aby pomóc użytkownikom przeglądać publicznie dostępne treści z Instagrama w jednym wygodnym miejscu.",
@@ -200,8 +200,8 @@
     "contactText3": "Doceniamy opinie i sugestie, które pomagają nam ulepszać InstaView Stories i zapewniać lepsze doświadczenia naszym użytkownikom."
   },
   "ContactPage": {
-    "metaTitle": "Skontaktuj się z InstaView Stories | Wsparcie przeglądarki relacji Instagram",
-    "metaDescription": "Skontaktuj się z InstaView Stories w sprawie pytań, opinii lub wsparcia dotyczącego naszej przeglądarki relacji Instagram, publicznych relacji, profili, wyróżnionych, postów, rolek i pobierania.",
+    "metaTitle": "Kontakt i Wsparcie",
+    "metaDescription": "Skontaktuj się z InstaView Stories w sprawie pytań, opinii lub wsparcia dotyczącego naszej przeglądarki relacji Instagram, publicznych relacji, profili,",
     "breadcrumb": "Kontakt",
     "h1": "Skontaktuj się z nami",
     "intro1": "Masz pytanie dotyczące InstaView Stories, naszej przeglądarki relacji Instagram lub dowolnej funkcji dostępnej na naszej stronie? Chętnie pomożemy.",
@@ -239,8 +239,8 @@
     "privacyNote": "W przypadku próśb związanych z prywatnością zapoznaj się z naszą <privacyLink>Polityką prywatności</privacyLink>, aby dowiedzieć się, jak skontaktować się z nami w sprawie Twoich danych."
   },
   "DisclaimerPage": {
-    "metaTitle": "Zastrzeżenie prawne InstaView Stories | Przeglądarka relacji Instagram",
-    "metaDescription": "Przeczytaj Zastrzeżenie prawne InstaView Stories, aby dowiedzieć się więcej o publicznych treściach z Instagrama, funkcjach przeglądarki relacji Instagram, pobieraniu, treściach stron trzecich i ograniczeniach usługi.",
+    "metaTitle": "Zastrzeżenia",
+    "metaDescription": "Przeczytaj Zastrzeżenie prawne InstaView Stories, aby dowiedzieć się więcej o publicznych treściach z Instagrama, funkcjach przeglądarki relacji Instagram,",
     "breadcrumb": "Zastrzeżenie prawne",
     "h1": "Zastrzeżenie prawne",
     "intro1": "Informacje i usługi dostępne na stronie InstaView Stories, pod adresem instaviewstories.com, są udostępniane wyłącznie w celach informacyjnych i dla wygody użytkowników.",
@@ -285,8 +285,8 @@
     "contactMore": "Aby uzyskać dodatkowe informacje, zapoznaj się z naszymi stronami <aboutLink>O nas</aboutLink>, <privacyLink>Polityka prywatności</privacyLink> i <termsLink>Regulamin</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Polityka prywatności InstaView Stories | Przeglądarka relacji Instagram",
-    "metaDescription": "Przeczytaj Politykę prywatności InstaView Stories, aby dowiedzieć się, jak przetwarzane są informacje podczas korzystania z naszej przeglądarki relacji Instagram do przeglądania publicznych relacji, profili, wyróżnionych, postów i rolek.",
+    "metaTitle": "Polityka Prywatności",
+    "metaDescription": "Przeczytaj Politykę prywatności InstaView Stories, aby dowiedzieć się, jak przetwarzane są informacje podczas korzystania z naszej przeglądarki relacji.",
     "breadcrumb": "Polityka prywatności",
     "h1": "Polityka prywatności",
     "lastUpdated": "Ostatnia aktualizacja: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Aby uzyskać więcej informacji o naszej stronie i usłudze, odwiedź <aboutLink>O nas</aboutLink>. Możesz również zapoznać się z naszym <termsLink>Regulaminem</termsLink> i <disclaimerLink>Zastrzeżeniem prawnym</disclaimerLink>."
   },
   "TermsPage": {
-    "metaTitle": "Regulamin InstaView Stories | Przeglądarka relacji Instagram",
-    "metaDescription": "Przeczytaj Regulamin InstaView Stories, w tym zasady korzystania z naszej przeglądarki relacji Instagram, publicznych treści z Instagrama, pobierania, prywatności i treści stron trzecich.",
+    "metaTitle": "Warunki Użytkowania",
+    "metaDescription": "Przeczytaj Regulamin InstaView Stories, w tym zasady korzystania z naszej przeglądarki relacji Instagram, publicznych treści z Instagrama, pobierania,",
     "breadcrumb": "Regulamin",
     "h1": "Regulamin",
     "lastUpdated": "Ostatnia aktualizacja: {date}",

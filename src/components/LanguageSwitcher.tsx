@@ -19,7 +19,6 @@ export function LanguageSwitcher() {
 
   useEffect(() => {
     if (!open) return;
-    setQuery("");
     searchRef.current?.focus();
 
     function onPointerDown(e: MouseEvent) {
@@ -53,7 +52,10 @@ export function LanguageSwitcher() {
     <div ref={rootRef} className="relative flex shrink-0 items-center">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => {
+          setQuery("");
+          setOpen((v) => !v);
+        }}
         aria-haspopup="listbox"
         aria-expanded={open}
         aria-label={t("label")}

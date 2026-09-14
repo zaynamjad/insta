@@ -42,8 +42,8 @@
     "button": "Dîtoka çîrokan veke"
   },
   "HomePage": {
-    "metaTitle": "{siteName}: Dîtoka çîrokên Instagram | Çîrokan bi awayekî nenas bibîne",
-    "metaDescription": "Navekî bikarhênerê giştî yê Instagramê binivîse da ku çîrokên giştî yên berdest bêyî têketina Instagramê bibînî. Bêyî şîfre, bêyî hesab, bêyî sazkirina sepanê.",
+    "metaTitle": "Dîtoka Nenas a Çîrokên Instagram",
+    "metaDescription": "Navekî bikarhênerê giştî yê Instagramê binivîse da ku çîrokên giştî yên berdest bêyî têketina Instagramê bibînî. Bêyî şîfre, bêyî hesab,",
     "h1": "Dîtoka çîrokên Instagram",
     "sub1": "Navekî bikarhênerê giştî yê Instagramê binivîse da ku tavilê agahiyên profîla wî ya giştî bibînî, têketin ne pêwîst e.",
     "trendingCaption": "Li ser hin ji herî şopandî hesabên li ser Instagramê biceribîne",
@@ -82,8 +82,8 @@
     "finalCtaButton": "Çîrokan bibîne"
   },
   "AboutPage": {
-    "metaTitle": "Der barê {siteName} de",
-    "metaDescription": "Fêr bibe ku {siteName} çi dike, çawa dixebite, û çima tenê daneyên profîla giştî ya Instagramê nîşan dide, tucaran naveroka çîrokê nade.",
+    "metaTitle": "Der barê me de",
+    "metaDescription": "Fêr bibe ku InstaView Stories çi dike, çawa dixebite, û çima tenê daneyên profîla giştî ya Instagramê nîşan dide, tucaran naveroka çîrokê nade.",
     "breadcrumb": "Der barê me de",
     "h1": "Der barê {siteName} de",
     "intro": "{siteName} amûrek e ku tenê mebestek e: navekî bikarhênerê giştî yê Instagramê binivîse û agahiyên profîla wî ya giştî bibîne (wêne, nav, jînenîgarî, jimara şopîneran) bêyî ku pêwîst be tu bi xwe têkevî Instagramê.",
@@ -100,8 +100,8 @@
     "questionsText": "<privacyLink>Polîtîkaya nihêniyê</privacyLink>, <termsLink>Mercên bikaranînê</termsLink> ya me bibîne an <contactLink>bi me re têkilî deyne</contactLink>."
   },
   "ContactPage": {
-    "metaTitle": "Bi {siteName} re têkilî",
-    "metaDescription": "Bi tîma {siteName} re têkilî deyne bi pirs, raman, an daxwazên rakirina naverokê.",
+    "metaTitle": "Têkilî û Piştgirî",
+    "metaDescription": "Bi tîma InstaView Stories re têkilî deyne bi pirs, raman, an daxwazên rakirina naverokê.",
     "breadcrumb": "Têkilî",
     "h1": "Bi me re têkilî deyne",
     "intro": "Pirs, ramanên te, an daxwazek têkildarî naveroka bi giştî nîşandayî: bi me re têkilî deyne û em ê vegerin.",
@@ -109,8 +109,8 @@
     "privacyNote": "Ji bo daxwazên têkildarî nihêniyê, <privacyLink>Polîtîkaya nihêniyê</privacyLink> ya me bibîne da ku fêr bibî çawa der barê daneyên xwe de bi me re têkilî deynî."
   },
   "DisclaimerPage": {
-    "metaTitle": "Sernavê berpirsiyariyê",
-    "metaDescription": "Agahiyên girîng der barê tiştên ku {siteName} dikare bike û nikare bike de.",
+    "metaTitle": "Redkirina Berpirsiyariyê",
+    "metaDescription": "Agahiyên girîng der barê tiştên ku InstaView Stories dikare bike û nikare bike de.",
     "breadcrumb": "Sernavê berpirsiyariyê",
     "h1": "Sernavê berpirsiyariyê",
     "publicOnlyTitle": "Tenê naveroka giştî",
@@ -125,8 +125,8 @@
     "availabilityText": "Berdestbûna çîrokan bi tiştê ku xwedî hesabê niha weşandiye û bi jêhatîbûna dabînkerê daneyên me ya wergirtina wê ve girêdayî ye. Em nikarin garantî bikin ku çîrokên her hesabekî giştî her tim berdest bin."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Polîtîkaya nihêniyê",
-    "metaDescription": "{siteName} çawa daneyan bi rê ve dibe gava tu li çîrokên giştî yên Instagramê digerî û wan dibînî.",
+    "metaTitle": "Polîtîkaya Nihêniyê",
+    "metaDescription": "InstaView Stories çawa daneyan bi rê ve dibe gava tu li çîrokên giştî yên Instagramê digerî û wan dibînî.",
     "breadcrumb": "Polîtîkaya nihêniyê",
     "h1": "Polîtîkaya nihêniyê",
     "lastUpdated": "Nûvekirina dawî: {date}",
@@ -155,8 +155,8 @@
     "contactText": "Pirsên te der barê vê polîtîkayê de hene? <email>e-name</email> an biçe <contactLink>rûpela têkiliyê</contactLink> ya me."
   },
   "TermsPage": {
-    "metaTitle": "Mercên bikaranînê",
-    "metaDescription": "Mercên ku bikaranîna te ya {siteName} birêve dibin.",
+    "metaTitle": "Şert û Mercên Bikaranînê",
+    "metaDescription": "Merc û şertên girîng ên ku bikaranîna te ya InstaView Stories, mafên naverokê û karûbarên wê birêve dibin.",
     "breadcrumb": "Mercên bikaranînê",
     "h1": "Mercên bikaranînê",
     "lastUpdated": "Nûvekirina dawî: {date}",

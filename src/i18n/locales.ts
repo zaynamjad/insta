@@ -7,6 +7,8 @@ export interface LocaleMeta {
   countryCode: string;
   /** Text shown next to the flag; falls back to countryCode when omitted. */
   displayCode?: string;
+  /** BCP 47 language tag used for hreflang annotations and the HTML lang attribute. Falls back to `code` when omitted. Needed when the internal locale code (e.g. "ckb") differs from the standards-valid tag (e.g. "ku-Arab"). */
+  hreflangCode?: string;
   flag: string;
 }
 
@@ -45,7 +47,7 @@ export const LOCALES: LocaleMeta[] = [
   { code: "fa", name: "Persian", nativeName: "فارسی", dir: "rtl", countryCode: "IR", flag: "🇮🇷" },
   { code: "ps", name: "Pashto", nativeName: "پښتو", dir: "rtl", countryCode: "AF", flag: "🇦🇫" },
   { code: "ku", name: "Kurdish", nativeName: "Kurdî", dir: "ltr", countryCode: "IQ", flag: "🇮🇶" },
-  { code: "ckb", name: "Sorani Kurdish", nativeName: "کوردی", dir: "rtl", countryCode: "IQ", displayCode: "CKB", flag: "🇮🇶" },
+  { code: "ckb", name: "Sorani Kurdish", nativeName: "کوردی", dir: "rtl", countryCode: "IQ", displayCode: "CKB", hreflangCode: "ku-Arab", flag: "🇮🇶" },
   { code: "he", name: "Hebrew", nativeName: "עברית", dir: "rtl", countryCode: "IL", flag: "🇮🇱" },
   { code: "az", name: "Azerbaijani", nativeName: "Azərbaycan dili", dir: "ltr", countryCode: "AZ", flag: "🇦🇿" },
   { code: "hy", name: "Armenian", nativeName: "Հայերեն", dir: "ltr", countryCode: "AM", flag: "🇦🇲" },

@@ -43,7 +43,7 @@
     "button": "Storyviewer openen"
   },
   "HomePage": {
-    "metaTitle": "Instagram Anonieme Storyviewer | IG Storyviewer & Downloader",
+    "metaTitle": "Anonieme Instagram Story Viewer",
     "metaDescription": "Instagram Storyviewer: bekijk anoniem Stories, profielen, foto's, video's, Reels en Highlights. Download met één klik op elk apparaat. Zonder registratie.",
     "heroEyebrow": "Anonieme Instagram Storyviewer",
     "badgeFree": "100% gratis",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Geen Instagram-login vereist · Alleen openbare profielen"
   },
   "AboutPage": {
-    "metaTitle": "Over ons InstaView Stories | Instagram Storyviewer",
-    "metaDescription": "Lees meer over InstaView Stories, een eenvoudige Instagram Storyviewer waarmee je openbare Instagram Stories, profielen, Highlights, berichten, foto's, video's en Reels kunt verkennen.",
+    "metaTitle": "Over Ons",
+    "metaDescription": "Lees meer over InstaView Stories, een eenvoudige Instagram Storyviewer waarmee je openbare Instagram Stories, profielen, Highlights, berichten, foto's,",
     "breadcrumb": "Over ons",
     "h1": "Over ons",
     "intro1": "Welkom bij InstaView Stories, een eenvoudig online platform dat gebruikers helpt om openbaar beschikbare Instagram-inhoud vanaf één handige plek te verkennen.",
@@ -200,8 +200,8 @@
     "contactText3": "We staan open voor feedback en suggesties die ons helpen InstaView Stories te verbeteren en een betere ervaring te bieden voor onze gebruikers."
   },
   "ContactPage": {
-    "metaTitle": "Contact InstaView Stories | Ondersteuning Instagram Storyviewer",
-    "metaDescription": "Neem contact op met InstaView Stories voor vragen, feedback of ondersteuning over onze Instagram Storyviewer, openbare Stories, profielen, Highlights, berichten, Reels en downloads.",
+    "metaTitle": "Contact & Ondersteuning",
+    "metaDescription": "Neem contact op met InstaView Stories voor vragen, feedback of ondersteuning over onze Instagram Storyviewer, openbare Stories, profielen, Highlights,",
     "breadcrumb": "Contact",
     "h1": "Neem contact op",
     "intro1": "Heb je een vraag over InstaView Stories, onze Instagram Storyviewer, of een van de functies op onze website? We helpen je graag.",
@@ -239,8 +239,8 @@
     "privacyNote": "Bekijk voor privacygerelateerde verzoeken ons <privacyLink>Privacybeleid</privacyLink> om te zien hoe je ons kunt bereiken over je gegevens."
   },
   "DisclaimerPage": {
-    "metaTitle": "Disclaimer InstaView Stories | Instagram Storyviewer",
-    "metaDescription": "Lees de disclaimer van InstaView Stories voor informatie over openbare Instagram-inhoud, functies van de Instagram Storyviewer, downloads, inhoud van derden en beperkingen van de dienst.",
+    "metaTitle": "Disclaimer",
+    "metaDescription": "Lees de disclaimer van InstaView Stories voor informatie over openbare Instagram-inhoud, functies van de Instagram Storyviewer, downloads,",
     "breadcrumb": "Disclaimer",
     "h1": "Disclaimer",
     "intro1": "De informatie en diensten die worden aangeboden op InstaView Stories, beschikbaar op instaviewstories.com, worden uitsluitend verstrekt voor algemene informatieve en gemaksdoeleinden.",
@@ -285,8 +285,8 @@
     "contactMore": "Voor aanvullende informatie kun je onze pagina's <aboutLink>Over ons</aboutLink>, <privacyLink>Privacybeleid</privacyLink> en <termsLink>Algemene Voorwaarden</termsLink> raadplegen."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Privacybeleid InstaView Stories | Instagram Storyviewer",
-    "metaDescription": "Lees het privacybeleid van InstaView Stories om te weten hoe gegevens worden verwerkt bij het gebruik van onze Instagram Storyviewer om openbare Instagram Stories, profielen, Highlights, berichten en Reels te verkennen.",
+    "metaTitle": "Privacybeleid",
+    "metaDescription": "Lees het privacybeleid van InstaView Stories om te weten hoe gegevens worden verwerkt bij het gebruik van onze Instagram Storyviewer om openbare Instagram.",
     "breadcrumb": "Privacybeleid",
     "h1": "Privacybeleid",
     "lastUpdated": "Laatst bijgewerkt: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Bezoek <aboutLink>Over ons</aboutLink> voor meer informatie over onze website en dienst. Je kunt ook onze <termsLink>Algemene Voorwaarden</termsLink> en <disclaimerLink>Disclaimer</disclaimerLink> raadplegen."
   },
   "TermsPage": {
-    "metaTitle": "Algemene Voorwaarden InstaView Stories | Instagram Storyviewer",
-    "metaDescription": "Lees de Algemene Voorwaarden van InstaView Stories, inclusief de regels voor het gebruik van onze Instagram Storyviewer, openbare Instagram-inhoud, downloads, privacy en inhoud van derden.",
+    "metaTitle": "Gebruiksvoorwaarden",
+    "metaDescription": "Lees de Algemene Voorwaarden van InstaView Stories, inclusief de regels voor het gebruik van onze Instagram Storyviewer, openbare Instagram-inhoud,",
     "breadcrumb": "Algemene Voorwaarden",
     "h1": "Algemene Voorwaarden",
     "lastUpdated": "Laatst bijgewerkt: {date}",

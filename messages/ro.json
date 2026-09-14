@@ -43,8 +43,8 @@
     "button": "Deschide vizualizatorul de story-uri"
   },
   "HomePage": {
-    "metaTitle": "Vizualizator Anonim de Story-uri Instagram | Vizualizator și Descărcător de Story-uri IG",
-    "metaDescription": "Vizualizatorul de story-uri Instagram vă permite să vedeți anonim story-uri, profiluri, fotografii, videoclipuri, Reels și highlight-uri. Descărcați dintr-un clic pe orice dispozitiv. Fără nicio înregistrare.",
+    "metaTitle": "Vizualizator Anonim de Povești Instagram",
+    "metaDescription": "Vizualizatorul de story-uri Instagram vă permite să vedeți anonim story-uri, profiluri, fotografii, videoclipuri, Reels și highlight-uri.",
     "heroEyebrow": "Vizualizator Anonim de Story-uri Instagram",
     "badgeFree": "100% Gratuit",
     "badgeNoRegistration": "Fără Înregistrare",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Nu este necesară autentificarea Instagram · Doar profiluri publice"
   },
   "AboutPage": {
-    "metaTitle": "Despre Noi InstaView Stories | Vizualizator de Story-uri Instagram",
-    "metaDescription": "Aflați mai multe despre noi, InstaView Stories, un Vizualizator simplu de Story-uri Instagram pentru explorarea story-urilor, profilurilor, highlight-urilor, postărilor, fotografiilor, videoclipurilor și Reels publice Instagram.",
+    "metaTitle": "Despre Noi",
+    "metaDescription": "Aflați mai multe despre noi, InstaView Stories, un Vizualizator simplu de Story-uri Instagram pentru explorarea story-urilor, profilurilor,",
     "breadcrumb": "Despre noi",
     "h1": "Despre Noi",
     "intro1": "Bine ați venit la InstaView Stories, o platformă online simplă concepută pentru a ajuta utilizatorii să exploreze conținutul Instagram disponibil public, totul dintr-un singur loc convenabil.",
@@ -200,8 +200,8 @@
     "contactText3": "Apreciem feedback-ul și sugestiile care ne pot ajuta să îmbunătățim InstaView Stories și să oferim o experiență mai bună utilizatorilor noștri."
   },
   "ContactPage": {
-    "metaTitle": "Contactați InstaView Stories | Asistență pentru Vizualizatorul de Story-uri Instagram",
-    "metaDescription": "Contactați InstaView Stories pentru întrebări, feedback sau asistență cu privire la Vizualizatorul nostru de Story-uri Instagram, story-uri, profiluri, highlight-uri, postări, Reels și descărcări publice.",
+    "metaTitle": "Contact și Suport",
+    "metaDescription": "Contactați InstaView Stories pentru întrebări, feedback sau asistență cu privire la Vizualizatorul nostru de Story-uri Instagram, story-uri, profiluri,",
     "breadcrumb": "Contact",
     "h1": "Contactați-ne",
     "intro1": "Aveți o întrebare despre InstaView Stories, Vizualizatorul nostru de Story-uri Instagram sau despre oricare dintre funcționalitățile disponibile pe site-ul nostru web? Suntem aici pentru a vă ajuta.",
@@ -239,8 +239,8 @@
     "privacyNote": "Pentru cereri legate de confidențialitate, consultați <privacyLink>Politica noastră de confidențialitate</privacyLink> pentru a afla cum să ne contactați cu privire la datele dvs."
   },
   "DisclaimerPage": {
-    "metaTitle": "Declinare de Responsabilitate InstaView Stories | Vizualizator de Story-uri Instagram",
-    "metaDescription": "Citiți Declinarea de Responsabilitate InstaView Stories pentru informații despre conținutul public Instagram, funcționalitățile Vizualizatorului de Story-uri Instagram, descărcări, conținut de la terți și limitările serviciului.",
+    "metaTitle": "Declinarea Responsabilității",
+    "metaDescription": "Citiți Declinarea de Responsabilitate InstaView Stories pentru informații despre conținutul public Instagram, funcționalitățile Vizualizatorului de.",
     "breadcrumb": "Declinare de responsabilitate",
     "h1": "Declinare de Responsabilitate",
     "intro1": "Informațiile și serviciile furnizate pe InstaView Stories, disponibil la instaviewstories.com, sunt furnizate exclusiv în scopuri informative generale și de conveniență.",
@@ -285,8 +285,8 @@
     "contactMore": "Pentru informații suplimentare, vă rugăm să consultați paginile noastre <aboutLink>Despre noi</aboutLink>, <privacyLink>Politica de confidențialitate</privacyLink> și <termsLink>Termeni și Condiții</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Politica de Confidențialitate InstaView Stories | Vizualizator de Story-uri Instagram",
-    "metaDescription": "Citiți Politica de Confidențialitate InstaView Stories pentru a afla cum sunt gestionate informațiile atunci când utilizați Vizualizatorul nostru de Story-uri Instagram pentru a explora story-uri, profiluri, highlight-uri, postări și Reels publice Instagram.",
+    "metaTitle": "Politica de Confidențialitate",
+    "metaDescription": "Citiți Politica de Confidențialitate InstaView Stories pentru a afla cum sunt gestionate informațiile atunci când utilizați Vizualizatorul nostru de.",
     "breadcrumb": "Politica de confidențialitate",
     "h1": "Politica de Confidențialitate",
     "lastUpdated": "Ultima actualizare: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Pentru mai multe informații despre site-ul nostru web și serviciu, vizitați pagina <aboutLink>Despre noi</aboutLink>. De asemenea, puteți consulta <termsLink>Termenii și Condițiile</termsLink> și <disclaimerLink>Declinarea de responsabilitate</disclaimerLink> ale noastre."
   },
   "TermsPage": {
-    "metaTitle": "Termeni și Condiții InstaView Stories | Vizualizator de Story-uri Instagram",
-    "metaDescription": "Citiți Termenii și Condițiile InstaView Stories, inclusiv regulile pentru utilizarea Vizualizatorului nostru de Story-uri Instagram, conținut public Instagram, descărcări, confidențialitate și conținut de la terți.",
+    "metaTitle": "Termeni de Utilizare",
+    "metaDescription": "Citiți Termenii și Condițiile InstaView Stories, inclusiv regulile pentru utilizarea Vizualizatorului nostru de Story-uri Instagram,",
     "breadcrumb": "Termeni și condiții",
     "h1": "Termeni și Condiții",
     "lastUpdated": "Ultima actualizare: {date}",

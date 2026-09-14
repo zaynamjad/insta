@@ -13,6 +13,7 @@ export function FlagIcon({
 }) {
   const cc = countryCode.toLowerCase();
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={`https://flagcdn.com/24x18/${cc}.png`}
       srcSet={`https://flagcdn.com/48x36/${cc}.png 2x`}

@@ -43,8 +43,8 @@
     "button": "Buka Penampil Story"
   },
   "HomePage": {
-    "metaTitle": "Instagram Anonymous Story Viewer | Penampil & Pengunduh Story IG",
-    "metaDescription": "Penampil Story Instagram untuk menonton Story, profil, foto, video, Reels, dan sorotan secara anonim. Unduh dengan satu klik di perangkat mana pun. Tanpa registrasi.",
+    "metaTitle": "Penampil Story Instagram Anonim",
+    "metaDescription": "Penampil Story Instagram untuk menonton Story, profil, foto, video, Reels, dan sorotan secara anonim. Unduh dengan satu klik di perangkat mana pun.",
     "heroEyebrow": "Penampil Story Instagram Anonim",
     "badgeFree": "100% Gratis",
     "badgeNoRegistration": "Tanpa Registrasi",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Tanpa login Instagram · Hanya profil publik"
   },
   "AboutPage": {
-    "metaTitle": "Tentang Kami InstaView Stories | Penampil Story Instagram",
-    "metaDescription": "Pelajari lebih lanjut tentang InstaView Stories, Penampil Story Instagram sederhana untuk menjelajahi Story, profil, Sorotan, postingan, foto, video, dan Reels publik Instagram.",
+    "metaTitle": "Tentang Kami",
+    "metaDescription": "Pelajari lebih lanjut tentang InstaView Stories, Penampil Story Instagram sederhana untuk menjelajahi Story, profil, Sorotan, postingan, foto, video,",
     "breadcrumb": "Tentang Kami",
     "h1": "Tentang Kami",
     "intro1": "Selamat datang di InstaView Stories, platform online sederhana yang dirancang untuk membantu pengguna menjelajahi konten Instagram yang tersedia untuk umum dari satu tempat yang praktis.",
@@ -200,8 +200,8 @@
     "contactText3": "Kami menyambut baik masukan dan saran yang dapat membantu kami meningkatkan InstaView Stories dan memberikan pengalaman yang lebih baik bagi pengguna kami."
   },
   "ContactPage": {
-    "metaTitle": "Hubungi Kami InstaView Stories | Dukungan Penampil Story Instagram",
-    "metaDescription": "Hubungi InstaView Stories untuk pertanyaan, masukan, atau dukungan seputar Penampil Story Instagram kami, Story publik, profil, Sorotan, postingan, Reels, dan unduhan.",
+    "metaTitle": "Kontak & Dukungan",
+    "metaDescription": "Hubungi InstaView Stories untuk pertanyaan, masukan, atau dukungan seputar Penampil Story Instagram kami, Story publik, profil, Sorotan, postingan, Reels,",
     "breadcrumb": "Kontak",
     "h1": "Hubungi Kami",
     "intro1": "Punya pertanyaan tentang InstaView Stories, Penampil Story Instagram kami, atau fitur apa pun yang tersedia di situs web kami? Kami siap membantu.",
@@ -239,8 +239,8 @@
     "privacyNote": "Untuk permintaan terkait privasi, lihat <privacyLink>Kebijakan Privasi</privacyLink> kami untuk mengetahui cara menghubungi kami tentang data Anda."
   },
   "DisclaimerPage": {
-    "metaTitle": "Sangkalan InstaView Stories | Penampil Story Instagram",
-    "metaDescription": "Baca Sangkalan InstaView Stories untuk informasi tentang konten publik Instagram, fitur Penampil Story Instagram, unduhan, konten pihak ketiga, dan batasan layanan.",
+    "metaTitle": "Penafian",
+    "metaDescription": "Baca Sangkalan InstaView Stories untuk informasi tentang konten publik Instagram, fitur Penampil Story Instagram, unduhan, konten pihak ketiga,",
     "breadcrumb": "Sangkalan",
     "h1": "Sangkalan",
     "intro1": "Informasi dan layanan yang disediakan di InstaView Stories, yang tersedia di instaviewstories.com, disediakan hanya untuk tujuan informasi umum dan kenyamanan.",
@@ -285,8 +285,8 @@
     "contactMore": "Untuk informasi tambahan, silakan tinjau <aboutLink>Tentang Kami</aboutLink>, <privacyLink>Kebijakan Privasi</privacyLink>, dan <termsLink>Syarat dan Ketentuan</termsLink> kami."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Kebijakan Privasi InstaView Stories | Penampil Story Instagram",
-    "metaDescription": "Baca Kebijakan Privasi InstaView Stories untuk mempelajari bagaimana informasi ditangani saat menggunakan Penampil Story Instagram kami untuk menjelajahi Story, profil, Sorotan, postingan, dan Reels publik Instagram.",
+    "metaTitle": "Kebijakan Privasi",
+    "metaDescription": "Baca Kebijakan Privasi InstaView Stories untuk mempelajari bagaimana informasi ditangani saat menggunakan Penampil Story Instagram kami untuk menjelajahi.",
     "breadcrumb": "Kebijakan Privasi",
     "h1": "Kebijakan Privasi",
     "lastUpdated": "Terakhir diperbarui: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Untuk informasi lebih lanjut tentang situs web dan layanan kami, kunjungi <aboutLink>Tentang Kami</aboutLink>. Anda juga dapat meninjau <termsLink>Syarat dan Ketentuan</termsLink> dan <disclaimerLink>Sangkalan</disclaimerLink> kami."
   },
   "TermsPage": {
-    "metaTitle": "Syarat dan Ketentuan InstaView Stories | Penampil Story Instagram",
-    "metaDescription": "Baca Syarat dan Ketentuan InstaView Stories, termasuk aturan penggunaan Penampil Story Instagram kami, konten publik Instagram, unduhan, privasi, dan konten pihak ketiga.",
+    "metaTitle": "Ketentuan Penggunaan",
+    "metaDescription": "Baca Syarat dan Ketentuan InstaView Stories, termasuk aturan penggunaan Penampil Story Instagram kami, konten publik Instagram, unduhan, privasi,",
     "breadcrumb": "Syarat dan Ketentuan",
     "h1": "Syarat dan Ketentuan",
     "lastUpdated": "Terakhir diperbarui: {date}",

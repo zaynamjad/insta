@@ -43,8 +43,8 @@
     "button": "Történetnéző megnyitása"
   },
   "HomePage": {
-    "metaTitle": "Névtelen Instagram történetnéző | IG történetnéző és letöltő",
-    "metaDescription": "Az Instagram történetnéző segítségével névtelenül tekintheti meg a történeteket, profilokat, fotókat, videókat, Reeleket és kiemelt történeteket. Töltse le egy kattintással bármilyen eszközön. Regisztráció nélkül.",
+    "metaTitle": "Anonim Instagram Story Néző",
+    "metaDescription": "Az Instagram történetnéző segítségével névtelenül tekintheti meg a történeteket, profilokat, fotókat, videókat, Reeleket és kiemelt történeteket.",
     "heroEyebrow": "Névtelen Instagram történetnéző",
     "badgeFree": "100% ingyenes",
     "badgeNoRegistration": "Regisztráció nem szükséges",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Instagram bejelentkezés nem szükséges · Csak nyilvános profilok"
   },
   "AboutPage": {
-    "metaTitle": "Rólunk – InstaView Stories | Instagram történetnéző",
-    "metaDescription": "Tudjon meg többet az InstaView Stories-ról, egy egyszerű Instagram történetnézőről, amely nyilvános Instagram-történetek, profilok, kiemelt történetek, bejegyzések, fotók, videók és Reelek felfedezésére szolgál.",
+    "metaTitle": "Rólunk",
+    "metaDescription": "Tudjon meg többet az InstaView Stories-ról, egy egyszerű Instagram történetnézőről, amely nyilvános Instagram-történetek, profilok, kiemelt történetek,",
     "breadcrumb": "Rólunk",
     "h1": "Rólunk",
     "intro1": "Üdvözöljük az InstaView Stories-on, egy egyszerű online platformon, amely segít a felhasználóknak felfedezni a nyilvánosan elérhető Instagram-tartalmat egyetlen kényelmes helyről.",
@@ -200,8 +200,8 @@
     "contactText3": "Szívesen fogadjuk a visszajelzéseket és javaslatokat, amelyek segíthetnek fejleszteni az InstaView Stories-t, és jobb élményt nyújtani felhasználóinknak."
   },
   "ContactPage": {
-    "metaTitle": "Kapcsolat – InstaView Stories | Instagram történetnéző támogatás",
-    "metaDescription": "Vegye fel a kapcsolatot az InstaView Stories-szal kérdésekkel, visszajelzésekkel vagy támogatással kapcsolatban Instagram történetnézőnkről, nyilvános történetekről, profilokról, kiemelt történetekről, bejegyzésekről, Reelekről és letöltésekről.",
+    "metaTitle": "Kapcsolat és Támogatás",
+    "metaDescription": "Vegye fel a kapcsolatot az InstaView Stories-szal kérdésekkel, visszajelzésekkel vagy támogatással kapcsolatban Instagram történetnézőnkről,",
     "breadcrumb": "Kapcsolat",
     "h1": "Lépjen kapcsolatba velünk",
     "intro1": "Kérdése van az InstaView Stories-ról, Instagram történetnézőnkről, vagy a weboldalunkon elérhető bármely funkcióról? Szívesen segítünk.",
@@ -239,8 +239,8 @@
     "privacyNote": "Az adatvédelemmel kapcsolatos kérésekhez tekintse meg <privacyLink>Adatvédelmi irányelveinket</privacyLink>, hogy megtudja, hogyan léphet kapcsolatba velünk az adataival kapcsolatban."
   },
   "DisclaimerPage": {
-    "metaTitle": "Jogi nyilatkozat – InstaView Stories | Instagram történetnéző",
-    "metaDescription": "Olvassa el az InstaView Stories jogi nyilatkozatát a nyilvános Instagram-tartalomról, az Instagram történetnéző funkcióiról, letöltésekről, harmadik féltől származó tartalomról és a szolgáltatás korlátairól.",
+    "metaTitle": "Jogi Nyilatkozat",
+    "metaDescription": "Olvassa el az InstaView Stories jogi nyilatkozatát a nyilvános Instagram-tartalomról, az Instagram történetnéző funkcióiról, letöltésekről,",
     "breadcrumb": "Jogi nyilatkozat",
     "h1": "Jogi nyilatkozat",
     "intro1": "Az InstaView Stories-on, amely az instaviewstories.com címen érhető el, nyújtott információk és szolgáltatások kizárólag általános tájékoztató és kényelmi célokat szolgálnak.",
@@ -285,8 +285,8 @@
     "contactMore": "További információkért olvassa el <aboutLink>Rólunk</aboutLink>, <privacyLink>Adatvédelmi irányelvek</privacyLink> és <termsLink>Felhasználási feltételek</termsLink> oldalainkat."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Adatvédelmi irányelvek – InstaView Stories | Instagram történetnéző",
-    "metaDescription": "Olvassa el az InstaView Stories adatvédelmi irányelveit, hogy megtudja, hogyan kezeljük az információkat, amikor Instagram történetnézőnket használja nyilvános Instagram-történetek, profilok, kiemelt történetek, bejegyzések és Reelek felfedezésére.",
+    "metaTitle": "Adatvédelmi Irányelvek",
+    "metaDescription": "Olvassa el az InstaView Stories adatvédelmi irányelveit, hogy megtudja, hogyan kezeljük az információkat, amikor Instagram történetnézőnket használja.",
     "breadcrumb": "Adatvédelmi irányelvek",
     "h1": "Adatvédelmi irányelvek",
     "lastUpdated": "Utolsó frissítés: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Weboldalunkkal és szolgáltatásunkkal kapcsolatos további információkért látogasson el <aboutLink>Rólunk</aboutLink> oldalunkra. Áttekintheti <termsLink>Felhasználási feltételeinket</termsLink> és <disclaimerLink>Jogi nyilatkozatunkat</disclaimerLink> is."
   },
   "TermsPage": {
-    "metaTitle": "Felhasználási feltételek – InstaView Stories | Instagram történetnéző",
-    "metaDescription": "Olvassa el az InstaView Stories felhasználási feltételeit, beleértve az Instagram történetnéző, a nyilvános Instagram-tartalom, a letöltések, az adatvédelem és a harmadik féltől származó tartalom használatára vonatkozó szabályokat.",
+    "metaTitle": "Használati Feltételek",
+    "metaDescription": "Olvassa el az InstaView Stories felhasználási feltételeit, beleértve az Instagram történetnéző, a nyilvános Instagram-tartalom, a letöltések,",
     "breadcrumb": "Felhasználási feltételek",
     "h1": "Felhasználási feltételek",
     "lastUpdated": "Utolsó frissítés: {date}",

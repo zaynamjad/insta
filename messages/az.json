@@ -43,8 +43,8 @@
     "button": "Story izləyicisini aç"
   },
   "HomePage": {
-    "metaTitle": "Anonim Instagram Story İzləyicisi | IG Story İzləyici və Yükləyici",
-    "metaDescription": "Instagram Story İzləyicisi Story-lərə, profillərə, fotolara, videolara, Reels-lərə və seçilmişlərə anonim baxmağa imkan verir. İstənilən cihazda bir kliklə yükləyin. Heç bir qeydiyyat olmadan.",
+    "metaTitle": "Anonim Instagram Story İzləyicisi",
+    "metaDescription": "Instagram Story İzləyicisi Story-lərə, profillərə, fotolara, videolara, Reels-lərə və seçilmişlərə anonim baxmağa imkan verir.",
     "heroEyebrow": "Anonim Instagram Story İzləyicisi",
     "badgeFree": "100% Pulsuz",
     "badgeNoRegistration": "Qeydiyyat Tələb Olunmur",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Instagram girişi tələb olunmur · Yalnız ictimai profillər"
   },
   "AboutPage": {
-    "metaTitle": "Haqqımızda InstaView Stories | Instagram Story İzləyicisi",
-    "metaDescription": "İctimai Instagram Story-lərini, profillərini, Seçilmişlərini, paylaşımlarını, fotolarını, videolarını və Reels-lərini araşdırmaq üçün sadə bir Instagram Story İzləyicisi olan InstaView Stories haqqında daha çox öyrənin.",
+    "metaTitle": "Haqqımızda",
+    "metaDescription": "İctimai Instagram Story-lərini, profillərini, Seçilmişlərini, paylaşımlarını, fotolarını, videolarını və Reels-lərini araşdırmaq üçün sadə bir Instagram.",
     "breadcrumb": "Haqqımızda",
     "h1": "Haqqımızda",
     "intro1": "İstifadəçilərin ictimai şəkildə əlçatan Instagram məzmununu bir rahat yerdən araşdırmasına kömək etmək üçün nəzərdə tutulmuş sadə onlayn platforma olan InstaView Stories-ə xoş gəlmisiniz.",
@@ -200,8 +200,8 @@
     "contactText3": "InstaView Stories-i təkmilləşdirməyə və istifadəçilərimiz üçün daha yaxşı bir təcrübə təqdim etməyə kömək edə biləcək rəy və təklifləri məmnuniyyətlə qarşılayırıq."
   },
   "ContactPage": {
-    "metaTitle": "Əlaqə InstaView Stories | Instagram Story İzləyicisi Dəstəyi",
-    "metaDescription": "Instagram Story İzləyicimiz, ictimai Story-lər, profillər, Seçilmişlər, paylaşımlar, Reels-lər və yükləmələr haqqında suallar, rəylər və ya dəstək üçün InstaView Stories-lə əlaqə saxlayın.",
+    "metaTitle": "Əlaqə və Dəstək",
+    "metaDescription": "Instagram Story İzləyicimiz, ictimai Story-lər, profillər, Seçilmişlər, paylaşımlar, Reels-lər və yükləmələr haqqında suallar, rəylər və ya dəstək üçün.",
     "breadcrumb": "Əlaqə",
     "h1": "Bizimlə Əlaqə Saxlayın",
     "intro1": "InstaView Stories, Instagram Story İzləyicimiz, yaxud vebsaytımızda mövcud olan hər hansı xüsusiyyət haqqında sualınız var? Biz köməyə hazırıq.",
@@ -239,8 +239,8 @@
     "privacyNote": "Məxfiliklə bağlı sorğular üçün, məlumatlarınız haqqında bizimlə necə əlaqə saxlayacağınızı öyrənmək üçün <privacyLink>Məxfilik siyasətimizə</privacyLink> baxın."
   },
   "DisclaimerPage": {
-    "metaTitle": "Məsuliyyətdən İmtina InstaView Stories | Instagram Story İzləyicisi",
-    "metaDescription": "İctimai Instagram məzmunu, Instagram Story İzləyicisi xüsusiyyətləri, yükləmələr, üçüncü tərəf məzmunu və xidmət məhdudiyyətləri haqqında məlumat üçün InstaView Stories Məsuliyyətdən İmtina bəyanatını oxuyun.",
+    "metaTitle": "Məsuliyyət Rəddi",
+    "metaDescription": "İctimai Instagram məzmunu, Instagram Story İzləyicisi xüsusiyyətləri, yükləmələr, üçüncü tərəf məzmunu və xidmət məhdudiyyətləri haqqında məlumat üçün.",
     "breadcrumb": "Məsuliyyətdən imtina",
     "h1": "Məsuliyyətdən İmtina",
     "intro1": "instaviewstories.com ünvanında mövcud olan InstaView Stories-də təqdim olunan məlumat və xidmətlər yalnız ümumi məlumatlandırma və rahatlıq məqsədləri üçün təqdim olunur.",
@@ -285,8 +285,8 @@
     "contactMore": "Əlavə məlumat üçün zəhmət olmasa <aboutLink>Haqqımızda</aboutLink>, <privacyLink>Məxfilik siyasəti</privacyLink> və <termsLink>Şərtlər və Qaydalar</termsLink> səhifələrimizi nəzərdən keçirin."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Məxfilik Siyasəti InstaView Stories | Instagram Story İzləyicisi",
-    "metaDescription": "İctimai Instagram Story-lərini, profillərini, Seçilmişlərini, paylaşımlarını və Reels-lərini araşdırmaq üçün Instagram Story İzləyicimizdən istifadə edərkən məlumatların necə idarə olunduğunu öyrənmək üçün InstaView Stories Məxfilik Siyasətini oxuyun.",
+    "metaTitle": "Məxfilik Siyasəti",
+    "metaDescription": "İctimai Instagram Story-lərini, profillərini, Seçilmişlərini, paylaşımlarını və Reels-lərini araşdırmaq üçün Instagram Story İzləyicimizdən istifadə.",
     "breadcrumb": "Məxfilik siyasəti",
     "h1": "Məxfilik Siyasəti",
     "lastUpdated": "Son yenilənmə: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Vebsaytımız və xidmətimiz haqqında daha çox məlumat üçün <aboutLink>Haqqımızda</aboutLink> səhifəsinə baxın. Həmçinin <termsLink>Şərtlər və Qaydalar</termsLink> və <disclaimerLink>Məsuliyyətdən İmtina</disclaimerLink> səhifələrimizi nəzərdən keçirə bilərsiniz."
   },
   "TermsPage": {
-    "metaTitle": "Şərtlər və Qaydalar InstaView Stories | Instagram Story İzləyicisi",
-    "metaDescription": "Instagram Story İzləyicimizdən, ictimai Instagram məzmunundan, yükləmələrdən, məxfilikdən və üçüncü tərəf məzmunundan istifadə qaydaları daxil olmaqla, InstaView Stories Şərtlər və Qaydalarını oxuyun.",
+    "metaTitle": "İstifadə Şərtləri",
+    "metaDescription": "Instagram Story İzləyicimizdən, ictimai Instagram məzmunundan, yükləmələrdən, məxfilikdən və üçüncü tərəf məzmunundan istifadə qaydaları daxil olmaqla,",
     "breadcrumb": "Şərtlər və qaydalar",
     "h1": "Şərtlər və Qaydalar",
     "lastUpdated": "Son yenilənmə: {date}",

@@ -43,8 +43,8 @@
     "button": "Abrir o Visualizador de Stories"
   },
   "HomePage": {
-    "metaTitle": "Visualizador Anónimo de Stories do Instagram | Visualizador e Descarregador de Stories do IG",
-    "metaDescription": "O Visualizador de Stories do Instagram permite ver anonimamente stories, perfis, fotos, vídeos, Reels e destaques. Descarregue com um clique em qualquer dispositivo. Sem necessidade de registo.",
+    "metaTitle": "Visualizador Anônimo de Stories",
+    "metaDescription": "O Visualizador de Stories do Instagram permite ver anonimamente stories, perfis, fotos, vídeos, Reels e destaques. Descarregue com um clique em qualquer.",
     "heroEyebrow": "Visualizador Anónimo de Stories do Instagram",
     "badgeFree": "100% Gratuito",
     "badgeNoRegistration": "Sem Necessidade de Registo",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Sem necessidade de iniciar sessão no Instagram · Apenas perfis públicos"
   },
   "AboutPage": {
-    "metaTitle": "Sobre Nós InstaView Stories | Visualizador de Stories do Instagram",
-    "metaDescription": "Saiba mais sobre nós, o InstaView Stories, um Visualizador de Stories do Instagram simples para explorar stories, perfis, destaques, publicações, fotos, vídeos e Reels públicos do Instagram.",
+    "metaTitle": "Sobre Nós",
+    "metaDescription": "Saiba mais sobre nós, o InstaView Stories, um Visualizador de Stories do Instagram simples para explorar stories, perfis, destaques, publicações, fotos,",
     "breadcrumb": "Sobre Nós",
     "h1": "Sobre Nós",
     "intro1": "Bem-vindo ao InstaView Stories, uma plataforma online simples concebida para ajudar os utilizadores a explorar conteúdo do Instagram disponível publicamente, tudo num só lugar conveniente.",
@@ -200,8 +200,8 @@
     "contactText3": "Agradecemos comentários e sugestões que nos ajudem a melhorar o InstaView Stories e a proporcionar uma melhor experiência aos nossos utilizadores."
   },
   "ContactPage": {
-    "metaTitle": "Contacte-nos InstaView Stories | Suporte do Visualizador de Stories do Instagram",
-    "metaDescription": "Contacte o InstaView Stories para questões, comentários ou suporte sobre o nosso Visualizador de Stories do Instagram, stories, perfis, destaques, publicações, Reels e descarregamentos públicos.",
+    "metaTitle": "Contato e Suporte",
+    "metaDescription": "Contacte o InstaView Stories para questões, comentários ou suporte sobre o nosso Visualizador de Stories do Instagram, stories, perfis, destaques,",
     "breadcrumb": "Contacto",
     "h1": "Contacte-nos",
     "intro1": "Tem alguma dúvida sobre o InstaView Stories, o nosso Visualizador de Stories do Instagram, ou sobre qualquer uma das funcionalidades disponíveis no nosso website? Estamos aqui para ajudar.",
@@ -239,8 +239,8 @@
     "privacyNote": "Para pedidos relacionados com privacidade, consulte a nossa <privacyLink>Política de Privacidade</privacyLink> para saber como nos contactar sobre os seus dados."
   },
   "DisclaimerPage": {
-    "metaTitle": "Aviso Legal InstaView Stories | Visualizador de Stories do Instagram",
-    "metaDescription": "Leia o Aviso Legal do InstaView Stories para obter informações sobre conteúdo público do Instagram, funcionalidades do Visualizador de Stories do Instagram, descarregamentos, conteúdo de terceiros e limitações do serviço.",
+    "metaTitle": "Isenção de Responsabilidade",
+    "metaDescription": "Leia o Aviso Legal do InstaView Stories para obter informações sobre conteúdo público do Instagram, funcionalidades do Visualizador de Stories do.",
     "breadcrumb": "Aviso Legal",
     "h1": "Aviso Legal",
     "intro1": "As informações e serviços fornecidos no InstaView Stories, disponível em instaviewstories.com, são fornecidos apenas para fins informativos e de conveniência geral.",
@@ -285,8 +285,8 @@
     "contactMore": "Para mais informações, consulte as nossas páginas <aboutLink>Sobre Nós</aboutLink>, <privacyLink>Política de Privacidade</privacyLink> e <termsLink>Termos e Condições</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Política de Privacidade InstaView Stories | Visualizador de Stories do Instagram",
-    "metaDescription": "Leia a Política de Privacidade do InstaView Stories para saber como a informação é tratada quando utiliza o nosso Visualizador de Stories do Instagram para explorar stories, perfis, destaques, publicações e Reels públicos do Instagram.",
+    "metaTitle": "Política de Privacidade",
+    "metaDescription": "Leia a Política de Privacidade do InstaView Stories para saber como a informação é tratada quando utiliza o nosso Visualizador de Stories do Instagram.",
     "breadcrumb": "Política de Privacidade",
     "h1": "Política de Privacidade",
     "lastUpdated": "Última atualização: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Para mais informações sobre o nosso website e serviço, visite a página <aboutLink>Sobre Nós</aboutLink>. Também pode consultar os nossos <termsLink>Termos e Condições</termsLink> e o <disclaimerLink>Aviso Legal</disclaimerLink>."
   },
   "TermsPage": {
-    "metaTitle": "Termos e Condições InstaView Stories | Visualizador de Stories do Instagram",
-    "metaDescription": "Leia os Termos e Condições do InstaView Stories, incluindo as regras para utilizar o nosso Visualizador de Stories do Instagram, conteúdo público do Instagram, descarregamentos, privacidade e conteúdo de terceiros.",
+    "metaTitle": "Termos de Uso",
+    "metaDescription": "Leia os Termos e Condições do InstaView Stories, incluindo as regras para utilizar o nosso Visualizador de Stories do Instagram, conteúdo público do.",
     "breadcrumb": "Termos e Condições",
     "h1": "Termos e Condições",
     "lastUpdated": "Última atualização: {date}",

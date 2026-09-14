@@ -43,7 +43,7 @@
     "button": "스토리 뷰어 열기"
   },
   "HomePage": {
-    "metaTitle": "{siteName}: 인스타그램 스토리 뷰어 | 스토리를 익명으로 보기",
+    "metaTitle": "익명 인스타그램 스토리 뷰어",
     "metaDescription": "인스타그램에 로그인하지 않고 공개적으로 이용 가능한 스토리를 보려면 공개 인스타그램 사용자 이름을 입력하세요. 비밀번호도, 계정도, 앱 설치도 필요 없습니다.",
     "heroEyebrow": "익명 인스타그램 스토리 뷰어",
     "badgeFree": "100% 무료",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "인스타그램 로그인 불필요 · 공개 프로필만 지원"
   },
   "AboutPage": {
-    "metaTitle": "{siteName} 소개",
-    "metaDescription": "{siteName}이 무엇을 하는지, 어떻게 작동하는지, 그리고 왜 공개 인스타그램 프로필 데이터만 표시하고 스토리 콘텐츠는 절대 표시하지 않는지 알아보세요.",
+    "metaTitle": "소개",
+    "metaDescription": "InstaView Stories이 무엇을 하는지, 어떻게 작동하는지, 그리고 왜 공개 인스타그램 프로필 데이터만 표시하고 스토리 콘텐츠는 절대 표시하지 않는지 알아보세요.",
     "breadcrumb": "소개",
     "h1": "{siteName} 소개",
     "intro1": "InstaView Stories에 오신 것을 환영합니다. 사용자가 한곳에서 편리하게 공개적으로 이용 가능한 인스타그램 콘텐츠를 살펴볼 수 있도록 설계된 간편한 온라인 플랫폼입니다.",
@@ -200,8 +200,8 @@
     "contactText3": "InstaView Stories를 개선하고 사용자에게 더 나은 경험을 제공하는 데 도움이 되는 피드백과 제안을 언제나 환영합니다."
   },
   "ContactPage": {
-    "metaTitle": "{siteName} 문의하기",
-    "metaDescription": "질문, 피드백 또는 콘텐츠 삭제 요청은 {siteName} 팀에 문의하세요.",
+    "metaTitle": "문의 및 지원",
+    "metaDescription": "서비스 관련 질문, 의견, 피드백 또는 콘텐츠 삭제 요청이 있으시면 언제든지 친절한 InstaView Stories 고객 지원 팀에 문의해 주세요.",
     "breadcrumb": "문의하기",
     "h1": "문의하기",
     "intro1": "InstaView Stories, 저희 인스타그램 스토리 뷰어, 또는 웹사이트에서 이용 가능한 기능에 대해 궁금한 점이 있으신가요? 저희가 도와드리겠습니다.",
@@ -240,7 +240,7 @@
   },
   "DisclaimerPage": {
     "metaTitle": "면책 조항",
-    "metaDescription": "{siteName}이 할 수 있는 것과 할 수 없는 것에 대한 중요한 정보.",
+    "metaDescription": "공개 콘텐츠 소유권, 타사 상표권 및 서비스 제공 한계를 포함하여 InstaView Stories이 할 수 있는 것과 할 수 없는 것에 대한 중요 안내입니다.",
     "breadcrumb": "면책 조항",
     "h1": "면책 조항",
     "intro1": "instaviewstories.com에서 제공되는 InstaView Stories의 정보와 서비스는 일반적인 정보 제공 및 편의를 위한 목적으로만 제공됩니다.",
@@ -286,7 +286,7 @@
   },
   "PrivacyPolicyPage": {
     "metaTitle": "개인정보 처리방침",
-    "metaDescription": "공개 인스타그램 스토리를 검색하고 볼 때 {siteName}이 데이터를 처리하는 방법.",
+    "metaDescription": "개인정보 수집이나 회원가입 없이 공개 인스타그램 스토리를 검색하고 익명으로 볼 때 InstaView Stories이 데이터를 안전하게 처리하는 정책입니다.",
     "breadcrumb": "개인정보 처리방침",
     "h1": "개인정보 처리방침",
     "lastUpdated": "최종 업데이트: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "저희 웹사이트와 서비스에 대한 더 자세한 정보는 <aboutLink>회사 소개</aboutLink>를 방문해 주세요. <termsLink>이용약관</termsLink>과 <disclaimerLink>면책 조항</disclaimerLink>도 함께 확인하실 수 있습니다."
   },
   "TermsPage": {
-    "metaTitle": "서비스 약관",
-    "metaDescription": "{siteName} 이용을 규율하는 약관.",
+    "metaTitle": "이용약관",
+    "metaDescription": "서비스 이용, 허용되는 사용 정책, 면책 조항 및 책임 제한을 포함하여 InstaView Stories 플랫폼 이용을 규율하는 종합 이용약관입니다.",
     "breadcrumb": "서비스 약관",
     "h1": "서비스 약관",
     "lastUpdated": "최종 업데이트: {date}",

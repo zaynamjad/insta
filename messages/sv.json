@@ -43,8 +43,8 @@
     "button": "Öppna storyvisaren"
   },
   "HomePage": {
-    "metaTitle": "Instagram Anonymous Story Viewer | IG Story-visare och nedladdare",
-    "metaDescription": "Instagram Story Viewer låter dig anonymt se stories, profiler, foton, videor, Reels och höjdpunkter med mera. Ladda ner med ett klick på vilken enhet som helst. Utan registrering.",
+    "metaTitle": "Anonym Instagram Story-visare",
+    "metaDescription": "Instagram Story Viewer låter dig anonymt se stories, profiler, foton, videor, Reels och höjdpunkter med mera. Ladda ner med ett klick på vilken enhet som.",
     "heroEyebrow": "Anonym Instagram Story Viewer",
     "badgeFree": "100 % gratis",
     "badgeNoRegistration": "Ingen registrering krävs",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Ingen Instagram-inloggning krävs · Endast offentliga profiler"
   },
   "AboutPage": {
-    "metaTitle": "Om oss InstaView Stories | Instagram-storyvisare",
-    "metaDescription": "Läs mer om oss på InstaView Stories, en enkel Instagram-storyvisare för att utforska offentliga Instagram-stories, profiler, höjdpunkter, inlägg, foton, videor och Reels.",
+    "metaTitle": "Om Oss",
+    "metaDescription": "Läs mer om oss på InstaView Stories, en enkel Instagram-storyvisare för att utforska offentliga Instagram-stories, profiler, höjdpunkter, inlägg, foton,",
     "breadcrumb": "Om oss",
     "h1": "Om oss",
     "intro1": "Välkommen till InstaView Stories, en enkel onlineplattform utformad för att hjälpa användare att utforska offentligt tillgängligt Instagram-innehåll på ett och samma ställe.",
@@ -200,8 +200,8 @@
     "contactText3": "Vi välkomnar feedback och förslag som kan hjälpa oss att förbättra InstaView Stories och erbjuda en bättre upplevelse för våra användare."
   },
   "ContactPage": {
-    "metaTitle": "Kontakta oss InstaView Stories | Support för Instagram-storyvisare",
-    "metaDescription": "Kontakta InstaView Stories med frågor, feedback eller support om vår Instagram-storyvisare, offentliga stories, profiler, höjdpunkter, inlägg, Reels och nedladdningar.",
+    "metaTitle": "Kontakt och Support",
+    "metaDescription": "Kontakta InstaView Stories med frågor, feedback eller support om vår Instagram-storyvisare, offentliga stories, profiler, höjdpunkter, inlägg,",
     "breadcrumb": "Kontakt",
     "h1": "Kontakta oss",
     "intro1": "Har du en fråga om InstaView Stories, vår Instagram-storyvisare eller någon av funktionerna på vår webbplats? Vi hjälper dig gärna.",
@@ -239,8 +239,8 @@
     "privacyNote": "För sekretessrelaterade förfrågningar, se vår <privacyLink>Integritetspolicy</privacyLink> för hur du når oss angående dina uppgifter."
   },
   "DisclaimerPage": {
-    "metaTitle": "Ansvarsfriskrivning InstaView Stories | Instagram-storyvisare",
-    "metaDescription": "Läs InstaView Stories ansvarsfriskrivning för information om offentligt Instagram-innehåll, funktioner i Instagram-storyvisaren, nedladdningar, innehåll från tredje part och begränsningar av tjänsten.",
+    "metaTitle": "Ansvarsfriskrivning",
+    "metaDescription": "Läs InstaView Stories ansvarsfriskrivning för information om offentligt Instagram-innehåll, funktioner i Instagram-storyvisaren, nedladdningar,",
     "breadcrumb": "Ansvarsfriskrivning",
     "h1": "Ansvarsfriskrivning",
     "intro1": "Informationen och tjänsterna som tillhandahålls på InstaView Stories, tillgänglig på instaviewstories.com, tillhandahålls endast i allmänt informations- och bekvämlighetssyfte.",
@@ -285,8 +285,8 @@
     "contactMore": "För ytterligare information, granska gärna vår sida <aboutLink>Om oss</aboutLink>, vår <privacyLink>Integritetspolicy</privacyLink> och våra <termsLink>Användarvillkor</termsLink>."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Integritetspolicy InstaView Stories | Instagram-storyvisare",
-    "metaDescription": "Läs InstaView Stories integritetspolicy för att lära dig hur information hanteras när du använder vår Instagram-storyvisare för att utforska offentliga Instagram-stories, profiler, höjdpunkter, inlägg och Reels.",
+    "metaTitle": "Integritetspolicy",
+    "metaDescription": "Läs InstaView Stories integritetspolicy för att lära dig hur information hanteras när du använder vår Instagram-storyvisare för att utforska offentliga.",
     "breadcrumb": "Integritetspolicy",
     "h1": "Integritetspolicy",
     "lastUpdated": "Senast uppdaterad: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "För mer information om vår webbplats och tjänst, besök <aboutLink>Om oss</aboutLink>. Du kan även granska våra <termsLink>Användarvillkor</termsLink> och vår <disclaimerLink>Ansvarsfriskrivning</disclaimerLink>."
   },
   "TermsPage": {
-    "metaTitle": "Användarvillkor InstaView Stories | Instagram-storyvisare",
-    "metaDescription": "Läs användarvillkoren för InstaView Stories, inklusive reglerna för att använda vår Instagram-storyvisare, offentligt Instagram-innehåll, nedladdningar, integritet och innehåll från tredje part.",
+    "metaTitle": "Användarvillkor",
+    "metaDescription": "Läs användarvillkoren för InstaView Stories, inklusive reglerna för att använda vår Instagram-storyvisare, offentligt Instagram-innehåll, nedladdningar,",
     "breadcrumb": "Användarvillkor",
     "h1": "Användarvillkor",
     "lastUpdated": "Senast uppdaterad: {date}",

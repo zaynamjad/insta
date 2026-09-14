@@ -43,8 +43,8 @@
     "button": "打开快拍查看器"
   },
   "HomePage": {
-    "metaTitle": "Instagram 匿名快拍查看器 | IG 快拍查看与下载工具",
-    "metaDescription": "Instagram 快拍查看器可匿名浏览快拍、个人资料、照片、视频、短视频和精选等内容，并支持在任意设备上一键下载，无需注册。",
+    "metaTitle": "匿名Instagram快拍查看器",
+    "metaDescription": "Instagram 快拍查看器可让您以完全匿名的方式浏览快拍、个人资料、照片、视频、Reels短视频和精选等内容，支持在任意设备上一键高速下载，100%免费且无需登录注册。",
     "heroEyebrow": "匿名 Instagram 快拍查看器",
     "badgeFree": "100% 免费",
     "badgeNoRegistration": "无需注册",
@@ -152,7 +152,7 @@
     "finalCtaSupportingText": "无需登录 Instagram · 仅限公开个人资料"
   },
   "AboutPage": {
-    "metaTitle": "关于我们 InstaView Stories | Instagram 快拍查看器",
+    "metaTitle": "关于我们",
     "metaDescription": "深入了解 InstaView Stories——一款简单易用的 Instagram 快拍查看器，可用于浏览公开的 Instagram 快拍、个人资料、精选、帖子、照片、视频和短视频。",
     "breadcrumb": "关于我们",
     "h1": "关于我们",
@@ -200,7 +200,7 @@
     "contactText3": "我们欢迎任何有助于改进 InstaView Stories、为用户提供更好体验的反馈和建议。"
   },
   "ContactPage": {
-    "metaTitle": "联系我们 InstaView Stories | Instagram 快拍查看器支持",
+    "metaTitle": "联系与支持",
     "metaDescription": "如需就我们的 Instagram 快拍查看器、公开快拍、个人资料、精选、帖子、短视频及下载相关问题、反馈或支持进行咨询，请联系 InstaView Stories。",
     "breadcrumb": "联系我们",
     "h1": "联系我们",
@@ -239,7 +239,7 @@
     "privacyNote": "如有隐私相关请求，请查看我们的<privacyLink>隐私政策</privacyLink>，了解如何就您的数据联系我们。"
   },
   "DisclaimerPage": {
-    "metaTitle": "免责声明 InstaView Stories | Instagram 快拍查看器",
+    "metaTitle": "免责声明",
     "metaDescription": "阅读 InstaView Stories 免责声明，了解有关公开 Instagram 内容、Instagram 快拍查看器功能、下载、第三方内容以及服务限制的相关信息。",
     "breadcrumb": "免责声明",
     "h1": "免责声明",
@@ -285,7 +285,7 @@
     "contactMore": "如需了解更多信息，请查看我们的<aboutLink>关于我们</aboutLink>、<privacyLink>隐私政策</privacyLink>和<termsLink>条款和条件</termsLink>。"
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "隐私政策 InstaView Stories | Instagram 快拍查看器",
+    "metaTitle": "隐私政策",
     "metaDescription": "阅读 InstaView Stories 隐私政策，了解在使用我们的 Instagram 快拍查看器浏览公开的 Instagram 快拍、个人资料、精选和帖子时，信息将如何被处理。",
     "breadcrumb": "隐私政策",
     "h1": "隐私政策",
@@ -356,7 +356,7 @@
     "contactMore": "如需了解更多关于我们网站和服务的信息，请访问<aboutLink>关于我们</aboutLink>页面。您也可以查看我们的<termsLink>条款和条件</termsLink>及<disclaimerLink>免责声明</disclaimerLink>。"
   },
   "TermsPage": {
-    "metaTitle": "条款和条件 InstaView Stories | Instagram 快拍查看器",
+    "metaTitle": "使用条款",
     "metaDescription": "阅读 InstaView Stories 的条款和条件，了解使用我们的 Instagram 快拍查看器、公开 Instagram 内容、下载、隐私及第三方内容的相关规则。",
     "breadcrumb": "条款和条件",
     "h1": "条款和条件",

@@ -43,8 +43,8 @@
     "button": "Hikaye Görüntüleyici'yi aç"
   },
   "HomePage": {
-    "metaTitle": "Instagram Anonim Hikaye Görüntüleyici | IG Hikaye Görüntüleyici ve İndirici",
-    "metaDescription": "Instagram Hikaye Görüntüleyici ile Hikayeleri, profilleri, fotoğrafları, videoları, Reels'leri ve öne çıkanları anonim olarak izleyin. Herhangi bir cihazda tek tıkla indirin. Kayıt gerekmez.",
+    "metaTitle": "Anonim Instagram Hikaye Görüntüleyici",
+    "metaDescription": "Instagram Hikaye Görüntüleyici ile Hikayeleri, profilleri, fotoğrafları, videoları, Reels'leri ve öne çıkanları anonim olarak izleyin.",
     "heroEyebrow": "Instagram Hikaye Görüntüleyici Anonim",
     "badgeFree": "%100 Ücretsiz",
     "badgeNoRegistration": "Kayıt Gerekmez",
@@ -152,8 +152,8 @@
     "finalCtaSupportingText": "Instagram girişi gerekmez · Yalnızca herkese açık profiller"
   },
   "AboutPage": {
-    "metaTitle": "InstaView Stories Hakkında | Instagram Hikaye Görüntüleyici",
-    "metaDescription": "Herkese açık Instagram Hikayelerini, profillerini, Öne Çıkanlarını, gönderilerini, fotoğraflarını, videolarını ve Reels'lerini keşfetmek için basit bir Instagram Hikaye Görüntüleyici olan InstaView Stories hakkında daha fazla bilgi edinin.",
+    "metaTitle": "Hakkımızda",
+    "metaDescription": "Herkese açık Instagram Hikayelerini, profillerini, Öne Çıkanlarını, gönderilerini, fotoğraflarını, videolarını ve Reels'lerini keşfetmek için basit bir.",
     "breadcrumb": "Hakkımızda",
     "h1": "Hakkımızda",
     "intro1": "Kullanıcıların herkese açık Instagram içeriğini tek bir uygun yerden keşfetmelerine yardımcı olmak için tasarlanmış basit bir çevrimiçi platform olan InstaView Stories'e hoş geldiniz.",
@@ -200,8 +200,8 @@
     "contactText3": "InstaView Stories'i geliştirmemize ve kullanıcılarımıza daha iyi bir deneyim sunmamıza yardımcı olabilecek geri bildirim ve önerileri memnuniyetle karşılıyoruz."
   },
   "ContactPage": {
-    "metaTitle": "InstaView Stories ile İletişime Geçin | Instagram Hikaye Görüntüleyici Desteği",
-    "metaDescription": "Instagram Hikaye Görüntüleyicimiz, herkese açık Hikayeler, profiller, Öne Çıkanlar, gönderiler, Reels'ler ve indirmeler hakkında sorular, geri bildirimler veya destek için InstaView Stories ile iletişime geçin.",
+    "metaTitle": "İletişim ve Destek",
+    "metaDescription": "Instagram Hikaye Görüntüleyicimiz, herkese açık Hikayeler, profiller, Öne Çıkanlar, gönderiler, Reels'ler ve indirmeler hakkında sorular,",
     "breadcrumb": "İletişim",
     "h1": "Bize Ulaşın",
     "intro1": "InstaView Stories, Instagram Hikaye Görüntüleyicimiz veya web sitemizde bulunan özelliklerden herhangi biri hakkında bir sorunuz mu var? Size yardımcı olmak için buradayız.",
@@ -239,8 +239,8 @@
     "privacyNote": "Gizlilikle ilgili talepler için, verilerinizle ilgili bize nasıl ulaşabileceğinizi görmek üzere <privacyLink>Gizlilik Politikamıza</privacyLink> bakın."
   },
   "DisclaimerPage": {
-    "metaTitle": "Yasal Uyarı InstaView Stories | Instagram Hikaye Görüntüleyici",
-    "metaDescription": "Herkese açık Instagram içeriği, Instagram Hikaye Görüntüleyici özellikleri, indirmeler, üçüncü taraf içeriği ve hizmet sınırlamaları hakkında bilgi için InstaView Stories Yasal Uyarısını okuyun.",
+    "metaTitle": "Sorumluluk Reddi",
+    "metaDescription": "Herkese açık Instagram içeriği, Instagram Hikaye Görüntüleyici özellikleri, indirmeler, üçüncü taraf içeriği ve hizmet sınırlamaları hakkında bilgi için.",
     "breadcrumb": "Yasal Uyarı",
     "h1": "Yasal Uyarı",
     "intro1": "instaviewstories.com adresinde bulunan InstaView Stories'te sağlanan bilgi ve hizmetler yalnızca genel bilgilendirme ve kolaylık amacıyla sunulmaktadır.",
@@ -285,8 +285,8 @@
     "contactMore": "Ek bilgi için lütfen <aboutLink>Hakkımızda</aboutLink>, <privacyLink>Gizlilik Politikamızı</privacyLink> ve <termsLink>Kullanım Koşullarımızı</termsLink> inceleyin."
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "Gizlilik Politikası InstaView Stories | Instagram Hikaye Görüntüleyici",
-    "metaDescription": "Herkese açık Instagram Hikayelerini, profillerini, Öne Çıkanlarını, gönderilerini ve Reels'lerini keşfetmek için Instagram Hikaye Görüntüleyicimizi kullanırken bilgilerin nasıl işlendiğini öğrenmek için InstaView Stories Gizlilik Politikasını okuyun.",
+    "metaTitle": "Gizlilik Politikası",
+    "metaDescription": "Herkese açık Instagram Hikayelerini, profillerini, Öne Çıkanlarını, gönderilerini ve Reels'lerini keşfetmek için Instagram Hikaye Görüntüleyicimizi.",
     "breadcrumb": "Gizlilik Politikası",
     "h1": "Gizlilik Politikası",
     "lastUpdated": "Son güncelleme: {date}",
@@ -356,8 +356,8 @@
     "contactMore": "Web sitemiz ve hizmetimiz hakkında daha fazla bilgi için <aboutLink>Hakkımızda</aboutLink> sayfasını ziyaret edin. Ayrıca <termsLink>Kullanım Koşullarımızı</termsLink> ve <disclaimerLink>Yasal Uyarımızı</disclaimerLink> inceleyebilirsiniz."
   },
   "TermsPage": {
-    "metaTitle": "Kullanım Koşulları InstaView Stories | Instagram Hikaye Görüntüleyici",
-    "metaDescription": "Instagram Hikaye Görüntüleyicimizin, herkese açık Instagram içeriğinin, indirmelerin, gizliliğin ve üçüncü taraf içeriğinin kullanımına ilişkin kurallar dahil olmak üzere InstaView Stories için Kullanım Koşullarını okuyun.",
+    "metaTitle": "Kullanım Koşulları",
+    "metaDescription": "Instagram Hikaye Görüntüleyicimizin, herkese açık Instagram içeriğinin, indirmelerin, gizliliğin ve üçüncü taraf içeriğinin kullanımına ilişkin kurallar.",
     "breadcrumb": "Kullanım Koşulları",
     "h1": "Kullanım Koşulları",
     "lastUpdated": "Son güncelleme: {date}",

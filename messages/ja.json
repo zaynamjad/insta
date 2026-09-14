@@ -43,7 +43,7 @@
     "button": "ストーリービューアーを開く"
   },
   "HomePage": {
-    "metaTitle": "Instagramストーリー匿名ビューアー | IGストーリービューアー＆ダウンローダー",
+    "metaTitle": "匿名インスタグラムストーリービューアー",
     "metaDescription": "Instagramストーリービューアーで、ストーリー、プロフィール、写真、動画、リール、ハイライトなどを匿名で閲覧できます。どのデバイスでもワンクリックでダウンロード。登録は一切不要です。",
     "heroEyebrow": "Instagramストーリー匿名ビューアー",
     "badgeFree": "100%無料",
@@ -152,7 +152,7 @@
     "finalCtaSupportingText": "Instagramへのログイン不要・公開プロフィールのみ"
   },
   "AboutPage": {
-    "metaTitle": "会社概要 InstaView Stories | Instagramストーリービューアー",
+    "metaTitle": "サイト概要",
     "metaDescription": "公開されているInstagramのストーリー、プロフィール、ハイライト、投稿、写真、動画、リールを閲覧できるシンプルなInstagramストーリービューアー、InstaView Storiesについて詳しくご紹介します。",
     "breadcrumb": "会社概要",
     "h1": "会社概要",
@@ -200,7 +200,7 @@
     "contactText3": "InstaView Storiesの改善やユーザーの皆様へのより良い体験の提供に役立つフィードバックやご提案を歓迎いたします。"
   },
   "ContactPage": {
-    "metaTitle": "お問い合わせ InstaView Stories | Instagramストーリービューアーサポート",
+    "metaTitle": "お問い合わせ",
     "metaDescription": "当社のInstagramストーリービューアー、公開ストーリー、プロフィール、ハイライト、投稿、リール、ダウンロードに関するご質問、フィードバック、サポートについては、InstaView Storiesまでお問い合わせください。",
     "breadcrumb": "お問い合わせ",
     "h1": "お問い合わせ",
@@ -239,7 +239,7 @@
     "privacyNote": "プライバシーに関するリクエストについては、データに関するお問い合わせ方法を確認するために<privacyLink>プライバシーポリシー</privacyLink>をご覧ください。"
   },
   "DisclaimerPage": {
-    "metaTitle": "免責事項 InstaView Stories | Instagramストーリービューアー",
+    "metaTitle": "免責事項",
     "metaDescription": "公開Instagramコンテンツ、Instagramストーリービューアーの機能、ダウンロード、第三者コンテンツ、サービスの制限に関する情報については、InstaView Storiesの免責事項をお読みください。",
     "breadcrumb": "免責事項",
     "h1": "免責事項",
@@ -285,7 +285,7 @@
     "contactMore": "詳細については、<aboutLink>会社概要</aboutLink>、<privacyLink>プライバシーポリシー</privacyLink>、<termsLink>利用規約</termsLink>をご確認ください。"
   },
   "PrivacyPolicyPage": {
-    "metaTitle": "プライバシーポリシー InstaView Stories | Instagramストーリービューアー",
+    "metaTitle": "プライバシーポリシー",
     "metaDescription": "公開されているInstagramのストーリー、プロフィール、ハイライト、投稿、リールを閲覧する際に、Instagramストーリービューアーで情報がどのように扱われるかについては、InstaView Storiesのプライバシーポリシーをお読みください。",
     "breadcrumb": "プライバシーポリシー",
     "h1": "プライバシーポリシー",
@@ -356,7 +356,7 @@
     "contactMore": "当サイトおよびサービスに関する詳細については、<aboutLink>会社概要</aboutLink>をご覧ください。また、<termsLink>利用規約</termsLink>および<disclaimerLink>免責事項</disclaimerLink>もご確認いただけます。"
   },
   "TermsPage": {
-    "metaTitle": "利用規約 InstaView Stories | Instagramストーリービューアー",
+    "metaTitle": "利用規約",
     "metaDescription": "当社のInstagramストーリービューアー、公開Instagramコンテンツ、ダウンロード、プライバシー、第三者コンテンツの利用に関するルールを含む、InstaView Storiesの利用規約をお読みください。",
     "breadcrumb": "利用規約",
     "h1": "利用規約",
