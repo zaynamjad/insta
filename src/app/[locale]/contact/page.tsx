@@ -83,7 +83,7 @@ export default async function ContactPage({ params }: Props) {
             — {t("helpfulPrivacyText")}
           </li>
           <li>
-            <Link href="/terms/" className="font-semibold text-accent hover:underline">
+            <Link href="/terms-condition/" className="font-semibold text-accent hover:underline">
               {t("helpfulTermsLabel")}
             </Link>{" "}
             — {t("helpfulTermsText")}

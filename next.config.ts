@@ -10,6 +10,12 @@ const nextConfig: NextConfig = {
     // breaks in-page <img> rendering for optimized images in some browsers.
     contentDispositionType: "inline",
   },
+  async redirects() {
+    return [
+      { source: "/terms", destination: "/terms-condition", permanent: true },
+      { source: "/:locale/terms", destination: "/:locale/terms-condition", permanent: true },
+    ];
+  },
 };
 
 export default withNextIntl(nextConfig);

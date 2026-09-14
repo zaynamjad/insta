@@ -131,7 +131,7 @@ export default async function DisclaimerPage({ params }: Props) {
                 </Link>
               ),
               termsLink: (chunks) => (
-                <Link href="/terms/" className="text-accent hover:underline">
+                <Link href="/terms-condition/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),

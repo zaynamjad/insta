@@ -1,7 +1,10 @@
 export const SITE_NAME = "InstaViewStories";
 export const SITE_TAGLINE = "Simple, Fast and Free Instagram Story Viewer";
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const SITE_URL = (
-  process.env.NEXT_PUBLIC_SITE_URL || "https://instaviewstories.com"
+  rawSiteUrl && !rawSiteUrl.includes("vercel.app") && !rawSiteUrl.includes("localhost")
+    ? rawSiteUrl
+    : "https://instaviewstories.com"
 ).replace(/\/$/, "");
 
 export const SITE_DESCRIPTION =
@@ -25,6 +28,6 @@ export const FOOTER_COMPANY_LINKS = [
   { href: "/about/", key: "linkAbout" },
   { href: "/contact/", key: "linkContact" },
   { href: "/privacy-policy/", key: "linkPrivacy" },
-  { href: "/terms/", key: "linkTerms" },
+  { href: "/terms-condition/", key: "linkTerms" },
   { href: "/disclaimer/", key: "linkDisclaimer" },
 ] as const;

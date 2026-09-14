@@ -98,7 +98,7 @@ export default async function AboutPage({ params }: Props) {
         <p>
           {t.rich("commitmentText3", {
             termsLink: (chunks) => (
-              <Link href="/terms/" className="text-accent hover:underline">
+              <Link href="/terms-condition/" className="text-accent hover:underline">
                 {chunks}
               </Link>
             ),

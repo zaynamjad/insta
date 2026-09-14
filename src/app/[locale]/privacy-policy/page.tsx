@@ -167,7 +167,7 @@ export default async function PrivacyPolicyPage({ params }: Props) {
                 </Link>
               ),
               termsLink: (chunks) => (
-                <Link href="/terms/" className="text-accent hover:underline">
+                <Link href="/terms-condition/" className="text-accent hover:underline">
                   {chunks}
                 </Link>
               ),

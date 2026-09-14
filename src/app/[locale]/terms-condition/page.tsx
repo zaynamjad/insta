@@ -7,7 +7,7 @@ import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-type Props = PageProps<"/[locale]/terms">;
+type Props = PageProps<"/[locale]/terms-condition">;
 
 const LAST_UPDATED = "August 25, 2026";
 
@@ -17,9 +17,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return buildMetadata({
     title: t("metaTitle"),
     description: t("metaDescription"),
-    path: "/terms/",
-    localizedPath: getPathname({ href: "/terms", locale }),
-    languageAlternates: buildLanguageAlternates("/terms"),
+    path: "/terms-condition/",
+    localizedPath: getPathname({ href: "/terms-condition", locale }),
+    languageAlternates: buildLanguageAlternates("/terms-condition"),
   });
 }
 
@@ -29,7 +29,7 @@ export default async function TermsPage({ params }: Props) {
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6 sm:py-14">
-      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/terms/" }]} />
+      <Breadcrumbs items={[{ name: t("breadcrumb"), path: "/terms-condition/" }]} />
       <h1 className="mt-6 text-3xl font-extrabold tracking-tight sm:text-4xl">
         {t("h1")}
       </h1>
