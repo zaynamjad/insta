@@ -47,7 +47,6 @@ export const LOCALES: LocaleMeta[] = [
   { code: "fa", name: "Persian", nativeName: "فارسی", dir: "rtl", countryCode: "IR", flag: "🇮🇷" },
   { code: "ps", name: "Pashto", nativeName: "پښتو", dir: "rtl", countryCode: "AF", flag: "🇦🇫" },
   { code: "ku", name: "Kurdish", nativeName: "Kurdî", dir: "ltr", countryCode: "IQ", flag: "🇮🇶" },
-  { code: "ckb", name: "Sorani Kurdish", nativeName: "کوردی", dir: "rtl", countryCode: "IQ", displayCode: "CKB", hreflangCode: "ku-Arab", flag: "🇮🇶" },
   { code: "he", name: "Hebrew", nativeName: "עברית", dir: "rtl", countryCode: "IL", flag: "🇮🇱" },
   { code: "az", name: "Azerbaijani", nativeName: "Azərbaycan dili", dir: "ltr", countryCode: "AZ", flag: "🇦🇿" },
   { code: "hy", name: "Armenian", nativeName: "Հայերեն", dir: "ltr", countryCode: "AM", flag: "🇦🇲" },
