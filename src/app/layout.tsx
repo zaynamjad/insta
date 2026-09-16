@@ -74,6 +74,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             }
           } catch (e) {}`}
         </Script>
+        {/* strategy="beforeInteractive" is what guarantees this lands in <head> */}
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="oQHdBPMkSnWIZSd3oJgWSg"
+          strategy="beforeInteractive"
+        />
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-W5NQ4KV7QY" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
