@@ -473,6 +473,7 @@
     "networkError": "We couldn't retrieve public content right now. Please try again later.",
     "postsNetworkError": "We couldn't retrieve posts right now. Please try again later.",
     "noPublicPosts": "No public posts found for this username.",
+    "loadMore": "Load more",
     "openPost": "Open post {index}",
     "downloadPost": "Download post {index}",
     "noPublicReels": "No public reels found for this username.",

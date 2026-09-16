@@ -16,12 +16,16 @@ import { PostViewerModal } from "./PostViewerModal";
  * variants share one request (short-lived server cache keeps a same-page
  * tab switch from re-billing HikerAPI).
  */
+const INITIAL_VISIBLE = 8;
+const LOAD_MORE_STEP = 4;
+
 export function PostsGrid({ username, filter = "posts" }: { username: string; filter?: "posts" | "reels" }) {
   const t = useTranslations("StoryTool");
   const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
   const [allPosts, setAllPosts] = useState<Post[]>([]);
   const [errorKey, setErrorKey] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
+  const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE);
 
   useEffect(() => {
     let cancelled = false;
@@ -61,7 +65,12 @@ export function PostsGrid({ username, filter = "posts" }: { username: string; fi
     };
   }, [username]);
 
+  useEffect(() => {
+    setVisibleCount(INITIAL_VISIBLE);
+  }, [filter, username]);
+
   const posts = allPosts.filter((p) => (filter === "reels" ? p.isReel : !p.isReel));
+  const visiblePosts = posts.slice(0, visibleCount);
 
   if (state === "loading") {
     return (
@@ -84,7 +93,7 @@ export function PostsGrid({ username, filter = "posts" }: { username: string; fi
   return (
     <>
       <div className="mt-5 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6">
-        {posts.map((post, index) => {
+        {visiblePosts.map((post, index) => {
           const cover = post.items[0];
           return (
             <div
@@ -127,9 +136,21 @@ export function PostsGrid({ username, filter = "posts" }: { username: string; fi
         })}
       </div>
 
+      {visibleCount < posts.length && (
+        <div className="mt-5 flex justify-center">
+          <button
+            type="button"
+            onClick={() => setVisibleCount((c) => c + LOAD_MORE_STEP)}
+            className="rounded-full border border-border px-5 py-2 text-sm font-semibold text-foreground/80 transition-colors hover:text-foreground"
+          >
+            {t("loadMore")}
+          </button>
+        </div>
+      )}
+
       {viewerIndex !== null && (
         <PostViewerModal
-          posts={posts}
+          posts={visiblePosts}
           initialIndex={viewerIndex}
           onClose={() => setViewerIndex(null)}
         />
