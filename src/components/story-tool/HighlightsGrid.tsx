@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type RefObject } from "react";
 import { useTranslations } from "next-intl";
 import type { HighlightsLookupResult, HighlightMeta, HighlightItemsLookupResult } from "@/types/highlight";
 import type { Story } from "@/types/story";
 import { errorMessageKey } from "@/lib/story/error-messages";
 import { StoryViewerModal } from "./StoryViewerModal";
+import type { TurnstileHandle } from "./Turnstile";
 
 /**
  * Self-contained Highlights tab: fetches the tray (cover + title per
@@ -13,13 +14,24 @@ import { StoryViewerModal } from "./StoryViewerModal";
  * items only when it's clicked — mirrors `PostsGrid`'s lazy-fetch pattern,
  * but adds a second, per-click fetch since the tray call intentionally
  * doesn't include items (see `hikerapi-provider.ts`).
+ *
+ * `turnstileRef` is the same widget instance `StoryTool` renders for the
+ * main search — `/api/highlight-viewer` requires a token, so each click
+ * here runs another (invisible, in most cases) challenge through it.
  */
-export function HighlightsGrid({ username }: { username: string }) {
+export function HighlightsGrid({
+  username,
+  turnstileRef,
+}: {
+  username: string;
+  turnstileRef?: RefObject<TurnstileHandle | null>;
+}) {
   const t = useTranslations("StoryTool");
   const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
   const [highlights, setHighlights] = useState<HighlightMeta[]>([]);
   const [errorKey, setErrorKey] = useState<string | null>(null);
   const [openingId, setOpeningId] = useState<string | null>(null);
+  const [openError, setOpenError] = useState<string | null>(null);
   const [viewer, setViewer] = useState<{ title: string; coverImageUrl: string | null; items: Story[] } | null>(null);
 
   useEffect(() => {
@@ -62,16 +74,27 @@ export function HighlightsGrid({ username }: { username: string }) {
 
   async function openHighlight(h: HighlightMeta) {
     setOpeningId(h.id);
+    setOpenError(null);
     try {
+      const turnstileToken = turnstileRef?.current ? await turnstileRef.current.getToken() : null;
       const res = await fetch("/api/highlight-viewer/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url: `https://www.instagram.com/stories/highlights/${h.id}/` }),
+        body: JSON.stringify({
+          url: `https://www.instagram.com/stories/highlights/${h.id}/`,
+          turnstileToken,
+        }),
       });
       const data: HighlightItemsLookupResult = await res.json();
       if (data.status === "ok" && data.items.length > 0) {
         setViewer({ title: data.title || h.title, coverImageUrl: data.coverImageUrl ?? h.coverImageUrl, items: data.items });
+      } else if (data.status === "error") {
+        setOpenError(t(errorMessageKey(data.code)));
+      } else {
+        setOpenError(t("highlightNotFound"));
       }
+    } catch {
+      setOpenError(t("highlightsNetworkError"));
     } finally {
       setOpeningId(null);
     }
@@ -127,6 +150,12 @@ export function HighlightsGrid({ username }: { username: string }) {
           </button>
         ))}
       </div>
+
+      {openError && (
+        <p role="alert" className="mt-3 text-sm text-foreground/60">
+          {openError}
+        </p>
+      )}
 
       {viewer && (
         <StoryViewerModal

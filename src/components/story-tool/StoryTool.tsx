@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type FormEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
@@ -217,6 +217,7 @@ export function StoryTool({
             onTabChange={setTab}
             onReset={reset}
             onOpenViewer={(index) => setViewerIndex(index)}
+            turnstileRef={turnstileRef}
           />
         )}
         {status === "result" && postResult && (
@@ -288,6 +289,7 @@ function ResultState({
   onTabChange,
   onReset,
   onOpenViewer,
+  turnstileRef,
 }: {
   result: StoryLookupResult;
   variant: "hero" | "compact";
@@ -295,6 +297,7 @@ function ResultState({
   onTabChange: (tab: Tab) => void;
   onReset: () => void;
   onOpenViewer: (index: number) => void;
+  turnstileRef: RefObject<TurnstileHandle | null>;
 }) {
   const t = useTranslations("StoryTool");
 
@@ -411,7 +414,7 @@ function ResultState({
       ) : tab === "reels" ? (
         <PostsGrid username={profile.username} filter="reels" />
       ) : tab === "highlights" ? (
-        <HighlightsGrid username={profile.username} />
+        <HighlightsGrid username={profile.username} turnstileRef={turnstileRef} />
       ) : (
         <ProfilePictureTab profile={profile} />
       )}
