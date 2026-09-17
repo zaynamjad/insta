@@ -500,6 +500,7 @@
     "closePostViewer": "පළකිරීම් දර්ශකය වසන්න",
     "postFromUser": "@{id} ගේ පළකිරීම",
     "prevPost": "පෙර පළකිරීම",
-    "nextPost": "ඊළඟ පළකිරීම"
+    "nextPost": "ඊළඟ පළකිරීම",
+    "loadMore": "තවත් පූරණය කරන්න"
   }
 }

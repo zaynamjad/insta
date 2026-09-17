@@ -500,6 +500,7 @@
     "closePostViewer": "إغلاق عارض المنشورات",
     "postFromUser": "منشور @{id}",
     "prevPost": "المنشور السابق",
-    "nextPost": "المنشور التالي"
+    "nextPost": "المنشور التالي",
+    "loadMore": "تحميل المزيد"
   }
 }

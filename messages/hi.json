@@ -500,6 +500,7 @@
     "closePostViewer": "पोस्ट व्यूअर बंद करें",
     "postFromUser": "@{id} की पोस्ट",
     "prevPost": "पिछली पोस्ट",
-    "nextPost": "अगली पोस्ट"
+    "nextPost": "अगली पोस्ट",
+    "loadMore": "और लोड करें"
   }
 }

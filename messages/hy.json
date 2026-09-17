@@ -500,6 +500,7 @@
     "closePostViewer": "Փակել փոստերի դիտիչը",
     "postFromUser": "@{id}-ի փոստը",
     "prevPost": "Նախորդ փոստ",
-    "nextPost": "Հաջորդ փոստ"
+    "nextPost": "Հաջորդ փոստ",
+    "loadMore": "Բեռնել ավելին"
   }
 }

@@ -500,6 +500,7 @@
     "closePostViewer": "投稿ビューアーを閉じる",
     "postFromUser": "@{id}の投稿",
     "prevPost": "前の投稿",
-    "nextPost": "次の投稿"
+    "nextPost": "次の投稿",
+    "loadMore": "もっと読み込む"
   }
 }

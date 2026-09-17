@@ -500,6 +500,7 @@
     "closePostViewer": "Tutup penampil postingan",
     "postFromUser": "Postingan dari @{id}",
     "prevPost": "Postingan sebelumnya",
-    "nextPost": "Postingan berikutnya"
+    "nextPost": "Postingan berikutnya",
+    "loadMore": "Muat lebih banyak"
   }
 }

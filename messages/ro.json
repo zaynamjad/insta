@@ -500,6 +500,7 @@
     "closePostViewer": "Închide vizualizatorul de postări",
     "postFromUser": "Postare de la @{id}",
     "prevPost": "Postarea anterioară",
-    "nextPost": "Postarea următoare"
+    "nextPost": "Postarea următoare",
+    "loadMore": "Încarcă mai mult"
   }
 }

@@ -501,6 +501,7 @@
     "closePostViewer": "Zapri pregledovalnik objav",
     "postFromUser": "Objava od @{id}",
     "prevPost": "Prejšnja objava",
-    "nextPost": "Naslednja objava"
+    "nextPost": "Naslednja objava",
+    "loadMore": "Naloži več"
   }
 }

@@ -500,6 +500,7 @@
     "closePostViewer": "Gönderi görüntüleyiciyi kapat",
     "postFromUser": "@{id} kullanıcısının gönderisi",
     "prevPost": "Önceki gönderi",
-    "nextPost": "Sonraki gönderi"
+    "nextPost": "Sonraki gönderi",
+    "loadMore": "Daha fazla yükle"
   }
 }

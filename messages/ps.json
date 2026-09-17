@@ -500,6 +500,7 @@
     "closePostViewer": "د پوسټ لیدونکی تړل",
     "postFromUser": "د @{id} پوسټ",
     "prevPost": "پخوانی پوسټ",
-    "nextPost": "راتلونکی پوسټ"
+    "nextPost": "راتلونکی پوسټ",
+    "loadMore": "نور بار کړئ"
   }
 }

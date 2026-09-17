@@ -500,6 +500,7 @@
     "closePostViewer": "Zatvori preglednik objava",
     "postFromUser": "Objava od @{id}",
     "prevPost": "Prethodna objava",
-    "nextPost": "Sljedeća objava"
+    "nextPost": "Sljedeća objava",
+    "loadMore": "Učitaj više"
   }
 }

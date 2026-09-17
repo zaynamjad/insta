@@ -500,6 +500,7 @@
     "closePostViewer": "关闭帖子查看器",
     "postFromUser": "@{id} 的帖子",
     "prevPost": "上一条帖子",
-    "nextPost": "下一条帖子"
+    "nextPost": "下一条帖子",
+    "loadMore": "加载更多"
   }
 }

@@ -500,6 +500,7 @@
     "closePostViewer": "Stäng inläggsvisaren",
     "postFromUser": "Inlägg från @{id}",
     "prevPost": "Föregående inlägg",
-    "nextPost": "Nästa inlägg"
+    "nextPost": "Nästa inlägg",
+    "loadMore": "Ladda fler"
   }
 }

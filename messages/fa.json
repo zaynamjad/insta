@@ -500,6 +500,7 @@
     "closePostViewer": "بستن مشاهده‌گر پست",
     "postFromUser": "پست از @{id}",
     "prevPost": "پست قبلی",
-    "nextPost": "پست بعدی"
+    "nextPost": "پست بعدی",
+    "loadMore": "بارگذاری بیشتر"
   }
 }

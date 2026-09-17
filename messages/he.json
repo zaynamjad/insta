@@ -500,6 +500,7 @@
     "closePostViewer": "סגור את מציג הפוסטים",
     "postFromUser": "פוסט מאת @{id}",
     "prevPost": "פוסט קודם",
-    "nextPost": "פוסט הבא"
+    "nextPost": "פוסט הבא",
+    "loadMore": "טען עוד"
   }
 }

@@ -500,6 +500,7 @@
     "closePostViewer": "Beitrags-Viewer schließen",
     "postFromUser": "Beitrag von @{id}",
     "prevPost": "Vorheriger Beitrag",
-    "nextPost": "Nächster Beitrag"
+    "nextPost": "Nächster Beitrag",
+    "loadMore": "Mehr laden"
   }
 }

@@ -500,6 +500,7 @@
     "closePostViewer": "ปิดตัวแสดงโพสต์",
     "postFromUser": "โพสต์จาก @{id}",
     "prevPost": "โพสต์ก่อนหน้า",
-    "nextPost": "โพสต์ถัดไป"
+    "nextPost": "โพสต์ถัดไป",
+    "loadMore": "โหลดเพิ่มเติม"
   }
 }

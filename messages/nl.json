@@ -500,6 +500,7 @@
     "closePostViewer": "Berichtenviewer sluiten",
     "postFromUser": "Bericht van @{id}",
     "prevPost": "Vorig bericht",
-    "nextPost": "Volgend bericht"
+    "nextPost": "Volgend bericht",
+    "loadMore": "Meer laden"
   }
 }

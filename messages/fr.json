@@ -500,6 +500,7 @@
     "closePostViewer": "Fermer la visionneuse de publications",
     "postFromUser": "Publication de @{id}",
     "prevPost": "Publication précédente",
-    "nextPost": "Publication suivante"
+    "nextPost": "Publication suivante",
+    "loadMore": "Charger plus"
   }
 }

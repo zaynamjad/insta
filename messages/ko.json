@@ -500,6 +500,7 @@
     "closePostViewer": "게시물 뷰어 닫기",
     "postFromUser": "@{id}님의 게시물",
     "prevPost": "이전 게시물",
-    "nextPost": "다음 게시물"
+    "nextPost": "다음 게시물",
+    "loadMore": "더 보기"
   }
 }

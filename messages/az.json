@@ -500,6 +500,7 @@
     "closePostViewer": "Paylaşım izləyicisini bağla",
     "postFromUser": "@{id}-dan paylaşım",
     "prevPost": "Əvvəlki paylaşım",
-    "nextPost": "Növbəti paylaşım"
+    "nextPost": "Növbəti paylaşım",
+    "loadMore": "Daha çox yüklə"
   }
 }

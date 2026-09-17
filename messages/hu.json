@@ -500,6 +500,7 @@
     "closePostViewer": "Bejegyzésnéző bezárása",
     "postFromUser": "Bejegyzés tőle: @{id}",
     "prevPost": "Előző bejegyzés",
-    "nextPost": "Következő bejegyzés"
+    "nextPost": "Következő bejegyzés",
+    "loadMore": "Több betöltése"
   }
 }

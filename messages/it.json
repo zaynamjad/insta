@@ -500,6 +500,7 @@
     "closePostViewer": "Chiudi il visualizzatore di post",
     "postFromUser": "Post di @{id}",
     "prevPost": "Post precedente",
-    "nextPost": "Post successivo"
+    "nextPost": "Post successivo",
+    "loadMore": "Carica altro"
   }
 }

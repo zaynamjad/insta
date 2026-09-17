@@ -500,6 +500,7 @@
     "closePostViewer": "Zavrieť prehliadač príspevkov",
     "postFromUser": "Príspevok od @{id}",
     "prevPost": "Predchádzajúci príspevok",
-    "nextPost": "Ďalší príspevok"
+    "nextPost": "Ďalší príspevok",
+    "loadMore": "Načítať viac"
   }
 }

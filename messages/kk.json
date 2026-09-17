@@ -500,6 +500,7 @@
     "closePostViewer": "Посттарды көру құралын жабу",
     "postFromUser": "@{id} посты",
     "prevPost": "Алдыңғы пост",
-    "nextPost": "Келесі пост"
+    "nextPost": "Келесі пост",
+    "loadMore": "Көбірек жүктеу"
   }
 }

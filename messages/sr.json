@@ -500,6 +500,7 @@
     "closePostViewer": "Затвори прегледач објава",
     "postFromUser": "Објава од @{id}",
     "prevPost": "Претходна објава",
-    "nextPost": "Следећа објава"
+    "nextPost": "Следећа објава",
+    "loadMore": "Учитај још"
   }
 }

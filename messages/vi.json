@@ -500,6 +500,7 @@
     "closePostViewer": "Đóng trình xem bài viết",
     "postFromUser": "Bài viết của @{id}",
     "prevPost": "Bài viết trước",
-    "nextPost": "Bài viết tiếp theo"
+    "nextPost": "Bài viết tiếp theo",
+    "loadMore": "Tải thêm"
   }
 }

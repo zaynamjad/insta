@@ -500,6 +500,7 @@
     "closePostViewer": "பதிவு பார்வையாளரை மூடு",
     "postFromUser": "@{id} இன் பதிவு",
     "prevPost": "முந்தைய பதிவு",
-    "nextPost": "அடுத்த பதிவு"
+    "nextPost": "அடுத்த பதிவு",
+    "loadMore": "மேலும் ஏற்றவும்"
   }
 }

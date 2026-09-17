@@ -500,6 +500,7 @@
     "closePostViewer": "პოსტების ხედვის დახურვა",
     "postFromUser": "პოსტი @{id}-იდან",
     "prevPost": "წინა პოსტი",
-    "nextPost": "შემდეგი პოსტი"
+    "nextPost": "შემდეგი პოსტი",
+    "loadMore": "მეტის ჩატვირთვა"
   }
 }
