@@ -27,12 +27,6 @@ export function getHikerApiKeys(): string[] {
     if (!key) break;
     keys.push(key);
   }
-  // TEMP DIAGNOSTIC — safe to log: length + last 4 chars only, never the
-  // full key. Remove once the production key-mismatch investigation is done.
-  console.log(
-    "[hikerapi-debug] configured keys:",
-    keys.map((k) => `len=${k.length} last4=${k.slice(-4)}`).join(", "),
-  );
   return keys;
 }
 
@@ -420,8 +414,6 @@ export class HikerApiStoryProvider implements StoryProvider {
         lastError = err instanceof ProviderError ? err : new ProviderError("Failed to reach HikerAPI.", "UPSTREAM_ERROR", err);
         continue;
       }
-
-      console.log(`[hikerapi-debug] key ${i + 1}/${keys.length} (last4=${keys[i].slice(-4)}) -> HTTP ${res.status}`);
 
       if (res.ok || res.status === 404) return res;
 
