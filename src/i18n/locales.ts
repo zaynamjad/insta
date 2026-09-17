@@ -59,6 +59,17 @@ export const LOCALES: LocaleMeta[] = [
   { code: "te", name: "Telugu", nativeName: "తెలుగు", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
   { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
   { code: "ml", name: "Malayalam", nativeName: "മലയാളം", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
+  { code: "ms", name: "Malay", nativeName: "Bahasa Melayu", dir: "ltr", countryCode: "MY", flag: "🇲🇾" },
+  { code: "fil", name: "Filipino", nativeName: "Filipino", dir: "ltr", countryCode: "PH", flag: "🇵🇭" },
+  { code: "sw", name: "Swahili", nativeName: "Kiswahili", dir: "ltr", countryCode: "TZ", flag: "🇹🇿" },
+  { code: "am", name: "Amharic", nativeName: "አማርኛ", dir: "ltr", countryCode: "ET", flag: "🇪🇹" },
+  { code: "my", name: "Burmese", nativeName: "မြန်မာဘာသာ", dir: "ltr", countryCode: "MM", flag: "🇲🇲" },
+  { code: "km", name: "Khmer", nativeName: "ខ្មែរ", dir: "ltr", countryCode: "KH", flag: "🇰🇭" },
+  { code: "mn", name: "Mongolian", nativeName: "Монгол", dir: "ltr", countryCode: "MN", flag: "🇲🇳" },
+  { code: "uz", name: "Uzbek", nativeName: "Oʻzbek", dir: "ltr", countryCode: "UZ", flag: "🇺🇿" },
+  { code: "pa", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
+  { code: "gu", name: "Gujarati", nativeName: "ગુજરાતી", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
+  { code: "mr", name: "Marathi", nativeName: "मराठी", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
