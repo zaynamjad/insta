@@ -69,6 +69,11 @@ export const LOCALES: LocaleMeta[] = [
   { code: "pa", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
   { code: "gu", name: "Gujarati", nativeName: "ગુજરાતી", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
   { code: "mr", name: "Marathi", nativeName: "मराठी", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
+  { code: "af", name: "Afrikaans", nativeName: "Afrikaans", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
+  { code: "ha", name: "Hausa", nativeName: "Hausa", dir: "ltr", countryCode: "NG", flag: "🇳🇬" },
+  { code: "yo", name: "Yoruba", nativeName: "Yorùbá", dir: "ltr", countryCode: "NG", flag: "🇳🇬" },
+  { code: "ig", name: "Igbo", nativeName: "Igbo", dir: "ltr", countryCode: "NG", flag: "🇳🇬" },
+  { code: "zu", name: "Zulu", nativeName: "isiZulu", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
