@@ -49,7 +49,14 @@ export async function lookupStory(usernameInput: unknown): Promise<StoryLookupRe
   } catch (err) {
     if (err instanceof ProviderError) {
       console.error("[story-lookup] provider error:", err.code, err.message, err.detail);
-      return { status: "error", code: err.code, message: errorMessageForCode(err.code) };
+      // TEMP DIAGNOSTIC: surfacing err.detail in the response so it's visible
+      // via direct API calls (the UI never reads `message`, so this is safe
+      // and invisible to real users). Remove once the key-mismatch investigation is done.
+      return {
+        status: "error",
+        code: err.code,
+        message: `${errorMessageForCode(err.code)} [debug: ${err.message} | ${err.detail ?? "no detail"}]`,
+      };
     }
     console.error("[story-lookup] unexpected error:", err);
     return {
