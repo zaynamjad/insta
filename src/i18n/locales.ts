@@ -74,6 +74,18 @@ export const LOCALES: LocaleMeta[] = [
   { code: "yo", name: "Yoruba", nativeName: "Yorùbá", dir: "ltr", countryCode: "NG", flag: "🇳🇬" },
   { code: "ig", name: "Igbo", nativeName: "Igbo", dir: "ltr", countryCode: "NG", flag: "🇳🇬" },
   { code: "zu", name: "Zulu", nativeName: "isiZulu", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
+  { code: "da", name: "Danish", nativeName: "Dansk", dir: "ltr", countryCode: "DK", flag: "🇩🇰" },
+  { code: "no", name: "Norwegian", nativeName: "Norsk", dir: "ltr", countryCode: "NO", flag: "🇳🇴" },
+  { code: "fi", name: "Finnish", nativeName: "Suomi", dir: "ltr", countryCode: "FI", flag: "🇫🇮" },
+  { code: "lt", name: "Lithuanian", nativeName: "Lietuvių", dir: "ltr", countryCode: "LT", flag: "🇱🇹" },
+  { code: "lv", name: "Latvian", nativeName: "Latviešu", dir: "ltr", countryCode: "LV", flag: "🇱🇻" },
+  { code: "et", name: "Estonian", nativeName: "Eesti", dir: "ltr", countryCode: "EE", flag: "🇪🇪" },
+  { code: "sq", name: "Albanian", nativeName: "Shqip", dir: "ltr", countryCode: "AL", flag: "🇦🇱" },
+  { code: "mk", name: "Macedonian", nativeName: "Македонски", dir: "ltr", countryCode: "MK", flag: "🇲🇰" },
+  { code: "bs", name: "Bosnian", nativeName: "Bosanski", dir: "ltr", countryCode: "BA", flag: "🇧🇦" },
+  { code: "is", name: "Icelandic", nativeName: "Íslenska", dir: "ltr", countryCode: "IS", flag: "🇮🇸" },
+  { code: "ga", name: "Irish", nativeName: "Gaeilge", dir: "ltr", countryCode: "IE", flag: "🇮🇪" },
+  { code: "mt", name: "Maltese", nativeName: "Malti", dir: "ltr", countryCode: "MT", flag: "🇲🇹" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
