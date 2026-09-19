@@ -86,6 +86,18 @@ export const LOCALES: LocaleMeta[] = [
   { code: "is", name: "Icelandic", nativeName: "Íslenska", dir: "ltr", countryCode: "IS", flag: "🇮🇸" },
   { code: "ga", name: "Irish", nativeName: "Gaeilge", dir: "ltr", countryCode: "IE", flag: "🇮🇪" },
   { code: "mt", name: "Maltese", nativeName: "Malti", dir: "ltr", countryCode: "MT", flag: "🇲🇹" },
+  { code: "so", name: "Somali", nativeName: "Soomaali", dir: "ltr", countryCode: "SO", flag: "🇸🇴" },
+  { code: "cy", name: "Welsh", nativeName: "Cymraeg", dir: "ltr", countryCode: "GB", flag: "🏴" },
+  { code: "ht", name: "Haitian Creole", nativeName: "Kreyòl Ayisyen", dir: "ltr", countryCode: "HT", flag: "🇭🇹" },
+  { code: "lo", name: "Lao", nativeName: "ລາວ", dir: "ltr", countryCode: "LA", flag: "🇱🇦" },
+  { code: "tg", name: "Tajik", nativeName: "Тоҷикӣ", dir: "ltr", countryCode: "TJ", flag: "🇹🇯" },
+  { code: "tk", name: "Turkmen", nativeName: "Türkmençe", dir: "ltr", countryCode: "TM", flag: "🇹🇲" },
+  { code: "or", name: "Odia", nativeName: "ଓଡ଼ିଆ", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
+  { code: "as", name: "Assamese", nativeName: "অসমীয়া", dir: "ltr", countryCode: "IN", flag: "🇮🇳" },
+  { code: "sd", name: "Sindhi", nativeName: "سنڌي", dir: "rtl", countryCode: "PK", flag: "🇵🇰" },
+  { code: "lb", name: "Luxembourgish", nativeName: "Lëtzebuergesch", dir: "ltr", countryCode: "LU", flag: "🇱🇺" },
+  { code: "fo", name: "Faroese", nativeName: "Føroyskt", dir: "ltr", countryCode: "FO", flag: "🇫🇴" },
+  { code: "mi", name: "Maori", nativeName: "Te Reo Māori", dir: "ltr", countryCode: "NZ", flag: "🇳🇿" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
