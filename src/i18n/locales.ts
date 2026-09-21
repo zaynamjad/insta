@@ -98,6 +98,18 @@ export const LOCALES: LocaleMeta[] = [
   { code: "lb", name: "Luxembourgish", nativeName: "Lëtzebuergesch", dir: "ltr", countryCode: "LU", flag: "🇱🇺" },
   { code: "fo", name: "Faroese", nativeName: "Føroyskt", dir: "ltr", countryCode: "FO", flag: "🇫🇴" },
   { code: "mi", name: "Maori", nativeName: "Te Reo Māori", dir: "ltr", countryCode: "NZ", flag: "🇳🇿" },
+  { code: "ca", name: "Catalan", nativeName: "Català", dir: "ltr", countryCode: "ES", flag: "🇪🇸" },
+  { code: "eu", name: "Basque", nativeName: "Euskara", dir: "ltr", countryCode: "ES", flag: "🇪🇸" },
+  { code: "gl", name: "Galician", nativeName: "Galego", dir: "ltr", countryCode: "ES", flag: "🇪🇸" },
+  { code: "be", name: "Belarusian", nativeName: "Беларуская", dir: "ltr", countryCode: "BY", flag: "🇧🇾" },
+  { code: "ceb", name: "Cebuano", nativeName: "Cebuano", dir: "ltr", countryCode: "PH", flag: "🇵🇭" },
+  { code: "jv", name: "Javanese", nativeName: "Basa Jawa", dir: "ltr", countryCode: "ID", flag: "🇮🇩" },
+  { code: "su", name: "Sundanese", nativeName: "Basa Sunda", dir: "ltr", countryCode: "ID", flag: "🇮🇩" },
+  { code: "xh", name: "Xhosa", nativeName: "isiXhosa", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
+  { code: "sn", name: "Shona", nativeName: "chiShona", dir: "ltr", countryCode: "ZW", flag: "🇿🇼" },
+  { code: "mg", name: "Malagasy", nativeName: "Malagasy", dir: "ltr", countryCode: "MG", flag: "🇲🇬" },
+  { code: "rw", name: "Kinyarwanda", nativeName: "Ikinyarwanda", dir: "ltr", countryCode: "RW", flag: "🇷🇼" },
+  { code: "zh-TW", name: "Chinese (Traditional)", nativeName: "繁體中文", dir: "ltr", countryCode: "TW", displayCode: "TW", flag: "🇹🇼" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
