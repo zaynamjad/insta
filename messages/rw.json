@@ -193,7 +193,7 @@
     "commitmentTitle": "Icyo Twiyemeje",
     "commitmentText1": "Twiyemeje gukomeza kunoza InstaView Stories no gutuma urubuga ruba rworoshye kandi rugira akamaro ku bantu bashaka gushakisha ibikubiyemo bya Instagram biboneka rusange.",
     "commitmentText2": "Tugamije gutanga uburambe bworoheye mu gihe dusobanura neza ibyo serivisi yacu ishyigikira. Kuboneka kw'ibikubiyemo bya Instagram n'ibiranga runaka bishobora gutandukana bitewe n'ibikubiyemo n'imbogamizi z'ikoranabuhanga.",
-    "commitmentText3": "Mu gukoresha InstaView Stories, abakoresha bagomba na none gusuzuma <termsLink>Amabwiriza n'Amategeko</termsLink> hamwe n'<disclaimerLink>Ihakana ry'Inshingano</disclaimerLink> byacu kugira ngo bumve amabwiriza n'imbogamizi bifitanye isano n'urubuga.",
+    "commitmentText3": "Mu gukoresha InstaView Stories, abakoresha bagomba na none gusuzuma <termsLink>Amabwiriza n'Amategeko</termsLink> hamwe na <disclaimerLink>Ihakana ry'Inshingano</disclaimerLink> byacu kugira ngo bumve amabwiriza n'imbogamizi bifitanye isano n'urubuga.",
     "contactTitle": "Twandikire kuri InstaView Stories",
     "contactText1": "Ufite ikibazo, igitekerezo, cyangwa ukeneye ubufasha bwo gukoresha urubuga?",
     "contactText2": "Ushobora kutwandikira binyuze kuri <contactLink>paji yacu yo Twandikire</contactLink> cyangwa udukoreshe imeyili kuri:",
@@ -353,7 +353,7 @@
     "contactTitle": "Twandikire",
     "contactIntro": "Niba ufite ibibazo kuri iyi Politiki y'Ibanga cyangwa uburyo InstaView Stories icunga amakuru, nyamuneka twandikire:",
     "contactVisit": "Ushobora kandi gusura <contactLink>paji yacu yo Twandikire</contactLink>.",
-    "contactMore": "Kubindi bisobanuro ku rubuga rwacu na serivisi, sura <aboutLink>Abo Turi Bo</aboutLink>. Ushobora kandi gusuzuma <termsLink>Amabwiriza n'Amategeko</termsLink> hamwe n'<disclaimerLink>Ihakana ry'Inshingano</disclaimerLink> byacu."
+    "contactMore": "Kubindi bisobanuro ku rubuga rwacu na serivisi, sura <aboutLink>Abo Turi Bo</aboutLink>. Ushobora kandi gusuzuma <termsLink>Amabwiriza n'Amategeko</termsLink> hamwe na <disclaimerLink>Ihakana ry'Inshingano</disclaimerLink> byacu."
   },
   "TermsPage": {
     "metaTitle": "Amabwiriza n'Amategeko - InstaView Stories | Igikoresho cyo Kureba Stories za Instagram",
@@ -435,7 +435,7 @@
     "contactTitle": "Twandikire",
     "contactIntro": "Niba ufite ibibazo kuri aya Mabwiriza n'Amategeko, nyamuneka twandikire:",
     "contactVisit": "Ushobora kandi gusura <contactLink>paji yacu yo Twandikire</contactLink>.",
-    "contactMore": "Kubindi bisobanuro, ushobora gusoma <aboutLink>Abo Turi Bo</aboutLink> hamwe n'<disclaimerLink>Ihakana ry'Inshingano</disclaimerLink> byacu."
+    "contactMore": "Kubindi bisobanuro, ushobora gusoma <aboutLink>Abo Turi Bo</aboutLink> hamwe na <disclaimerLink>Ihakana ry'Inshingano</disclaimerLink> byacu."
   },
   "StoryTool": {
     "searchAriaLabel": "Shakisha muri Instagram ukoresheje izina ry'umukoresha, ihuza rya post, reel, cyangwa highlight",
