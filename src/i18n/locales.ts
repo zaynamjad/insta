@@ -110,6 +110,18 @@ export const LOCALES: LocaleMeta[] = [
   { code: "mg", name: "Malagasy", nativeName: "Malagasy", dir: "ltr", countryCode: "MG", flag: "🇲🇬" },
   { code: "rw", name: "Kinyarwanda", nativeName: "Ikinyarwanda", dir: "ltr", countryCode: "RW", flag: "🇷🇼" },
   { code: "zh-TW", name: "Chinese (Traditional)", nativeName: "繁體中文", dir: "ltr", countryCode: "TW", displayCode: "TW", flag: "🇹🇼" },
+  { code: "bo", name: "Tibetan", nativeName: "བོད་སྐད།", dir: "ltr", countryCode: "CN", flag: "🇨🇳" },
+  { code: "ug", name: "Uyghur", nativeName: "ئۇيغۇرچە", dir: "rtl", countryCode: "CN", flag: "🇨🇳" },
+  { code: "yi", name: "Yiddish", nativeName: "ייִדיש", dir: "rtl", countryCode: "IL", flag: "🇮🇱" },
+  { code: "sm", name: "Samoan", nativeName: "Gagana Samoa", dir: "ltr", countryCode: "WS", flag: "🇼🇸" },
+  { code: "to", name: "Tongan", nativeName: "Lea Fakatonga", dir: "ltr", countryCode: "TO", flag: "🇹🇴" },
+  { code: "haw", name: "Hawaiian", nativeName: "ʻŌlelo Hawaiʻi", dir: "ltr", countryCode: "US", displayCode: "HAW", flag: "🇺🇸" },
+  { code: "st", name: "Sesotho", nativeName: "Sesotho", dir: "ltr", countryCode: "LS", flag: "🇱🇸" },
+  { code: "tn", name: "Setswana", nativeName: "Setswana", dir: "ltr", countryCode: "BW", flag: "🇧🇼" },
+  { code: "ts", name: "Tsonga", nativeName: "Xitsonga", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
+  { code: "wo", name: "Wolof", nativeName: "Wolof", dir: "ltr", countryCode: "SN", flag: "🇸🇳" },
+  { code: "ak", name: "Twi", nativeName: "Twi", dir: "ltr", countryCode: "GH", flag: "🇬🇭" },
+  { code: "ln", name: "Lingala", nativeName: "Lingála", dir: "ltr", countryCode: "CD", flag: "🇨🇩" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
