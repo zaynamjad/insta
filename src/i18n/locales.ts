@@ -122,6 +122,23 @@ export const LOCALES: LocaleMeta[] = [
   { code: "wo", name: "Wolof", nativeName: "Wolof", dir: "ltr", countryCode: "SN", flag: "🇸🇳" },
   { code: "ak", name: "Twi", nativeName: "Twi", dir: "ltr", countryCode: "GH", flag: "🇬🇭" },
   { code: "ln", name: "Lingala", nativeName: "Lingála", dir: "ltr", countryCode: "CD", flag: "🇨🇩" },
+  { code: "ss", name: "Swati", nativeName: "siSwati", dir: "ltr", countryCode: "SZ", flag: "🇸🇿" },
+  { code: "ve", name: "Venda", nativeName: "Tshivenḓa", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
+  { code: "nr", name: "Southern Ndebele", nativeName: "isiNdebele", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
+  { code: "ti", name: "Tigrinya", nativeName: "ትግርኛ", dir: "ltr", countryCode: "ER", flag: "🇪🇷" },
+  { code: "om", name: "Oromo", nativeName: "Afaan Oromoo", dir: "ltr", countryCode: "ET", flag: "🇪🇹" },
+  { code: "rn", name: "Kirundi", nativeName: "Ikirundi", dir: "ltr", countryCode: "BI", flag: "🇧🇮" },
+  { code: "lg", name: "Luganda", nativeName: "Luganda", dir: "ltr", countryCode: "UG", flag: "🇺🇬" },
+  { code: "ny", name: "Chichewa", nativeName: "Chichewa", dir: "ltr", countryCode: "MW", flag: "🇲🇼" },
+  { code: "bm", name: "Bambara", nativeName: "Bamanankan", dir: "ltr", countryCode: "ML", flag: "🇲🇱" },
+  { code: "ee", name: "Ewe", nativeName: "Eʋegbe", dir: "ltr", countryCode: "TG", flag: "🇹🇬" },
+  { code: "fj", name: "Fijian", nativeName: "Vosa Vakaviti", dir: "ltr", countryCode: "FJ", flag: "🇫🇯" },
+  { code: "gd", name: "Scottish Gaelic", nativeName: "Gàidhlig", dir: "ltr", countryCode: "GB", displayCode: "GD", flag: "🇬🇧" },
+  { code: "co", name: "Corsican", nativeName: "Corsu", dir: "ltr", countryCode: "FR", displayCode: "CO", flag: "🇫🇷" },
+  { code: "fy", name: "Frisian", nativeName: "Frysk", dir: "ltr", countryCode: "NL", displayCode: "FY", flag: "🇳🇱" },
+  { code: "hmn", name: "Hmong", nativeName: "Hmoob", dir: "ltr", countryCode: "LA", flag: "🇱🇦" },
+  { code: "qu", name: "Quechua", nativeName: "Runasimi", dir: "ltr", countryCode: "PE", flag: "🇵🇪" },
+  { code: "gn", name: "Guarani", nativeName: "Avañeʼẽ", dir: "ltr", countryCode: "PY", flag: "🇵🇾" },
 ];
 
 export const LOCALE_CODES = LOCALES.map((l) => l.code);
