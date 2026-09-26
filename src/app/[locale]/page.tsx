@@ -10,6 +10,7 @@ import { softwareApplicationSchema, faqPageSchema } from "@/lib/seo/schema";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
+import { getOgLocale } from "@/i18n/locales";
 import { SITE_NAME, CONTACT_EMAIL } from "@/lib/site";
 
 type Props = PageProps<"/[locale]">;
@@ -23,6 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: "/",
     localizedPath: getPathname({ href: "/", locale }),
     languageAlternates: buildLanguageAlternates("/"),
+    ogLocale: getOgLocale(locale),
   });
 }
 

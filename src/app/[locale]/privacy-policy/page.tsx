@@ -5,6 +5,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getPathname } from "@/i18n/navigation";
 import { buildLanguageAlternates } from "@/i18n/alternates";
+import { getOgLocale } from "@/i18n/locales";
 import { CONTACT_EMAIL } from "@/lib/site";
 
 type Props = PageProps<"/[locale]/privacy-policy">;
@@ -20,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     path: "/privacy-policy/",
     localizedPath: getPathname({ href: "/privacy-policy", locale }),
     languageAlternates: buildLanguageAlternates("/privacy-policy"),
+    ogLocale: getOgLocale(locale),
   });
 }
 

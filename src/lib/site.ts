@@ -31,3 +31,11 @@ export const FOOTER_COMPANY_LINKS = [
   { href: "/terms-and-conditions/", key: "linkTerms" },
   { href: "/disclaimer/", key: "linkDisclaimer" },
 ] as const;
+
+export const SOCIAL_LINKS = [
+  { name: "LinkedIn", href: "https://www.linkedin.com/company/instaview-stories/" },
+  { name: "Facebook", href: "https://www.facebook.com/people/InstaView-Stories/61594039874600/" },
+  { name: "Instagram", href: "https://www.instagram.com/instaviewstories/" },
+  { name: "Pinterest", href: "https://www.pinterest.com/instaviewstories/" },
+  { name: "X", href: "https://x.com/instaviewstory" },
+] as const;

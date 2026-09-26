@@ -2,10 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, getPathname } from "@/i18n/navigation";
 import { Link } from "@/i18n/navigation";
 import { LOCALES, getLocaleMeta } from "@/i18n/locales";
-import { switchLocale } from "@/lib/switch-locale";
+import { setLocaleCookie } from "@/lib/switch-locale";
 import { FlagIcon } from "@/components/FlagIcon";
 
 export function MobileNav() {
@@ -100,11 +100,11 @@ export function MobileNav() {
                   filteredLocales.map((l) => {
                     const active = l.code === locale;
                     return (
-                      <button
+                      <a
                         key={l.code}
-                        type="button"
+                        href={getPathname({ href: pathname, locale: l.code })}
                         aria-current={active}
-                        onClick={() => switchLocale(pathname, l.code)}
+                        onClick={() => setLocaleCookie(l.code)}
                         className={`flex flex-col items-center gap-1 rounded-xl border px-2 py-2.5 text-xs font-medium transition-colors ${
                           active
                             ? "brand-gradient border-transparent text-white"
@@ -113,7 +113,7 @@ export function MobileNav() {
                       >
                         <FlagIcon countryCode={l.countryCode} />
                         {l.displayCode ?? l.countryCode}
-                      </button>
+                      </a>
                     );
                   })
                 )}

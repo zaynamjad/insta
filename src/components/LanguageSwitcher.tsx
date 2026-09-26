@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
+import { usePathname, getPathname } from "@/i18n/navigation";
 import { LOCALES, getLocaleMeta } from "@/i18n/locales";
-import { switchLocale } from "@/lib/switch-locale";
+import { setLocaleCookie } from "@/lib/switch-locale";
 import { FlagIcon } from "@/components/FlagIcon";
 
 /** Desktop-only trigger + popover; mobile gets the language list inline in MobileNav instead. */
@@ -86,11 +86,11 @@ export function LanguageSwitcher() {
                 const active = l.code === locale;
                 return (
                   <li key={l.code} role="none">
-                    <button
-                      type="button"
+                    <a
+                      href={getPathname({ href: pathname, locale: l.code })}
                       role="option"
                       aria-selected={active}
-                      onClick={() => switchLocale(pathname, l.code)}
+                      onClick={() => setLocaleCookie(l.code)}
                       className={`flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-sm font-medium transition-colors ${
                         active
                           ? "brand-gradient text-white"
@@ -102,7 +102,7 @@ export function LanguageSwitcher() {
                       <span className="ml-auto shrink-0 text-xs text-foreground/40">
                         {l.displayCode ?? l.countryCode}
                       </span>
-                    </button>
+                    </a>
                   </li>
                 );
               })

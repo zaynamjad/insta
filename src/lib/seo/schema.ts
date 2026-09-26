@@ -27,7 +27,7 @@ export function organizationSchema(): SchemaObject {
     "@type": "Organization",
     name: SITE_NAME,
     url: SITE_URL,
-    logo: `${SITE_URL}/logo.svg`,
+    logo: `${SITE_URL}/logo.png`,
   };
 }
 
@@ -130,7 +130,7 @@ export function articleSchema(args: ArticleSchemaArgs): SchemaObject {
     publisher: {
       "@type": "Organization",
       name: SITE_NAME,
-      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.svg` },
+      logo: { "@type": "ImageObject", url: `${SITE_URL}/logo.png` },
     },
     mainEntityOfPage: { "@type": "WebPage", "@id": `${SITE_URL}${args.path}` },
   };

@@ -35,6 +35,8 @@ interface BuildMetadataArgs {
   robots?: RobotsFlags;
   /** Absolute or site-relative canonical override; defaults to `${SITE_URL}${path}`. */
   canonicalUrl?: string;
+  /** `og:locale` value for this page, e.g. from `getOgLocale(locale)`. Defaults to "en_US" when omitted. */
+  ogLocale?: string;
 }
 
 function withTrailingSlash(path: string): string {
@@ -105,6 +107,7 @@ export function buildMetadata({
   twitterCreator,
   robots,
   canonicalUrl,
+  ogLocale,
 }: BuildMetadataArgs): Metadata {
   const formattedTitle = cleanTitle(rawTitle);
   const formattedDescription = cleanDescription(rawDescription);
@@ -146,7 +149,7 @@ export function buildMetadata({
       url: canonical,
       siteName: SITE_NAME,
       type: "website",
-      locale: "en_US",
+      locale: ogLocale ?? "en_US",
       images: [{ url: ogImage, width: 1200, height: 630, alt: ogImageAlt }],
     },
     twitter: {

@@ -146,3 +146,18 @@ export const LOCALE_CODES = LOCALES.map((l) => l.code);
 export function getLocaleMeta(code: string): LocaleMeta {
   return LOCALES.find((l) => l.code === code) ?? LOCALES[0];
 }
+
+/**
+ * Best-effort `og:locale` value (e.g. "fr_FR", "zh_TW") for a given locale
+ * code, derived from `countryCode` — used so social crawlers see the
+ * page's actual language instead of a hardcoded "en_US" on every page.
+ * Codes that already carry a region subtag (e.g. "zh-TW") just swap the
+ * hyphen for an underscore; everything else pairs the code with its flag
+ * country. Not guaranteed to match Facebook's own closed locale list, but
+ * still strictly more correct than a fixed "en_US" for non-English pages.
+ */
+export function getOgLocale(code: string): string {
+  if (code.includes("-")) return code.replace(/-/g, "_");
+  const meta = getLocaleMeta(code);
+  return `${code}_${meta.countryCode}`;
+}

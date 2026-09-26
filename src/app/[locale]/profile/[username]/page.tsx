@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { lookupStory } from "@/lib/story/lookup";
 import { validateUsername } from "@/lib/story/validation";
 import { buildMetadata } from "@/lib/seo/metadata";
+import { getOgLocale } from "@/i18n/locales";
 import { profilePageSchema } from "@/lib/seo/schema";
 import { JsonLd } from "@/components/JsonLd";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
@@ -25,15 +26,16 @@ type Props = PageProps<"/[locale]/profile/[username]">;
 const NOINDEX_PROFILE_PAGES = true;
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { username } = await params;
+  const { locale, username } = await params;
+  const ogLocale = getOgLocale(locale);
   const { valid, normalized } = validateUsername(username);
-  if (!valid) return buildMetadata({ title: "Profile", description: "", path: `/profile/${username}/`, noindex: true });
+  if (!valid) return buildMetadata({ title: "Profile", description: "", path: `/profile/${username}/`, noindex: true, ogLocale });
 
   const result = await lookupStory(normalized);
   const path = `/profile/${normalized}/`;
 
   if (result.status === "not_found") {
-    return buildMetadata({ title: "Profile not found", description: "", path, noindex: true });
+    return buildMetadata({ title: "Profile not found", description: "", path, noindex: true, ogLocale });
   }
 
   if (result.status === "error") {
@@ -42,6 +44,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: "We couldn't retrieve public content right now.",
       path,
       noindex: true,
+      ogLocale,
     });
   }
 
@@ -58,6 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     // short expiry, so hotlinking one as a cached social-preview image
     // would go stale — fall back to the site's default OG image instead.
     noindex: NOINDEX_PROFILE_PAGES,
+    ogLocale,
   });
 }
 
