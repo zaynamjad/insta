@@ -80,6 +80,16 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
           data-key="oQHdBPMkSnWIZSd3oJgWSg"
           strategy="beforeInteractive"
         />
+        {/*
+          Second Ahrefs Web Analytics project. Ahrefs' script bails out with "Did you
+          install it twice?" when window[data-instance] already exists, so this one needs
+          its own data-instance. It is injected by a small inline loader instead of a
+          second <Script src>, because next/script and React both de-duplicate scripts by
+          src and would silently drop it.
+        */}
+        <Script id="ahrefs-analytics-2" strategy="beforeInteractive">
+          {`(function(){var s=document.createElement('script');s.src='https://analytics.ahrefs.com/analytics.js';s.async=true;s.setAttribute('data-key','PksriBtd52QeXCL7W9mNvw');s.setAttribute('data-instance','AhrefsAnalytics2');document.head.appendChild(s);})();`}
+        </Script>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-W5NQ4KV7QY" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
