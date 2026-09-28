@@ -44,6 +44,10 @@ export const metadata: Metadata = {
   },
   verification: {
     google: "ULm6yrKYNbMbqP3xl1PLHekKaqnBcKYE6Rpo8YOgt-0",
+    other: {
+      "ahrefs-site-verification":
+        "0c34c4b43b20dfe296f5cc3c4bbbd6ca902237cf9c7b989298db1c0ec3b86089",
+    },
   },
 };
 
@@ -74,22 +78,12 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             }
           } catch (e) {}`}
         </Script>
-        {/* strategy="beforeInteractive" is what guarantees this lands in <head> */}
+        {/* Next emits this as a bootstrap entry (not a literal <script> in the raw HTML head); at runtime it is inserted into <head>. */}
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
-          data-key="oQHdBPMkSnWIZSd3oJgWSg"
+          data-key="PksriBtd52QeXCL7W9mNvw"
           strategy="beforeInteractive"
         />
-        {/*
-          Second Ahrefs Web Analytics project. Ahrefs' script bails out with "Did you
-          install it twice?" when window[data-instance] already exists, so this one needs
-          its own data-instance. It is injected by a small inline loader instead of a
-          second <Script src>, because next/script and React both de-duplicate scripts by
-          src and would silently drop it.
-        */}
-        <Script id="ahrefs-analytics-2" strategy="beforeInteractive">
-          {`(function(){var s=document.createElement('script');s.src='https://analytics.ahrefs.com/analytics.js';s.async=true;s.setAttribute('data-key','PksriBtd52QeXCL7W9mNvw');s.setAttribute('data-instance','AhrefsAnalytics2');document.head.appendChild(s);})();`}
-        </Script>
         <Script src="https://www.googletagmanager.com/gtag/js?id=G-W5NQ4KV7QY" strategy="afterInteractive" />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
