@@ -20,6 +20,9 @@ const nextConfig: NextConfig = {
       { source: "/:locale/about", destination: "/:locale/about-us", permanent: true },
       { source: "/contact", destination: "/contact-us", permanent: true },
       { source: "/:locale/contact", destination: "/:locale/contact-us", permanent: true },
+      // Locales that were removed after launch: send their old URLs to the
+      // unprefixed English page instead of 404ing.
+      { source: "/:removed(ceb|hmn|haw)/:path*", destination: "/:path*", permanent: true },
     ];
   },
 };

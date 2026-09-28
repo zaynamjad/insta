@@ -102,7 +102,6 @@ export const LOCALES: LocaleMeta[] = [
   { code: "eu", name: "Basque", nativeName: "Euskara", dir: "ltr", countryCode: "ES", flag: "🇪🇸" },
   { code: "gl", name: "Galician", nativeName: "Galego", dir: "ltr", countryCode: "ES", flag: "🇪🇸" },
   { code: "be", name: "Belarusian", nativeName: "Беларуская", dir: "ltr", countryCode: "BY", flag: "🇧🇾" },
-  { code: "ceb", name: "Cebuano", nativeName: "Cebuano", dir: "ltr", countryCode: "PH", flag: "🇵🇭" },
   { code: "jv", name: "Javanese", nativeName: "Basa Jawa", dir: "ltr", countryCode: "ID", flag: "🇮🇩" },
   { code: "su", name: "Sundanese", nativeName: "Basa Sunda", dir: "ltr", countryCode: "ID", flag: "🇮🇩" },
   { code: "xh", name: "Xhosa", nativeName: "isiXhosa", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
@@ -115,7 +114,6 @@ export const LOCALES: LocaleMeta[] = [
   { code: "yi", name: "Yiddish", nativeName: "ייִדיש", dir: "rtl", countryCode: "IL", flag: "🇮🇱" },
   { code: "sm", name: "Samoan", nativeName: "Gagana Samoa", dir: "ltr", countryCode: "WS", flag: "🇼🇸" },
   { code: "to", name: "Tongan", nativeName: "Lea Fakatonga", dir: "ltr", countryCode: "TO", flag: "🇹🇴" },
-  { code: "haw", name: "Hawaiian", nativeName: "ʻŌlelo Hawaiʻi", dir: "ltr", countryCode: "US", displayCode: "HAW", flag: "🇺🇸" },
   { code: "st", name: "Sesotho", nativeName: "Sesotho", dir: "ltr", countryCode: "LS", flag: "🇱🇸" },
   { code: "tn", name: "Setswana", nativeName: "Setswana", dir: "ltr", countryCode: "BW", flag: "🇧🇼" },
   { code: "ts", name: "Tsonga", nativeName: "Xitsonga", dir: "ltr", countryCode: "ZA", flag: "🇿🇦" },
@@ -136,7 +134,6 @@ export const LOCALES: LocaleMeta[] = [
   { code: "gd", name: "Scottish Gaelic", nativeName: "Gàidhlig", dir: "ltr", countryCode: "GB", displayCode: "GD", flag: "🇬🇧" },
   { code: "co", name: "Corsican", nativeName: "Corsu", dir: "ltr", countryCode: "FR", displayCode: "CO", flag: "🇫🇷" },
   { code: "fy", name: "Frisian", nativeName: "Frysk", dir: "ltr", countryCode: "NL", displayCode: "FY", flag: "🇳🇱" },
-  { code: "hmn", name: "Hmong", nativeName: "Hmoob", dir: "ltr", countryCode: "LA", flag: "🇱🇦" },
   { code: "qu", name: "Quechua", nativeName: "Runasimi", dir: "ltr", countryCode: "PE", flag: "🇵🇪" },
   { code: "gn", name: "Guarani", nativeName: "Avañeʼẽ", dir: "ltr", countryCode: "PY", flag: "🇵🇾" },
 ];
