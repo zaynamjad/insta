@@ -69,6 +69,22 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       dir={localeMeta.dir}
       className={`${inter.variable} h-full antialiased`}
     >
+      {/*
+        A literal <head> in the root layout, merged by Next.js with the
+        metadata-generated one. next/script (below, in <body>) never emits a
+        real <script> tag into the server-rendered HTML — even with
+        strategy="beforeInteractive" it's only inserted client-side after
+        hydration — so crawlers that read raw HTML (Google AdSense's site
+        verification, notably) never see it. This tag has to be static
+        markup for verification to pass.
+      */}
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4197958885583712"
+          crossOrigin="anonymous"
+        />
+      </head>
       <body className="min-h-full flex flex-col">
         <Script id="theme-init" strategy="beforeInteractive">
           {`try {
@@ -78,7 +94,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             }
           } catch (e) {}`}
         </Script>
-        {/* Next emits this as a bootstrap entry (not a literal <script> in the raw HTML head); at runtime it is inserted into <head>. */}
         <Script
           src="https://analytics.ahrefs.com/analytics.js"
           data-key="PksriBtd52QeXCL7W9mNvw"
@@ -94,11 +109,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             gtag('config', 'G-W5NQ4KV7QY');
           `}
         </Script>
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4197958885583712"
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
         <NextIntlClientProvider>
           <JsonLd data={[websiteSchema(), organizationSchema()]} />
           <a
