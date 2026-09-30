@@ -38,4 +38,5 @@ export const SOCIAL_LINKS = [
   { name: "Instagram", href: "https://www.instagram.com/instaviewstories/" },
   { name: "Pinterest", href: "https://www.pinterest.com/instaviewstories/" },
   { name: "X", href: "https://x.com/instaviewstory" },
+  { name: "YouTube", href: "https://youtube.com/@instaviewstories" },
 ] as const;
