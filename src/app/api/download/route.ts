@@ -8,11 +8,13 @@ const FETCH_TIMEOUT_MS = 20_000;
 const MAX_DOWNLOAD_BYTES = 60_000_000; // generous headroom for a short story/reel video
 
 /**
- * Instagram CDN hostnames only — this proxy exists purely to add a
+ * Instagram CDN hostnames only. Two uses: (1) downloads — add a
  * Content-Disposition header so the browser saves a file instead of
- * navigating to it (the `download` attribute isn't honored cross-origin).
- * It must never become a general-purpose URL fetcher: the allowlist is
- * this route's entire SSRF boundary.
+ * navigating to it, since the `download` attribute isn't honored
+ * cross-origin; (2) `inline=1` — serve an image back for display when the
+ * CDN won't let the browser load it directly (see the `inline` comment
+ * below). It must never become a general-purpose URL fetcher: the
+ * allowlist is this route's entire SSRF boundary.
  */
 const ALLOWED_HOST_PATTERN = /^([a-z0-9-]+\.)+(cdninstagram\.com|fbcdn\.net)$/i;
 
@@ -22,6 +24,13 @@ export async function GET(req: NextRequest) {
   if (!rateLimit.allowed) {
     return NextResponse.json({ error: "Too many requests. Please wait a moment and try again." }, { status: 429 });
   }
+
+  // "inline" is for displaying an image in the page (e.g. the HD profile
+  // picture, which Instagram's CDN blocks from loading directly cross-origin
+  // via <img src> even though the exact same URL fetches fine server-side)
+  // — same allowlist/size/timeout guards as a download, just without forcing
+  // a file save and with real caching instead of no-store.
+  const inline = req.nextUrl.searchParams.get("inline") === "1";
 
   const rawUrl = req.nextUrl.searchParams.get("url");
   if (!rawUrl) {
@@ -60,6 +69,10 @@ export async function GET(req: NextRequest) {
   const extension = contentType.includes("video") ? "mp4" : "jpg";
   const filename = `instagram-${Date.now()}.${extension}`;
 
+  if (inline && !contentType.startsWith("image/")) {
+    return NextResponse.json({ error: "inline mode only supports image responses." }, { status: 400 });
+  }
+
   const reader = upstream.body.getReader();
   const chunks: Uint8Array[] = [];
   let received = 0;
@@ -86,9 +99,13 @@ export async function GET(req: NextRequest) {
     status: 200,
     headers: {
       "Content-Type": contentType,
-      "Content-Disposition": `attachment; filename="${filename}"`,
       "Content-Length": String(received),
-      "Cache-Control": "no-store",
+      ...(inline
+        ? { "Cache-Control": "private, max-age=3600" }
+        : {
+            "Content-Disposition": `attachment; filename="${filename}"`,
+            "Cache-Control": "no-store",
+          }),
     },
   });
 }
