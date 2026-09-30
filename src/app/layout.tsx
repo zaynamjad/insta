@@ -94,6 +94,11 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             gtag('config', 'G-W5NQ4KV7QY');
           `}
         </Script>
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4197958885583712"
+          crossOrigin="anonymous"
+          strategy="afterInteractive"
+        />
         <NextIntlClientProvider>
           <JsonLd data={[websiteSchema(), organizationSchema()]} />
           <a
