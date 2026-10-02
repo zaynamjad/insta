@@ -495,6 +495,8 @@
     "downloadThisMedia": "Download this media",
     "storiesFromUser": "Stories from @{username}",
     "closeStoryViewer": "Close story viewer",
+    "muteStory": "Mute",
+    "unmuteStory": "Unmute",
     "previousStory": "Previous story",
     "nextStory": "Next story",
     "storyFromUser": "Story from @{username}",

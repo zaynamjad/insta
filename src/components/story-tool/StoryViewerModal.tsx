@@ -23,6 +23,11 @@ export function StoryViewerModal({
   const t = useTranslations("StoryTool");
   const [index, setIndex] = useState(initialIndex);
   const [paused, setPaused] = useState(false);
+  // Starts muted because browsers block unmuted autoplay without a prior
+  // user gesture (the story opens and starts playing on its own) — once the
+  // visitor taps to unmute, that choice carries over as they move between
+  // stories, same as Instagram's own viewer.
+  const [muted, setMuted] = useState(true);
   const closeBtnRef = useRef<HTMLButtonElement>(null);
   const touchStart = useRef<{ x: number; y: number } | null>(null);
 
@@ -150,6 +155,27 @@ export function StoryViewerModal({
             </span>
           </div>
           <div className="flex items-center gap-1">
+            {current.type === "video" && (
+              <button
+                onClick={() => setMuted((m) => !m)}
+                aria-label={muted ? t("unmuteStory") : t("muteStory")}
+                className="flex h-11 w-11 items-center justify-center rounded-full text-white/90 hover:bg-white/10"
+              >
+                {muted ? (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <line x1="22" y1="9" x2="16" y2="15" />
+                    <line x1="16" y1="9" x2="22" y2="15" />
+                  </svg>
+                ) : (
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                  </svg>
+                )}
+              </button>
+            )}
             <DownloadButton
               mediaUrl={current.mediaUrl}
               label={t("downloadThisStory")}
@@ -176,7 +202,7 @@ export function StoryViewerModal({
               className="h-full w-full object-contain"
               autoPlay
               playsInline
-              muted
+              muted={muted}
               onEnded={goNext}
             />
           ) : (
