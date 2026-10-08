@@ -24,7 +24,7 @@ export async function lookupStory(usernameInput: unknown): Promise<StoryLookupRe
   if (cached) return cached;
 
   try {
-    const provider = getProvider();
+    const provider = await getProvider();
     const profile = await provider.getProfile(normalized);
 
     if (!profile) {

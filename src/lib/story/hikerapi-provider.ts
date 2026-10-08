@@ -6,29 +6,10 @@ import type { Post, PostMediaItem } from "@/types/post";
 import type { HighlightMeta } from "@/types/highlight";
 import { validateUsername } from "./validation";
 import { checkOutboundRateLimit } from "./rate-limit";
+import { getAllHikerApiKeys } from "./key-store";
 
 const HIKERAPI_BASE = "https://api.hikerapi.com";
 const FETCH_TIMEOUT_MS = 15_000;
-
-/**
- * All configured HikerAPI access keys, in fallback order: the primary
- * `HIKERAPI_KEY`, then `HIKERAPI_Fallback_1_KEY`, `_2_KEY`, `_3_KEY`, and
- * so on for however many are set — adding a `HIKERAPI_Fallback_4_KEY`
- * later needs no code change. `request()` walks this list and moves to
- * the next key the moment one stops working (bad key, rate-limited,
- * HikerAPI-side error), so one exhausted or blocked account doesn't take
- * lookups down.
- */
-export function getHikerApiKeys(): string[] {
-  const keys: string[] = [];
-  if (process.env.HIKERAPI_KEY) keys.push(process.env.HIKERAPI_KEY);
-  for (let i = 1; ; i++) {
-    const key = process.env[`HIKERAPI_Fallback_${i}_KEY`];
-    if (!key) break;
-    keys.push(key);
-  }
-  return keys;
-}
 
 interface HikerUser {
   pk: number | string;
@@ -153,7 +134,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (getHikerApiKeys().length === 0) {
+    if ((await getAllHikerApiKeys()).length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -191,7 +172,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (getHikerApiKeys().length === 0) {
+    if ((await getAllHikerApiKeys()).length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -221,7 +202,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (getHikerApiKeys().length === 0) {
+    if ((await getAllHikerApiKeys()).length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -245,7 +226,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (getHikerApiKeys().length === 0) {
+    if ((await getAllHikerApiKeys()).length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -275,7 +256,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       );
     }
 
-    if (getHikerApiKeys().length === 0) {
+    if ((await getAllHikerApiKeys()).length === 0) {
       throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
     }
 
@@ -403,7 +384,7 @@ export class HikerApiStoryProvider implements StoryProvider {
    * only once every configured key has failed does this throw.
    */
   private async request(path: string): Promise<Response> {
-    const keys = getHikerApiKeys();
+    const keys = await getAllHikerApiKeys();
     let lastError: ProviderError | null = null;
 
     for (let i = 0; i < keys.length; i++) {

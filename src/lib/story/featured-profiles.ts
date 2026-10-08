@@ -84,7 +84,7 @@ export async function getFeaturedProfiles(): Promise<FeaturedProfile[]> {
     if (cached) return cached;
   }
 
-  const provider = getProvider();
+  const provider = await getProvider();
   const fetchOne = provider.getBasicProfile?.bind(provider) ?? provider.getProfile.bind(provider);
 
   const results = await Promise.allSettled(

@@ -21,7 +21,7 @@ export async function lookupHighlights(usernameInput: unknown): Promise<Highligh
   const cached = getCached<HighlightsLookupResult>(cacheKey);
   if (cached) return cached;
 
-  const provider = getProvider();
+  const provider = await getProvider();
   if (!provider.getHighlights) {
     return {
       status: "error",

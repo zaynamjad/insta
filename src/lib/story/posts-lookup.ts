@@ -23,7 +23,7 @@ export async function lookupPosts(usernameInput: unknown): Promise<PostsLookupRe
   const cached = getCached<PostsLookupResult>(cacheKey);
   if (cached) return cached;
 
-  const provider = getProvider();
+  const provider = await getProvider();
   if (!provider.getPosts) {
     return {
       status: "error",

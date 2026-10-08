@@ -8,7 +8,7 @@ export async function lookupHighlightItems(highlightUrl: string): Promise<Highli
   const cached = getCached<HighlightItemsLookupResult>(cacheKey);
   if (cached) return cached;
 
-  const provider = getProvider();
+  const provider = await getProvider();
   if (!provider.getHighlightItems) {
     return {
       status: "error",

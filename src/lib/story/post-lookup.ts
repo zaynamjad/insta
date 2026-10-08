@@ -7,7 +7,7 @@ export async function lookupPostByShortcode(shortcode: string): Promise<PostLook
   const cached = getCached<PostLookupResult>(cacheKey);
   if (cached) return cached;
 
-  const provider = getProvider();
+  const provider = await getProvider();
   if (!provider.getPostByShortcode) {
     return {
       status: "error",

@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import Script from "next/script";
-import { NextIntlClientProvider } from "next-intl";
 import { getLocale } from "next-intl/server";
 import "./globals.css";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { JsonLd } from "@/components/JsonLd";
-import { websiteSchema, organizationSchema } from "@/lib/seo/schema";
 import { getLocaleMeta } from "@/i18n/locales";
 import {
   SITE_NAME,
@@ -58,6 +53,26 @@ export const viewport = {
   ],
 };
 
+/**
+ * True root layout — the one place `<html>`/`<body>` can live. Every page
+ * on the site today is under `[locale]`, which is where the public site's
+ * chrome (Header, Footer, analytics/ads scripts, the `NextIntlClientProvider`)
+ * actually lives — see that layout. This root layout only holds what every
+ * route, `[locale]`-prefixed or not (e.g. `/admin/*`), should get: the
+ * `<html lang dir>` shell (still resolved via `getLocale()`, which falls
+ * back to the default locale outside `[locale]`, so this never throws for
+ * a route the i18n middleware doesn't touch) and the dark/light theme
+ * script, so design tokens like `bg-surface` work consistently everywhere.
+ *
+ * The AdSense tag below also has to live here rather than in `[locale]`'s
+ * layout: Google's site-verification crawler fetches raw HTML and needs a
+ * genuinely static <script> tag inside <head> (next/script, even with
+ * strategy="beforeInteractive", only inserts into <head> client-side after
+ * hydration — confirmed by diffing the server-rendered HTML, see the git
+ * history for this file), and <head> can only be rendered from the layout
+ * that owns <html>, i.e. this one. It ends up loading on /admin too as a
+ * result; harmless since there are no ad slots there to fill.
+ */
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   const locale = await getLocale();
   const localeMeta = getLocaleMeta(locale);
@@ -69,15 +84,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       dir={localeMeta.dir}
       className={`${inter.variable} h-full antialiased`}
     >
-      {/*
-        A literal <head> in the root layout, merged by Next.js with the
-        metadata-generated one. next/script (below, in <body>) never emits a
-        real <script> tag into the server-rendered HTML — even with
-        strategy="beforeInteractive" it's only inserted client-side after
-        hydration — so crawlers that read raw HTML (Google AdSense's site
-        verification, notably) never see it. This tag has to be static
-        markup for verification to pass.
-      */}
       <head>
         <script
           async
@@ -94,35 +100,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
             }
           } catch (e) {}`}
         </Script>
-        <Script
-          src="https://analytics.ahrefs.com/analytics.js"
-          data-key="PksriBtd52QeXCL7W9mNvw"
-          strategy="beforeInteractive"
-        />
-        <Script src="https://www.googletagmanager.com/gtag/js?id=G-W5NQ4KV7QY" strategy="afterInteractive" />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', 'G-W5NQ4KV7QY');
-          `}
-        </Script>
-        <NextIntlClientProvider>
-          <JsonLd data={[websiteSchema(), organizationSchema()]} />
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-white"
-          >
-            Skip to content
-          </a>
-          <Header />
-          <main id="main-content" className="flex-1">
-            {children}
-          </main>
-          <Footer />
-        </NextIntlClientProvider>
+        {children}
       </body>
     </html>
   );
