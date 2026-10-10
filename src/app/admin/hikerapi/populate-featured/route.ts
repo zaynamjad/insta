@@ -3,7 +3,11 @@ import { put } from "@vercel/blob";
 import { ADMIN_SESSION_COOKIE, isValidSessionToken } from "@/lib/admin-auth";
 import { HikerApiStoryProvider } from "@/lib/story/hikerapi-provider";
 import { FEATURED_META } from "@/lib/story/featured-profiles";
-import { writeStoredFeaturedProfiles, type StoredFeaturedProfile } from "@/lib/story/featured-profiles-store";
+import {
+  getStoredFeaturedProfiles,
+  writeStoredFeaturedProfiles,
+  type StoredFeaturedProfile,
+} from "@/lib/story/featured-profiles-store";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -24,11 +28,27 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Sign in to the dashboard first." }, { status: 401 });
   }
 
+  // Optional { usernames: [...] } body — re-fetches just those accounts
+  // and merges into the existing stored list, instead of redoing all 20
+  // (and spending 20 more requests) to fix or add one.
+  let only: Set<string> | null = null;
+  try {
+    const body = (await req.json()) as { usernames?: string[] };
+    if (Array.isArray(body.usernames) && body.usernames.length > 0) {
+      only = new Set(body.usernames);
+    }
+  } catch {
+    // No/invalid JSON body — fine, means "do all of them".
+  }
+
+  const metaToFetch = only ? FEATURED_META.filter((m) => only!.has(m.username)) : FEATURED_META;
+
   const provider = new HikerApiStoryProvider();
   const results: Array<{ username: string; status: string; followers?: number | null; logoUrl?: string | null }> = [];
-  const toStore: StoredFeaturedProfile[] = [];
+  const existing = await getStoredFeaturedProfiles();
+  const toStore: StoredFeaturedProfile[] = existing.filter((p) => !metaToFetch.some((m) => m.username === p.username));
 
-  for (const meta of FEATURED_META) {
+  for (const meta of metaToFetch) {
     try {
       const profile = await provider.getBasicProfile(meta.username);
       if (!profile) {

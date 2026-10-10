@@ -36,7 +36,7 @@ const FEATURED_META: FeaturedProfileMeta[] = [
   { username: "louisvuitton", displayName: "Louis Vuitton", category: "Luxury fashion house", country: "France", fallbackFollowers: "65M" },
   { username: "sportscenter", displayName: "SportsCenter", category: "Sports news show", country: "United States", fallbackFollowers: "35M" },
   { username: "nfl", displayName: "NFL", category: "American football league", country: "United States", fallbackFollowers: "40M" },
-  { username: "chanel", displayName: "Chanel", category: "Luxury fashion house", country: "France", fallbackFollowers: "60M" },
+  { username: "chanelofficial", displayName: "Chanel", category: "Luxury fashion house", country: "France", fallbackFollowers: "60M" },
 ];
 
 export { FEATURED_META };
