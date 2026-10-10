@@ -1,4 +1,5 @@
 import { get as getConfigValue } from "@vercel/global-config";
+import { writeGlobalConfigItem } from "@/lib/global-config-write";
 
 /**
  * Admin-dashboard-managed HikerAPI keys, stored in Vercel Global Config
@@ -17,10 +18,6 @@ export interface StoredHikerApiKey {
 }
 
 const STORE_KEY = "hikerApiKeys";
-
-/** Not secret — a Global Config/Vercel resource id, not a credential. */
-const EDGE_CONFIG_ID = "ecfg_j1zztto7tbn1hvnlbsmas3qqrzhc";
-const VERCEL_TEAM_ID = "team_0gVH2bECHS5S1kug76oJG0PM";
 
 function isStoredKey(value: unknown): value is StoredHikerApiKey {
   return (
@@ -92,27 +89,5 @@ export async function getAllHikerApiKeys(): Promise<string[]> {
  * path, never sent to the client.
  */
 export async function writeStoredKeys(keys: StoredHikerApiKey[]): Promise<void> {
-  const token = process.env.VERCEL_API_TOKEN;
-  if (!token) {
-    throw new Error("VERCEL_API_TOKEN is not configured — key store writes are disabled.");
-  }
-
-  const res = await fetch(
-    `https://api.vercel.com/v1/edge-config/${EDGE_CONFIG_ID}/items?teamId=${VERCEL_TEAM_ID}`,
-    {
-      method: "PATCH",
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        items: [{ operation: "upsert", key: STORE_KEY, value: keys }],
-      }),
-    },
-  );
-
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Failed to update the key store (${res.status}): ${text.slice(0, 300)}`);
-  }
+  await writeGlobalConfigItem(STORE_KEY, keys);
 }
