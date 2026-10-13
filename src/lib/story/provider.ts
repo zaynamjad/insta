@@ -27,6 +27,13 @@ export class ProviderError extends Error {
     message: string,
     public readonly code: ProviderErrorCode = "UPSTREAM_ERROR",
     public readonly detail?: unknown,
+    /**
+     * True only for conditions where a *different* provider might succeed
+     * (timeouts, network failures, 429, 402, 5xx). Defaults to false so a
+     * bad username, an auth/config mistake or our own outbound budget never
+     * trigger a provider failover.
+     */
+    public readonly retryable: boolean = false,
   ) {
     super(message);
     this.name = "ProviderError";

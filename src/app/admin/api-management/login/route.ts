@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
     return redirectWithError(req, "Incorrect password.");
   }
 
-  const res = NextResponse.redirect(new URL("/admin/hikerapi", req.url), 303);
+  const res = NextResponse.redirect(new URL("/admin/api-management", req.url), 303);
   res.cookies.set(ADMIN_SESSION_COOKIE, createSessionToken(), {
     httpOnly: true,
     secure: true,
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 }
 
 function redirectWithError(req: NextRequest, message: string) {
-  const url = new URL("/admin/hikerapi", req.url);
+  const url = new URL("/admin/api-management", req.url);
   url.searchParams.set("error", message);
   return NextResponse.redirect(url, 303);
 }

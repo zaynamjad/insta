@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // The admin dashboard now manages every API provider, not just HikerAPI.
+      // Permanent (308) so both page loads and the old POST form actions
+      // survive; query strings are carried over automatically.
+      { source: "/admin/hikerapi/:path*", destination: "/admin/api-management/:path*", permanent: true },
       { source: "/terms", destination: "/terms-and-conditions", permanent: true },
       { source: "/:locale/terms", destination: "/:locale/terms-and-conditions", permanent: true },
       { source: "/terms-condition", destination: "/terms-and-conditions", permanent: true },

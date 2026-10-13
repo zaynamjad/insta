@@ -145,6 +145,23 @@ src/
 > a multi-landing-page/blog content strategy that no longer matches the
 > site — treat it as historical, not current.
 
+## API providers and the admin dashboard
+
+Two licensed data vendors can serve lookups: **HikerAPI** and **Scrape
+Creators**. They're managed together at `/admin/api-management` (the old
+`/admin/hikerapi` URL redirects there): add/replace keys for either, pick
+which one is Primary (the other automatically becomes the Fallback), turn
+automatic failover on or off, enable/disable each provider, test a
+provider's connection, and see usage and recent fallback history. Settings
+live in Global Config and apply to the next request — no redeploy.
+
+Failover only happens for retryable failures (timeouts, network errors,
+HTTP 429/402/5xx); invalid usernames, not-found and bad-credential errors
+are returned as-is. Scrape Creators has no Stories endpoint, so Story
+lookups (`getProfile`) always go to HikerAPI. Optional env keys:
+`SCRAPECREATORS_API_KEY` / `SCRAPECREATORS_Fallback_N_KEY`. `npm test`
+runs the provider-routing tests (mocked — no credits spent).
+
 ## Deploying
 
 ```bash

@@ -392,7 +392,7 @@ export class HikerApiStoryProvider implements StoryProvider {
       try {
         res = await this.attempt(path, keys[i]);
       } catch (err) {
-        lastError = err instanceof ProviderError ? err : new ProviderError("Failed to reach HikerAPI.", "UPSTREAM_ERROR", err);
+        lastError = err instanceof ProviderError ? err : new ProviderError("Failed to reach HikerAPI.", "UPSTREAM_ERROR", err, true);
         continue;
       }
 
@@ -406,6 +406,9 @@ export class HikerApiStoryProvider implements StoryProvider {
             : "HikerAPI returned an unexpected status.",
         res.status === 429 ? "RATE_LIMITED" : "UPSTREAM_ERROR",
         `status=${res.status}, key ${i + 1}/${keys.length}`,
+        // Only conditions another provider could plausibly fix — not 401/403
+        // (a credential problem, surfaced in the admin dashboard instead).
+        res.status === 402 || res.status === 429 || res.status >= 500,
       );
     }
 
@@ -430,6 +433,7 @@ export class HikerApiStoryProvider implements StoryProvider {
         isTimeout ? "HikerAPI request timed out." : "Failed to reach HikerAPI.",
         isTimeout ? "UPSTREAM_TIMEOUT" : "UPSTREAM_ERROR",
         err,
+        true,
       );
     } finally {
       clearTimeout(timer);

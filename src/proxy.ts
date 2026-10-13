@@ -28,7 +28,7 @@ export const config = {
   // which doesn't exist as a route, so the asset 404s.
   // `admin` is excluded the same way `api` is: it lives outside the
   // `[locale]` segment entirely, and without this exclusion next-intl's
-  // locale-detection redirect could send a request for /admin/hikerapi
-  // off to e.g. /fr/admin/hikerapi, which isn't a route at all.
+  // locale-detection redirect could send a request for /admin/api-management
+  // off to e.g. /fr/admin/api-management, which isn't a route at all.
   matcher: "/((?!api|admin|_next/static|_next/image|favicon.ico|robots.txt|sitemap.xml|opengraph-image|.*\\..*).*)",
 };

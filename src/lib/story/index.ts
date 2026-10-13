@@ -1,34 +1,53 @@
 import type { StoryProvider } from "./provider";
 import { PublicWebStoryProvider } from "./public-web-provider";
 import { HikerApiStoryProvider } from "./hikerapi-provider";
-import { getAllHikerApiKeys } from "./key-store";
+import { ScrapeCreatorsStoryProvider } from "./scrapecreators-provider";
+import { RoutedStoryProvider, type RoutingSnapshot } from "./provider-router";
+import { getAllApiKeys, type ApiProviderId } from "./key-store";
+import { getProviderSettings } from "./provider-settings";
 
 export type { StoryProvider } from "./provider";
 export { ProviderError } from "./provider";
 
-const hikerApiProvider = new HikerApiStoryProvider();
+const clients: Record<ApiProviderId, StoryProvider> = {
+  hikerapi: new HikerApiStoryProvider(),
+  scrapecreators: new ScrapeCreatorsStoryProvider(),
+};
 const publicWebProvider = new PublicWebStoryProvider();
 
 /**
  * Single point of control for which implementation powers story/profile
  * lookups. Everything downstream (route handlers, `/profile/[username]`)
- * depends only on the `StoryProvider` interface — a future replacement
- * only needs to change this function.
+ * depends only on the `StoryProvider` interface.
  *
- * When at least one HikerAPI key is configured — in the admin dashboard
- * (Global Config) and/or via `HIKERAPI_KEY`/`HIKERAPI_Fallback_N_KEY` env
- * vars — uses `HikerApiStoryProvider`, which calls the HikerAPI vendor and
- * can return actual Story media, internally rotating through whichever
- * key still works. Otherwise falls back to `PublicWebStoryProvider`
- * (profile metadata only, stories always empty).
+ * When at least one API provider is enabled and has a key — HikerAPI
+ * and/or Scrape Creators, keys from the admin dashboard (Global Config)
+ * and/or env vars — returns a `RoutedStoryProvider` that calls the
+ * dashboard-selected Primary and fails over to the other provider on
+ * retryable errors (see `provider-router.ts`). With only HikerAPI
+ * configured that is exactly the previous HikerAPI-only behavior.
+ * Otherwise falls back to `PublicWebStoryProvider` (profile metadata only,
+ * stories always empty).
  *
- * Deliberately not caching this decision (unlike the old sync version,
- * which picked a provider once per server instance): keys added or
- * removed through the dashboard need to take effect on the next request,
- * not the next cold start. Both provider instances are plain and cheap to
- * hold onto, so only the *choice* between them is re-evaluated each call.
+ * Deliberately not cached: provider selection and keys are re-read every
+ * call so a dashboard change applies to the next request, not the next
+ * cold start. The returned provider holds the configuration read here, so
+ * a request that makes several calls (e.g. lookupPosts) stays consistent
+ * even if an admin saves new settings mid-request.
  */
 export async function getProvider(): Promise<StoryProvider> {
-  const keys = await getAllHikerApiKeys();
-  return keys.length > 0 ? hikerApiProvider : publicWebProvider;
+  const [settings, hikerKeys, scKeys] = await Promise.all([
+    getProviderSettings(),
+    getAllApiKeys("hikerapi"),
+    getAllApiKeys("scrapecreators"),
+  ]);
+  const snapshot: RoutingSnapshot = {
+    settings,
+    configured: { hikerapi: hikerKeys.length > 0, scrapecreators: scKeys.length > 0 },
+  };
+
+  const anyUsable =
+    (settings.enabled.hikerapi && snapshot.configured.hikerapi) ||
+    (settings.enabled.scrapecreators && snapshot.configured.scrapecreators);
+  return anyUsable ? new RoutedStoryProvider(snapshot, clients) : publicWebProvider;
 }
