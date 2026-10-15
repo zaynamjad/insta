@@ -3,12 +3,12 @@ import { lookupStory } from "@/lib/story/lookup";
 import { validateUsername } from "@/lib/story/validation";
 import { checkClientRateLimit } from "@/lib/story/rate-limit";
 import { getClientIp, isCrossSiteRequest } from "@/lib/story/request-guards";
-import { verifyTurnstileToken } from "@/lib/story/turnstile";
+import { verifySearchRequest } from "@/lib/story/recaptcha";
 import type { StoryLookupResult, StoryErrorCode } from "@/types/story";
 
 export const runtime = "nodejs";
 
-const MAX_BODY_BYTES = 4_000; // username plus a Turnstile token, which can run a few hundred bytes
+const MAX_BODY_BYTES = 4_000; // username plus a reCAPTCHA token, which can run a few hundred bytes
 
 function jsonError(
   status: number,
@@ -53,17 +53,12 @@ export async function POST(req: NextRequest) {
       ? (body as { username: unknown }).username
       : undefined;
 
-  const turnstileToken =
-    typeof body === "object" && body !== null && "turnstileToken" in body
-      ? (body as { turnstileToken: unknown }).turnstileToken
-      : undefined;
-
   const { valid, error } = validateUsername(usernameInput);
   if (!valid) {
     return jsonError(400, "INVALID_USERNAME", error ?? "Invalid username.");
   }
 
-  if (!(await verifyTurnstileToken(turnstileToken, ip))) {
+  if (!(await verifySearchRequest(body, ip))) {
     return jsonError(403, "INVALID_REQUEST", "Verification failed. Please try again.");
   }
 

@@ -6,7 +6,7 @@ import type { HighlightsLookupResult, HighlightMeta, HighlightItemsLookupResult 
 import type { Story } from "@/types/story";
 import { errorMessageKey } from "@/lib/story/error-messages";
 import { StoryViewerModal } from "./StoryViewerModal";
-import type { TurnstileHandle } from "./Turnstile";
+import { RecaptchaCancelledError, type RecaptchaHandle } from "./RecaptchaChallenge";
 
 /**
  * Self-contained Highlights tab: fetches the tray (cover + title per
@@ -15,16 +15,16 @@ import type { TurnstileHandle } from "./Turnstile";
  * but adds a second, per-click fetch since the tray call intentionally
  * doesn't include items (see `hikerapi-provider.ts`).
  *
- * `turnstileRef` is the same widget instance `StoryTool` renders for the
- * main search — `/api/highlight-viewer` requires a token, so each click
- * here runs another (invisible, in most cases) challenge through it.
+ * `recaptchaRef` is the same challenge `StoryTool` renders for the main
+ * search — `/api/highlight-viewer` requires a token, so each click here
+ * shows the reCAPTCHA checkbox again through it.
  */
 export function HighlightsGrid({
   username,
-  turnstileRef,
+  recaptchaRef,
 }: {
   username: string;
-  turnstileRef?: RefObject<TurnstileHandle | null>;
+  recaptchaRef?: RefObject<RecaptchaHandle | null>;
 }) {
   const t = useTranslations("StoryTool");
   const [state, setState] = useState<"loading" | "loaded" | "error">("loading");
@@ -76,13 +76,13 @@ export function HighlightsGrid({
     setOpeningId(h.id);
     setOpenError(null);
     try {
-      const turnstileToken = turnstileRef?.current ? await turnstileRef.current.getToken() : null;
+      const recaptchaToken = recaptchaRef?.current ? await recaptchaRef.current.getToken() : null;
       const res = await fetch("/api/highlight-viewer/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           url: `https://www.instagram.com/stories/highlights/${h.id}/`,
-          turnstileToken,
+          recaptchaToken,
         }),
       });
       const data: HighlightItemsLookupResult = await res.json();
@@ -93,8 +93,8 @@ export function HighlightsGrid({
       } else {
         setOpenError(t("highlightNotFound"));
       }
-    } catch {
-      setOpenError(t("highlightsNetworkError"));
+    } catch (err) {
+      if (!(err instanceof RecaptchaCancelledError)) setOpenError(t("highlightsNetworkError"));
     } finally {
       setOpeningId(null);
     }

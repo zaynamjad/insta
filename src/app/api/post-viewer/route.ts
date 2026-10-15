@@ -3,7 +3,7 @@ import { lookupPostByShortcode } from "@/lib/story/post-lookup";
 import { extractPostShortcode } from "@/lib/story/post-url";
 import { checkClientRateLimit } from "@/lib/story/rate-limit";
 import { getClientIp, isCrossSiteRequest } from "@/lib/story/request-guards";
-import { verifyTurnstileToken } from "@/lib/story/turnstile";
+import { verifySearchRequest } from "@/lib/story/recaptcha";
 import type { PostLookupResult, PostsErrorCode } from "@/types/post";
 
 export const runtime = "nodejs";
@@ -53,11 +53,6 @@ export async function POST(req: NextRequest) {
       ? (body as { url: unknown }).url
       : undefined;
 
-  const turnstileToken =
-    typeof body === "object" && body !== null && "turnstileToken" in body
-      ? (body as { turnstileToken: unknown }).turnstileToken
-      : undefined;
-
   if (typeof urlInput !== "string") {
     return jsonError(400, "INVALID_REQUEST", "Missing post URL.");
   }
@@ -67,7 +62,7 @@ export async function POST(req: NextRequest) {
     return jsonError(400, "INVALID_REQUEST", "That doesn't look like an Instagram post or reel URL.");
   }
 
-  if (!(await verifyTurnstileToken(turnstileToken, ip))) {
+  if (!(await verifySearchRequest(body, ip))) {
     return jsonError(403, "INVALID_REQUEST", "Verification failed. Please try again.");
   }
 

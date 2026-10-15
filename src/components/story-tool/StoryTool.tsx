@@ -16,7 +16,7 @@ import { PostsGrid } from "./PostsGrid";
 import { HighlightsGrid } from "./HighlightsGrid";
 import { ProfilePictureTab } from "./ProfilePictureTab";
 import { DownloadButton } from "./DownloadButton";
-import { Turnstile, type TurnstileHandle } from "./Turnstile";
+import { RecaptchaChallenge, RecaptchaCancelledError, type RecaptchaHandle } from "./RecaptchaChallenge";
 import { SinglePostResult } from "./SinglePostResult";
 import { SingleHighlightResult } from "./SingleHighlightResult";
 
@@ -24,7 +24,7 @@ type Status = "idle" | "loading" | "result";
 type Tab = "stories" | "posts" | "reels" | "highlights" | "profile";
 type LoadingPhase = "verifying" | "searching";
 
-const TURNSTILE_ENABLED = Boolean(process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY);
+const RECAPTCHA_ENABLED = Boolean(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY);
 const MIN_LOADING_MS = 900; // avoids a jarring instant flash on a fast response
 
 async function waitOutMinLoading(startedAt: number) {
@@ -52,7 +52,7 @@ export function StoryTool({
   const [formError, setFormError] = useState<string | null>(null);
   const [viewerIndex, setViewerIndex] = useState<number | null>(null);
   const [tab, setTab] = useState<Tab>("stories");
-  const turnstileRef = useRef<TurnstileHandle>(null);
+  const recaptchaRef = useRef<RecaptchaHandle>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   // Scrolls the results section into view as soon as a search starts
@@ -90,14 +90,15 @@ export function StoryTool({
     setTab("stories");
 
     try {
-      const turnstileToken = TURNSTILE_ENABLED ? await turnstileRef.current?.getToken() : null;
+      // The visitor passes the reCAPTCHA checkbox after submitting the username.
+      const recaptchaToken = RECAPTCHA_ENABLED ? await recaptchaRef.current?.getToken() : null;
       setLoadingPhase("searching");
 
       if (highlightUrl) {
         const res = await fetch("/api/highlight-viewer/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: highlightUrl, turnstileToken }),
+          body: JSON.stringify({ url: highlightUrl, recaptchaToken }),
         });
         const data: HighlightItemsLookupResult = await res.json();
         await waitOutMinLoading(startedAt);
@@ -106,7 +107,7 @@ export function StoryTool({
         const res = await fetch("/api/post-viewer/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ url: searchInput, turnstileToken }),
+          body: JSON.stringify({ url: searchInput, recaptchaToken }),
         });
         const data: PostLookupResult = await res.json();
         await waitOutMinLoading(startedAt);
@@ -116,13 +117,17 @@ export function StoryTool({
         const res = await fetch("/api/story-viewer/", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username: normalized, turnstileToken }),
+          body: JSON.stringify({ username: normalized, recaptchaToken }),
         });
         const data: StoryLookupResult = await res.json();
         await waitOutMinLoading(startedAt);
         setResult(data);
       }
-    } catch {
+    } catch (err) {
+      if (err instanceof RecaptchaCancelledError) {
+        setStatus("idle");
+        return;
+      }
       await waitOutMinLoading(startedAt);
       const errorResult = {
         status: "error" as const,
@@ -197,7 +202,7 @@ export function StoryTool({
         </button>
       </form>
 
-      {TURNSTILE_ENABLED && <Turnstile ref={turnstileRef} />}
+      {RECAPTCHA_ENABLED && <RecaptchaChallenge ref={recaptchaRef} />}
 
       {formError && (
         <p role="alert" className="mt-2 text-sm font-medium text-red-600">
@@ -217,7 +222,7 @@ export function StoryTool({
             onTabChange={setTab}
             onReset={reset}
             onOpenViewer={(index) => setViewerIndex(index)}
-            turnstileRef={turnstileRef}
+            recaptchaRef={recaptchaRef}
           />
         )}
         {status === "result" && postResult && (
@@ -289,7 +294,7 @@ function ResultState({
   onTabChange,
   onReset,
   onOpenViewer,
-  turnstileRef,
+  recaptchaRef,
 }: {
   result: StoryLookupResult;
   variant: "hero" | "compact";
@@ -297,7 +302,7 @@ function ResultState({
   onTabChange: (tab: Tab) => void;
   onReset: () => void;
   onOpenViewer: (index: number) => void;
-  turnstileRef: RefObject<TurnstileHandle | null>;
+  recaptchaRef: RefObject<RecaptchaHandle | null>;
 }) {
   const t = useTranslations("StoryTool");
 
@@ -414,7 +419,7 @@ function ResultState({
       ) : tab === "reels" ? (
         <PostsGrid username={profile.username} filter="reels" />
       ) : tab === "highlights" ? (
-        <HighlightsGrid username={profile.username} turnstileRef={turnstileRef} />
+        <HighlightsGrid username={profile.username} recaptchaRef={recaptchaRef} />
       ) : (
         <ProfilePictureTab profile={profile} />
       )}
