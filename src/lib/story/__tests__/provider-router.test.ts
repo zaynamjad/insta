@@ -1,11 +1,15 @@
-import { describe, expect, it, vi } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { RoutedStoryProvider, type RoutingSnapshot } from "../provider-router";
 import { ProviderError, type StoryProvider } from "../provider";
 import { DEFAULT_PROVIDER_SETTINGS, type ApiProviderSettings } from "../provider-settings";
 import type { ProviderAttemptRecord } from "../provider-stats";
+import { resetBreakersForTests } from "../circuit-breaker";
 import type { Profile } from "@/types/profile";
 
 vi.mock("../provider-stats", () => ({ recordAttempt: vi.fn(async () => {}) }));
+
+// The circuit breaker keeps per-process state when Redis is absent; isolate every test from the last.
+beforeEach(() => resetBreakersForTests());
 
 const profile = (username: string): Profile => ({
   username,

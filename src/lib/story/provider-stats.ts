@@ -16,7 +16,8 @@ const LOG_MAX = 100;
 const ERROR_MAX_LEN = 160;
 
 export interface ProviderAttemptRecord {
-  provider: ApiProviderId;
+  /** An API provider, or "instaloader" (the keyless tier tried ahead of them). */
+  provider: ApiProviderId | "instaloader";
   operation: string;
   ok: boolean;
   /** True when this attempt was on the Fallback after the Primary failed. */
@@ -24,6 +25,8 @@ export interface ProviderAttemptRecord {
   durationMs: number;
   /** Short error class/message when `ok` is false. */
   error?: string;
+  /** Set on a fallback attempt: why the previous provider didn't answer (error code or circuit state). */
+  fallbackReason?: string;
 }
 
 export interface ProviderStats {

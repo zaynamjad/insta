@@ -43,8 +43,8 @@ function isStoredKey(value: unknown): value is StoredApiKey {
 
 /**
  * Keys added through the admin dashboard. Never throws — a Global Config
- * outage degrades to "no dashboard-managed keys" (callers fall back to the
- * legacy env-var keys below), not a broken site.
+ * outage degrades to "no keys" (lookups then fail with a configuration
+ * error) rather than crashing the request.
  */
 export async function getStoredKeys(provider: ApiProviderId = "hikerapi"): Promise<StoredApiKey[]> {
   try {
@@ -58,44 +58,18 @@ export async function getStoredKeys(provider: ApiProviderId = "hikerapi"): Promi
 }
 
 /**
- * The original key source. HikerAPI: `HIKERAPI_KEY` plus however many
- * `HIKERAPI_Fallback_N_KEY` env vars are set. Scrape Creators:
- * `SCRAPECREATORS_API_KEY` plus `SCRAPECREATORS_Fallback_N_KEY`. Kept as a
- * safety net — keys configured this way keep working even if nothing has
- * been added through the dashboard yet, or Global Config is unreachable.
+ * Every usable key for a provider, in the order its client should try
+ * them. Only dashboard-managed keys are used — env-var keys are no longer read.
  */
-export function getEnvKeys(provider: ApiProviderId = "hikerapi"): string[] {
-  const [primaryVar, fallbackPrefix] =
-    provider === "hikerapi"
-      ? ["HIKERAPI_KEY", "HIKERAPI_Fallback_"]
-      : ["SCRAPECREATORS_API_KEY", "SCRAPECREATORS_Fallback_"];
+export async function getAllApiKeys(provider: ApiProviderId): Promise<string[]> {
+  const seen = new Set<string>();
   const keys: string[] = [];
-  if (process.env[primaryVar]) keys.push(process.env[primaryVar] as string);
-  for (let i = 1; ; i++) {
-    const key = process.env[`${fallbackPrefix}${i}_KEY`];
-    if (!key) break;
+  for (const { key } of await getStoredKeys(provider)) {
+    if (seen.has(key)) continue;
+    seen.add(key);
     keys.push(key);
   }
   return keys;
-}
-
-/**
- * Every usable key for a provider, in the order its client should try
- * them: dashboard-managed keys first (what the owner actively curates and
- * can reorder by replacing/removing), then legacy env-var keys as a safety
- * net — deduplicated so a key present in both places is only tried once.
- */
-export async function getAllApiKeys(provider: ApiProviderId): Promise<string[]> {
-  const stored = (await getStoredKeys(provider)).map((k) => k.key);
-  const env = getEnvKeys(provider);
-  const seen = new Set<string>();
-  const merged: string[] = [];
-  for (const key of [...stored, ...env]) {
-    if (seen.has(key)) continue;
-    seen.add(key);
-    merged.push(key);
-  }
-  return merged;
 }
 
 export function getAllHikerApiKeys(): Promise<string[]> {

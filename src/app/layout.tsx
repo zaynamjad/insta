@@ -84,13 +84,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       dir={localeMeta.dir}
       className={`${inter.variable} h-full antialiased`}
     >
-      <head>
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4197958885583712"
-          crossOrigin="anonymous"
-        />
-      </head>
       <body className="min-h-full flex flex-col">
         <Script id="theme-init" strategy="beforeInteractive">
           {`try {

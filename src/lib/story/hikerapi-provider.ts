@@ -1,5 +1,7 @@
-import type { StoryProvider } from "./provider";
+import type { StoryProvider, RequestHints } from "./provider";
 import { ProviderError } from "./provider";
+import { CallBudget } from "./call-budget";
+import { recordHikerCall } from "./usage";
 import type { Profile } from "@/types/profile";
 import type { Story } from "@/types/story";
 import type { Post, PostMediaItem } from "@/types/post";
@@ -106,6 +108,13 @@ interface HikerHighlightDetail {
  * pay for an API call, HikerAPI owns the session and the account risk.
  */
 export class HikerApiStoryProvider implements StoryProvider {
+  /**
+   * `budget` caps the paid HTTP calls this client instance may make; a fresh
+   * client (and budget) is created for each visitor request. The default is
+   * effectively unlimited so direct callers and tests keep working.
+   */
+  constructor(private readonly budget: CallBudget = new CallBudget(Number.MAX_SAFE_INTEGER, "HikerAPI")) {}
+
   async getProfile(usernameInput: string): Promise<Profile | null> {
     const user = await this.resolveUser(usernameInput);
     if (!user) return null;
@@ -135,7 +144,7 @@ export class HikerApiStoryProvider implements StoryProvider {
     }
 
     if ((await getAllHikerApiKeys()).length === 0) {
-      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+      throw new ProviderError("No HikerAPI key is configured in the admin panel.", "UPSTREAM_ERROR");
     }
 
     return this.fetchUser(normalized);
@@ -156,31 +165,22 @@ export class HikerApiStoryProvider implements StoryProvider {
       stories,
       category: user.category || null,
       externalUrl: user.external_url || null,
+      userId: String(user.pk),
     };
   }
 
-  async getPosts(usernameInput: string): Promise<Post[]> {
-    const { valid, normalized } = validateUsername(usernameInput);
-    if (!valid) {
-      throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
+  async getPosts(usernameInput: string, hints?: RequestHints): Promise<Post[]> {
+    const normalized = await this.preflight(usernameInput);
+
+    const userId = await this.resolveUserId(normalized, hints);
+    if (userId === null) return [];
+
+    const res = await this.request(`/v1/user/medias/chunk?user_id=${encodeURIComponent(userId)}`);
+    // HikerAPI documents this endpoint as deprecated and able to 404 for accounts that do have posts, so a
+    // non-OK answer is "couldn't list them", never "has none" — an empty list here would be cached as the truth.
+    if (!res.ok) {
+      throw new ProviderError("HikerAPI could not list posts.", "UPSTREAM_ERROR", `status=${res.status}`, true);
     }
-
-    if (!checkOutboundRateLimit().allowed) {
-      throw new ProviderError(
-        "Upstream request budget exceeded for this window.",
-        "RATE_LIMITED",
-      );
-    }
-
-    if ((await getAllHikerApiKeys()).length === 0) {
-      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
-    }
-
-    const user = await this.fetchUser(normalized);
-    if (!user || user.is_private !== false) return [];
-
-    const res = await this.request(`/v1/user/medias/chunk?user_id=${encodeURIComponent(String(user.pk))}`);
-    if (!res.ok) return [];
 
     const body = (await res.json()) as [HikerMediaItem[], string | null] | HikerMediaItem[];
     const items = Array.isArray(body[0]) ? (body[0] as HikerMediaItem[]) : (body as HikerMediaItem[]);
@@ -188,6 +188,17 @@ export class HikerApiStoryProvider implements StoryProvider {
     return items
       .map((item) => this.normalizeMediaPost(item))
       .filter((post): post is Post => post !== null);
+  }
+
+  /**
+   * Active Stories for a profile already known to be public. Uses the
+   * user id when the caller has it (one billed call: 2 units) instead of
+   * re-resolving the username first (one more unit).
+   */
+  async getStories(usernameInput: string, hints?: RequestHints): Promise<Story[]> {
+    const normalized = await this.preflight(usernameInput);
+    const userId = await this.resolveUserId(normalized, hints);
+    return userId === null ? [] : this.fetchStories(userId);
   }
 
   async getPostByShortcode(shortcode: string): Promise<Post | null> {
@@ -203,7 +214,7 @@ export class HikerApiStoryProvider implements StoryProvider {
     }
 
     if ((await getAllHikerApiKeys()).length === 0) {
-      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+      throw new ProviderError("No HikerAPI key is configured in the admin panel.", "UPSTREAM_ERROR");
     }
 
     const res = await this.request(`/v1/media/by/code?code=${encodeURIComponent(shortcode)}`);
@@ -213,31 +224,21 @@ export class HikerApiStoryProvider implements StoryProvider {
     return this.normalizeMediaPost(item);
   }
 
-  async getHighlights(usernameInput: string): Promise<HighlightMeta[]> {
-    const { valid, normalized } = validateUsername(usernameInput);
-    if (!valid) {
-      throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
+  async getHighlights(usernameInput: string, hints?: RequestHints): Promise<HighlightMeta[]> {
+    const normalized = await this.preflight(usernameInput);
+
+    const userId = await this.resolveUserId(normalized, hints);
+    if (userId === null) return [];
+
+    const res = await this.request(`/v1/user/highlights?user_id=${encodeURIComponent(userId)}`);
+    if (!res.ok) {
+      throw new ProviderError("HikerAPI could not list highlights.", "UPSTREAM_ERROR", `status=${res.status}`, true);
     }
-
-    if (!checkOutboundRateLimit().allowed) {
-      throw new ProviderError(
-        "Upstream request budget exceeded for this window.",
-        "RATE_LIMITED",
-      );
-    }
-
-    if ((await getAllHikerApiKeys()).length === 0) {
-      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
-    }
-
-    const user = await this.fetchUser(normalized);
-    if (!user || user.is_private !== false) return [];
-
-    const res = await this.request(`/v1/user/highlights?user_id=${encodeURIComponent(String(user.pk))}`);
-    if (!res.ok) return [];
 
     const body = (await res.json()) as HikerHighlightMeta[];
-    if (!Array.isArray(body)) return [];
+    if (!Array.isArray(body)) {
+      throw new ProviderError("HikerAPI returned an unexpected highlights response.", "UPSTREAM_ERROR", undefined, true);
+    }
 
     return body.map((h) => this.normalizeHighlightMeta(h));
   }
@@ -257,7 +258,7 @@ export class HikerApiStoryProvider implements StoryProvider {
     }
 
     if ((await getAllHikerApiKeys()).length === 0) {
-      throw new ProviderError("HIKERAPI_KEY is not configured.", "UPSTREAM_ERROR");
+      throw new ProviderError("No HikerAPI key is configured in the admin panel.", "UPSTREAM_ERROR");
     }
 
     const res = await this.request(`/v1/highlight/by/url?url=${encodeURIComponent(highlightUrl)}`);
@@ -273,6 +274,37 @@ export class HikerApiStoryProvider implements StoryProvider {
       coverImageUrl: detail.cover_media?.cropped_image_version?.url ?? null,
       items,
     };
+  }
+
+  /** Validates the username and local preconditions shared by every username-based call. */
+  private async preflight(usernameInput: string): Promise<string> {
+    const { valid, normalized } = validateUsername(usernameInput);
+    if (!valid) {
+      throw new ProviderError("Invalid username.", "UPSTREAM_ERROR");
+    }
+
+    if (!checkOutboundRateLimit().allowed) {
+      throw new ProviderError(
+        "Upstream request budget exceeded for this window.",
+        "RATE_LIMITED",
+      );
+    }
+
+    if ((await getAllHikerApiKeys()).length === 0) {
+      throw new ProviderError("No HikerAPI key is configured in the admin panel.", "UPSTREAM_ERROR");
+    }
+    return normalized;
+  }
+
+  /**
+   * The numeric user id for a username, or null when the profile doesn't exist or is private.
+   * A caller-supplied id (from a cached profile lookup that already established the profile is
+   * public) is used as-is, which saves the billed username lookup.
+   */
+  private async resolveUserId(normalized: string, hints?: RequestHints): Promise<string | null> {
+    if (hints?.userId) return hints.userId;
+    const user = await this.fetchUser(normalized);
+    return !user || user.is_private !== false ? null : String(user.pk);
   }
 
   private normalizeHighlightMeta(h: HikerHighlightMeta): HighlightMeta {
@@ -416,10 +448,11 @@ export class HikerApiStoryProvider implements StoryProvider {
   }
 
   private async attempt(path: string, key: string): Promise<Response> {
+    this.budget.take();
     const controller = new AbortController();
     const timer = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
     try {
-      return await fetch(`${HIKERAPI_BASE}${path}`, {
+      const res = await fetch(`${HIKERAPI_BASE}${path}`, {
         signal: controller.signal,
         cache: "no-store",
         headers: {
@@ -427,7 +460,10 @@ export class HikerApiStoryProvider implements StoryProvider {
           "x-access-key": key,
         },
       });
+      await recordHikerCall({ path, status: res.status });
+      return res;
     } catch (err) {
+      await recordHikerCall({ path, status: null });
       const isTimeout = err instanceof Error && err.name === "AbortError";
       throw new ProviderError(
         isTimeout ? "HikerAPI request timed out." : "Failed to reach HikerAPI.",

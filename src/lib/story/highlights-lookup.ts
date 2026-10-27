@@ -1,15 +1,17 @@
 import { getProvider, ProviderError } from "./index";
 import { validateUsername } from "./validation";
-import { getCached, setCached } from "./cache";
-import type { StoryLookupResult, StoryErrorCode } from "@/types/story";
+import { cachedLoad } from "./shared-cache";
+import { getHybridConfig } from "./hybrid-config";
+import { boundTtlByMedia, loadProfileEntry } from "./lookup-support";
+import type { StoryErrorCode } from "@/types/story";
 import type { HighlightsLookupResult, HighlightsErrorCode } from "@/types/highlight";
 
 /**
  * A username's highlight tray (cover + title per highlight). Mirrors
- * `posts-lookup.ts`: reuses the `story-lookup:<username>` cache entry to
- * resolve not_found/private without an extra provider call, and falls
- * back to a fresh `getBasicProfile` (not `getProfile` — no need to pay
- * for a stories fetch here) only when that cache is empty.
+ * `posts-lookup.ts`: the shared cached profile entry resolves
+ * not_found/private and supplies the user id, so the provider doesn't
+ * re-resolve the username (a billed call on HikerAPI, which also bills
+ * the tray itself at 2 units). Highlights rarely change, hence the long TTL.
  */
 export async function lookupHighlights(usernameInput: unknown): Promise<HighlightsLookupResult> {
   const { valid, normalized, error } = validateUsername(usernameInput);
@@ -17,54 +19,39 @@ export async function lookupHighlights(usernameInput: unknown): Promise<Highligh
     return { status: "error", code: "INVALID_USERNAME", message: error ?? "Invalid username." };
   }
 
-  const cacheKey = `highlights-lookup:${normalized}`;
-  const cached = getCached<HighlightsLookupResult>(cacheKey);
-  if (cached) return cached;
-
-  const provider = await getProvider();
-  if (!provider.getHighlights) {
-    return {
-      status: "error",
-      code: "NOT_SUPPORTED",
-      message: "Highlight retrieval isn't available right now.",
-    };
-  }
-
   try {
-    const storyCacheKey = `story-lookup:${normalized}`;
-    const storyResult = getCached<StoryLookupResult>(storyCacheKey);
-
-    if (storyResult?.status === "not_found") {
-      const result: HighlightsLookupResult = { status: "not_found", username: normalized };
-      setCached(cacheKey, result, 60_000);
-      return result;
+    const provider = await getProvider();
+    if (!provider.getHighlights) {
+      return {
+        status: "error",
+        code: "NOT_SUPPORTED",
+        message: "Highlight retrieval isn't available right now.",
+      };
     }
 
-    if (storyResult?.status === "private") {
-      const result: HighlightsLookupResult = { status: "private", username: normalized };
-      setCached(cacheKey, result, 10 * 60_000);
-      return result;
-    }
+    return await cachedLoad<HighlightsLookupResult>({
+      feature: "highlights",
+      key: `highlights:v1:${normalized}`,
+      load: async () => {
+        const { profile } = await loadProfileEntry(provider, normalized);
+        if (!profile) return { status: "not_found", username: normalized };
+        if (!profile.isPublic) return { status: "private", username: normalized };
 
-    if (!storyResult || storyResult.status === "error") {
-      const fetchProfile = provider.getBasicProfile?.bind(provider) ?? provider.getProfile.bind(provider);
-      const profile = await fetchProfile(normalized);
-      if (!profile) {
-        const result: HighlightsLookupResult = { status: "not_found", username: normalized };
-        setCached(cacheKey, result, 60_000);
-        return result;
-      }
-      if (!profile.isPublic) {
-        const result: HighlightsLookupResult = { status: "private", username: normalized };
-        setCached(cacheKey, result, 10 * 60_000);
-        return result;
-      }
-    }
-
-    const highlights = await provider.getHighlights(normalized);
-    const result: HighlightsLookupResult = { status: "ok", highlights };
-    setCached(cacheKey, result, 60_000);
-    return result;
+        const highlights = await provider.getHighlights!(normalized, { userId: profile.userId });
+        return { status: "ok", highlights };
+      },
+      ttlSeconds: (result) => {
+        const { ttl } = getHybridConfig();
+        if (result.status === "not_found") return ttl.negativeS;
+        if (result.status === "private") return ttl.shortS;
+        if (result.status === "error") return 0;
+        // A short life for an empty tray: many accounts have none, but an empty answer from a
+        // flaky provider shouldn't stick for hours.
+        return result.highlights.length === 0
+          ? ttl.shortS
+          : boundTtlByMedia(ttl.highlightsS, result.highlights.map((h) => h.coverImageUrl));
+      },
+    });
   } catch (err) {
     if (err instanceof ProviderError) {
       console.error("[highlights-lookup] provider error:", err.code, err.message, err.detail);

@@ -1,17 +1,21 @@
 import { getProvider, ProviderError } from "./index";
 import { validateUsername } from "./validation";
-import { getCached, setCached } from "./cache";
-import type { StoryLookupResult, StoryErrorCode } from "@/types/story";
+import { cachedLoad } from "./shared-cache";
+import { getHybridConfig } from "./hybrid-config";
+import { boundTtlByMedia, loadProfileEntry, postUrls } from "./lookup-support";
+import type { StoryErrorCode } from "@/types/story";
 import type { PostsLookupResult, PostsErrorCode } from "@/types/post";
 
 /**
- * Posts are fetched separately from `lookupStory` — a distinct, separately
- * billed HikerAPI call the UI only needs when the Posts tab is opened. To
- * avoid a redundant profile fetch, this reuses the `story-lookup:<username>`
- * cache entry (already populated by a prior `/api/story-viewer` call in the
- * normal UI flow) to resolve not_found/private without hitting the
- * provider again; only falls back to a fresh `getProfile` call when that
- * cache is empty (e.g. a direct API call that skipped the story lookup).
+ * Posts (and Reels — the UI filters one combined list by `isReel`) are fetched
+ * separately from `lookupStory`, only when the Posts/Reels tab is opened.
+ *
+ * Profile public/private/not-found comes from the shared cached profile entry
+ * (already populated by the main search in the normal flow), and the user id
+ * from that entry lets the provider skip its own username lookup. An empty
+ * list is cached only briefly unless the profile is known to have no posts:
+ * a provider that reports "nothing" after a failed or ambiguous fetch must not
+ * be believed for 30 minutes.
  */
 export async function lookupPosts(usernameInput: unknown): Promise<PostsLookupResult> {
   const { valid, normalized, error } = validateUsername(usernameInput);
@@ -19,57 +23,37 @@ export async function lookupPosts(usernameInput: unknown): Promise<PostsLookupRe
     return { status: "error", code: "INVALID_USERNAME", message: error ?? "Invalid username." };
   }
 
-  const cacheKey = `posts-lookup:${normalized}`;
-  const cached = getCached<PostsLookupResult>(cacheKey);
-  if (cached) return cached;
-
-  const provider = await getProvider();
-  if (!provider.getPosts) {
-    return {
-      status: "error",
-      code: "NOT_SUPPORTED",
-      message: "Post retrieval isn't available right now.",
-    };
-  }
-
   try {
-    const storyCacheKey = `story-lookup:${normalized}`;
-    const storyResult = getCached<StoryLookupResult>(storyCacheKey);
-
-    if (storyResult?.status === "not_found") {
-      const result: PostsLookupResult = { status: "not_found", username: normalized };
-      setCached(cacheKey, result, 60_000);
-      return result;
+    const provider = await getProvider();
+    if (!provider.getPosts) {
+      return {
+        status: "error",
+        code: "NOT_SUPPORTED",
+        message: "Post retrieval isn't available right now.",
+      };
     }
 
-    if (storyResult?.status === "private") {
-      const result: PostsLookupResult = { status: "private", username: normalized };
-      setCached(cacheKey, result, 10 * 60_000);
-      return result;
-    }
+    return await cachedLoad<PostsLookupResult>({
+      feature: "posts",
+      key: `posts:v1:${normalized}`,
+      load: async () => {
+        const { profile } = await loadProfileEntry(provider, normalized);
+        if (!profile) return { status: "not_found", username: normalized };
+        if (!profile.isPublic) return { status: "private", username: normalized };
+        // The profile already says there is nothing to list — no provider call (and no credit) needed.
+        if (profile.posts === 0) return { status: "ok", posts: [] };
 
-    if (!storyResult || storyResult.status === "error") {
-      // getBasicProfile (skips the stories fetch) when available — we only
-      // need public/private + not-found here, not Story media, and
-      // getPosts() below resolves the user itself anyway.
-      const fetchProfile = provider.getBasicProfile?.bind(provider) ?? provider.getProfile.bind(provider);
-      const profile = await fetchProfile(normalized);
-      if (!profile) {
-        const result: PostsLookupResult = { status: "not_found", username: normalized };
-        setCached(cacheKey, result, 60_000);
-        return result;
-      }
-      if (!profile.isPublic) {
-        const result: PostsLookupResult = { status: "private", username: normalized };
-        setCached(cacheKey, result, 10 * 60_000);
-        return result;
-      }
-    }
-
-    const posts = await provider.getPosts(normalized);
-    const result: PostsLookupResult = { status: "ok", posts };
-    setCached(cacheKey, result, 60_000);
-    return result;
+        const posts = await provider.getPosts!(normalized, { userId: profile.userId });
+        return { status: "ok", posts };
+      },
+      ttlSeconds: (result) => {
+        const { ttl } = getHybridConfig();
+        if (result.status === "not_found") return ttl.negativeS;
+        if (result.status === "private") return ttl.shortS;
+        if (result.status === "error") return 0;
+        return result.posts.length === 0 ? ttl.negativeS : boundTtlByMedia(ttl.postsS, postUrls(result.posts));
+      },
+    });
   } catch (err) {
     if (err instanceof ProviderError) {
       console.error("[posts-lookup] provider error:", err.code, err.message, err.detail);

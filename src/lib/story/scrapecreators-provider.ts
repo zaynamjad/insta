@@ -33,6 +33,8 @@ interface ScFeedItem extends ScMedia {
   carousel_media?: ScMedia[] | null;
 }
 interface ScProfileUser {
+  /** Instagram's numeric user id, when the response includes it (not guaranteed). */
+  id?: string | number;
   username?: string;
   full_name?: string | null;
   biography?: string | null;
@@ -120,6 +122,8 @@ export class ScrapeCreatorsStoryProvider implements StoryProvider {
       stories: [],
       category: user.category_name || null,
       externalUrl: user.external_url || null,
+      // Only a purely numeric id is trusted; anything else means "unknown" and later calls look the user up themselves.
+      userId: /^\d+$/.test(String(user.id ?? "")) ? String(user.id) : null,
     };
   }
 

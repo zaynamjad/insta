@@ -24,4 +24,10 @@ export interface Profile {
   category: string | null;
   /** The single external link shown on the profile, if any. */
   externalUrl: string | null;
+  /**
+   * Instagram's numeric user id, when a provider returned it. Server-internal:
+   * it lets Stories/Posts/Highlights calls skip a billed username→id lookup,
+   * and `lookupStory` strips it before a profile is sent to the browser.
+   */
+  userId?: string | null;
 }

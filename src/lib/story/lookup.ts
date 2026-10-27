@@ -1,17 +1,30 @@
 import { getProvider, ProviderError } from "./index";
+import type { StoryProvider } from "./provider";
 import { validateUsername } from "./validation";
-import { getCached, setCached } from "./cache";
-import type { StoryLookupResult, StoryErrorCode } from "@/types/story";
+import { cachedLoad } from "./shared-cache";
+import { getHybridConfig } from "./hybrid-config";
+import { boundTtlByMedia, loadProfileEntry, publicProfile, storyUrls } from "./lookup-support";
+import type { StoryLookupResult, StoryErrorCode, Story } from "@/types/story";
 
 /**
  * Shared entry point for resolving a username to a `StoryLookupResult` —
- * used by both `/api/story-viewer` and `/profile/[username]` so a lookup
- * triggered from either surface shares the same cache entry and never
- * fetches Instagram twice for the same username within the TTL.
+ * used by both `/api/story-viewer` and `/profile/[username]`, so a lookup
+ * from either surface shares the same Redis cache entries and never fetches
+ * a provider twice for the same data within its TTL.
+ *
+ * The lookup is two independently cached pieces, because they age very
+ * differently and are billed very differently:
+ *
+ *   1. Profile metadata (long TTL) — cheap, and shared with the Posts and
+ *      Highlights tabs. Carries the numeric user id.
+ *   2. Active Stories (short TTL) — fetched only for a public profile, and by
+ *      user id, so the Stories call doesn't first re-buy a username lookup.
+ *
+ * A provider with no separate Stories source (the public-web fallback) keeps
+ * the original one-shot `getProfile` path.
  *
  * Always resolves (never throws): retrieval failures come back as
- * `{ status: "error" }` rather than propagating, since both callers need
- * a result object either way.
+ * `{ status: "error" }` and are never cached.
  */
 export async function lookupStory(usernameInput: unknown): Promise<StoryLookupResult> {
   const { valid, normalized, error } = validateUsername(usernameInput);
@@ -19,33 +32,9 @@ export async function lookupStory(usernameInput: unknown): Promise<StoryLookupRe
     return { status: "error", code: "INVALID_USERNAME", message: error ?? "Invalid username." };
   }
 
-  const cacheKey = `story-lookup:${normalized}`;
-  const cached = getCached<StoryLookupResult>(cacheKey);
-  if (cached) return cached;
-
   try {
     const provider = await getProvider();
-    const profile = await provider.getProfile(normalized);
-
-    if (!profile) {
-      const result: StoryLookupResult = { status: "not_found", username: normalized };
-      setCached(cacheKey, result, 60_000);
-      return result;
-    }
-
-    if (!profile.isPublic) {
-      const result: StoryLookupResult = { status: "private", profile };
-      setCached(cacheKey, result, 10 * 60_000);
-      return result;
-    }
-
-    const result: StoryLookupResult =
-      profile.stories.length === 0
-        ? { status: "no_stories", profile }
-        : { status: "ok", profile };
-
-    setCached(cacheKey, result, 60_000);
-    return result;
+    return provider.getStories ? await lookupSplit(provider, normalized) : await lookupLegacy(provider, normalized);
   } catch (err) {
     if (err instanceof ProviderError) {
       console.error("[story-lookup] provider error:", err.code, err.message, err.detail);
@@ -58,6 +47,47 @@ export async function lookupStory(usernameInput: unknown): Promise<StoryLookupRe
       message: errorMessageForCode("UPSTREAM_ERROR"),
     };
   }
+}
+
+async function lookupSplit(provider: StoryProvider, username: string): Promise<StoryLookupResult> {
+  const { profile } = await loadProfileEntry(provider, username);
+  if (!profile) return { status: "not_found", username };
+  if (!profile.isPublic) return { status: "private", profile: publicProfile(profile, []) };
+
+  const stories = await cachedLoad<Story[]>({
+    feature: "stories",
+    key: `stories:v1:${username}`,
+    load: () => provider.getStories!(username, { userId: profile.userId }),
+    ttlSeconds: (list) => boundTtlByMedia(getHybridConfig().ttl.storiesS, storyUrls(list)),
+  });
+
+  return stories.length === 0
+    ? { status: "no_stories", profile: publicProfile(profile, []) }
+    : { status: "ok", profile: publicProfile(profile, stories) };
+}
+
+async function lookupLegacy(provider: StoryProvider, username: string): Promise<StoryLookupResult> {
+  const { ttl } = getHybridConfig();
+  return cachedLoad<StoryLookupResult>({
+    feature: "story",
+    key: `story-lookup:v1:${username}`,
+    load: async () => {
+      const profile = await provider.getProfile(username);
+      if (!profile) return { status: "not_found", username };
+      if (!profile.isPublic) return { status: "private", profile: publicProfile(profile, []) };
+      return profile.stories.length === 0
+        ? { status: "no_stories", profile: publicProfile(profile, []) }
+        : { status: "ok", profile: publicProfile(profile, profile.stories) };
+    },
+    ttlSeconds: (result) =>
+      result.status === "not_found"
+        ? ttl.negativeS
+        : result.status === "private"
+          ? ttl.shortS
+          : result.status === "error"
+            ? 0
+            : boundTtlByMedia(ttl.storiesS, result.status === "ok" ? storyUrls(result.profile.stories) : []),
+  });
 }
 
 function errorMessageForCode(code: StoryErrorCode): string {

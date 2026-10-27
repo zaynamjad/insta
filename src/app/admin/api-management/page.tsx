@@ -1,16 +1,22 @@
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { ADMIN_SESSION_COOKIE, isValidSessionToken } from "@/lib/admin-auth";
-import { getStoredKeys, getEnvKeys, type ApiProviderId, type StoredApiKey } from "@/lib/story/key-store";
+import { getStoredKeys, type ApiProviderId, type StoredApiKey } from "@/lib/story/key-store";
 import { getKeyBalance, type KeyBalanceResult } from "@/lib/story/hikerapi-balance";
+import { getScrapeCreatorsBalance, type ScrapeCreatorsBalanceResult } from "@/lib/story/scrapecreators-balance";
 import {
   getProviderSettings,
   otherProvider,
   PROVIDER_IDS,
   PROVIDER_LABELS,
+  providerLabel,
   type ApiProviderSettings,
 } from "@/lib/story/provider-settings";
 import { getProviderStats, getRecentLog, type ProviderStats } from "@/lib/story/provider-stats";
+import { getHybridConfig } from "@/lib/story/hybrid-config";
+import { isSharedCacheAvailable } from "@/lib/story/shared-cache";
+import { isCircuitOpen } from "@/lib/story/circuit-breaker";
+import { getMonthlyUsage, type MonthlyUsage } from "@/lib/story/usage";
 
 // Belt and suspenders alongside the robots.txt disallow and the proxy's
 // i18n-middleware exclusion: this page lists and edits paid API
@@ -41,6 +47,25 @@ function balanceTone(result: KeyBalanceResult): string {
   return "text-amber-500";
 }
 
+/** What a key card shows for a balance, whichever provider it came from. */
+interface BalanceLabel {
+  text: string;
+  tone: string;
+}
+
+const hikerLabel = (r: KeyBalanceResult): BalanceLabel => ({ text: formatBalance(r), tone: balanceTone(r) });
+
+function scrapeCreatorsLabel(r: ScrapeCreatorsBalanceResult): BalanceLabel {
+  if (r.status === "ok") {
+    return {
+      text: `${r.credits.toLocaleString()} credits left`,
+      tone: r.credits <= 0 ? "text-red-500" : "text-foreground/70",
+    };
+  }
+  if (r.status === "invalid") return { text: "Key rejected by Scrape Creators (invalid or revoked)", tone: "text-amber-500" };
+  return { text: `Couldn't check credits (${r.message})`, tone: "text-amber-500" };
+}
+
 export default async function ApiManagementPage({
   searchParams,
 }: {
@@ -62,20 +87,32 @@ export default async function ApiManagementPage({
     getProviderStats("scrapecreators"),
     getRecentLog(20),
   ]);
-  const hikerEnv = getEnvKeys("hikerapi");
-  const scEnv = getEnvKeys("scrapecreators");
-  const hikerStoredBalances = await Promise.all(hikerStored.map((k) => getKeyBalance(k.key)));
-  const hikerEnvBalances = await Promise.all(hikerEnv.map((k) => getKeyBalance(k)));
+  const [usage, instaloaderOpen, hikerOpen] = await Promise.all([
+    getMonthlyUsage(),
+    isCircuitOpen("instaloader"),
+    isCircuitOpen("hikerapi"),
+  ]);
+  const [hikerBalances, scBalances] = await Promise.all([
+    Promise.all(hikerStored.map((k) => getKeyBalance(k.key))),
+    Promise.all(scStored.map((k) => getScrapeCreatorsBalance(k.key))),
+  ]);
 
   const configured: Record<ApiProviderId, boolean> = {
-    hikerapi: hikerStored.length + hikerEnv.length > 0,
-    scrapecreators: scStored.length + scEnv.length > 0,
+    hikerapi: hikerStored.length > 0,
+    scrapecreators: scStored.length > 0,
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold tracking-tight">API Management</h1>
+    <div className="mx-auto w-full max-w-[1600px] px-4 py-8 sm:px-8">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">API Management</h1>
+          <p className="mt-1 max-w-3xl text-sm text-foreground/60">
+            Manage API providers, credentials, priorities, fallback settings, and usage. Keys within a
+            provider are tried in order — the first one still working wins. Keys are managed only here;
+            environment variables are not used.
+          </p>
+        </div>
         <form action="/admin/api-management/logout" method="POST">
           <button
             type="submit"
@@ -85,10 +122,6 @@ export default async function ApiManagementPage({
           </button>
         </form>
       </div>
-      <p className="mt-1 text-sm text-foreground/60">
-        Manage API providers, credentials, priorities, fallback settings, and usage. Keys within a
-        provider are tried in order — the first one still working wins.
-      </p>
 
       {error && (
         <p className="mt-4 rounded-xl border border-red-500/30 bg-red-500/5 px-4 py-2.5 text-sm text-red-500">
@@ -103,63 +136,145 @@ export default async function ApiManagementPage({
 
       <RoutingSection settings={settings} configured={configured} />
 
-      <ProviderSection
-        provider="hikerapi"
-        settings={settings}
-        stats={hikerStats}
-        stored={hikerStored}
-        storedBalances={hikerStoredBalances}
-        env={hikerEnv}
-        envBalances={hikerEnvBalances}
-        envHint={
-          <>
-            From <code>HIKERAPI_KEY</code> / <code>HIKERAPI_Fallback_N_KEY</code>. Still tried after the
-            keys above — edit these from the Vercel dashboard, not here.
-          </>
-        }
-        balanceNote="HikerAPI balances are free to check (/sys/balance) and refresh every time you load this page."
-      />
+      <HybridSection usage={usage} instaloaderOpen={instaloaderOpen} hikerOpen={hikerOpen} />
 
-      <ProviderSection
-        provider="scrapecreators"
-        settings={settings}
-        stats={scStats}
-        stored={scStored}
-        env={scEnv}
-        envHint={
-          <>
-            From <code>SCRAPECREATORS_API_KEY</code> / <code>SCRAPECREATORS_Fallback_N_KEY</code>. Still
-            tried after the keys above — edit these from the Vercel dashboard, not here.
-          </>
-        }
-        balanceNote="Scrape Creators credits are only checked when you press Test connection (and updated from each lookup's response), so this page never spends credits."
-      />
+      <div className="mt-6 grid gap-6 xl:grid-cols-2">
+        <ProviderSection
+          provider="hikerapi"
+          settings={settings}
+          stats={hikerStats}
+          stored={hikerStored}
+          balances={hikerBalances.map(hikerLabel)}
+          balanceNote="HikerAPI balances are free to check (/sys/balance) and refresh every time you load this page."
+        />
+        <ProviderSection
+          provider="scrapecreators"
+          settings={settings}
+          stats={scStats}
+          stored={scStored}
+          balances={scBalances.map(scrapeCreatorsLabel)}
+          balanceNote="Credits left are fetched from Scrape Creators' /v1/account/credit-balance each time you load this page."
+        />
+      </div>
 
-      <section className="mt-10">
+      <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
         <h2 className="text-sm font-semibold text-foreground/80">Recent requests &amp; fallback history</h2>
         {log.length === 0 ? (
           <p className="mt-2 text-sm text-foreground/50">
             Nothing recorded yet (activity is stored in Redis; none is kept if Redis isn&apos;t configured).
           </p>
         ) : (
-          <ul className="mt-3 space-y-1.5">
+          <ul className="mt-3 grid gap-1.5 lg:grid-cols-2">
             {log.map((e, i) => (
               <li
                 key={`${e.at}-${i}`}
                 className="flex flex-col gap-0.5 rounded-xl border border-border bg-surface-muted px-4 py-2 text-xs sm:flex-row sm:items-center sm:justify-between"
               >
                 <span className={e.ok ? "text-foreground/80" : "text-red-500"}>
-                  {e.ok ? "OK" : "Failed"} · {PROVIDER_LABELS[e.provider]}
+                  {e.ok ? "OK" : "Failed"} · {providerLabel(e.provider)}
                   {e.isFallback ? " (fallback)" : ""} · {e.operation} · {e.durationMs}ms
                   {e.error ? ` · ${e.error}` : ""}
                 </span>
-                <span className="text-foreground/40">{new Date(e.at).toLocaleString()}</span>
+                <span className="shrink-0 text-foreground/40">{new Date(e.at).toLocaleString()}</span>
               </li>
             ))}
           </ul>
         )}
       </section>
     </div>
+  );
+}
+
+function HybridSection({
+  usage,
+  instaloaderOpen,
+  hikerOpen,
+}: {
+  usage: MonthlyUsage | null;
+  instaloaderOpen: boolean;
+  hikerOpen: boolean;
+}) {
+  const config = getHybridConfig();
+  const il = config.instaloader;
+  const limit = config.hiker.monthlyUnitLimit;
+  const units = usage?.hiker.unitsTotal ?? 0;
+  const pct = limit > 0 ? Math.round((units / limit) * 100) : null;
+  const instaloaderStatus =
+    il.state === "disabled"
+      ? "Disabled (INSTALOADER_ENABLED is not true)"
+      : il.state === "misconfigured"
+        ? `Misconfigured — ${il.problem}`
+        : instaloaderOpen
+          ? "Circuit open — skipped for now after repeated failures"
+          : "Enabled (tried first for profile and posts, HikerAPI on failure)";
+
+  return (
+    <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
+      <h2 className="text-sm font-semibold text-foreground/80">Hybrid backend &amp; HikerAPI usage</h2>
+      <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-3 text-xs sm:grid-cols-3 lg:grid-cols-4">
+        <Stat label="Instaloader" value={instaloaderStatus} />
+        <Stat label="HikerAPI circuit" value={hikerOpen ? "Open — calls paused" : "Closed (normal)"} />
+        <Stat
+          label="Shared cache"
+          value={isSharedCacheAvailable() ? "Redis (shared across instances)" : "Not configured — per-instance only"}
+        />
+        <Stat
+          label="Calls per visitor request"
+          value={`HikerAPI max ${config.hiker.maxCallsPerRequest}`}
+        />
+        <Stat
+          label={`HikerAPI units ${usage?.month ?? "this month"} (estimated)`}
+          value={
+            usage === null
+              ? "n/a (needs Redis)"
+              : `${units.toLocaleString()}${limit > 0 ? ` / ${limit.toLocaleString()} (${pct}%)` : " (no limit set)"}`
+          }
+        />
+        <Stat label="HikerAPI HTTP calls" value={usage ? usage.hiker.callsTotal.toLocaleString() : "n/a"} />
+        <Stat
+          label="Threshold alerts"
+          value={usage?.hiker.alerts.length ? usage.hiker.alerts.map((a) => `${a.pct}% at ${new Date(a.at).toLocaleString()}`).join("; ") : "none"}
+        />
+      </dl>
+
+      {usage && usage.hiker.perEndpoint.length > 0 && (
+        <div className="mt-4 overflow-x-auto">
+          <table className="w-full text-left text-xs">
+            <thead className="text-foreground/40">
+              <tr>
+                <th className="py-1 pr-4 font-medium">HikerAPI endpoint</th>
+                <th className="py-1 pr-4 font-medium">Calls</th>
+                <th className="py-1 font-medium">Billed units</th>
+              </tr>
+            </thead>
+            <tbody className="text-foreground/80">
+              {usage.hiker.perEndpoint.map((e) => (
+                <tr key={e.endpoint}>
+                  <td className="py-0.5 pr-4">
+                    {e.endpoint}
+                    {e.assumed ? " (price assumed: 1)" : ""}
+                  </td>
+                  <td className="py-0.5 pr-4">{e.calls.toLocaleString()}</td>
+                  <td className="py-0.5">{e.units.toLocaleString()}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {usage && usage.cache.length > 0 && (
+        <p className="mt-4 text-xs text-foreground/60">
+          Cache hit rate this month:{" "}
+          {usage.cache
+            .map((c) => {
+              const total = c.hits + c.misses;
+              return `${c.feature} ${total > 0 ? Math.round((c.hits / total) * 100) : 0}% (${c.hits}/${total})`;
+            })
+            .join(" · ")}
+        </p>
+      )}
+    </section>
   );
 }
 
@@ -173,7 +288,7 @@ function RoutingSection({
   const fallback = otherProvider(settings.primary);
   const inputCls = "rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm outline-none";
   return (
-    <section className="mt-8 rounded-2xl border border-border bg-surface p-5">
+    <section className="mt-6 rounded-2xl border border-border bg-surface p-5">
       <h2 className="text-sm font-semibold text-foreground/80">Provider priority</h2>
       <p className="mt-1 text-sm text-foreground/60">
         Primary: <strong>{PROVIDER_LABELS[settings.primary]}</strong> · Fallback:{" "}
@@ -181,8 +296,12 @@ function RoutingSection({
           {settings.fallbackEnabled ? PROVIDER_LABELS[fallback] : `${PROVIDER_LABELS[fallback]} (off)`}
         </strong>
       </p>
-      <form action="/admin/api-management/settings" method="POST" className="mt-4 flex flex-col gap-3">
-        <label className="flex flex-col gap-1 text-xs font-medium text-foreground/60 sm:w-72">
+      <form
+        action="/admin/api-management/settings"
+        method="POST"
+        className="mt-4 grid items-start gap-x-8 gap-y-4 md:grid-cols-2 xl:grid-cols-3"
+      >
+        <label className="flex flex-col gap-1 text-xs font-medium text-foreground/60">
           Primary provider (the other becomes the Fallback automatically)
           <select name="primary" defaultValue={settings.primary} className={inputCls}>
             {PROVIDER_IDS.map((id) => (
@@ -193,24 +312,26 @@ function RoutingSection({
             ))}
           </select>
         </label>
-        <label className="flex items-center gap-2 text-sm">
-          <input type="checkbox" name="fallbackEnabled" defaultChecked={settings.fallbackEnabled} />
+        <label className="flex items-start gap-2 text-sm">
+          <input type="checkbox" name="fallbackEnabled" defaultChecked={settings.fallbackEnabled} className="mt-1" />
           Automatically fail over to the Fallback provider on timeouts, rate limits, credit exhaustion and
           5xx errors
         </label>
-        {PROVIDER_IDS.map((id) => (
-          <label key={id} className="flex items-center gap-2 text-sm">
-            <input type="checkbox" name={`enabled_${id}`} defaultChecked={settings.enabled[id]} />
-            {PROVIDER_LABELS[id]} enabled
-          </label>
-        ))}
-        <p className="text-xs text-foreground/50">
+        <div className="flex flex-col gap-2">
+          {PROVIDER_IDS.map((id) => (
+            <label key={id} className="flex items-center gap-2 text-sm">
+              <input type="checkbox" name={`enabled_${id}`} defaultChecked={settings.enabled[id]} />
+              {PROVIDER_LABELS[id]} enabled
+            </label>
+          ))}
+        </div>
+        <p className="text-xs text-foreground/50 md:col-span-2 xl:col-span-3">
           A disabled or key-less provider can&apos;t be Primary. Scrape Creators has no Stories endpoint, so
           Story lookups always use HikerAPI while it&apos;s enabled and configured.
         </p>
         <button
           type="submit"
-          className="brand-gradient self-start rounded-xl px-4 py-2 text-sm font-semibold text-white"
+          className="brand-gradient w-fit rounded-xl px-4 py-2 text-sm font-semibold text-white"
         >
           Save configuration
         </button>
@@ -229,24 +350,18 @@ function ProviderSection({
   settings,
   stats,
   stored,
-  storedBalances,
-  env,
-  envBalances,
-  envHint,
+  balances,
   balanceNote,
 }: {
   provider: ApiProviderId;
   settings: ApiProviderSettings;
   stats: ProviderStats | null;
   stored: StoredApiKey[];
-  storedBalances?: KeyBalanceResult[];
-  env: string[];
-  envBalances?: KeyBalanceResult[];
-  envHint: React.ReactNode;
+  balances?: BalanceLabel[];
   balanceNote: string;
 }) {
   const label = PROVIDER_LABELS[provider];
-  const hasKeys = stored.length + env.length > 0;
+  const hasKeys = stored.length > 0;
   const lastFailed =
     !!stats?.lastErrorAt && (!stats.lastSuccessAt || stats.lastErrorAt > stats.lastSuccessAt);
   const status = !hasKeys
@@ -259,7 +374,7 @@ function ProviderSection({
   const when = (iso: string | null | undefined) => (iso ? new Date(iso).toLocaleString() : "never");
 
   return (
-    <section className="mt-10 border-t border-border pt-8">
+    <section className="rounded-2xl border border-border bg-surface-muted/40 p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <h2 className="text-lg font-bold tracking-tight">
           {label} <span className="ml-1 text-xs font-semibold text-accent">{roleOf(settings, provider)}</span>
@@ -276,7 +391,7 @@ function ProviderSection({
       </div>
       <p className="mt-1 text-xs text-foreground/50">{balanceNote}</p>
 
-      <dl className="mt-3 grid grid-cols-2 gap-x-4 gap-y-2 rounded-xl border border-border bg-surface p-4 text-xs sm:grid-cols-3">
+      <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-3 rounded-xl border border-border bg-surface p-4 text-xs sm:grid-cols-3">
         <Stat label="Status" value={status} />
         <Stat label="Last request" value={when(stats?.lastRequestAt)} />
         <Stat label="Last success" value={when(stats?.lastSuccessAt)} />
@@ -327,7 +442,7 @@ function ProviderSection({
             name="key"
             required
             placeholder={`${label} API key`}
-            className="flex-1 rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm outline-none"
+            className="min-w-0 flex-1 rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm outline-none"
             autoComplete="off"
             spellCheck={false}
           />
@@ -341,40 +456,17 @@ function ProviderSection({
       </div>
 
       <div className="mt-6">
-        <h3 className="text-sm font-semibold text-foreground/80">Dashboard-managed keys ({stored.length})</h3>
+        <h3 className="text-sm font-semibold text-foreground/80">Keys ({stored.length})</h3>
         {stored.length === 0 ? (
-          <p className="mt-2 text-sm text-foreground/50">
-            No keys added here yet — {label} is running on whatever is below under &quot;Environment-variable
-            keys&quot;, if any.
-          </p>
+          <p className="mt-2 text-sm text-foreground/50">No keys added yet — add one above to enable {label}.</p>
         ) : (
           <ul className="mt-3 space-y-3">
             {stored.map((k, i) => (
-              <KeyCard key={k.id} provider={provider} index={i + 1} entry={k} balance={storedBalances?.[i]} />
+              <KeyCard key={k.id} provider={provider} index={i + 1} entry={k} balance={balances?.[i]} />
             ))}
           </ul>
         )}
       </div>
-
-      {env.length > 0 && (
-        <div className="mt-8">
-          <h3 className="text-sm font-semibold text-foreground/80">Environment-variable keys ({env.length})</h3>
-          <p className="mt-1 text-xs text-foreground/50">{envHint}</p>
-          <ul className="mt-3 space-y-2">
-            {env.map((key, i) => (
-              <li
-                key={i}
-                className="flex flex-col gap-1 rounded-xl border border-border bg-surface-muted px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between"
-              >
-                <code className="text-sm text-foreground/80">{maskKey(key)}</code>
-                {envBalances?.[i] && (
-                  <span className={`text-xs ${balanceTone(envBalances[i])}`}>{formatBalance(envBalances[i])}</span>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
     </section>
   );
 }
@@ -383,7 +475,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div>
       <dt className="text-foreground/40">{label}</dt>
-      <dd className="text-foreground/80">{value}</dd>
+      <dd className="break-words text-foreground/80">{value}</dd>
     </div>
   );
 }
@@ -397,7 +489,7 @@ function KeyCard({
   provider: ApiProviderId;
   index: number;
   entry: StoredApiKey;
-  balance?: KeyBalanceResult;
+  balance?: BalanceLabel;
 }) {
   return (
     <li className="rounded-xl border border-border bg-surface p-4">
@@ -407,7 +499,7 @@ function KeyCard({
           <span className="text-sm font-semibold">{entry.label}</span>
           <code className="ml-2 text-xs text-foreground/50">{maskKey(entry.key)}</code>
         </div>
-        {balance && <span className={`text-xs ${balanceTone(balance)}`}>{formatBalance(balance)}</span>}
+        {balance && <span className={`text-xs ${balance.tone}`}>{balance.text}</span>}
       </div>
 
       <details className="mt-3">
@@ -427,7 +519,7 @@ function KeyCard({
             name="key"
             required
             placeholder="New key value"
-            className="flex-1 rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm outline-none"
+            className="min-w-0 flex-1 rounded-xl border border-border bg-surface-muted px-3 py-2 text-sm outline-none"
             autoComplete="off"
             spellCheck={false}
           />

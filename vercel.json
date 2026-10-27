@@ -1,0 +1,6 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "functions": {
+    "api/ig_fetch.py": { "maxDuration": 15 }
+  }
+}

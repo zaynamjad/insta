@@ -41,6 +41,16 @@ export class ProviderError extends Error {
 }
 
 /**
+ * Optional knowledge about a username that a caller already has, so a
+ * provider doesn't have to buy it again. Providers that don't need it
+ * ignore it.
+ */
+export interface RequestHints {
+  /** Instagram's numeric user id for the username (from an earlier profile lookup). */
+  userId?: string | null;
+}
+
+/**
  * Every Instagram data source (current or future) implements this
  * contract. Nothing outside `lib/story` and the routes that call it may
  * depend on a specific provider's retrieval mechanism — swapping the
@@ -72,7 +82,15 @@ export interface StoryProvider {
    * Providers that can't retrieve posts simply don't implement this —
    * callers must treat it as absent, not assume every provider has it.
    */
-  getPosts?(username: string): Promise<Post[]>;
+  getPosts?(username: string, hints?: RequestHints): Promise<Post[]>;
+
+  /**
+   * Optional: the active Stories for a profile already known to be public.
+   * Split out of `getProfile` so Stories can be cached on their own short TTL
+   * and fetched by user id, without re-fetching (and re-paying for) the
+   * profile. Only providers with a real Stories source implement it.
+   */
+  getStories?(username: string, hints?: RequestHints): Promise<Story[]>;
 
   /**
    * Optional: a single post/reel by its shortcode (the id in an Instagram
@@ -87,7 +105,7 @@ export interface StoryProvider {
    * no story items yet — those are a separate, per-highlight call). Empty
    * array for a not-found or private profile, matching `getPosts`.
    */
-  getHighlights?(username: string): Promise<HighlightMeta[]>;
+  getHighlights?(username: string, hints?: RequestHints): Promise<HighlightMeta[]>;
 
   /**
    * Optional: the story items inside one highlight, given its public

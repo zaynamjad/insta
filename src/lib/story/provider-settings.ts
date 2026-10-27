@@ -23,6 +23,11 @@ export const PROVIDER_LABELS: Record<ApiProviderId, string> = {
   scrapecreators: "Scrape Creators",
 };
 
+/** Label for any provider that can appear in the request log, including the keyless Instaloader tier. */
+export function providerLabel(id: string): string {
+  return id === "instaloader" ? "Instaloader" : PROVIDER_LABELS[id as ApiProviderId] ?? id;
+}
+
 /**
  * Scrape Creators serves everything it can (profile, posts, post, highlights)
  * and HikerAPI is its fallback; Stories always use HikerAPI since Scrape

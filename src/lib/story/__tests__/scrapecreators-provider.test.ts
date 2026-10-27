@@ -61,6 +61,16 @@ describe("ScrapeCreatorsStoryProvider normalization", () => {
     expect(fetchMock.mock.calls[0][1].headers["x-api-key"]).toBe("sc_key_1");
   });
 
+  it("passes through a numeric user id, and treats a missing or odd one as unknown", async () => {
+    const body = (id: unknown) => json({ data: { user: { username: "alice", id, is_private: false } } });
+    fetchMock.mockResolvedValueOnce(body("12345"));
+    expect((await sc.getBasicProfile("alice"))?.userId).toBe("12345");
+    fetchMock.mockResolvedValueOnce(body(undefined));
+    expect((await sc.getBasicProfile("alice"))?.userId).toBeNull();
+    fetchMock.mockResolvedValueOnce(body("not-a-number"));
+    expect((await sc.getBasicProfile("alice"))?.userId).toBeNull();
+  });
+
   it("records credits_charged / credits_remaining from the response", async () => {
     fetchMock.mockResolvedValueOnce(json({ credits_remaining: 90, credits_charged: 2, data: { user: null } }));
     await sc.getBasicProfile("alice");
